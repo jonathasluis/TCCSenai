@@ -433,6 +433,7 @@ public class CadastrarAnimais {
 		
 		menu();
 		ComboBox.comboBoxEspecie();
+		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
 		colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));	
 		//VerificaSeTemDadosNaTabela();
 	}
