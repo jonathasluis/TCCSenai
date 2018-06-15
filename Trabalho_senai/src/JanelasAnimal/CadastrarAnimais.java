@@ -20,6 +20,7 @@ import java.text.ParseException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -248,7 +249,8 @@ public class CadastrarAnimais {
 			public void mouseClicked(MouseEvent arg0) {//evento de clique na tabela
 				pegaDadosDaTabela();
 				contadorParaEditar=1;
-				label_1.setText(String.valueOf(contadorParaEditar));
+				btnDeletar.setEnabled(true);
+				btnLimpar.setEnabled(false);
 			}
 		});
 		tabela.setModel(new DefaultTableModel(
@@ -387,6 +389,16 @@ public class CadastrarAnimais {
 		frmCadastroDeAnimais.getContentPane().add(btnLimpar);
 		
 		btnDeletar = new JButton("Deletar");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int resposta = JOptionPane.showConfirmDialog(null, "Deseja deletar esse dado?", "ALERTA!",
+						JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+				if(resposta==JOptionPane.YES_OPTION) {
+					crud.removeAnimal(animal);
+					colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));
+				}
+			}
+		});
 		btnDeletar.setEnabled(false);
 		btnDeletar.setBackground(SystemColor.controlHighlight);
 		btnDeletar.setBounds(876, 637, 89, 23);
@@ -496,6 +508,8 @@ public class CadastrarAnimais {
 		animal.setDataCompra(tabela.getValueAt(linha, 8).toString());
 		animal.setIdAnimal(Integer.parseInt(tabela.getValueAt(linha, 0).toString()));
 		
+		
+		
 		ResultSet dados1 = null;
 		String sql = "SELECT (img) FROM animais WHERE idanimal=?";
 		
@@ -521,7 +535,22 @@ public class CadastrarAnimais {
 			spinnerQuantidade.setValue(animal.getQuantidade());
 			tfDestino.setText(animal.getDestino());
 			cbEspecie.setSelectedItem(ComboBox.pegaNomeEspecie(animal.getRaca()));
-			cbRaca.setSelectedItem(ComboBox.pegaNomeRaca(animal.getRaca()));		
+			cbRaca.setSelectedItem(ComboBox.pegaNomeRaca(animal.getRaca()));	
+			
+			if(animal.getSexo().equalsIgnoreCase("masculino")) {
+				rdbtnMacho.setSelected(true);
+			}
+			
+			if(animal.getSexo().equalsIgnoreCase("feminino")) {
+				rdbtnFemea.setSelected(true);
+			}
+			
+			if(animal.getImagem()!= null) {
+				lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
+				ImageIcon icon = new ImageIcon(animal.getImagem());
+				icon.setImage(icon.getImage().getScaledInstance(panel.getWidth(),panel.getHeight(), 100));
+				lblImagem.setIcon(icon);
+			}
 	}
 	
 	Runnable thread = new Runnable() {	

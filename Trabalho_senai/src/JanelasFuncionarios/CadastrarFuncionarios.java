@@ -40,7 +40,6 @@ import javax.swing.text.MaskFormatter;
 import DAO.Funcionario;
 import Imagem.MetodosImagem;
 import JanelasAnimal.CadastrarAnimais;
-import JanelasAnimal.ComboBox;
 import JanelasComtabil.NovaCompra;
 import JanelasComtabil.NovaVenda;
 import JanelasComtabil.Total;
@@ -163,6 +162,8 @@ public class CadastrarFuncionarios {
 			public void mouseClicked(MouseEvent e) {
 				lblImagem.setIcon(null);
 				contadorParaEditar=1;
+				btnLimpar.setEnabled(false);
+				btnDeletar.setEnabled(true);
 				pegaDadosDaTabela();
 			}
 		});
@@ -294,7 +295,7 @@ public class CadastrarFuncionarios {
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {//inicio do evento do botao cancelar
 				if(contadorParaEditar==0) {
 					Principal.frmPrincipal.setVisible(true);
 					frmCadastrarFuncionarios.dispose();
@@ -305,12 +306,22 @@ public class CadastrarFuncionarios {
 					btnLimpar.doClick();
 				}
 			}
-		});
+		});//fim do evento do botao cancelar
 		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.setBounds(777, 636, 89, 23);
 		frmCadastrarFuncionarios.getContentPane().add(btnCancelar);
 		
-		btnDeletar = new JButton("Deletar");
+		btnDeletar = new JButton("Deletar");//inicio do evento do botao deletar
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int resposta = JOptionPane.showConfirmDialog(null, "Deseja deletar esse dado?", "ALERTA!",
+						JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+				if(resposta==JOptionPane.YES_OPTION) {
+					funcionario.removeFun(DAOFuncionario);
+					colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
+				}
+			}
+		});//fim do evento do botao deletar
 		btnDeletar.setEnabled(false);
 		btnDeletar.setBackground(SystemColor.controlHighlight);
 		btnDeletar.setBounds(876, 636, 89, 23);
