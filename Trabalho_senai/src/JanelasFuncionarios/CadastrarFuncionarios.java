@@ -303,6 +303,7 @@ public class CadastrarFuncionarios {
 				if(contadorParaEditar==1) {
 					contadorParaEditar=0;
 					btnDeletar.setEnabled(false);
+					btnLimpar.setEnabled(true);
 					btnLimpar.doClick();
 				}
 			}
@@ -572,9 +573,9 @@ public class CadastrarFuncionarios {
 		tfCargo.setText(DAOFuncionario.getCargo());
 		tfSalario.setText(String.valueOf(DAOFuncionario.getSalario()));
 		
-		if(DAOFuncionario.getSexo().equalsIgnoreCase("m")) {
+		if(DAOFuncionario.getSexo().equalsIgnoreCase("masculino")) {
 			rdbtnMasculino.setSelected(true);
-		}else {
+		}else if(DAOFuncionario.getSexo().equalsIgnoreCase("feminino")){
 			rdbtnFeminino.setSelected(true);
 		}
 		
