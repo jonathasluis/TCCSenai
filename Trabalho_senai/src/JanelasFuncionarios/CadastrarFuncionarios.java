@@ -252,6 +252,17 @@ public class CadastrarFuncionarios {
 					btnLimpar.doClick();
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
 				}
+				if(contadorParaEditar==1) {
+					int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar esse Funcionario? ", "alerta",
+							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					if(resposta==JOptionPane.YES_OPTION) {
+						funcionario.updFun(DAOFuncionario);
+						btnLimpar.doClick();
+						JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
+						contadorParaEditar=0;
+					}
+					
+				}
 				colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
 			}
 		});
@@ -288,13 +299,18 @@ public class CadastrarFuncionarios {
 					Principal.frmPrincipal.setVisible(true);
 					frmCadastrarFuncionarios.dispose();
 				}
+				if(contadorParaEditar==1) {
+					contadorParaEditar=0;
+					btnDeletar.setEnabled(false);
+					btnLimpar.doClick();
+				}
 			}
 		});
 		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.setBounds(777, 636, 89, 23);
 		frmCadastrarFuncionarios.getContentPane().add(btnCancelar);
 		
-		JButton btnDeletar = new JButton("Deletar");
+		btnDeletar = new JButton("Deletar");
 		btnDeletar.setEnabled(false);
 		btnDeletar.setBackground(SystemColor.controlHighlight);
 		btnDeletar.setBounds(876, 636, 89, 23);
@@ -584,6 +600,7 @@ public class CadastrarFuncionarios {
 	private JButton btnLimpar;
 	private JPanel panel;
 	private JLabel lblImagem;
+	private JButton btnDeletar;
 	
 	void menu() {
 		JMenuBar menuBar = new JMenuBar();
