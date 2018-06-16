@@ -19,13 +19,13 @@ import javax.swing.JTextField;
 
 import JanelasAnimal.CadastrarAnimais;
 import banco.Conexao;
+import java.awt.SystemColor;
 
 public class CadastrarEspecie {
 
 	private JFrame frmNovaEspecie;
 	private JTextField textField;
-	private JButton button;
-	Conexao con = new Conexao();
+	private JButton btnSalvar;
 	String palavra = null;
 
 	/**
@@ -67,7 +67,7 @@ public class CadastrarEspecie {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				if(arg0.getKeyCode() ==  KeyEvent.VK_ENTER){
-					button.doClick();
+					btnSalvar.doClick();
 				}
 			}
 		});
@@ -80,29 +80,29 @@ public class CadastrarEspecie {
 		lblNewLabel.setBounds(10, 45, 132, 14);
 		frmNovaEspecie.getContentPane().add(lblNewLabel);
 		
-		button = new JButton("Salvar");
-		button.addActionListener(new ActionListener() {
+		btnSalvar = new JButton("Salvar");
+		btnSalvar.setBackground(SystemColor.controlHighlight);
+		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				result();
+				verificaSeTemEspecie();
 				
-				if(!(palavra == "tem")) {
-					if(!textField.getText().trim().equals("")) {
-						Salvar();
-					}else
-						JOptionPane.showInternalMessageDialog(null, "campo vazio");
-				}
-					
-				else {
+				if(palavra == "tem") {
 					JOptionPane.showMessageDialog(null, "Especie já cadastrada!");
 					textField.selectAll();
+					return;
 				}
-					
+				if(textField.getText().trim().equals("")) {
+					JOptionPane.showInternalMessageDialog(null, "campo vazio");
+					return;	
+				}
+				Salvar();
 			}
 		});
-		button.setBounds(334, 109, 100, 23);
-		frmNovaEspecie.getContentPane().add(button);
+		btnSalvar.setBounds(334, 109, 100, 23);
+		frmNovaEspecie.getContentPane().add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmNovaEspecie.dispose();
@@ -110,21 +110,6 @@ public class CadastrarEspecie {
 		});
 		btnCancelar.setBounds(224, 109, 100, 23);
 		frmNovaEspecie.getContentPane().add(btnCancelar);
-		
-		JLabel lblIrParaTela = new JLabel("Ir para tela de Cadastro de Ra\u00E7a");
-		lblIrParaTela.setBounds(201, 6, 184, 14);
-		frmNovaEspecie.getContentPane().add(lblIrParaTela);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				NovaRaca.main(null);
-				frmNovaEspecie.dispose();
-			}
-		});
-		btnNewButton.setIcon(new ImageIcon(CadastrarEspecie.class.getResource("/img/seta.png")));
-		btnNewButton.setBounds(395, 4, 39, 19);
-		frmNovaEspecie.getContentPane().add(btnNewButton);
 		frmNovaEspecie.setLocationRelativeTo(null);
 		
 		CadastrarAnimais.btnOk.doClick();
@@ -135,7 +120,7 @@ public class CadastrarEspecie {
 		String sql = "INSERT INTO especie (nome_es) VALUES (?)";
 		
 		try {
-			PreparedStatement stmt = con.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
 			stmt.setString(1, textField.getText().toLowerCase());
 			stmt.execute();
 			stmt.close();
@@ -147,12 +132,12 @@ public class CadastrarEspecie {
 		}
 	}
 	
-	void result() {
+	void verificaSeTemEspecie() {
 		ResultSet dados=null;
 		String sql = "select * from especie";
 		
 		try {
-			PreparedStatement stmt = con.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
 			dados = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();

@@ -258,9 +258,10 @@ public class CadastrarFuncionarios {
 							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 					if(resposta==JOptionPane.YES_OPTION) {
 						funcionario.updFun(DAOFuncionario);
-						btnLimpar.doClick();
+						btnCancelar.doClick();
 						JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
-						contadorParaEditar=0;
+					}else {
+						return;
 					}
 					
 				}
@@ -293,7 +294,7 @@ public class CadastrarFuncionarios {
 		btnLimpar.setBounds(678, 636, 89, 23);
 		frmCadastrarFuncionarios.getContentPane().add(btnLimpar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {//inicio do evento do botao cancelar
 				if(contadorParaEditar==0) {
@@ -613,6 +614,7 @@ public class CadastrarFuncionarios {
 	private JPanel panel;
 	private JLabel lblImagem;
 	private JButton btnDeletar;
+	private JButton btnCancelar;
 	
 	void menu() {
 		JMenuBar menuBar = new JMenuBar();
