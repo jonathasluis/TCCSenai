@@ -59,7 +59,7 @@ import outraJanelas.Principal;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
 
-public class CadastrarAnimais {
+public class CadastrarAnimais {//teste
 
 	private JFrame frmCadastroDeAnimais;
 	private JTextField tfNomeLote;
@@ -177,12 +177,6 @@ public class CadastrarAnimais {
 		cbEspecie.setBackground(SystemColor.controlHighlight);
 		cbEspecie.setBounds(506, 100, 164, 20);
 		frmCadastroDeAnimais.getContentPane().add(cbEspecie);
-		
-		JPopupMenu popupMenu = new JPopupMenu();
-		addPopup(cbEspecie, popupMenu);
-		
-		JMenuItem mntmCadastrarNovaEspecie = new JMenuItem("Cadastrar nova Especie");
-		popupMenu.add(mntmCadastrarNovaEspecie);
 		
 		JLabel lblNomeDoLote = new JLabel("Nome do Lote:");
 		lblNomeDoLote.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -448,10 +442,6 @@ public class CadastrarAnimais {
 		btnProcurar.setBounds(351, 222, 89, 20);
 		frmCadastroDeAnimais.getContentPane().add(btnProcurar);
 		
-		label_1 = new JLabel("");
-		label_1.setBounds(20, 641, 46, 14);
-		frmCadastroDeAnimais.getContentPane().add(label_1);
-		
 		menu();
 		ComboBox.comboBoxEspecie();
 		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
@@ -579,7 +569,6 @@ public class CadastrarAnimais {
 	private JButton btnDeletar;
 	private JButton btnCancelar;
 	private JButton btnSalvar;
-	private JLabel label_1;
 	
 	void menu() {
 		JMenuBar menuBar = new JMenuBar();
