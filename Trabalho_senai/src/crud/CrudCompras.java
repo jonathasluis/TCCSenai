@@ -52,7 +52,7 @@ public class CrudCompras {
 		}
 	}
 	
-	public ResultSet selecionaCompras(Compras compras) {
+	public static ResultSet selecionaCompras(Compras compras) {
 		ResultSet tabela = null;
 		String sql = "SELECT*FROM compras_insumos where id_fazenda=?";
 		try {

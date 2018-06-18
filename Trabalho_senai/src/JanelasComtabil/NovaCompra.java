@@ -459,8 +459,8 @@ public class NovaCompra {
 		}
 		
 		//CHAMAR MÉTODO
-		
-		criaTabela(new CrudCompras().selecionaCompras(compra));
+		compra.setIdFazenda(Principal.fazenda.getIdFazenda());
+		criaTabela(CrudCompras.selecionaCompras(compra));
 		menu();
 	}
 		//MÉTODO PARA COLOCAR OS DADOS NA TABELA

@@ -385,8 +385,8 @@ public class CadastrarAnimais {//teste
 				rdbtnMacho.setSelected(true);
 				lblImagem.setIcon(null);
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
-				//ftfDataCompra.setText(null);
-				//ftfDataNascimento.setText(null);
+				ftfDataCompra.setText("");
+				ftfDataNascimento.setText("");
 			}
 		});//fim ação do botão limpar
 		btnLimpar.setBackground(SystemColor.controlHighlight);
