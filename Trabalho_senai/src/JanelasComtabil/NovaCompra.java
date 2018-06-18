@@ -1,22 +1,17 @@
 package JanelasComtabil;
 
-import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,24 +19,44 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.JTable;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.table.DefaultTableModel;
 
-import DAO.Compras;
 import JanelasAnimal.CadastrarAnimais;
+
 import JanelasFuncionarios.CadastrarFuncionarios;
 import crud.CrudCompras;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
+import outraJanelas.VisualizarFazendas;
+import javax.swing.JEditorPane;
+import java.awt.SystemColor;
+import javax.swing.JSpinner;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import DAO.Compras;
+import DAO.Fazenda;
+
+import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.ImageIcon;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.EmptyBorder;
+import java.awt.ComponentOrientation;
+import javax.swing.SpinnerNumberModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class NovaCompra {
 	
@@ -63,7 +78,7 @@ public class NovaCompra {
 	private JSpinner spinner;
 	static Compras addCompras = new Compras();
 	static Compras editarCompras = new Compras();
-	static int teste = 1; 
+	static int teste = 0; 
 	static int x1=1;
 	int idfazenda=0;
 	int contador =+1;
@@ -322,6 +337,7 @@ public class NovaCompra {
 				tfPreco.setText(null);
 				txtFornecedor.setText(null);
 				tfProduto.requestFocus();
+				
 			}
 		});
 		btnLimpar.setBounds(840, 637, 89, 23);
@@ -338,17 +354,20 @@ public class NovaCompra {
 		btnCancelar.setBounds(741, 637, 89, 23);
 		frmCompraDeInsumos.getContentPane().add(btnCancelar);
 		
+		
 		JLabel lblQuantidade = new JLabel("Quantidade:");
 		lblQuantidade.setForeground(Color.WHITE);
 		lblQuantidade.setFont(new Font("Arial", Font.BOLD, 14));
 		lblQuantidade.setBounds(787, 111, 89, 20);
 		frmCompraDeInsumos.getContentPane().add(lblQuantidade);
 		
+		
 		spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spinner.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		spinner.setBounds(886, 112, 164, 20);
 		frmCompraDeInsumos.getContentPane().add(spinner);
+		
 		
 		txtProucurarProdutos = new JTextField();
 		txtProucurarProdutos.setToolTipText("");
@@ -357,6 +376,10 @@ public class NovaCompra {
 		txtProucurarProdutos.setColumns(10);
 		txtProucurarProdutos.setBounds(26, 259, 369, 20);
 		frmCompraDeInsumos.getContentPane().add(txtProucurarProdutos);
+		
+		
+		
+		
 		
 		JButton button = new JButton("Proucurar");
 		button.addActionListener(new ActionListener() {
@@ -377,10 +400,12 @@ public class NovaCompra {
 						scrollPane.setBounds(26, 290, 1024, x2);
 					}
 				}else {
-					scrollPane.setBounds(26, 290, 1024, 327);
+					criaTabela(new CrudCompras().selecionaCompras(compra));
 		
 				}
-				//FIM DO TRATAMENTO 	
+				//FIM DO TRATAMENTO 
+				
+				
 			}
 		});
 		button.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -413,6 +438,7 @@ public class NovaCompra {
 		table.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		table.setForeground(Color.DARK_GRAY);
 		table.setBackground(SystemColor.control);
+		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -435,6 +461,10 @@ public class NovaCompra {
 		table.getColumnModel().getColumn(5).setResizable(false);
 		table.getColumnModel().getColumn(6).setResizable(false);
 	
+		
+	
+	
+		
 		scrollPane.setViewportView(table);
 		
 		//IMAGEICON PARA COLOCAR IMAGEM NA TELA E REDIMENSIONAR 
@@ -443,6 +473,7 @@ public class NovaCompra {
 		JLabel llll = new JLabel("");
 		llll.setBounds(941, 11, 57, 55);
 		llll.setIcon(icon);
+		
 		
 		//IMAGEICON PARA COLOCAR IMAGEM NA TELA E REDIMENSIONAR 
 		ImageIcon img = new ImageIcon("src/img/fundo3.jpg");
@@ -453,14 +484,15 @@ public class NovaCompra {
 		label.setBounds(0, 0, 1074, 671);
 		frmCompraDeInsumos.getContentPane().add(label);
 		
+		
 		//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
 		if (table.getRowCount()==0) {
 			scrollPane.setVisible(false);
 		}
 		
 		//CHAMAR MÉTODO
-		compra.setIdFazenda(Principal.fazenda.getIdFazenda());
-		criaTabela(CrudCompras.selecionaCompras(compra));
+		
+		criaTabela(new CrudCompras().selecionaCompras(compra));
 		menu();
 	}
 		//MÉTODO PARA COLOCAR OS DADOS NA TABELA
@@ -531,6 +563,18 @@ public class NovaCompra {
 			}
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Visualizar Animais");
+		mntmNewMenuItem.setBorder(null);
+		mntmNewMenuItem.setBackground(new Color(30, 144, 255));
+		mntmNewMenuItem.setForeground(new Color(230, 230, 250));
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastrarAnimais.main(null);
+				frmCompraDeInsumos.dispose();
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenu mnFuncionarios = new JMenu("Funcionarios");
 		mnFuncionarios.setForeground(new Color(230, 230, 250));

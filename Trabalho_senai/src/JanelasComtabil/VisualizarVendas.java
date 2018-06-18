@@ -3,32 +3,37 @@ package JanelasComtabil;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 
 import JanelasAnimal.CadastrarAnimais;
 import JanelasAnimal.VisualizarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import JanelasFuncionarios.VisualizarFuncionarios;
+import crud.CrudCompras;
 import crud.CrudVendas;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
 import outraJanelas.VisualizarFazendas;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import DAO.Compras;
+import DAO.Vendas;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VisualizarVendas {
 

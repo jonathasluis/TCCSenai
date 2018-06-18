@@ -3,7 +3,6 @@ package JanelasComtabil;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,7 +16,6 @@ import java.util.Date;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -33,13 +31,18 @@ import javax.swing.SwingConstants;
 
 import JanelasAnimal.CadastrarAnimais;
 import JanelasAnimal.ComboBox;
+import JanelasAnimal.VisualizarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import JanelasFuncionarios.VisualizarFuncionarios;
 import banco.Conexao;
+import crud.CrudAnimal;
+import crud.CrudVendas;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
 import outraJanelas.VisualizarFazendas;
+import javax.swing.JEditorPane;
+import java.awt.SystemColor;
 
 public class NovaVenda {
 
@@ -122,6 +125,7 @@ public class NovaVenda {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Visualizar Animais");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				VisualizarAnimais.main(null);
 				frmNovaVenda.dispose();
 			}
 		});
@@ -380,7 +384,7 @@ public class NovaVenda {
 					tipo="animal";
 					animal=cbAnimal.getSelectedItem().toString();
 					idAnimal(cbAnimal.getSelectedItem().toString());
-					
+					new CrudAnimal().removeAnimal(id);
 					JOptionPane.showMessageDialog(null, "animal removido com sucesso");
 				}
 					
@@ -401,7 +405,7 @@ public class NovaVenda {
 					JOptionPane.showMessageDialog(null, "insira o  produto");
 					tfProduto.requestFocus();
 				} else if(!tfPreco.getText().trim().equals("")){
-				//	new CrudVendas().addvendas(tfProduto.getText(), id, Double.parseDouble(tfPreco.getText()), tfCliente.getText(), qtd, tfData.getText(), cbFazenda.getSelectedItem().toString());
+					new CrudVendas().addvendas(tfProduto.getText(), id, Double.parseDouble(tfPreco.getText()), tfCliente.getText(), qtd, tfData.getText(), cbFazenda.getSelectedItem().toString());
 					JOptionPane.showMessageDialog(null, "salvo com sucesso");
 					btnLimpar.doClick();
 				}
@@ -448,6 +452,9 @@ public class NovaVenda {
 		dtrpnUmaVezSalvo.setText("Uma vez salvo as vendas nao poder\u00E3o ser \r\ndeletadas e nem atualizadas");
 		dtrpnUmaVezSalvo.setBounds(417, 298, 287, 57);
 		frmNovaVenda.getContentPane().add(dtrpnUmaVezSalvo);
+		
+		cb.comboBoxAnimal();
+		cb.comboBoxFazenda();
 	}
 	
 	void idAnimal(String nome) {

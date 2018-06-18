@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,8 +19,11 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
 import JanelasAnimal.CadastrarAnimais;
+import JanelasAnimal.VisualizarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import JanelasFuncionarios.VisualizarFuncionarios;
+import crud.CrudCompras;
+import crud.CrudVendas;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
@@ -93,6 +98,7 @@ public class Total {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Visualizar Animais");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				VisualizarAnimais.main(null);
 				frame.dispose();
 			}
 		});
@@ -256,10 +262,12 @@ public class Total {
 		separator.setBounds(0, 194, 484, 2);
 		frame.getContentPane().add(separator);
 		
-		//valor();
+		valor();
 	}
 	
-	/*void valor() {
+	void valor() {
+		ResultSet dados1 = new CrudCompras().selecompras();
+		ResultSet dados2 = new CrudVendas().selecvendas();
 		float valor1=0,valor2=0,total=0;
 		
 		try {
@@ -284,5 +292,5 @@ public class Total {
 			label.setForeground(Color.GREEN);
 		}
 		label.setText(String.valueOf(total));
-	}*/
+	}
 }
