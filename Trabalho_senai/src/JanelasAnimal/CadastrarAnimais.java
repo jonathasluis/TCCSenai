@@ -250,6 +250,7 @@ public class CadastrarAnimais {//teste
 		tabela.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {//evento de clique na tabela
+				lblImagem.setIcon(null);
 				btnLimpar.doClick();
 				pegaDadosDaTabela();
 				contadorParaEditar=1;
