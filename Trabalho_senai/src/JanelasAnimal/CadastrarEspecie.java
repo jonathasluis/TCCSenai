@@ -1,4 +1,4 @@
-package outraJanelas;
+package JanelasAnimal;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import JanelasAnimal.CadastrarAnimais;
 import banco.Conexao;
 import java.awt.SystemColor;
 
@@ -112,7 +111,7 @@ public class CadastrarEspecie {
 		frmNovaEspecie.getContentPane().add(btnCancelar);
 		frmNovaEspecie.setLocationRelativeTo(null);
 		
-		CadastrarAnimais.btnOk.doClick();
+		ComboBox.comboBoxEspecie();
 	}
 	
 	void Salvar() {

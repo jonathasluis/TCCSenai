@@ -442,6 +442,23 @@ public class CadastrarAnimais {//teste
 		btnProcurar.setBounds(351, 222, 89, 20);
 		frmCadastroDeAnimais.getContentPane().add(btnProcurar);
 		
+		JButton btnCadastrarNovaEspecie = new JButton("...");
+		btnCadastrarNovaEspecie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CadastrarEspecie.main(null);
+			}
+		});
+		btnCadastrarNovaEspecie.setBackground(SystemColor.controlHighlight);
+		btnCadastrarNovaEspecie.setToolTipText("Cadastrar nova Especie");
+		btnCadastrarNovaEspecie.setBounds(675, 100, 20, 20);
+		frmCadastroDeAnimais.getContentPane().add(btnCadastrarNovaEspecie);
+		
+		JButton btnCadastrarNovaRaca = new JButton("...");
+		btnCadastrarNovaRaca.setToolTipText("Cadastrar nova Ra\u00E7a");
+		btnCadastrarNovaRaca.setBackground(SystemColor.controlHighlight);
+		btnCadastrarNovaRaca.setBounds(675, 135, 20, 20);
+		frmCadastroDeAnimais.getContentPane().add(btnCadastrarNovaRaca);
+		
 		menu();
 		ComboBox.comboBoxEspecie();
 		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
