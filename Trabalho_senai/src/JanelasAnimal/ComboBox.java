@@ -117,7 +117,6 @@ public class ComboBox extends CadastrarAnimais{
 	public static String pegaNomeRaca(int id) {
 		ResultSet dados1=null;
 		String valor=null;
-		int idEspecie=0;
 		String sql = "SELECT * FROM raca where idraca = ?";
 		try {
 			PreparedStatement st = Conexao.getConexao().prepareStatement(sql);

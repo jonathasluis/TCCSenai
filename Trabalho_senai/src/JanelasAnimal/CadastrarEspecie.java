@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,8 +18,9 @@ import javax.swing.JTextField;
 
 import banco.Conexao;
 import java.awt.SystemColor;
+import javax.swing.SwingConstants;
 
-public class CadastrarEspecie {
+public class CadastrarEspecie extends CadastrarAnimais{
 
 	private JFrame frmNovaEspecie;
 	private JTextField textField;
@@ -57,7 +57,7 @@ public class CadastrarEspecie {
 		frmNovaEspecie = new JFrame();
 		frmNovaEspecie.setTitle("Nova Especie");
 		frmNovaEspecie.setResizable(false);
-		frmNovaEspecie.setBounds(100, 100, 450, 175);
+		frmNovaEspecie.setBounds(100, 100, 300, 150);
 		frmNovaEspecie.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmNovaEspecie.getContentPane().setLayout(null);
 		
@@ -70,13 +70,14 @@ public class CadastrarEspecie {
 				}
 			}
 		});
-		textField.setBounds(137, 43, 270, 20);
+		textField.setBounds(10, 36, 274, 20);
 		frmNovaEspecie.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Nome da Esp\u00E9cie:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel.setBounds(10, 45, 132, 14);
+		lblNewLabel.setBounds(10, 11, 274, 14);
 		frmNovaEspecie.getContentPane().add(lblNewLabel);
 		
 		btnSalvar = new JButton("Salvar");
@@ -88,16 +89,18 @@ public class CadastrarEspecie {
 				if(palavra == "tem") {
 					JOptionPane.showMessageDialog(null, "Especie já cadastrada!");
 					textField.selectAll();
+					palavra=null;
 					return;
 				}
 				if(textField.getText().trim().equals("")) {
 					JOptionPane.showInternalMessageDialog(null, "campo vazio");
 					return;	
 				}
+				cbEspecie.removeAllItems();
 				Salvar();
 			}
 		});
-		btnSalvar.setBounds(334, 109, 100, 23);
+		btnSalvar.setBounds(199, 88, 85, 23);
 		frmNovaEspecie.getContentPane().add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -107,7 +110,7 @@ public class CadastrarEspecie {
 				frmNovaEspecie.dispose();
 			}
 		});
-		btnCancelar.setBounds(224, 109, 100, 23);
+		btnCancelar.setBounds(104, 88, 85, 23);
 		frmNovaEspecie.getContentPane().add(btnCancelar);
 		frmNovaEspecie.setLocationRelativeTo(null);
 		

@@ -56,8 +56,6 @@ import crud.CrudFazenda;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
 
 public class CadastrarAnimais {//teste
 
@@ -85,6 +83,9 @@ public class CadastrarAnimais {//teste
 	private JScrollPane scrollPane;
 	private CrudAnimal crud = new CrudAnimal();
 	int contadorParaEditar=0;
+	private JButton btnDeletar;
+	private JButton btnCancelar;
+	private JButton btnSalvar;
 	/**
 	 *
 	 * Launch the application.
@@ -583,9 +584,6 @@ public class CadastrarAnimais {//teste
 			}
 		}
 	};
-	private JButton btnDeletar;
-	private JButton btnCancelar;
-	private JButton btnSalvar;
 	
 	void menu() {
 		JMenuBar menuBar = new JMenuBar();
@@ -689,22 +687,5 @@ public class CadastrarAnimais {//teste
 		});
 		mnOpes.add(mntmMudarFazenda);
 		mnOpes.add(mntmSada);
-	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
 	}
 }
