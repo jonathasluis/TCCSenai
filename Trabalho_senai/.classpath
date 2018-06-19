@@ -8,7 +8,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-bin.jar"/>
-	<classpathentry kind="lib" path="img/seta.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
