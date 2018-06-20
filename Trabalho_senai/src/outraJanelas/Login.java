@@ -26,33 +26,6 @@ public class Login {
 	
 	
 	String acesso="nao";
-	
-	public void logar() {
-		ResultSet tabela = null;
-		  
-		String sql = "select*from usuario where usuario=? and senha=?";
-		try {
-			PreparedStatement stmt = c.getConexao().prepareStatement(sql);
-			stmt.setString(1, tfUsuario.getText().toString());
-			stmt.setString(2, String.valueOf(pfSenha.getPassword()));
-			tabela = stmt.executeQuery();
-			if(tabela.next()) {
-				frmLogin.dispose();
-				Principal.main(null);
-			}else {
-
-				JOptionPane.showMessageDialog(null, "Usuario e/ou Senha inválido(s)!");						
-			}
-
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	
-
-	}
-
-
 	private JFrame frmLogin;
 	private JTextField tfUsuario;
 	private JPasswordField pfSenha;
@@ -145,10 +118,32 @@ public class Login {
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logar();
-			}
-				
-
-			
+			}			
 		});
 	}	
+	
+	public void logar() {
+		ResultSet tabela = null;
+		  
+		String sql = "select*from usuario where usuario=? and senha=?";
+		try {
+			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			stmt.setString(1, tfUsuario.getText().toString());
+			stmt.setString(2, String.valueOf(pfSenha.getPassword()));
+			tabela = stmt.executeQuery();
+			if(tabela.next()) {
+				frmLogin.dispose();
+				Principal.main(null);
+			}else {
+
+				JOptionPane.showMessageDialog(null, "Usuario e/ou Senha inválido(s)!");						
+			}
+
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	
+
+	}
 }

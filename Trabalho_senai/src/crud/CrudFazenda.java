@@ -71,7 +71,7 @@ public class CrudFazenda {
 		
 	}
 	
-	public ResultSet selecionaFazenda(Fazenda fazenda){
+	public static ResultSet selecionaFazenda(Fazenda fazenda){
 		ResultSet tabela = null;
 		String sql = "SELECT * FROM fazenda where idusuario=?";
 		try {

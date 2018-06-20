@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 
 import DAO.Fazenda;
 import banco.Conexao;
+import crud.CrudFazenda;
+import java.awt.SystemColor;
 
 public class Pergunta {
 
@@ -70,6 +72,7 @@ public class Pergunta {
 		frame.getContentPane().add(comboBox);
 		
 		JButton btnOk = new JButton("OK");
+		btnOk.setBackground(SystemColor.controlHighlight);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String resp = String.valueOf(comboBox.getSelectedItem());
@@ -83,6 +86,7 @@ public class Pergunta {
 		frame.getContentPane().add(btnOk);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -124,16 +128,8 @@ public class Pergunta {
 	
 	public void comboBoxFazenda() {
 		
-		 ResultSet dados1 = null;
+		 ResultSet dados1 = CrudFazenda.selecionaFazenda(fazenda);
 		
-		Conexao c = new Conexao();// conexão
-		String sql = "SELECT * FROM fazenda";
-		try {
-			PreparedStatement stmt = c.getConexao().prepareStatement(sql);
-			dados1 = stmt.executeQuery();
-			stmt.execute();
-			stmt.close();
-
 			while(dados1.next()) {
 					comboBox.addItem(dados1.getString("nome"));
 			}
