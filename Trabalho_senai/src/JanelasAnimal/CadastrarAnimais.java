@@ -17,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -56,6 +58,8 @@ import crud.CrudFazenda;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CadastrarAnimais {//teste8
 
@@ -135,6 +139,15 @@ public class CadastrarAnimais {//teste8
 		frmCadastroDeAnimais.getContentPane().add(lblDataDeNascimento);
 		
 		ftfDataNascimento = new JFormattedTextField(mask);
+		ftfDataNascimento.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==e.VK_ENTER) {
+					ftfDataCompra.requestFocus();
+				}
+			}
+		});
+		ftfDataNascimento.setToolTipText("aaaa-mm-dd");
 		ftfDataNascimento.setBounds(140, 100, 164, 20);
 		frmCadastroDeAnimais.getContentPane().add(ftfDataNascimento);
 		
@@ -148,7 +161,22 @@ public class CadastrarAnimais {//teste8
 		lblDataDaCompra.setBounds(10, 135, 120, 20);
 		frmCadastroDeAnimais.getContentPane().add(lblDataDaCompra);
 		
+		//VARIAVEL PARA PEGAR A DATA DO DIA ATUAL DO SEU COMPUTADOR
+		Date data = new Date();
+		SimpleDateFormat formato = new SimpleDateFormat("yyyyMMdd");
+		String formatada = formato.format(data);
+		
 		ftfDataCompra = new JFormattedTextField(mask);//define a mascara
+		ftfDataCompra.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==e.VK_ENTER) {
+					spinnerQuantidade.requestFocus();
+				}
+			}
+		});
+		ftfDataCompra.setText(formatada);
+		ftfDataCompra.setToolTipText("aaaa-mm-dd");
 		ftfDataCompra.setBounds(140, 135, 164, 20);
 		frmCadastroDeAnimais.getContentPane().add(ftfDataCompra);
 		
@@ -158,6 +186,14 @@ public class CadastrarAnimais {//teste8
 		frmCadastroDeAnimais.getContentPane().add(lblQuantidade);
 		
 		spinnerQuantidade = new JSpinner();
+		spinnerQuantidade.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==e.VK_ENTER) {
+					tfDestino.requestFocus();
+				}
+			}
+		});
 		spinnerQuantidade.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spinnerQuantidade.setBounds(506, 65, 164, 20);
 		frmCadastroDeAnimais.getContentPane().add(spinnerQuantidade);
@@ -185,6 +221,14 @@ public class CadastrarAnimais {//teste8
 		frmCadastroDeAnimais.getContentPane().add(lblNomeDoLote);
 		
 		tfNomeLote = new JTextField();
+		tfNomeLote.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode()==arg0.VK_ENTER) {
+					ftfDataNascimento.requestFocus();
+				}
+			}
+		});
 		tfNomeLote.setBounds(140, 65, 164, 20);
 		frmCadastroDeAnimais.getContentPane().add(tfNomeLote);
 		tfNomeLote.setColumns(10);
@@ -385,8 +429,8 @@ public class CadastrarAnimais {//teste8
 				rdbtnMacho.setSelected(true);
 				lblImagem.setIcon(null);
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
-				ftfDataCompra.setText("");
-				ftfDataNascimento.setText("");
+				ftfDataCompra.setValue(null);
+				ftfDataNascimento.setValue(null);
 			}
 		});//fim ação do botão limpar
 		btnLimpar.setBackground(SystemColor.controlHighlight);
@@ -568,6 +612,8 @@ public class CadastrarAnimais {//teste8
 				ImageIcon icon = new ImageIcon(animal.getImagem());
 				icon.setImage(icon.getImage().getScaledInstance(panel.getWidth(),panel.getHeight(), 100));
 				lblImagem.setIcon(icon);
+			}else {
+				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 			}
 	}
 	

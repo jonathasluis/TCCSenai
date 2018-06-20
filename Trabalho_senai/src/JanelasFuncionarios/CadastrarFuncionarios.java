@@ -57,16 +57,22 @@ public class CadastrarFuncionarios {
 	private JTextField tfProcurar;
 	private JTable tabela;
 	private JTextField tfNome;
-	private JTextField tfCpf;
 	private JTextField tfRg;
 	private JRadioButton rdbtnMasculino;
 	private JFormattedTextField ftfNascimento;
 	private JTextField tfEmail;
 	private JTextField tfCargo;
 	private JTextField tfSalario;
+	private JFormattedTextField ftfTelefone;
+	private JButton btnLimpar;
+	private JPanel panel;
+	private JLabel lblImagem;
+	private JButton btnDeletar;
+	private JButton btnCancelar;
+	private JFormattedTextField ftfCpf;
 	private MetodosImagem mI = new MetodosImagem();
 	private int contador=0;//contar quantos cliques
-	private MaskFormatter maskaraData, maskaraTelefone;
+	private MaskFormatter maskaraData, maskaraTelefone,maskaraCpf;
 	private JRadioButton rdbtnFeminino;
 	private JRadioButton rdbtnAtivo;
 	private JRadioButton rdbtnDesligado;
@@ -103,8 +109,9 @@ public class CadastrarFuncionarios {
 	private void initialize() {
 		
 		try {//inicio formatação mascara
-			maskaraData = new MaskFormatter("####/##/##");
+			maskaraData = new MaskFormatter("####-##-##");
 			maskaraTelefone = new MaskFormatter("(##) ####-####");
+			maskaraCpf = new MaskFormatter("###.###.###-##");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -226,9 +233,9 @@ public class CadastrarFuncionarios {
 					ftfNascimento.requestFocus();
 					return;
 				}
-				if(tfCpf.getText().trim().equals("")) {
+				if(ftfCpf.getText().contains(" ")) {
 					JOptionPane.showMessageDialog(null, "insira o CPF", "ALERTA!",JOptionPane.WARNING_MESSAGE);
-					tfCpf.requestFocus();
+					ftfCpf.requestFocus();
 					return;
 				}
 				if(tfRg.getText().trim().equals("")) {
@@ -277,11 +284,11 @@ public class CadastrarFuncionarios {
 			public void actionPerformed(ActionEvent arg0) {//evento do botao limpar
 				lblImagem.setText("SELECIONAR IMAGEM");
 				tfNome.setText(null);
-				//ftfNascimento.setText(null);
-				tfCpf.setText(null);
+				ftfNascimento.setValue(null);
+				ftfCpf.setValue(null);
 				tfRg.setText(null);
 				rdbtnMasculino.setSelected(true);
-				//ftfTelefone.setText(null);
+				ftfTelefone.setValue(null);
 				tfCargo.setText(null);
 				tfSalario.setText(null);
 				tfEmail.setText(null);
@@ -379,11 +386,6 @@ public class CadastrarFuncionarios {
 		tfNome.setBounds(89, 60, 174, 20);
 		frmCadastrarFuncionarios.getContentPane().add(tfNome);
 		
-		tfCpf = new JTextField();
-		tfCpf.setColumns(10);
-		tfCpf.setBounds(89, 122, 174, 20);
-		frmCadastrarFuncionarios.getContentPane().add(tfCpf);
-		
 		tfRg = new JTextField();
 		tfRg.setColumns(10);
 		tfRg.setBounds(89, 153, 174, 20);
@@ -464,6 +466,10 @@ public class CadastrarFuncionarios {
 		bgStatus.add(rdbtnAtivo);
 		bgStatus.add(rdbtnDesligado);
 		
+		ftfCpf = new JFormattedTextField(maskaraCpf);
+		ftfCpf.setBounds(89, 122, 174, 20);
+		frmCadastrarFuncionarios.getContentPane().add(ftfCpf);
+		
 		menu();
 		DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
 		colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
@@ -472,7 +478,7 @@ public class CadastrarFuncionarios {
 	void preencherDAOFuncionarioParaSalvarNovo() {
 		DAOFuncionario.setNome(tfNome.getText());
 		DAOFuncionario.setDataDeNascimento(ftfNascimento.getText());
-		DAOFuncionario.setCpf(tfCpf.getText());
+		DAOFuncionario.setCpf(ftfCpf.getText());
 		DAOFuncionario.setRg(tfRg.getText());
 		DAOFuncionario.setTelefone(ftfTelefone.getText());
 		DAOFuncionario.setEmail(tfEmail.getText());
@@ -567,7 +573,7 @@ public class CadastrarFuncionarios {
 			
 		tfNome.setText(DAOFuncionario.getNome());
 		ftfNascimento.setText(DAOFuncionario.getDataDeNascimento());
-		tfCpf.setText(DAOFuncionario.getCpf());
+		ftfCpf.setText(DAOFuncionario.getCpf());
 		tfRg.setText(DAOFuncionario.getRg());
 		ftfTelefone.setText(DAOFuncionario.getTelefone());
 		tfEmail.setText(DAOFuncionario.getEmail());
@@ -590,7 +596,10 @@ public class CadastrarFuncionarios {
 			ImageIcon icon = new ImageIcon(DAOFuncionario.getImg());
 			icon.setImage(icon.getImage().getScaledInstance(panel.getWidth(),panel.getHeight(), 100));
 			lblImagem.setIcon(icon);
+		}else {
+			lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 		}
+		
 			
 		
 	}
@@ -609,12 +618,6 @@ public class CadastrarFuncionarios {
 			}
 		}
 	};//fim da tarefa paralela de contar cliques
-	private JFormattedTextField ftfTelefone;
-	private JButton btnLimpar;
-	private JPanel panel;
-	private JLabel lblImagem;
-	private JButton btnDeletar;
-	private JButton btnCancelar;
 	
 	void menu() {
 		JMenuBar menuBar = new JMenuBar();
