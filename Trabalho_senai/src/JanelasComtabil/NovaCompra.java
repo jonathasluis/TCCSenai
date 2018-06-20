@@ -323,7 +323,7 @@ public class NovaCompra {
 					}
 			}
 		});
-		btnSalvar.setBounds(941, 637, 89, 23);
+		btnSalvar.setBounds(975, 637, 89, 23);
 		frmCompraDeInsumos.getContentPane().add(btnSalvar);
 		
 		//LIMPAR TODOS OS DADOS 
@@ -340,7 +340,7 @@ public class NovaCompra {
 				
 			}
 		});
-		btnLimpar.setBounds(840, 637, 89, 23);
+		btnLimpar.setBounds(876, 637, 89, 23);
 		frmCompraDeInsumos.getContentPane().add(btnLimpar);
 		
 		//CANCELAR A OPERAÇÃO E VOLTAR PARA A TELA PRINCIPAL
@@ -351,7 +351,7 @@ public class NovaCompra {
 				Principal.frmPrincipal.setVisible(true);
 			}
 		});
-		btnCancelar.setBounds(741, 637, 89, 23);
+		btnCancelar.setBounds(777, 637, 89, 23);
 		frmCompraDeInsumos.getContentPane().add(btnCancelar);
 		
 		
@@ -374,7 +374,7 @@ public class NovaCompra {
 		txtProucurarProdutos.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtProucurarProdutos.setForeground(Color.BLACK);
 		txtProucurarProdutos.setColumns(10);
-		txtProucurarProdutos.setBounds(26, 259, 369, 20);
+		txtProucurarProdutos.setBounds(10, 259, 369, 20);
 		frmCompraDeInsumos.getContentPane().add(txtProucurarProdutos);
 		
 		
@@ -412,13 +412,13 @@ public class NovaCompra {
 		button.setForeground(Color.WHITE);
 		button.setBackground(Color.DARK_GRAY);
 		button.setFont(new Font("Arial", Font.BOLD, 12));
-		button.setBounds(405, 258, 118, 23);
+		button.setBounds(389, 258, 118, 23);
 		frmCompraDeInsumos.getContentPane().add(button);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setFont(new Font("Arial", Font.BOLD, 12));
 		scrollPane.setBorder(new CompoundBorder());
-		scrollPane.setBounds(26, 290, 1024, 21);
+		scrollPane.setBounds(10, 290, 1054, 21);
 		
 		frmCompraDeInsumos.getContentPane().add(scrollPane);
 		
@@ -516,7 +516,7 @@ public class NovaCompra {
 					if (table.getRowCount() > teste  & table.getRowCount() <=19 ) {
 						teste=+1;
 						int x = (teste*16)+scrollPane.getHeight();
-						scrollPane.setBounds(26,290 , 1024, x);		
+						scrollPane.setBounds(10,290 , 1054, x);		
 					}
 				}
 			}

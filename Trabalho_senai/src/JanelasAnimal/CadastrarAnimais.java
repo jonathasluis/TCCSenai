@@ -57,7 +57,7 @@ import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
 
-public class CadastrarAnimais {//teste
+public class CadastrarAnimais {//teste8
 
 	private JFrame frmCadastroDeAnimais;
 	private JTextField tfNomeLote;
@@ -115,7 +115,7 @@ public class CadastrarAnimais {//teste
 	 */
 	private void initialize() {
 		try {//inicio formatação mascara
-			mask = new MaskFormatter("####/##/##");
+			mask = new MaskFormatter("####-##-##");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
