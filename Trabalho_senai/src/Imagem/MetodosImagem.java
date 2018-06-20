@@ -69,13 +69,18 @@ public class MetodosImagem {
 		return null;
 	}
 	
-public void abrirImagem(Object source,File img,JPanel panel,JLabel lblImg) {//abra a imagem
+public void abrirImagem(Object source,File img,JPanel panel,JLabel lblImg,byte[] imgByte) {//abra a imagem
 		
 		if(source instanceof File) {
 			ImageIcon icon = new ImageIcon(img.getAbsolutePath());
 			icon.setImage(icon.getImage().getScaledInstance(panel.getWidth(),panel.getHeight(), 100));
 			lblImg.setIcon(icon);
-		
 		}
+		if(source instanceof byte[]) {
+			ImageIcon icon = new ImageIcon(imgByte);
+			icon.setImage(icon.getImage().getScaledInstance(panel.getWidth(),panel.getHeight(), 100));
+			lblImg.setIcon(icon);
+		}	
+		
 	}
 }

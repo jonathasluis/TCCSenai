@@ -127,17 +127,17 @@ public class Pergunta {
 	}
 	
 	public void comboBoxFazenda() {
-		
+		Fazenda fazenda = new Fazenda();
+		fazenda.setIdUsuario(1);
 		 ResultSet dados1 = CrudFazenda.selecionaFazenda(fazenda);
 		
-			while(dados1.next()) {
-					comboBox.addItem(dados1.getString("nome"));
+			try {
+				while(dados1.next()) {
+						comboBox.addItem(dados1.getString("nome"));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("foi nao");
-		}
 	}
 }

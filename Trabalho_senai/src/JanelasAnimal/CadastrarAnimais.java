@@ -251,7 +251,7 @@ public class CadastrarAnimais {//teste8
 					lblImagem.setText(null);
 					lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
 					img = mI.selecionaImg();
-					mI.abrirImagem(img, img, panel, lblImagem);
+					mI.abrirImagem(img, img, panel, lblImagem,null);
 					contador=0;
 				}else {
 					return;
@@ -608,10 +608,9 @@ public class CadastrarAnimais {//teste8
 			}
 			
 			if(animal.getImagem()!= null) {
+				mI.abrirImagem(animal.getImagem(), null, panel, lblImagem,animal.getImagem());
 				lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
-				ImageIcon icon = new ImageIcon(animal.getImagem());
-				icon.setImage(icon.getImage().getScaledInstance(panel.getWidth(),panel.getHeight(), 100));
-				lblImagem.setIcon(icon);
+				
 			}else {
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 			}
