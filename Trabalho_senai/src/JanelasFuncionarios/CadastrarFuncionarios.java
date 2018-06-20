@@ -49,6 +49,8 @@ import crud.CrudFuncionarios;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CadastrarFuncionarios {
 
@@ -337,11 +339,19 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(btnDeletar);
 		
 		tfProcurar = new JTextField();
+		tfProcurar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==e.VK_ENTER) {
+					btnProcurar.doClick();
+				}
+			}
+		});
 		tfProcurar.setColumns(10);
 		tfProcurar.setBounds(10, 222, 331, 20);
 		frmCadastrarFuncionarios.getContentPane().add(tfProcurar);
 		
-		JButton btnProcurar = new JButton("Procurar");
+		btnProcurar = new JButton("Procurar");
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
@@ -382,16 +392,40 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(lblSexo);
 		
 		tfNome = new JTextField();
+		tfNome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==e.VK_ENTER) {
+					ftfNascimento.requestFocus();
+				}
+			}
+		});
 		tfNome.setColumns(10);
 		tfNome.setBounds(89, 60, 174, 20);
 		frmCadastrarFuncionarios.getContentPane().add(tfNome);
 		
 		tfRg = new JTextField();
+		tfRg.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==e.VK_ENTER) {
+					ftfTelefone.requestFocus();
+				}
+			}
+		});
 		tfRg.setColumns(10);
 		tfRg.setBounds(89, 153, 174, 20);
 		frmCadastrarFuncionarios.getContentPane().add(tfRg);
 		
 		ftfNascimento = new JFormattedTextField(maskaraData);
+		ftfNascimento.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==e.VK_ENTER) {
+					ftfCpf.requestFocus();
+				}
+			}
+		});
 		ftfNascimento.setToolTipText("aaaa/mm/dd");
 		ftfNascimento.setBounds(89, 92, 174, 20);
 		frmCadastrarFuncionarios.getContentPane().add(ftfNascimento);
@@ -440,15 +474,39 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnDesligado);
 		
 		ftfTelefone = new JFormattedTextField(maskaraTelefone);
+		ftfTelefone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==e.VK_ENTER) {
+					tfEmail.requestFocus();
+				}
+			}
+		});
 		ftfTelefone.setBounds(500, 61, 174, 20);
 		frmCadastrarFuncionarios.getContentPane().add(ftfTelefone);
 		
 		tfEmail = new JTextField();
+		tfEmail.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==e.VK_ENTER) {
+					tfCargo.requestFocus();
+				}
+			}
+		});
 		tfEmail.setColumns(10);
 		tfEmail.setBounds(500, 92, 174, 20);
 		frmCadastrarFuncionarios.getContentPane().add(tfEmail);
 		
 		tfCargo = new JTextField();
+		tfCargo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==e.VK_ENTER) {
+					tfSalario.requestFocus();
+				}
+			}
+		});
 		tfCargo.setColumns(10);
 		tfCargo.setBounds(500, 123, 174, 20);
 		frmCadastrarFuncionarios.getContentPane().add(tfCargo);
@@ -467,6 +525,14 @@ public class CadastrarFuncionarios {
 		bgStatus.add(rdbtnDesligado);
 		
 		ftfCpf = new JFormattedTextField(maskaraCpf);
+		ftfCpf.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==e.VK_ENTER) {
+					tfRg.requestFocus();
+				}
+			}
+		});
 		ftfCpf.setBounds(89, 122, 174, 20);
 		frmCadastrarFuncionarios.getContentPane().add(ftfCpf);
 		
@@ -618,6 +684,7 @@ public class CadastrarFuncionarios {
 			}
 		}
 	};//fim da tarefa paralela de contar cliques
+	private JButton btnProcurar;
 	
 	void menu() {
 		JMenuBar menuBar = new JMenuBar();
