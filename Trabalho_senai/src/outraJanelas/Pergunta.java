@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import DAO.Fazenda;
+import DAO.Usuario;
 import banco.Conexao;
 import crud.CrudFazenda;
 import java.awt.SystemColor;
@@ -24,6 +25,7 @@ public class Pergunta {
 
 	private JFrame frame;
 	private JComboBox comboBox;
+	static Usuario usuario = new Usuario();
 
 	/**
 	 * Launch the application.
@@ -60,7 +62,6 @@ public class Pergunta {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		
-		
 		JLabel lblNewLabel = new JLabel("Selecione a Fazenda");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -68,7 +69,7 @@ public class Pergunta {
 		frame.getContentPane().add(lblNewLabel);
 		
 		comboBox = new JComboBox();
-		comboBox.setBounds(83, 80, 183, 20);
+		comboBox.setBounds(83, 80, 180, 20);
 		frame.getContentPane().add(comboBox);
 		
 		JButton btnOk = new JButton("OK");
@@ -127,9 +128,8 @@ public class Pergunta {
 	}
 	
 	public void comboBoxFazenda() {
-		Fazenda fazenda = new Fazenda();
-		fazenda.setIdUsuario(1);
-		 ResultSet dados1 = CrudFazenda.selecionaFazenda(fazenda);
+		 Fazenda fazenda = new Fazenda();
+		 ResultSet dados1 = CrudFazenda.selecionaFazenda(usuario);
 		
 			try {
 				while(dados1.next()) {

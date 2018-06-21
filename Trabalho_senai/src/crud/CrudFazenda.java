@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import DAO.Fazenda;
+import DAO.Usuario;
 import banco.Conexao;
 
 public class CrudFazenda {
@@ -71,12 +72,12 @@ public class CrudFazenda {
 		
 	}
 	
-	public static ResultSet selecionaFazenda(Fazenda fazenda){
+	public static ResultSet selecionaFazenda(Usuario usuario){
 		ResultSet tabela = null;
 		String sql = "SELECT * FROM fazenda where idusuario=? order by nome";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
-			stmt.setInt(1, fazenda.getIdUsuario());
+			stmt.setInt(1, usuario.getIdUsuario());
 			tabela=stmt.executeQuery();
 			stmt.execute();
 			stmt.close();

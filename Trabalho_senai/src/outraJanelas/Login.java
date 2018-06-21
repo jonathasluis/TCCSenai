@@ -19,6 +19,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import DAO.Usuario;
 import banco.Conexao;
 
 public class Login {
@@ -84,14 +85,12 @@ public class Login {
 		lblSenha.setBounds(10, 87, 54, 20);
 		frmLogin.getContentPane().add(lblSenha);
 		
-		tfUsuario = 
-				new JTextField();
+		tfUsuario = new JTextField();
 		tfUsuario.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				if (arg0.getKeyCode() == arg0.VK_ENTER) {
 					pfSenha.requestFocus();
-					
 				}
 			}
 		});
@@ -105,7 +104,6 @@ public class Login {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == e.VK_ENTER) {
 					btnEntrar.doClick();
-					
 				}
 			}
 		});
@@ -123,19 +121,26 @@ public class Login {
 	}	
 	
 	public void logar() {
-		ResultSet tabela = null;
+		ResultSet rs = null;
 		  
 		String sql = "select*from usuario where usuario=? and senha=?";
 		try {
 			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
 			stmt.setString(1, tfUsuario.getText().toString());
 			stmt.setString(2, String.valueOf(pfSenha.getPassword()));
-			tabela = stmt.executeQuery();
-			if(tabela.next()) {
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				
+				Usuario usuario = new Usuario();
+				usuario.setIdUsuario(rs.getInt("idusuario"));
+				usuario.setUsuario(rs.getString("usuario"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setSenha(rs.getString("senha"));
+				Pergunta.usuario = usuario;
+				
 				frmLogin.dispose();
 				Principal.main(null);
 			}else {
-
 				JOptionPane.showMessageDialog(null, "Usuario e/ou Senha inválido(s)!");						
 			}
 
