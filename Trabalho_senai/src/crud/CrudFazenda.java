@@ -73,7 +73,7 @@ public class CrudFazenda {
 	
 	public static ResultSet selecionaFazenda(Fazenda fazenda){
 		ResultSet tabela = null;
-		String sql = "SELECT * FROM fazenda where idusuario=?";
+		String sql = "SELECT * FROM fazenda where idusuario=? order by nome";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, fazenda.getIdUsuario());
@@ -90,7 +90,7 @@ public class CrudFazenda {
 	
 	public ResultSet selecionaFazendaEspecifica(int idFazenda){
 		ResultSet tabela = null;
-		String sql = "SELECT * FROM fazenda where idfazenda=?";
+		String sql = "SELECT * FROM fazenda where idfazenda=? ";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, idFazenda);
@@ -107,7 +107,7 @@ public class CrudFazenda {
 	
 	public ResultSet procuraFazenda(String letra,Fazenda fazenda) {
 		ResultSet tabela = null;
-		String sql= "SELECT * FROM fazenda WHERE nome LIKE ? and idusuario=?";
+		String sql= "SELECT * FROM fazenda WHERE nome LIKE ? and idusuario=? order by nome";
 		 try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, "%"+letra+"%");

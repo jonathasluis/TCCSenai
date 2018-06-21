@@ -309,10 +309,6 @@ public class CadastrarAnimais {//teste8
 				"ID", "Nome", "Nascimento", "Especie", "Ra\u00E7a", "Sexo", "Destino", "Quantidade", "Data Obten\u00E7\u00E3o", "Fazenda"
 			}
 		) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false, false, false
 			};
@@ -469,6 +465,14 @@ public class CadastrarAnimais {//teste8
 		tfDestino.setColumns(10);
 		
 		tfProcurar = new JTextField();
+		tfProcurar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode()==arg0.VK_ENTER) {
+					ftfDataNascimento.requestFocus();
+				}
+			}
+		});
 		tfProcurar.setBounds(10, 222, 331, 20);
 		frmCadastroDeAnimais.getContentPane().add(tfProcurar);
 		tfProcurar.setColumns(10);

@@ -71,7 +71,7 @@ public class CrudFuncionarios {
 		
 	public static ResultSet selecionaFuncionario(Funcionario funcionario) {
 		ResultSet tabela = null;
-		String sql = "SELECT * FROM funcionarios where idfazenda=?";
+		String sql = "SELECT * FROM funcionarios where idfazenda=? order by nome_fun";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, funcionario.getIdFazenda());
@@ -88,7 +88,7 @@ public class CrudFuncionarios {
 	
 	public static ResultSet procurafuncionario(String letra, Funcionario funcionario) {
 		ResultSet tabela = null;
-		String sql = "SELECT*FROM funcionarios WHERE  nome_fun LIKE ? and idfazenda=?";
+		String sql = "SELECT*FROM funcionarios WHERE  nome_fun LIKE ? and idfazenda=? order by nome_fun";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1,"%"+letra+"%");

@@ -54,7 +54,7 @@ public class CrudCompras {
 	
 	public static ResultSet selecionaCompras(Compras compras) {
 		ResultSet tabela = null;
-		String sql = "SELECT*FROM compras_insumos where id_fazenda=?";
+		String sql = "SELECT*FROM compras_insumos where id_fazenda=? order by data_compra";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, compras.getIdFazenda());
@@ -72,7 +72,7 @@ public class CrudCompras {
 	
 	public ResultSet procurarCompra(String letra,int idFazenda) {
 		ResultSet tabela = null;
-		String sql = "SELECT*FROM compras_insumos WHERE produto LIKE ? and id_fazenda=?";
+		String sql = "SELECT*FROM compras_insumos WHERE produto LIKE ? and id_fazenda=? order by data_compra";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1,"%"+letra+"%");
