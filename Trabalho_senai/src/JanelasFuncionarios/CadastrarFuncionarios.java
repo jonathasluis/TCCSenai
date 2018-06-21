@@ -150,7 +150,7 @@ public class CadastrarFuncionarios {
 					lblImagem.setText(null);
 					lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
 					img = mI.selecionaImg();
-					mI.abrirImagem(img, img, panel, lblImagem);
+					mI.abrirImagem(img, img, panel, lblImagem,null);
 					contador=0;
 				}else {
 					return;
