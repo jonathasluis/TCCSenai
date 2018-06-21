@@ -183,25 +183,15 @@ public class CadastrarFuncionarios {
 			new String[] {
 				"ID", "Nome", "Nascimento", "CPF", "RG", "Sexo", "Telefone", "Email", "Cargo", "Salario", "Fazenda", "Status"
 			}
-		) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+		));
 		tabela.getColumnModel().getColumn(0).setResizable(false);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(70);
 		tabela.getColumnModel().getColumn(1).setResizable(false);
 		tabela.getColumnModel().getColumn(1).setPreferredWidth(100);
 		tabela.getColumnModel().getColumn(2).setResizable(false);
 		tabela.getColumnModel().getColumn(2).setPreferredWidth(83);
 		tabela.getColumnModel().getColumn(3).setResizable(false);
-		tabela.getColumnModel().getColumn(3).setPreferredWidth(85);
+		tabela.getColumnModel().getColumn(3).setPreferredWidth(95);
 		tabela.getColumnModel().getColumn(4).setResizable(false);
 		tabela.getColumnModel().getColumn(4).setPreferredWidth(85);
 		tabela.getColumnModel().getColumn(5).setResizable(false);
@@ -217,6 +207,7 @@ public class CadastrarFuncionarios {
 		tabela.getColumnModel().getColumn(10).setResizable(false);
 		tabela.getColumnModel().getColumn(10).setPreferredWidth(90);
 		tabela.getColumnModel().getColumn(11).setResizable(false);
+		tabela.getColumnModel().getColumn(11).setPreferredWidth(70);
 		tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tabela.getTableHeader().setReorderingAllowed(false);
@@ -593,7 +584,7 @@ public class CadastrarFuncionarios {
 				}
 					
 				modelo.addRow(new Object[] {rs.getInt("idfuncionarios"),rs.getString("nome_fun"),rs.getString("data_nasc"),
-						rs.getInt("cpf_fun"),rs.getInt("rg_fun"),sexo,rs.getString("fone_fun"),rs.getString("email_fun"),
+						rs.getString("cpf_fun"),rs.getString("rg_fun"),sexo,rs.getString("fone_fun"),rs.getString("email_fun"),
 						rs.getString("cargo"),rs.getString("salario"),fazenda,status});
 				
 			}
