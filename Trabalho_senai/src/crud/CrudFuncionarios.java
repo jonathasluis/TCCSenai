@@ -16,7 +16,7 @@ public class CrudFuncionarios {
 				+ " cargo, salario, status, img, idfazenda, sexo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, funcionario.getNome());
 			stmt.setString(2, funcionario.getDataDeNascimento());
 			stmt.setString(3, funcionario.getCpf());
@@ -45,7 +45,7 @@ public class CrudFuncionarios {
 				+ "fone_fun=?, email_fun=?, cargo=?, salario=?, status=?, img=?, idfazenda=?, sexo=?"
 				+ " where idfuncionarios=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, funcionario.getNome());
 			stmt.setString(2, funcionario.getDataDeNascimento());
 			stmt.setString(3, funcionario.getCpf());
@@ -73,7 +73,7 @@ public class CrudFuncionarios {
 		ResultSet tabela = null;
 		String sql = "SELECT * FROM funcionarios where idfazenda=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, funcionario.getIdFazenda());
 			tabela = stmt.executeQuery();
 			stmt.execute();
@@ -90,7 +90,7 @@ public class CrudFuncionarios {
 		ResultSet tabela = null;
 		String sql = "SELECT*FROM funcionarios WHERE  nome_fun LIKE ? and idfazenda=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1,"%"+letra+"%");
 			stmt.setInt(2, funcionario.getIdFazenda());
 			tabela = stmt.executeQuery();
@@ -107,7 +107,7 @@ public class CrudFuncionarios {
 	public boolean removeFun(Funcionario funcionario) {
 		String sql = "DELETE FROM funcionarios WHERE idfuncionarios=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, funcionario.getIdFuncionario());
 			stmt.execute();
 			stmt.close();

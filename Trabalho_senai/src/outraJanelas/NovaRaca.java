@@ -117,7 +117,7 @@ public class NovaRaca {
 		Conexao c = new Conexao();// conexão
 		String sql = "SELECT (nome_es) FROM especie";
 		try {
-			PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			dados1 = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();
@@ -138,7 +138,7 @@ void Salvar() {
 		String sql = "INSERT INTO raca (nome_ra,especie_ra) VALUES (?,?)";
 		
 		try {
-			PreparedStatement stmt = con.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, textField.getText().toLowerCase());
 			stmt.setString(2, comboBox.getSelectedItem().toString());
 			stmt.execute();
@@ -156,7 +156,7 @@ void Salvar() {
 		String sql = "select * from raca";
 		
 		try {
-			PreparedStatement stmt = con.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			dados = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();

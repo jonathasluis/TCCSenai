@@ -13,7 +13,7 @@ public class CrudAnimal {
 		String sql = "INSERT INTO animais (datadenascimento, raca, sexo, img, destino, idfazenda, quantidade, datacompra,nomeLote)"
 				+ " VALUES (?,?,?,?,?,?,?,?,?)";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, animal.getDataDeNascimento());
 			stmt.setInt(2, animal.getRaca());
 			stmt.setString(3, animal.getSexo());
@@ -37,7 +37,7 @@ public class CrudAnimal {
 		String sql = "update  animais set datadenascimento=?, raca=?, sexo=?, img=?, destino=?,"
 				+ " idfazenda=?, quantidade=?, datacompra=?,nomeLote=? where idanimal = ?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, animal.getDataDeNascimento());
 			stmt.setInt(2, animal.getRaca());
 			stmt.setString(3, animal.getSexo());
@@ -61,7 +61,7 @@ public class CrudAnimal {
 	public boolean removeAnimal(Animal animal) {
 		String sql = "delete from animais where idanimal = ?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, animal.getIdAnimal());
 			stmt.execute();
 			stmt.close();
@@ -78,7 +78,7 @@ public class CrudAnimal {
 		ResultSet tabela = null;
 		String sql = "SELECT * FROM animais where idfazenda = ?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, animal.getIdFazenda());
 			tabela = stmt.executeQuery();
 			stmt.execute();
@@ -95,7 +95,7 @@ public class CrudAnimal {
 		ResultSet tabela = null;
 		String sql = "SELECT * FROM animais WHERE nomelote LIKE ? and idfazenda = ?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, "%"+letra+"%");
 			stmt.setInt(2, animal.getIdFazenda());
 			tabela = stmt.executeQuery();

@@ -12,7 +12,7 @@ public class crudUsuarios {
 	public boolean addUsuario(Usuario usuario) {
 		String sql = "INSERT usuario(usuario,senha,email) VALUES(?,?,?)";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1,usuario.getUsuario());
 			stmt.setString(2,usuario.getSenha());
 			stmt.setString(2,usuario.getEmail());
@@ -29,7 +29,7 @@ public class crudUsuarios {
 	public boolean deletaUsuario(Usuario usuario) {
 		String sql = "DELETE FROM usuario WHERE idusuario=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, usuario.getIdUsuario());
 			stmt.execute();
 			stmt.close();
@@ -44,7 +44,7 @@ public class crudUsuarios {
 	public boolean updUsuario(Usuario usuario) {
 		String sql = "UPDATE usuario SET usuario=?,senha=?,email=? WHERE idusuario=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, usuario.getUsuario());
 			stmt.setString(2, usuario.getSenha());
 			stmt.setString(3, usuario.getEmail());
@@ -63,7 +63,7 @@ public class crudUsuarios {
 		ResultSet tabela = null;
 		String sql = "SELECT*FROM usuario where idusuario=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, usuario.getIdUsuario());
 			tabela = stmt.executeQuery();
 			stmt.execute();

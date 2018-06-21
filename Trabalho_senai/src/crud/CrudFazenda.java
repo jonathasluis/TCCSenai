@@ -13,7 +13,7 @@ public class CrudFazenda {
 		String sql = "INSERT INTO fazenda (nome, tamanho, proprietario, escritura, "
 				+ "descri, img, idusuario) VALUES (?,?,?,?,?,?,?)";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, fazenda.getNome());
 			stmt.setString(2, fazenda.getTamanho());
 			stmt.setString(3, fazenda.getProprietario());
@@ -35,7 +35,7 @@ public class CrudFazenda {
 	public boolean deletaFazenda(Fazenda fazenda) {
 		String sql = "DELETE FROM fazenda WHERE idfazenda=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, fazenda.getIdFazenda());
 			stmt.execute();
 			stmt.close();
@@ -52,7 +52,7 @@ public class CrudFazenda {
 		String sql = "UPDATE fazenda SET nome=?, tamanho=?, proprietario=?, "
 				+ "escritura=?, descri=?, img=? WHERE idfazenda=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, fazenda.getNome());
 			stmt.setString(2, fazenda.getTamanho());
 			stmt.setString(3, fazenda.getProprietario());
@@ -75,7 +75,7 @@ public class CrudFazenda {
 		ResultSet tabela = null;
 		String sql = "SELECT * FROM fazenda where idusuario=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, fazenda.getIdUsuario());
 			tabela=stmt.executeQuery();
 			stmt.execute();
@@ -92,7 +92,7 @@ public class CrudFazenda {
 		ResultSet tabela = null;
 		String sql = "SELECT * FROM fazenda where idfazenda=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, idFazenda);
 			tabela=stmt.executeQuery();
 			stmt.execute();
@@ -109,7 +109,7 @@ public class CrudFazenda {
 		ResultSet tabela = null;
 		String sql= "SELECT * FROM fazenda WHERE nome LIKE ? and idusuario=?";
 		 try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, "%"+letra+"%");
 			stmt.setInt(2, fazenda.getIdUsuario());
 			tabela = stmt.executeQuery();

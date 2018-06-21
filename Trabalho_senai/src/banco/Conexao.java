@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Conexao {
 
-	static Connection conexao = null;
+	public static Connection conexao = null;
 	
 	public static Connection getConexao() {
 		 String porta = "3307";

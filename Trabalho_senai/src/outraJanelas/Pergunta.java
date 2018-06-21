@@ -103,7 +103,7 @@ public class Pergunta {
 		String sql = "SELECT * FROM fazenda WHERE nome=?";
 		
 			try {
-				PreparedStatement stmt = new Conexao().getConexao().prepareStatement(sql);
+				PreparedStatement stmt =  Conexao.conexao.prepareStatement(sql);
 				stmt.setString(1, resp);
 				dados1 = stmt.executeQuery();
 				stmt.execute();

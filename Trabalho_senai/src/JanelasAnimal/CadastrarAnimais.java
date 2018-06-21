@@ -576,7 +576,7 @@ public class CadastrarAnimais {//teste8
 		String sql = "SELECT (img) FROM animais WHERE idanimal=?";
 		
 			try {
-				PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+				PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 				stmt.setInt(1, Integer.parseInt(tabela.getValueAt(linha, 0).toString()));
 				dados1 = stmt.executeQuery();
 				stmt.execute();

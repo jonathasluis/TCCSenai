@@ -14,7 +14,7 @@ public class ComboBox extends CadastrarAnimais{
 		ResultSet dados1=null;
 		String sql = "SELECT (nome_es) FROM especie";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			dados1 = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();
@@ -35,7 +35,7 @@ public class ComboBox extends CadastrarAnimais{
 		int id=0;
 		String sql = "SELECT idespecie FROM especie where nome_es=?";
 		try {
-			PreparedStatement st = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement st = Conexao.conexao.prepareStatement(sql);
 			st.setString(1, nomeEspecie);
 			dados1 = st.executeQuery();
 			st.execute();
@@ -58,7 +58,7 @@ public class ComboBox extends CadastrarAnimais{
 				"				INNER JOIN especie" + 
 				"				ON id_especie = idespecie where idraca = ?";
 		try {
-			PreparedStatement st = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement st = Conexao.conexao.prepareStatement(sql);
 			st.setInt(1, id);
 			dados1 = st.executeQuery();
 			st.execute();
@@ -78,7 +78,7 @@ public class ComboBox extends CadastrarAnimais{
 		ResultSet dados1=null;
 		String sql = "SELECT * FROM raca where id_especie = ?";
 		try {
-			PreparedStatement st = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement st = Conexao.conexao.prepareStatement(sql);
 			st.setInt(1, idEspecie);
 			dados1 = st.executeQuery();
 			st.execute();
@@ -98,7 +98,7 @@ public class ComboBox extends CadastrarAnimais{
 		int id = 0;
 		String sql = "SELECT (idraca) FROM raca where nome_ra = ?";
 		try {
-			PreparedStatement st = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement st = Conexao.conexao.prepareStatement(sql);
 			st.setString(1, raca);
 			dados1 = st.executeQuery();
 			st.execute();
@@ -119,7 +119,7 @@ public class ComboBox extends CadastrarAnimais{
 		String valor=null;
 		String sql = "SELECT * FROM raca where idraca = ?";
 		try {
-			PreparedStatement st = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement st = Conexao.conexao.prepareStatement(sql);
 			st.setInt(1, id);
 			dados1 = st.executeQuery();
 			st.execute();

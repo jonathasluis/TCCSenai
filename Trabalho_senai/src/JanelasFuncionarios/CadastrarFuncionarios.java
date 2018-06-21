@@ -622,7 +622,7 @@ public class CadastrarFuncionarios {
 		String sql = "SELECT (img) FROM funcionarios WHERE idfuncionarios=?";
 		
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, Integer.parseInt(tabela.getValueAt(linha, 0).toString()));
 			dados1 = stmt.executeQuery();
 			stmt.execute();

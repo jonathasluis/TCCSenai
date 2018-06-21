@@ -423,7 +423,7 @@ public class NovaVenda {
 		String sql = "SELECT (idanimal) from animais where nome_a=?";
 		ResultSet rs= null;
 		try {
-			PreparedStatement stmt = new Conexao().getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, cbAnimal.getSelectedItem().toString());
 			rs = stmt.executeQuery();
 			stmt.execute();

@@ -122,7 +122,7 @@ public class CadastrarEspecie extends CadastrarAnimais{
 		String sql = "INSERT INTO especie (nome_es) VALUES (?)";
 		
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, textField.getText().toLowerCase());
 			stmt.execute();
 			stmt.close();
@@ -139,7 +139,7 @@ public class CadastrarEspecie extends CadastrarAnimais{
 		String sql = "select * from especie";
 		
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			dados = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();

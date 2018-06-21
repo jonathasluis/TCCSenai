@@ -13,7 +13,7 @@ public class CrudCompras {
 		String sql = "INSERT compras_insumos(fornecedor, cnpj,"
 				+ " numero_nota, qtd, preco, produto, data_compra, id_fazenda) VALUES (?,?,?,?,?,?,?,?)";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, compras.getFornecedor());
 			stmt.setString(2, compras.getCnpj());
 			stmt.setString(3, compras.getNumeroNota());
@@ -36,7 +36,7 @@ public class CrudCompras {
 		String sql = "UPDATE compras_insumos SET fornecedor=?, cnpj=?,"
 					+ "numero_nota=?, produto=? where id_fazenda=? and id_compras";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, compras.getFornecedor());
 			stmt.setString(2, compras.getCnpj());
 			stmt.setString(3, compras.getNumeroNota());
@@ -56,7 +56,7 @@ public class CrudCompras {
 		ResultSet tabela = null;
 		String sql = "SELECT*FROM compras_insumos where id_fazenda=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, compras.getIdFazenda());
 			tabela=stmt.executeQuery();
 			stmt.execute();
@@ -74,7 +74,7 @@ public class CrudCompras {
 		ResultSet tabela = null;
 		String sql = "SELECT*FROM compras_insumos WHERE produto LIKE ? and id_fazenda=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1,"%"+letra+"%");
 			stmt.setInt(2, idFazenda);
 			tabela = stmt.executeQuery();

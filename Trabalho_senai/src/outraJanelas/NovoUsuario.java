@@ -128,7 +128,7 @@ public class NovoUsuario {
 				  
 				String sql = "select*from usuario where usuario=? and senha=?";
 				try {
-					PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+					PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 					stmt.setString(1, tfUsuario.getText().toString());
 					stmt.setString(2, String.valueOf(pfSenha.getPassword()));
 					tabela = stmt.executeQuery();

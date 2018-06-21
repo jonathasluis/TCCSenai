@@ -13,7 +13,7 @@ public class CrudVendas {
 		String sql = "INSERT INTO vendas(produto, idanimal, preco, cliente, qtd, idfazenda, datavenda)"
 				+ " VALUES (?,?,?,?,?,?,?)";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, venda.getProduto());
 			stmt.setInt(2, venda.getIdanimal());
 			stmt.setDouble(3, venda.getPreco());
@@ -34,7 +34,7 @@ public class CrudVendas {
 	public boolean updVendas(Vendas venda) {
 		String sql = "update  vendas set preco, cliente where idvendas=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			 stmt.setDouble(1, venda.getPreco());
 			 stmt.setString(2, venda.getCliente());
 			 stmt.setInt(3, venda.getId());
@@ -52,7 +52,7 @@ public class CrudVendas {
 		ResultSet tabela = null;
 		String sql = "SELECT*FROM vendas where idfazenda=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, venda.getIdFazenda());
 			tabela=stmt.executeQuery();
 			stmt.execute();
@@ -69,7 +69,7 @@ public class CrudVendas {
 		ResultSet tabela = null;
 		String sql = "SELECT * FROM vendas WHERE produto LIKE ? and idfazenda=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, "%"+letra+"%");
 			stmt.setInt(2, venda.getIdFazenda());
 			tabela=stmt.executeQuery();
