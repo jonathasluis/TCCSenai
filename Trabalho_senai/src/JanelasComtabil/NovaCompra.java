@@ -31,7 +31,7 @@ import crud.CrudCompras;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-import outraJanelas.VisualizarFazendas;
+
 import javax.swing.JEditorPane;
 import java.awt.SystemColor;
 import javax.swing.JSpinner;
@@ -706,12 +706,12 @@ public class NovaCompra {
 		tfData.setText(table.getValueAt(linha, 6).toString());
 		tfData.setEnabled(false);
 		tfData.setToolTipText("Não é possível alterar a data!");
-		addCompras.setId(table.getValueAt(linha, 7).toString());
+		//addCompras.setId(table.getValueAt(linha, 7).toString());
 		editar = 0;
 	
 	}
 	public void update() {
-		addCompras.setId(id);
+		//addCompras.setId(id);
 		addCompras.setProduto(tfProduto.getText().toString());
 		addCompras.setCnpj(tfCNPJ.getText().toString());
 		addCompras.setFornecedor(txtFornecedor.getText().toString());
