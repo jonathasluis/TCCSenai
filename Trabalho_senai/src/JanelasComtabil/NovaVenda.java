@@ -3,7 +3,6 @@ package JanelasComtabil;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,7 +16,6 @@ import java.util.Date;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -33,12 +31,18 @@ import javax.swing.SwingConstants;
 
 import JanelasAnimal.CadastrarAnimais;
 import JanelasAnimal.ComboBox;
+import JanelasAnimal.VisualizarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
+import JanelasFuncionarios.VisualizarFuncionarios;
 import banco.Conexao;
+import crud.CrudAnimal;
+import crud.CrudVendas;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
 import outraJanelas.VisualizarFazendas;
+import javax.swing.JEditorPane;
+import java.awt.SystemColor;
 
 public class NovaVenda {
 
@@ -117,7 +121,15 @@ public class NovaVenda {
 			}
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
-	
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Visualizar Animais");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VisualizarAnimais.main(null);
+				frmNovaVenda.dispose();
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenu mnFuncionarios = new JMenu("Funcionarios");
 		menuBar.add(mnFuncionarios);
@@ -130,7 +142,15 @@ public class NovaVenda {
 			}
 		});
 		mnFuncionarios.add(mntmCadastrarFuncionarios);
-
+		
+		JMenuItem mntmVisualizarFuncionarios = new JMenuItem("Visualizar funcionarios");
+		mntmVisualizarFuncionarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VisualizarFuncionarios.main(null);
+				frmNovaVenda.dispose();
+			}
+		});
+		mnFuncionarios.add(mntmVisualizarFuncionarios);
 		
 		JMenu mnNewMenu_1 = new JMenu("Compra de Insumos");
 		menuBar.add(mnNewMenu_1);
@@ -144,6 +164,15 @@ public class NovaVenda {
 		});
 		mnNewMenu_1.add(mntmCompra);
 		
+		JMenuItem mntmVisualizarCompra = new JMenuItem("Visualizar Compras");
+		mntmVisualizarCompra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VisualizarCompras.main(null);
+				frmNovaVenda.dispose();
+			}
+		});
+		mnNewMenu_1.add(mntmVisualizarCompra);
+		
 		JMenu mnNewMenu_2 = new JMenu("Vendas");
 		menuBar.add(mnNewMenu_2);
 		
@@ -156,6 +185,15 @@ public class NovaVenda {
 			}
 		});
 		mnNewMenu_2.add(mntmNovaVenda);
+		
+		JMenuItem mntmVisualizarVendas = new JMenuItem("Visualizar Vendas");
+		mntmVisualizarVendas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VisualizarVendas.main(null);
+				frmNovaVenda.dispose();
+			}
+		});
+		mnNewMenu_2.add(mntmVisualizarVendas);
 		
 		JMenu mnRelatrio = new JMenu("Relat\u00F3rio");
 		menuBar.add(mnRelatrio);
@@ -346,7 +384,7 @@ public class NovaVenda {
 					tipo="animal";
 					animal=cbAnimal.getSelectedItem().toString();
 					idAnimal(cbAnimal.getSelectedItem().toString());
-					//new CrudAnimal().removeAnimal(id);
+					new CrudAnimal().removeAnimal(id);
 					JOptionPane.showMessageDialog(null, "animal removido com sucesso");
 				}
 					
@@ -367,9 +405,9 @@ public class NovaVenda {
 					JOptionPane.showMessageDialog(null, "insira o  produto");
 					tfProduto.requestFocus();
 				} else if(!tfPreco.getText().trim().equals("")){
-				/*	new CrudVendas().addvendas(tfProduto.getText(), id, Double.parseDouble(tfPreco.getText()), tfCliente.getText(), qtd, tfData.getText(), cbFazenda.getSelectedItem().toString());
+					new CrudVendas().addvendas(tfProduto.getText(), id, Double.parseDouble(tfPreco.getText()), tfCliente.getText(), qtd, tfData.getText(), cbFazenda.getSelectedItem().toString());
 					JOptionPane.showMessageDialog(null, "salvo com sucesso");
-					btnLimpar.doClick();*/
+					btnLimpar.doClick();
 				}
 				
 			}
@@ -415,15 +453,15 @@ public class NovaVenda {
 		dtrpnUmaVezSalvo.setBounds(417, 298, 287, 57);
 		frmNovaVenda.getContentPane().add(dtrpnUmaVezSalvo);
 		
-		//cb.comboBoxAnimal();
-		//cb.comboBoxFazenda();
+		cb.comboBoxAnimal();
+		cb.comboBoxFazenda();
 	}
 	
 	void idAnimal(String nome) {
 		String sql = "SELECT (idanimal) from animais where nome_a=?";
 		ResultSet rs= null;
 		try {
-			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			PreparedStatement stmt = new Conexao().getConexao().prepareStatement(sql);
 			stmt.setString(1, cbAnimal.getSelectedItem().toString());
 			rs = stmt.executeQuery();
 			stmt.execute();

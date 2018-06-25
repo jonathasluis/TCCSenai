@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -38,6 +39,7 @@ import javax.swing.JSpinner;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import DAO.Compras;
 import DAO.Fazenda;
@@ -57,8 +59,10 @@ import java.awt.ComponentOrientation;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JFormattedTextField;
+import javax.swing.UIManager;
 
-public class NovaCompra {
+public class NovaCompra {////
 	
 	int editar = 1;
 	int x = 0;
@@ -69,7 +73,6 @@ public class NovaCompra {
 	private JTextField tfNota;
 	private JTextField tfPreco;
 	private JTextField txtFornecedor;
-	private JTextField tfCNPJ;
 	private JButton btnLimpar;
 	private JTextField txtProucurarProdutos;
 	private JTable table;
@@ -78,11 +81,12 @@ public class NovaCompra {
 	private JSpinner spinner;
 	static Compras addCompras = new Compras();
 	static Compras editarCompras = new Compras();
-	static int teste = 0; 
+	static int teste = 1; 
 	static int x1=1;
 	int idfazenda=0;
 	int contador =+1;
-	private JButton btnDeletar;
+	private JButton btnCancelar;
+	private JFormattedTextField tfCNPJ;
 	
 	/**
 	 * Launch the application.
@@ -111,6 +115,8 @@ public class NovaCompra {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		
 		frmCompraDeInsumos = new JFrame();
 		frmCompraDeInsumos.setTitle("Compra de Insumos");
 		frmCompraDeInsumos.setBounds(100, 100, 1080, 720);
@@ -134,6 +140,8 @@ public class NovaCompra {
 		frmCompraDeInsumos.getContentPane().add(lblProduto);
 		
 		tfProduto = new JTextField();
+		tfProduto.setForeground(SystemColor.controlText);
+		tfProduto.setFont(new Font("Arial", Font.PLAIN, 13));
 		tfProduto.addKeyListener(new KeyAdapter() {
 			//EVENTO PARA QUANDO APERTAR "ENTER" DAR FOCO EM OUTRA CAIXA DE TEXTO
 			@Override
@@ -161,9 +169,10 @@ public class NovaCompra {
 		String formatada = formato.format(data);
 		
 		tfData = new JTextField();
+		tfData.setForeground(SystemColor.controlText);
 		tfData.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tfData.setToolTipText("As datas s\u00E3o obtidas a partir do seu computador.\r\nCorrija se for necess\u00E1rio.");
-		tfData.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		tfData.setFont(new Font("Arial", Font.PLAIN, 13));
 		tfData.setHorizontalAlignment(SwingConstants.CENTER);
 		tfData.setBounds(546, 80, 188, 20);
 		frmCompraDeInsumos.getContentPane().add(tfData);
@@ -177,6 +186,8 @@ public class NovaCompra {
 		frmCompraDeInsumos.getContentPane().add(lblNumeroDaNota);
 		
 		tfNota = new JTextField();
+		tfNota.setForeground(SystemColor.controlText);
+		tfNota.setFont(new Font("Arial", Font.PLAIN, 13));
 		tfNota.addKeyListener(new KeyAdapter() {
 			//EVENTO PARA QUANDO APERTAR "ENTER" DAR FOCO EM OUTRA CAIXA DE TEXTO
 			@Override
@@ -201,9 +212,29 @@ public class NovaCompra {
 		
 		
 		tfPreco = new JTextField();
+		tfPreco.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				String numero = tfPreco.getText().toString();
+				System.out.println(numero);
+				numero = numero.replace(".", ",");
+				System.out.println(numero);
+
+			}
+		});
+		tfPreco.setForeground(SystemColor.controlText);
+		tfPreco.setFont(new Font("Arial", Font.PLAIN, 13));
 		tfPreco.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent arg0) {
+			public void keyTyped(KeyEvent e) {
+				if (e.getKeyChar() == e.VK_BACK_SPACE || (e.getKeyChar() == e.VK_0)|| (e.getKeyChar() == e.VK_1)|| (e.getKeyChar() == e.VK_2) 
+			            || (e.getKeyChar() == e.VK_3)|| (e.getKeyChar() == e.VK_4)|| (e.getKeyChar() == e.VK_5)|| (e.getKeyChar() == e.VK_6)|| (e.getKeyChar() == e.VK_7)
+			            || (e.getKeyChar() == e.VK_8)|| (e.getKeyChar() == e.VK_9)||(e.getKeyChar() == e.VK_ENTER)||(e.getKeyChar() == e.VK_COMMA)||(e.getKeyChar() == e.VK_PERIOD))
+			    { 
+					
+			    }else{
+			         e.consume();
+			    }
 			}
 		});
 		tfPreco.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -218,6 +249,8 @@ public class NovaCompra {
 		frmCompraDeInsumos.getContentPane().add(lblFornecedor);
 		
 		txtFornecedor = new JTextField();
+		txtFornecedor.setForeground(SystemColor.controlText);
+		txtFornecedor.setFont(new Font("Arial", Font.PLAIN, 13));
 		txtFornecedor.addKeyListener(new KeyAdapter() {
 			//EVENTO PARA QUANDO APERTAR "ENTER" DAR FOCO EM OUTRA CAIXA DE TEXTO
 			@Override
@@ -231,27 +264,14 @@ public class NovaCompra {
 		txtFornecedor.setBounds(108, 112, 200, 20);
 		frmCompraDeInsumos.getContentPane().add(txtFornecedor);
 		txtFornecedor.setColumns(10);
-		
+	
 		JLabel lblCnpj = new JLabel("CNPJ:");
 		lblCnpj.setForeground(Color.WHITE);
 		lblCnpj.setFont(new Font("Arial", Font.BOLD, 14));
 		lblCnpj.setBounds(10, 142, 66, 20);
 		frmCompraDeInsumos.getContentPane().add(lblCnpj);
 		
-		tfCNPJ = new JTextField();
-		tfCNPJ.addKeyListener(new KeyAdapter() {
-			//EVENTO PARA QUANDO APERTAR "ENTER" DAR FOCO EM OUTRA CAIXA DE TEXTO
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
-					tfNota.requestFocus();
-				}
-			}
-		});
-		tfCNPJ.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		tfCNPJ.setBounds(108, 143, 200, 20);
-		frmCompraDeInsumos.getContentPane().add(tfCNPJ);
-		tfCNPJ.setColumns(10);
+		
 		
 		//BOTÃO SALVAR E ADD OS DADOS NA TABELA DO BD
 		JButton btnSalvar = new JButton("Salvar");
@@ -308,13 +328,15 @@ public class NovaCompra {
 						new CrudCompras().addCompras(addCompras);
 						
 						//ADD LINHA NA TABELA DEPOIS DE SALVAR OS DADOS
+					
+						
+						JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!","SUCESSO!",JOptionPane.INFORMATION_MESSAGE);
 						if (table.getRowCount()<=19) {
 							int x = (teste*16)+scrollPane.getHeight();
-							scrollPane.setBounds(26,290 , 1024, x);
+							scrollPane.setBounds(26, 290, 1024, x);	
 						}
 						criaTabela(new CrudCompras().selecionaCompras(compra));
 						btnLimpar.doClick();
-						JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!","SUCESSO!",JOptionPane.INFORMATION_MESSAGE);
 					}
 					//TESTE DE SALVAR AS ALTERAÇÕES 
 					if (editar==0) {
@@ -324,6 +346,8 @@ public class NovaCompra {
 							update();
 							new CrudCompras().updCompras(addCompras);
 							criaTabela(new CrudCompras().selecionaCompras(compra));
+							btnCancelar.doClick();
+							
 						}
 					}
 			}
@@ -342,21 +366,30 @@ public class NovaCompra {
 				tfPreco.setText(null);
 				txtFornecedor.setText(null);
 				tfProduto.requestFocus();
+				tfData.setEnabled(true);
+				tfData.setToolTipText("As datas são obtidas a partir do seu computador.\r\n" + 
+					"Corrija se for necessário.");
 				
 			}
 		});
-		btnLimpar.setBounds(762, 637, 89, 23);
+		btnLimpar.setBounds(862, 637, 89, 23);
 		frmCompraDeInsumos.getContentPane().add(btnLimpar);
 		
 		//CANCELAR A OPERAÇÃO E VOLTAR PARA A TELA PRINCIPAL
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmCompraDeInsumos.dispose();
-				Principal.frmPrincipal.setVisible(true);
+				if(editar==1) {
+					frmCompraDeInsumos.dispose();
+					Principal.frmPrincipal.setVisible(true);
+				}else if(editar==0) {
+					editar=1;
+					btnLimpar.setEnabled(true);
+					btnLimpar.doClick();
+				}
 			}
 		});
-		btnCancelar.setBounds(663, 637, 89, 23);
+		btnCancelar.setBounds(763, 637, 89, 23);
 		frmCompraDeInsumos.getContentPane().add(btnCancelar);
 		
 		
@@ -368,6 +401,8 @@ public class NovaCompra {
 		
 		
 		spinner = new JSpinner();
+		spinner.setForeground(SystemColor.controlText);
+		spinner.setFont(new Font("Arial", Font.PLAIN, 13));
 		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spinner.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		spinner.setBounds(886, 112, 164, 20);
@@ -420,29 +455,52 @@ public class NovaCompra {
 		button.setBounds(405, 258, 118, 23);
 		frmCompraDeInsumos.getContentPane().add(button);
 		
+		try {
+			tfCNPJ = new JFormattedTextField(new MaskFormatter("###.###.###/####-##"));
+			tfCNPJ.setForeground(SystemColor.controlText);
+			tfCNPJ.setFont(new Font("Arial", Font.PLAIN, 13));
+			tfCNPJ.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			tfCNPJ.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent arg0) {
+					if (arg0.getKeyCode()==arg0.VK_ENTER) {
+						tfNota.requestFocus();
+					}
+				}
+			});
+			tfCNPJ.setBounds(108, 142, 200, 20);
+			frmCompraDeInsumos.getContentPane().add(tfCNPJ);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	
+		
 		scrollPane = new JScrollPane();
-		scrollPane.setFont(new Font("Arial", Font.BOLD, 12));
-		scrollPane.setBorder(new CompoundBorder());
+		scrollPane.setFont(new Font("Arial", Font.BOLD, 13));
+		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		scrollPane.setBounds(26, 290, 1024, 21);
 		
 		frmCompraDeInsumos.getContentPane().add(scrollPane);
 		
 		table = new JTable();
+		table.setSelectionBackground(new Color(51, 153, 255));
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				btnLimpar.setEnabled(false);
 				editar();
 			}
 		});
 		
-		table.setToolTipText("Clique duas vezes para editar os dados\r\n");
+		table.setToolTipText("Clique para editar os dados\r\n");
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table.setIgnoreRepaint(true);
 		table.setRowSelectionAllowed(false);
-		table.setFont(new Font("Arial", Font.PLAIN, 12));
-		table.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		table.setForeground(Color.DARK_GRAY);
-		table.setBackground(SystemColor.control);
+		table.setFont(new Font("Arial", Font.PLAIN, 13));
+		table.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		table.setForeground(SystemColor.controlText);
+		table.setBackground(SystemColor.controlHighlight);
 		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -483,11 +541,6 @@ public class NovaCompra {
 		//IMAGEICON PARA COLOCAR IMAGEM NA TELA E REDIMENSIONAR 
 		ImageIcon img = new ImageIcon("src/img/fundo3.jpg");
 		img.setImage(img.getImage().getScaledInstance(1074, 671, 100));
-		
-		btnDeletar = new JButton("Deletar");
-		btnDeletar.setEnabled(false);
-		btnDeletar.setBounds(861, 637, 89, 23);
-		frmCompraDeInsumos.getContentPane().add(btnDeletar);
 		frmCompraDeInsumos.getContentPane().add(llll);
 		JLabel label = new JLabel("");
 		label.setIcon(img);
@@ -523,7 +576,7 @@ public class NovaCompra {
 				//IF PARA FAZER A TABELA AUMENTAR 
 				
 				if (x1==1) {
-					if (table.getRowCount() > teste  & table.getRowCount() <=19 ) {
+					if (table.getRowCount() >= teste  & table.getRowCount() <=19 ) {
 						teste=1;
 						teste=+1;
 						int x = (teste*16)+scrollPane.getHeight();
@@ -697,21 +750,21 @@ public class NovaCompra {
 	public void editar() {
 		int linha = table.getSelectedRow();
 		
-		tfProduto.setText(table.getValueAt(linha, 0).toString());
-		txtFornecedor.setText(table.getValueAt(linha, 1).toString());
-		tfCNPJ.setText(table.getValueAt(linha, 2).toString());
-		tfNota.setText(table.getValueAt(linha, 3).toString());
-		tfPreco.setText(table.getValueAt(linha, 5).toString());
-		spinner.setValue(Integer.parseInt(table.getValueAt(linha, 4).toString()));
-		tfData.setText(table.getValueAt(linha, 6).toString());
+		tfProduto.setText(table.getValueAt(linha, 1).toString());
+		txtFornecedor.setText(table.getValueAt(linha, 2).toString());
+		tfCNPJ.setText(table.getValueAt(linha, 3).toString());
+		tfNota.setText(table.getValueAt(linha, 4).toString());
+		tfPreco.setText(table.getValueAt(linha, 6).toString());
+		spinner.setValue(Integer.parseInt(table.getValueAt(linha, 5).toString()));
+		tfData.setText(table.getValueAt(linha, 7).toString());
 		tfData.setEnabled(false);
 		tfData.setToolTipText("Não é possível alterar a data!");
-		//addCompras.setId(table.getValueAt(linha, 7).toString());
+		addCompras.setId(Integer.parseInt(table.getValueAt(linha, 0).toString()));
 		editar = 0;
 	
 	}
 	public void update() {
-		//addCompras.setId(id);
+		
 		addCompras.setProduto(tfProduto.getText().toString());
 		addCompras.setCnpj(tfCNPJ.getText().toString());
 		addCompras.setFornecedor(txtFornecedor.getText().toString());
