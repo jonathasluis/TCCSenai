@@ -220,6 +220,7 @@ public class NovaCompra {////
 				numero = numero.replace(".", ",");
 				System.out.println(numero);
 
+				
 			}
 		});
 		tfPreco.setForeground(SystemColor.controlText);
