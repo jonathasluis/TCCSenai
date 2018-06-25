@@ -155,7 +155,7 @@ public class CadastrarFuncionarios {
 				}else {
 					return;
 				}
-			}// fim evento para escolher e abrir imagem
+			}// fim evento para escolher e abrir imagem/
 		});
 		lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblImagem, "name_12082521761208");
