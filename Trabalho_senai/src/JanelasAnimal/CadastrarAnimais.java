@@ -59,6 +59,7 @@ import crud.CrudFazenda;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
+import javax.swing.ImageIcon;
 
 public class CadastrarAnimais {//teste8
 
@@ -238,7 +239,8 @@ public class CadastrarAnimais {//teste8
 		panel.setBounds(774, 25, 290, 217);
 		frmCadastroDeAnimais.getContentPane().add(panel);
 		
-		lblImagem = new JLabel("SELECIONAR IMAGEM");
+		lblImagem = new JLabel("");
+		lblImagem.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/logo-pequena-sem-texto.png")));
 		lblImagem.setToolTipText("Clique 2 vezes");
 		lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 		lblImagem.addMouseListener(new MouseAdapter() {
@@ -247,9 +249,10 @@ public class CadastrarAnimais {//teste8
 				contador++;
 				new Thread(thread).start();	
 				if(contador == 2) {
-					lblImagem.setText(null);
-					lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
 					img = mI.selecionaImg();
+					if(img != null) {
+						lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
+					}
 					mI.abrirImagem(img, img, panel, lblImagem,null);
 					contador=0;
 				}else {
@@ -308,6 +311,10 @@ public class CadastrarAnimais {//teste8
 				"ID", "Nome", "Nascimento", "Especie", "Ra\u00E7a", "Sexo", "Destino", "Quantidade", "Data Obten\u00E7\u00E3o", "Fazenda"
 			}
 		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false, false, false
 			};
@@ -416,13 +423,12 @@ public class CadastrarAnimais {//teste8
 		btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {//inicio da ação do botão limpar
-				lblImagem.setText("SELECIONAR IMAGEM");
 				tfNomeLote.setText(null);
 				spinnerQuantidade.setValue(0);
 				cbEspecie.setSelectedIndex(0);
 				tfDestino.setText(null);
 				rdbtnMacho.setSelected(true);
-				lblImagem.setIcon(null);
+				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 				ftfDataCompra.setValue(null);
 				ftfDataNascimento.setValue(null);
@@ -615,6 +621,7 @@ public class CadastrarAnimais {//teste8
 				mI.abrirImagem(animal.getImagem(), null, panel, lblImagem,animal.getImagem());
 			}else {
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
+				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
 			}
 	}
 	
