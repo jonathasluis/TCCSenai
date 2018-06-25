@@ -139,7 +139,8 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(panel);
 		panel.setLayout(new CardLayout(0, 0));
 		
-		lblImagem = new JLabel("SELECIONAR IMAGEM");
+		lblImagem = new JLabel("");
+		lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
 		lblImagem.setToolTipText("Clique 2 vezes");
 		lblImagem.addMouseListener(new MouseAdapter() {//inicio evento para escolher e abrir imagem
 			@Override
@@ -147,15 +148,14 @@ public class CadastrarFuncionarios {
 				contador++;
 				new Thread(thread).start();	
 				if(contador == 2) {
-					lblImagem.setText(null);
-					lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
 					img = mI.selecionaImg();
+					lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
 					mI.abrirImagem(img, img, panel, lblImagem,null);
 					contador=0;
 				}else {
 					return;
 				}
-			}// fim evento para escolher e abrir imagem/
+			}// fim evento para escolher e abrir imagem
 		});
 		lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblImagem, "name_12082521761208");
@@ -183,7 +183,14 @@ public class CadastrarFuncionarios {
 			new String[] {
 				"ID", "Nome", "Nascimento", "CPF", "RG", "Sexo", "Telefone", "Email", "Cargo", "Salario", "Fazenda", "Status"
 			}
-		));
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false, false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		tabela.getColumnModel().getColumn(0).setResizable(false);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(70);
 		tabela.getColumnModel().getColumn(1).setResizable(false);
@@ -275,7 +282,6 @@ public class CadastrarFuncionarios {
 		btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {//evento do botao limpar
-				lblImagem.setText("SELECIONAR IMAGEM");
 				tfNome.setText(null);
 				ftfNascimento.setValue(null);
 				ftfCpf.setValue(null);
@@ -286,7 +292,7 @@ public class CadastrarFuncionarios {
 				tfSalario.setText(null);
 				tfEmail.setText(null);
 				rdbtnAtivo.setSelected(true);
-				lblImagem.setIcon(null);
+				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 			}
 		});//fim evento botao limpar
@@ -650,11 +656,10 @@ public class CadastrarFuncionarios {
 		
 		if(DAOFuncionario.getImg()!= null) {
 			lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
-			ImageIcon icon = new ImageIcon(DAOFuncionario.getImg());
-			icon.setImage(icon.getImage().getScaledInstance(panel.getWidth(),panel.getHeight(), 100));
-			lblImagem.setIcon(icon);
+			mI.abrirImagem(DAOFuncionario.getImg(), null, panel, lblImagem, DAOFuncionario.getImg());
 		}else {
 			lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
+			lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
 		}
 		
 			

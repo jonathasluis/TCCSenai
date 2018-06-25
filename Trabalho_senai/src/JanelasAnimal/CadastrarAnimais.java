@@ -468,7 +468,7 @@ public class CadastrarAnimais {//teste8
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				if (arg0.getKeyCode()==arg0.VK_ENTER) {
-					ftfDataNascimento.requestFocus();
+					btnProcurar.doClick();
 				}
 			}
 		});
@@ -611,9 +611,8 @@ public class CadastrarAnimais {//teste8
 			}
 			
 			if(animal.getImagem()!= null) {
-				mI.abrirImagem(animal.getImagem(), null, panel, lblImagem,animal.getImagem());
 				lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
-				
+				mI.abrirImagem(animal.getImagem(), null, panel, lblImagem,animal.getImagem());
 			}else {
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 			}
