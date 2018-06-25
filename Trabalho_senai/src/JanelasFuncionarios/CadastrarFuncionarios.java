@@ -149,7 +149,9 @@ public class CadastrarFuncionarios {
 				new Thread(thread).start();	
 				if(contador == 2) {
 					img = mI.selecionaImg();
-					lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
+					if(img != null) {
+						lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
+					}
 					mI.abrirImagem(img, img, panel, lblImagem,null);
 					contador=0;
 				}else {
