@@ -87,7 +87,7 @@ public class NovaCompra {////
 	int contador =+1;
 	private JButton btnCancelar;
 	private JFormattedTextField tfCNPJ;
-	
+	int mouseClick = 0;
 	/**
 	 * Launch the application.
 	 */
@@ -169,6 +169,7 @@ public class NovaCompra {////
 		String formatada = formato.format(data);
 		
 		tfData = new JTextField();
+		tfData.setEditable(false);
 		tfData.setForeground(SystemColor.controlText);
 		tfData.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tfData.setToolTipText("As datas s\u00E3o obtidas a partir do seu computador.\r\nCorrija se for necess\u00E1rio.");
@@ -230,7 +231,7 @@ public class NovaCompra {////
 			public void keyTyped(KeyEvent e) {
 				if (e.getKeyChar() == e.VK_BACK_SPACE || (e.getKeyChar() == e.VK_0)|| (e.getKeyChar() == e.VK_1)|| (e.getKeyChar() == e.VK_2) 
 			            || (e.getKeyChar() == e.VK_3)|| (e.getKeyChar() == e.VK_4)|| (e.getKeyChar() == e.VK_5)|| (e.getKeyChar() == e.VK_6)|| (e.getKeyChar() == e.VK_7)
-			            || (e.getKeyChar() == e.VK_8)|| (e.getKeyChar() == e.VK_9)||(e.getKeyChar() == e.VK_ENTER)||(e.getKeyChar() == e.VK_COMMA)||(e.getKeyChar() == e.VK_PERIOD))
+			            || (e.getKeyChar() == e.VK_8)|| (e.getKeyChar() == e.VK_9)||(e.getKeyChar() == e.VK_ENTER)||(e.getKeyChar() == e.VK_PERIOD))
 			    { 
 					
 			    }else{
@@ -348,7 +349,7 @@ public class NovaCompra {////
 							new CrudCompras().updCompras(addCompras);
 							criaTabela(new CrudCompras().selecionaCompras(compra));
 							btnCancelar.doClick();
-							
+						
 						}
 					}
 			}
@@ -360,6 +361,7 @@ public class NovaCompra {////
 		btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				tfCNPJ.setText(null);
 				spinner.setValue(0);
 				tfNota.setText(null);
@@ -368,6 +370,8 @@ public class NovaCompra {////
 				txtFornecedor.setText(null);
 				tfProduto.requestFocus();
 				tfData.setEnabled(true);
+				tfData.setText(formatada);
+				tfData.setEditable(false);
 				tfData.setToolTipText("As datas são obtidas a partir do seu computador.\r\n" + 
 					"Corrija se for necessário.");
 				
@@ -489,8 +493,13 @@ public class NovaCompra {////
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				mouseClick++;
+				new Thread(thread).start();	
+				if(mouseClick%2==0) {
 				btnLimpar.setEnabled(false);
 				editar();
+				mouseClick=0;
+				}
 			}
 		});
 		
@@ -736,6 +745,8 @@ public class NovaCompra {////
 	}
 	
 	public void colocaDadosDAO() {
+		String preco = tfPreco.getText();
+		preco = preco.replace(",", ".");
 		int teste = (int) spinner.getValue();
 		addCompras.setProduto(tfProduto.getText().toString());
 		addCompras.setCnpj(tfCNPJ.getText().toString());
@@ -761,6 +772,8 @@ public class NovaCompra {////
 		tfData.setEnabled(false);
 		tfData.setToolTipText("Não é possível alterar a data!");
 		addCompras.setId(Integer.parseInt(table.getValueAt(linha, 0).toString()));
+		
+		System.out.println(addCompras.getId());
 		editar = 0;
 	
 	}
@@ -773,7 +786,21 @@ public class NovaCompra {////
 		addCompras.setQuantidade(teste);
 		addCompras.setPreco(Double.parseDouble(tfPreco.getText()));
 		addCompras.setIdFazenda(Principal.fazenda.getIdFazenda());
-	
+		
 
 	}
+	Runnable thread = new Runnable() {	
+		@Override
+		public void run() {
+			try {
+				while(true) { 
+					Thread.sleep(1200);
+					mouseClick=0;
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	};
 }

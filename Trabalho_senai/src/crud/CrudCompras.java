@@ -34,7 +34,7 @@ public class CrudCompras {
 	
 	public boolean updCompras(Compras compras) {
 		String sql = "UPDATE compras_insumos SET fornecedor=?, cnpj=?,"
-					+ "numero_nota=?, produto=? where id_fazenda=? and id_compras";
+					+ "numero_nota=?, produto=? where id_fazenda=? and id_compras = ?";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, compras.getFornecedor());
@@ -42,6 +42,7 @@ public class CrudCompras {
 			stmt.setString(3, compras.getNumeroNota());
 			stmt.setString(4, compras.getProduto());
 			stmt.setInt(5, compras.getIdFazenda());
+			stmt.setInt(6, compras.getId());
 			stmt.execute();
 			stmt.close();
 			return true;
