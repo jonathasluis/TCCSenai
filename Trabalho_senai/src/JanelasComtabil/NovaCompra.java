@@ -564,7 +564,7 @@ public class NovaCompra {////
 		}
 		
 		//CHAMAR MÉTODO
-		
+		x1=1;
 		criaTabela(new CrudCompras().selecionaCompras(compra));
 		menu();
 	}
