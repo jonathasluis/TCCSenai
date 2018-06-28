@@ -61,7 +61,7 @@ import outraJanelas.Pergunta;
 import outraJanelas.Principal;
 import javax.swing.ImageIcon;
 
-public class CadastrarAnimais {//teste8
+public class CadastrarAnimais {//teste3
 
 	private JFrame frmCadastroDeAnimais;
 	private JTextField tfNomeLote;
