@@ -579,10 +579,10 @@ public class NovaCompra {////
 				idfazenda=rs.getInt("id_fazenda");
 				scrollPane.setVisible(true);
 				tabela.addRow(new Object[] {rs.getInt("id_compras"),rs.getString("produto"),rs.getString("fornecedor"),rs.getString("cnpj"),rs.getString("numero_nota"),
-						rs.getInt("qtd"),rs.getDouble("preco"),rs.getString("data_compra")});
+	 					rs.getInt("qtd"),rs.getDouble("preco"),rs.getString("data_compra")});
 				
 				
-				
+				//s
 				//IF PARA FAZER A TABELA AUMENTAR 
 				
 				if (x1==1) {
