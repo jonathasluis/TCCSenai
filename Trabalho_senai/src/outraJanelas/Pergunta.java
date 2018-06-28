@@ -78,8 +78,7 @@ public class Pergunta {
 			public void actionPerformed(ActionEvent arg0) {
 				String resp = String.valueOf(comboBox.getSelectedItem());
 				passa(resp);
-				Principal.button.doClick();
-				Principal.frmPrincipal.setEnabled(true);
+				Principal.pega();
 				frame.dispose();
 			}
 		});
