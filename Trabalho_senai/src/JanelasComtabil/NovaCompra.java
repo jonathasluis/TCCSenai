@@ -88,6 +88,7 @@ public class NovaCompra {////
 	private JButton btnCancelar;
 	private JFormattedTextField tfCNPJ;
 	int mouseClick = 0;
+	static String numero=null;
 	/**
 	 * Launch the application.
 	 */
@@ -149,9 +150,7 @@ public class NovaCompra {////
 				if (arg0.getKeyCode()==arg0.VK_ENTER) 
 					txtFornecedor.requestFocus();
 				}
-			}
-			
-		});
+			});
 		tfProduto.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tfProduto.setBounds(108, 82, 200, 20);
 		frmCompraDeInsumos.getContentPane().add(tfProduto);
@@ -231,7 +230,7 @@ public class NovaCompra {////
 			public void keyTyped(KeyEvent e) {
 				if (e.getKeyChar() == e.VK_BACK_SPACE || (e.getKeyChar() == e.VK_0)|| (e.getKeyChar() == e.VK_1)|| (e.getKeyChar() == e.VK_2) 
 			            || (e.getKeyChar() == e.VK_3)|| (e.getKeyChar() == e.VK_4)|| (e.getKeyChar() == e.VK_5)|| (e.getKeyChar() == e.VK_6)|| (e.getKeyChar() == e.VK_7)
-			            || (e.getKeyChar() == e.VK_8)|| (e.getKeyChar() == e.VK_9)||(e.getKeyChar() == e.VK_ENTER)||(e.getKeyChar() == e.VK_PERIOD))
+			            || (e.getKeyChar() == e.VK_8)|| (e.getKeyChar() == e.VK_9)||(e.getKeyChar() == e.VK_ENTER)||(e.getKeyChar() == e.VK_COMMA))
 			    { 
 					
 			    }else{
@@ -329,9 +328,12 @@ public class NovaCompra {////
 						colocaDadosDAO();
 						new CrudCompras().addCompras(addCompras);
 						
-						//ADD LINHA NA TABELA DEPOIS DE SALVAR OS DADOS
-					
+						//TESTE DE CADASTRO DE PREÇO
+						 numero = tfPreco.getText().toString();
+						numero = numero.replace(".", ",");
+						//FIM DO TESTE
 						
+						//ADD LINHA NA TABELA DEPOIS DE SALVAR OS DADOS
 						JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!","SUCESSO!",JOptionPane.INFORMATION_MESSAGE);
 						if (table.getRowCount()<=19) {
 							int x = (teste*16)+scrollPane.getHeight();
@@ -494,12 +496,13 @@ public class NovaCompra {////
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				mouseClick++;
-				new Thread(thread).start();	
-				if(mouseClick%2==0) {
+				//new Thread(thread).start();	
 				btnLimpar.setEnabled(false);
 				editar();
+				/*if(mouseClick%2==0) {
+				
 				mouseClick=0;
-				}
+				}*/
 			}
 		});
 		
@@ -754,7 +757,7 @@ public class NovaCompra {////
 		addCompras.setFornecedor(txtFornecedor.getText().toString());
 		addCompras.setNumeroNota(tfNota.getText().toString());
 		addCompras.setQuantidade(teste);
-		addCompras.setPreco(Double.parseDouble(tfPreco.getText()));
+		addCompras.setPreco(Double.parseDouble(preco));
 		addCompras.setIdFazenda(Principal.fazenda.getIdFazenda());
 	
 	}
@@ -766,30 +769,33 @@ public class NovaCompra {////
 		txtFornecedor.setText(table.getValueAt(linha, 2).toString());
 		tfCNPJ.setText(table.getValueAt(linha, 3).toString());
 		tfNota.setText(table.getValueAt(linha, 4).toString());
-		tfPreco.setText(table.getValueAt(linha, 6).toString());
+		numero=table.getValueAt(linha, 6).toString();
 		spinner.setValue(Integer.parseInt(table.getValueAt(linha, 5).toString()));
 		tfData.setText(table.getValueAt(linha, 7).toString());
 		tfData.setEnabled(false);
 		tfData.setToolTipText("Não é possível alterar a data!");
 		addCompras.setId(Integer.parseInt(table.getValueAt(linha, 0).toString()));
-		
-		System.out.println(addCompras.getId());
+
+		tfPreco.setText(numero);
 		editar = 0;
 	
 	}
 	public void update() {
 		
+		numero = tfPreco.getText().toString();
+		numero = numero.replace(",", ".");
+		System.out.println(numero);
 		addCompras.setProduto(tfProduto.getText().toString());
 		addCompras.setCnpj(tfCNPJ.getText().toString());
 		addCompras.setFornecedor(txtFornecedor.getText().toString());
 		addCompras.setNumeroNota(tfNota.getText().toString());
 		addCompras.setQuantidade(teste);
-		addCompras.setPreco(Double.parseDouble(tfPreco.getText()));
+		addCompras.setPreco(Double.parseDouble(numero));
 		addCompras.setIdFazenda(Principal.fazenda.getIdFazenda());
 		
 
 	}
-	Runnable thread = new Runnable() {	
+/*	Runnable thread = new Runnable() {	
 		@Override
 		public void run() {
 			try {
@@ -802,5 +808,5 @@ public class NovaCompra {////
 				e.printStackTrace();
 			}
 		}
-	};
+	};*/
 }

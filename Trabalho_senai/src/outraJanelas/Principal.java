@@ -33,14 +33,15 @@ import JanelasComtabil.NovaVenda;
 import JanelasComtabil.Total;
 
 import JanelasFuncionarios.CadastrarFuncionarios;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 
 public class Principal {
 
 	public static JFrame frmPrincipal;
-	private static JTextField tfTamanho;
-	private static JTextField tfEscritura;
-	private static JTextField tfDono;
 	static JButton button;
 	public static Fazenda fazenda = new Fazenda();
 	private static JEditorPane editorPane;
@@ -48,6 +49,9 @@ public class Principal {
 	private static JPanel panel;
 	private static JLabel lblNom;
 	private static MetodosImagem abrirImagem = new MetodosImagem();
+	private static JLabel prop;
+	private static JLabel tamanho;
+	private static JLabel escri;
 
 	/**
 	 * Launch the application.
@@ -88,70 +92,42 @@ public class Principal {
 		
 		frmPrincipal.getContentPane().setLayout(null);
 		
-		tfTamanho = new JTextField();
-		tfTamanho.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
-		tfTamanho.setEditable(false);
-		tfTamanho.setBounds(27, 150, 175, 30);
-		frmPrincipal.getContentPane().add(tfTamanho);
-		tfTamanho.setColumns(10);
-		
-		tfEscritura = new JTextField();
-		tfEscritura.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
-		tfEscritura.setEditable(false);
-		tfEscritura.setColumns(10);
-		tfEscritura.setBounds(486, 128, 175, 30);
-		frmPrincipal.getContentPane().add(tfEscritura);
-		
-		tfDono = new JTextField();
-		tfDono.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
-		tfDono.setEditable(false);
-		tfDono.setColumns(10);
-		tfDono.setBounds(10, 191, 379, 30);
-		frmPrincipal.getContentPane().add(tfDono);
-		
 		editorPane = new JEditorPane();
-		editorPane.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
+		editorPane.setOpaque(false);
+		editorPane.setForeground(Color.WHITE);
+		editorPane.setFont(new Font("Arial", Font.BOLD, 17));
+		editorPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE));
 		editorPane.setEditable(false);
-		editorPane.setBounds(10, 254, 379, 116);
+		editorPane.setBounds(9, 358, 521, 175);
 		frmPrincipal.getContentPane().add(editorPane);
 		
 		panel = new JPanel();
-		panel.setBorder(null);
 		panel.setOpaque(false);
-		panel.setBounds(388, 381, 303, 276);
+		panel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE));
+		panel.setBounds(745, 115, 303, 276);
 		frmPrincipal.getContentPane().add(panel);
 		panel.setLayout(new CardLayout(0, 0));
 		
 		lblImg = new JLabel("");
+		lblImg.setBackground(SystemColor.textHighlightText);
+		panel.add(lblImg, "name_4493982702195");
 		lblImg.setBorder(null);
-		panel.add(lblImg, "name_7484632455859");
 		lblImg.setHorizontalAlignment(SwingConstants.CENTER);
 		lblImg.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/logo-pequena-sem-texto.png")));
 		
 		JLabel label_1 = new JLabel("Tamanho:");
 		label_1.setForeground(Color.WHITE);
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setFont(new Font("Arial", Font.BOLD, 14));
-		label_1.setBounds(10, 114, 175, 14);
+		label_1.setHorizontalAlignment(SwingConstants.LEFT);
+		label_1.setFont(new Font("Arial", Font.BOLD, 22));
+		label_1.setBounds(9, 228, 117, 26);
 		frmPrincipal.getContentPane().add(label_1);
 		
-		JLabel label_2 = new JLabel("Escritura:");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		label_2.setBounds(582, 177, 175, 14);
-		frmPrincipal.getContentPane().add(label_2);
-		
 		JLabel label_3 = new JLabel("Propriet\u00E1rio:");
-		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		label_3.setBounds(10, 177, 378, 14);
+		label_3.setForeground(Color.WHITE);
+		label_3.setHorizontalAlignment(SwingConstants.LEFT);
+		label_3.setFont(new Font("Arial", Font.BOLD, 22));
+		label_3.setBounds(9, 188, 129, 29);
 		frmPrincipal.getContentPane().add(label_3);
-		
-		JLabel label_4 = new JLabel("Descri\u00E7\u00E3o:");
-		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setFont(new Font("Tahoma", Font.BOLD, 12));
-		label_4.setBounds(10, 239, 378, 14);
-		frmPrincipal.getContentPane().add(label_4);
 		
 		
 		
@@ -163,16 +139,44 @@ public class Principal {
 		frmPrincipal.getContentPane().add(lblNom);
 		
 		
-		ImageIcon icon = new ImageIcon("src/img/Principal.jpg");
+		ImageIcon icon = new ImageIcon("src/img/Principal3.jpg");
 		icon.setImage(icon.getImage().getScaledInstance(1074, 671, 1));
+		
+		prop = new JLabel("");
+		prop.setForeground(Color.WHITE);
+		prop.setFont(new Font("Arial", Font.BOLD, 22));
+		prop.setBounds(143, 188, 420, 29);
+		frmPrincipal.getContentPane().add(prop);
+		
+		tamanho = new JLabel("");
+		tamanho.setForeground(Color.WHITE);
+		tamanho.setFont(new Font("Arial", Font.BOLD, 22));
+		tamanho.setBounds(136, 228, 427, 26);
+		frmPrincipal.getContentPane().add(tamanho);
+		
+		JLabel lblEscritura = new JLabel("Escritura:");
+		lblEscritura.setHorizontalAlignment(SwingConstants.LEFT);
+		lblEscritura.setForeground(Color.WHITE);
+		lblEscritura.setFont(new Font("Arial", Font.BOLD, 22));
+		lblEscritura.setBounds(9, 271, 117, 26);
+		frmPrincipal.getContentPane().add(lblEscritura);
+		
+		escri = new JLabel("");
+		escri.setForeground(Color.WHITE);
+		escri.setFont(new Font("Arial", Font.BOLD, 22));
+		escri.setBounds(143, 271, 427, 26);
+		frmPrincipal.getContentPane().add(escri);
+		
+		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o:");
+		lblDescrio.setHorizontalAlignment(SwingConstants.LEFT);
+		lblDescrio.setForeground(Color.WHITE);
+		lblDescrio.setFont(new Font("Arial", Font.BOLD, 22));
+		lblDescrio.setBounds(9, 308, 117, 26);
+		frmPrincipal.getContentPane().add(lblDescrio);
 		JLabel foto = new JLabel("");
 		foto.setBounds(0, 0, 1074, 671);
 		frmPrincipal.getContentPane().add(foto);
 		foto.setIcon(icon);
-		
-		JLabel label = new JLabel("");
-		label.setBounds(190, 114, 46, 14);
-		frmPrincipal.getContentPane().add(label);
 		
 		
 		
@@ -183,9 +187,9 @@ public class Principal {
 	
 	public static void pega() {
 		lblNom.setText(fazenda.getNome());
-		tfTamanho.setText(fazenda.getTamanho());
-		tfDono.setText(fazenda.getProprietario());
-		tfEscritura.setText(fazenda.getEscritura());
+		prop.setText(fazenda.getProprietario());
+		escri.setText(fazenda.getEscritura());
+		tamanho.setText(fazenda.getTamanho());
 		editorPane.setText(fazenda.getDescricao());
 		abrirImagem.abrirImagem(fazenda.getImg(), null, panel, lblImg,fazenda.getImg());
 	}
