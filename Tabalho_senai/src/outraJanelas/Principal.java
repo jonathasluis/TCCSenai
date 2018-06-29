@@ -44,7 +44,7 @@ public class Principal {
 	static JButton button;
 	public static Fazenda fazenda = new Fazenda();
 	private static JEditorPane editorPane;
-	private static JLabel lblImg;
+	private static JLabel lblImg = null;
 	private static JPanel panel;
 	private static JLabel lblNom;
 	private static MetodosImagem abrirImagem = new MetodosImagem();
@@ -91,7 +91,7 @@ public class Principal {
 		tfTamanho = new JTextField();
 		tfTamanho.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
 		tfTamanho.setEditable(false);
-		tfTamanho.setBounds(10, 128, 175, 30);
+		tfTamanho.setBounds(27, 150, 175, 30);
 		frmPrincipal.getContentPane().add(tfTamanho);
 		tfTamanho.setColumns(10);
 		
@@ -99,7 +99,7 @@ public class Principal {
 		tfEscritura.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
 		tfEscritura.setEditable(false);
 		tfEscritura.setColumns(10);
-		tfEscritura.setBounds(214, 128, 175, 30);
+		tfEscritura.setBounds(486, 128, 175, 30);
 		frmPrincipal.getContentPane().add(tfEscritura);
 		
 		tfDono = new JTextField();
@@ -116,24 +116,29 @@ public class Principal {
 		frmPrincipal.getContentPane().add(editorPane);
 		
 		panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(759, 11, 305, 359);
+		panel.setBorder(null);
+		panel.setOpaque(false);
+		panel.setBounds(388, 381, 303, 276);
 		frmPrincipal.getContentPane().add(panel);
 		panel.setLayout(new CardLayout(0, 0));
 		
 		lblImg = new JLabel("");
-		panel.add(lblImg, "name_10680970679459");
+		lblImg.setBorder(null);
+		panel.add(lblImg, "name_7484632455859");
+		lblImg.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImg.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/logo-pequena-sem-texto.png")));
 		
 		JLabel label_1 = new JLabel("Tamanho:");
+		label_1.setForeground(Color.WHITE);
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		label_1.setFont(new Font("Arial", Font.BOLD, 14));
 		label_1.setBounds(10, 114, 175, 14);
 		frmPrincipal.getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel("Escritura:");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		label_2.setBounds(214, 114, 175, 14);
+		label_2.setBounds(582, 177, 175, 14);
 		frmPrincipal.getContentPane().add(label_2);
 		
 		JLabel label_3 = new JLabel("Propriet\u00E1rio:");
@@ -151,18 +156,25 @@ public class Principal {
 		
 		
 		lblNom = new JLabel("");
+		lblNom.setForeground(Color.WHITE);
 		lblNom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNom.setFont(new Font("Arial", Font.BOLD, 40));
-		lblNom.setBounds(193, 32, 450, 54);
+		lblNom.setBounds(10, 32, 1054, 54);
 		frmPrincipal.getContentPane().add(lblNom);
 		
-		ImageIcon icon = new ImageIcon("src/img/Principal1.jpg");
-		icon.setImage(icon.getImage().getScaledInstance(57, 55, 100));
 		
+		ImageIcon icon = new ImageIcon("src/img/Principal.jpg");
+		icon.setImage(icon.getImage().getScaledInstance(1074, 671, 1));
 		JLabel foto = new JLabel("");
 		foto.setBounds(0, 0, 1074, 671);
-		foto.setIcon(icon);
 		frmPrincipal.getContentPane().add(foto);
+		foto.setIcon(icon);
+		
+		JLabel label = new JLabel("");
+		label.setBounds(190, 114, 46, 14);
+		frmPrincipal.getContentPane().add(label);
+		
+		
 		
 	
 		pega();
@@ -186,6 +198,7 @@ public class Principal {
 		
 		JMenu mnInicio = new JMenu("Inicio");
 		mnInicio.setOpaque(true);
+		mnInicio.setEnabled(false);
 		mnInicio.setForeground(new Color(230, 230, 250));
 		mnInicio.setBackground(Color.DARK_GRAY);
 		mnInicio.addMouseListener(new MouseAdapter() {
@@ -250,7 +263,7 @@ public class Principal {
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmCompra = new JMenuItem("Nova Compra");
-		mntmCompra.setEnabled(false);
+		mntmCompra.setEnabled(true);
 		mntmCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaCompra.main(null);
@@ -321,6 +334,4 @@ public class Principal {
 		mnOpes.add(mntmSada);
 		frmPrincipal.getContentPane().setLayout(null);
 	}
-	
-
 }

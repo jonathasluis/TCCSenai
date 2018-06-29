@@ -146,7 +146,7 @@ public class NovaCompra {////
 			//EVENTO PARA QUANDO APERTAR "ENTER" DAR FOCO EM OUTRA CAIXA DE TEXTO
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode()==arg0.VK_ENTER) {
+				if (arg0.getKeyCode()==arg0.VK_ENTER) 
 					txtFornecedor.requestFocus();
 				}
 			}
