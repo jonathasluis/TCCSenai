@@ -5,7 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -17,7 +20,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class MetodosImagem {
 	
 	public File selecionaImg() {//seleciona uma imagem do diretorio
-		File arquivo = null;
 		JFileChooser fileC = new JFileChooser();
 		FileNameExtensionFilter filtro = new FileNameExtensionFilter("imagens em JPEG e PNG", "jpg","png");
 		
@@ -29,6 +31,8 @@ public class MetodosImagem {
 		
 		return fileC.getSelectedFile();
 	}
+	
+
 	
 	public byte[] getImagem(File img,JPanel panel) {//transforma a imagem em um array de byte
 		boolean isPng = false;
@@ -68,15 +72,17 @@ public class MetodosImagem {
 			
 		}
 		return null;
+		
 	}
 	
-public void abrirImagem(Object source,File img,JPanel panel,JLabel lblImg,byte[] imgByte) {//abra a imagem
+	public void abrirImagem(Object source,File img,JPanel panel,JLabel lblImg,byte[] imgByte) {//abra a imagem
 		
 		if(source instanceof File) {
 			ImageIcon icon = new ImageIcon(img.getAbsolutePath());
 			icon.setImage(icon.getImage().getScaledInstance(panel.getWidth(),panel.getHeight(), 100));
 			lblImg.setIcon(icon);
 		}
+		
 		if(source instanceof byte[]) {
 			ImageIcon icon = new ImageIcon(imgByte);
 			icon.setImage(icon.getImage().getScaledInstance(panel.getWidth(),panel.getHeight(), 100));
