@@ -18,16 +18,21 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+import DAO.Compras;
+import DAO.Vendas;
 import JanelasAnimal.CadastrarAnimais;
-import JanelasAnimal.VisualizarAnimais;
+import JanelasAnimal.ComboBox;
 import JanelasFuncionarios.CadastrarFuncionarios;
-import JanelasFuncionarios.VisualizarFuncionarios;
 import crud.CrudCompras;
+import crud.CrudFazenda;
 import crud.CrudVendas;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-import outraJanelas.VisualizarFazendas;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.ScrollPaneConstants;
 
 public class Total {
 
@@ -35,6 +40,12 @@ public class Total {
 	private JLabel valorGasto;
 	private JLabel valorReceita;
 	private JLabel label;
+	private Vendas vendas = new Vendas();
+	private Compras compras = new Compras();
+	private JTable tabelaGasto;
+	private JTable tabelaReceita;
+	private JScrollPane scrollPaneGasto;
+	private JScrollPane scrollPaneReceita;
 
 	/**
 	 * Launch the application.
@@ -64,11 +75,195 @@ public class Total {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 350);
+		frame.setBounds(100, 100, 1080, 720);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		
+		
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblRelatorioContabil = new JLabel("Relat\u00F3rio Cont\u00E1bil");
+		lblRelatorioContabil.setBounds(10, 11, 1054, 25);
+		lblRelatorioContabil.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRelatorioContabil.setFont(new Font("Tahoma", Font.BOLD, 25));
+		frame.getContentPane().add(lblRelatorioContabil);
+		
+		JLabel lblTotalGasto = new JLabel("Total Gasto");
+		lblTotalGasto.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTotalGasto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTotalGasto.setBounds(10, 47, 519, 20);
+		frame.getContentPane().add(lblTotalGasto);
+		
+		JLabel lblReceita = new JLabel("Receita");
+		lblReceita.setHorizontalAlignment(SwingConstants.CENTER);
+		lblReceita.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblReceita.setBounds(551, 47, 513, 20);
+		frame.getContentPane().add(lblReceita);
+		
+		valorGasto = new JLabel("");
+		valorGasto.setForeground(Color.BLACK);
+		valorGasto.setFont(new Font("Tahoma", Font.BOLD, 20));
+		valorGasto.setHorizontalAlignment(SwingConstants.TRAILING);
+		valorGasto.setBounds(403, 348, 126, 25);
+		frame.getContentPane().add(valorGasto);
+		
+		valorReceita = new JLabel("");
+		valorReceita.setFont(new Font("Tahoma", Font.BOLD, 20));
+		valorReceita.setForeground(Color.BLACK);
+		valorReceita.setHorizontalAlignment(SwingConstants.TRAILING);
+		valorReceita.setBounds(932, 348, 126, 25);
+		frame.getContentPane().add(valorReceita);
+		
+		JLabel lblTotal = new JLabel("Total:");
+		lblTotal.setForeground(new Color(0, 0, 0));
+		lblTotal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblTotal.setBounds(10, 609, 104, 51);
+		frame.getContentPane().add(lblTotal);
+		
+		label = new JLabel("0.0");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setForeground(Color.BLACK);
+		label.setFont(new Font("Tahoma", Font.BOLD, 20));
+		label.setBounds(124, 609, 350, 51);
+		frame.getContentPane().add(label);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 378, 1054, 2);
+		frame.getContentPane().add(separator);
+		
+		scrollPaneGasto = new JScrollPane();
+		scrollPaneGasto.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneGasto.setBounds(10, 78, 519, 259);
+		frame.getContentPane().add(scrollPaneGasto);
+		
+		tabelaGasto = new JTable();
+		tabelaGasto.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Produto", "Pre\u00E7o", "Data"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		tabelaGasto.getColumnModel().getColumn(0).setResizable(false);
+		tabelaGasto.getColumnModel().getColumn(0).setPreferredWidth(200);
+		tabelaGasto.getColumnModel().getColumn(1).setResizable(false);
+		tabelaGasto.getColumnModel().getColumn(1).setPreferredWidth(151);
+		tabelaGasto.getColumnModel().getColumn(2).setResizable(false);
+		tabelaGasto.getColumnModel().getColumn(2).setPreferredWidth(167);
+		tabelaGasto.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		scrollPaneGasto.setViewportView(tabelaGasto);
+		
+		scrollPaneReceita = new JScrollPane();
+		scrollPaneReceita.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneReceita.setBounds(545, 78, 519, 259);
+		frame.getContentPane().add(scrollPaneReceita);
+		
+		tabelaReceita = new JTable();
+		tabelaReceita.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Produto", "Pre\u00E7o", "Data"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		tabelaReceita.getColumnModel().getColumn(0).setResizable(false);
+		tabelaReceita.getColumnModel().getColumn(0).setPreferredWidth(200);
+		tabelaReceita.getColumnModel().getColumn(1).setResizable(false);
+		tabelaReceita.getColumnModel().getColumn(1).setPreferredWidth(151);
+		tabelaReceita.getColumnModel().getColumn(2).setResizable(false);
+		tabelaReceita.getColumnModel().getColumn(2).setPreferredWidth(167);
+		tabelaReceita.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		scrollPaneReceita.setViewportView(tabelaReceita);
+		
+		compras.setIdFazenda(Principal.fazenda.getIdFazenda());
+		vendas.setIdFazenda(Principal.fazenda.getIdFazenda());
+		
+		valor();
+		menu();
+		
+		colocaDadosNaTabelaGasto(CrudCompras.selecionaCompras(compras));
+		colocaDadosNaTabelaReceita(CrudVendas.selecionaVendas(vendas));
+	}
+	
+	void colocaDadosNaTabelaGasto(ResultSet rs) {
+		
+		DefaultTableModel modelo = (DefaultTableModel) tabelaGasto.getModel();
+		modelo.setNumRows(0);
+		
+		try {
+			while (rs.next()) {
+				modelo.addRow(new Object[] {rs.getString("produto"),rs.getString("preco"),rs.getString("data_compra")});
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void colocaDadosNaTabelaReceita(ResultSet rs) {
+		
+		DefaultTableModel modelo = (DefaultTableModel) tabelaReceita.getModel();
+		modelo.setNumRows(0);
+		
+		try {
+			while (rs.next()) {
+				modelo.addRow(new Object[] {rs.getString("produto"),rs.getString("preco"),rs.getString("datavenda")});	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void valor() {
+		ResultSet dados1 = CrudCompras.selecionaCompras(compras);
+		ResultSet dados2 = new CrudVendas().selecionaVendas(vendas);
+		
+		float valor1=0,valor2=0,total=0;
+		
+		try {
+			while(dados1.next()) {
+				valor1 = valor1 + dados1.getFloat("preco");
+			}
+			
+			while(dados2.next()) {
+				valor2 = valor2 + dados2.getFloat("preco");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		valorGasto.setText(String.valueOf(valor1));
+		valorReceita.setText(String.valueOf(valor2));
+		total = valor2 - valor1;
+		if(total < 0) {
+			label.setForeground(Color.RED);
+		}
+		if(total > 0) {
+			label.setForeground(Color.GREEN);
+		}
+		label.setText(String.valueOf(total));
+	}
+	
+	void menu() {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
@@ -95,15 +290,6 @@ public class Total {
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Visualizar Animais");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VisualizarAnimais.main(null);
-				frame.dispose();
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem);
-		
 		JMenu mnFuncionarios = new JMenu("Funcionarios");
 		menuBar.add(mnFuncionarios);
 		
@@ -115,15 +301,6 @@ public class Total {
 			}
 		});
 		mnFuncionarios.add(mntmCadastrarFuncionarios);
-		
-		JMenuItem mntmVisualizarFuncionarios = new JMenuItem("Visualizar funcionarios");
-		mntmVisualizarFuncionarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VisualizarFuncionarios.main(null);
-				frame.dispose();
-			}
-		});
-		mnFuncionarios.add(mntmVisualizarFuncionarios);
 		
 		JMenu mnNewMenu_1 = new JMenu("Compra de Insumos");
 		menuBar.add(mnNewMenu_1);
@@ -137,15 +314,6 @@ public class Total {
 		});
 		mnNewMenu_1.add(mntmCompra);
 		
-		JMenuItem mntmVisualizarCompra = new JMenuItem("Visualizar Compras");
-		mntmVisualizarCompra.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VisualizarCompras.main(null);
-				frame.dispose();
-			}
-		});
-		mnNewMenu_1.add(mntmVisualizarCompra);
-		
 		JMenu mnNewMenu_2 = new JMenu("Vendas");
 		menuBar.add(mnNewMenu_2);
 		
@@ -157,15 +325,6 @@ public class Total {
 			}
 		});
 		mnNewMenu_2.add(mntmNovaVenda);
-		
-		JMenuItem mntmVisualizarVendas = new JMenuItem("Visualizar Vendas");
-		mntmVisualizarVendas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VisualizarVendas.main(null);
-				frame.dispose();
-			}
-		});
-		mnNewMenu_2.add(mntmVisualizarVendas);
 		
 		JMenu mnRelatrio = new JMenu("Relat\u00F3rio");
 		menuBar.add(mnRelatrio);
@@ -186,15 +345,6 @@ public class Total {
 		});
 		mnOpes.add(mntmNovaFazenda);
 		
-		JMenuItem mntmVisualizarFazenda = new JMenuItem("Visualizar Fazenda");
-		mntmVisualizarFazenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VisualizarFazendas.main(null);
-				frame.dispose();
-			}
-		});
-		mnOpes.add(mntmVisualizarFazenda);
-		
 		JMenuItem mntmSada = new JMenuItem("Sair");
 		mntmSada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -210,87 +360,5 @@ public class Total {
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);
-		frame.getContentPane().setLayout(null);
-		
-		JLabel lblRelatorioContabil = new JLabel("Relatorio Contabil");
-		lblRelatorioContabil.setBounds(10, 11, 464, 20);
-		lblRelatorioContabil.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRelatorioContabil.setFont(new Font("Tahoma", Font.BOLD, 16));
-		frame.getContentPane().add(lblRelatorioContabil);
-		
-		JLabel lblTotalGasto = new JLabel("Total Gasto");
-		lblTotalGasto.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTotalGasto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTotalGasto.setBounds(10, 74, 220, 20);
-		frame.getContentPane().add(lblTotalGasto);
-		
-		JLabel lblReceita = new JLabel("Receita");
-		lblReceita.setHorizontalAlignment(SwingConstants.CENTER);
-		lblReceita.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblReceita.setBounds(254, 74, 220, 20);
-		frame.getContentPane().add(lblReceita);
-		
-		valorGasto = new JLabel("");
-		valorGasto.setForeground(Color.BLACK);
-		valorGasto.setFont(new Font("Tahoma", Font.BOLD, 20));
-		valorGasto.setHorizontalAlignment(SwingConstants.CENTER);
-		valorGasto.setBounds(10, 105, 220, 91);
-		frame.getContentPane().add(valorGasto);
-		
-		valorReceita = new JLabel("");
-		valorReceita.setFont(new Font("Tahoma", Font.BOLD, 20));
-		valorReceita.setForeground(Color.BLACK);
-		valorReceita.setHorizontalAlignment(SwingConstants.CENTER);
-		valorReceita.setBounds(254, 105, 220, 91);
-		frame.getContentPane().add(valorReceita);
-		
-		JLabel lblTotal = new JLabel("Total:");
-		lblTotal.setForeground(new Color(0, 0, 0));
-		lblTotal.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblTotal.setBounds(10, 228, 104, 51);
-		frame.getContentPane().add(lblTotal);
-		
-		label = new JLabel("0.0");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setForeground(Color.BLACK);
-		label.setFont(new Font("Tahoma", Font.BOLD, 20));
-		label.setBounds(124, 228, 350, 51);
-		frame.getContentPane().add(label);
-		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 194, 484, 2);
-		frame.getContentPane().add(separator);
-		
-		valor();
-	}
-	
-	void valor() {
-		ResultSet dados1 = new CrudCompras().selecompras();
-		ResultSet dados2 = new CrudVendas().selecvendas();
-		float valor1=0,valor2=0,total=0;
-		
-		try {
-			while(dados1.next()) {
-				valor1 = valor1 + dados1.getFloat("preco");
-			}
-			
-			while(dados2.next()) {
-				valor2 = valor2 + dados2.getFloat("preco");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		valorGasto.setText(String.valueOf(valor1));
-		valorReceita.setText(String.valueOf(valor2));
-		total = valor2 - valor1;
-		if(total < 0) {
-			label.setForeground(Color.RED);
-		}
-		if(total > 0) {
-			label.setForeground(Color.GREEN);
-		}
-		label.setText(String.valueOf(total));
 	}
 }
