@@ -196,15 +196,16 @@ public class Principal {
 	public void menu() {
 
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setForeground(new Color(230, 230, 250));
-		menuBar.setBackground(Color.DARK_GRAY);
+		menuBar.setBorder(new LineBorder(Color.DARK_GRAY));
+		menuBar.setForeground(Color.GREEN);
+		menuBar.setBackground(new Color(128, 128, 128));
 		frmPrincipal.setJMenuBar(menuBar);
 		
 		JMenu mnInicio = new JMenu("Inicio");
 		mnInicio.setOpaque(true);
 		mnInicio.setEnabled(false);
 		mnInicio.setForeground(new Color(230, 230, 250));
-		mnInicio.setBackground(Color.DARK_GRAY);
+		mnInicio.setBackground(new Color(128, 128, 128));
 		mnInicio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -218,13 +219,15 @@ public class Principal {
 		mnNewMenu.setOpaque(true);
 		mnNewMenu.setFocusPainted(true);
 		mnNewMenu.setBorder(new CompoundBorder());
-		mnNewMenu.setBackground(Color.DARK_GRAY);
+		mnNewMenu.setBackground(new Color(47, 79, 79));
 		mnNewMenu.setForeground(new Color(230, 230, 250));
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
+		mntmCadastrarAnimais.setBorder(new LineBorder(new Color(34, 139, 34)));
+		mntmCadastrarAnimais.setOpaque(true);
 		mntmCadastrarAnimais.setForeground(new Color(230, 230, 250));
-		mntmCadastrarAnimais.setBackground(new Color(30, 144, 255));
+		mntmCadastrarAnimais.setBackground(new Color(34, 139, 34));
 		mntmCadastrarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarAnimais.main(null);
@@ -234,8 +237,9 @@ public class Principal {
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Visualizar Animais");
-		mntmNewMenuItem.setBorder(null);
-		mntmNewMenuItem.setBackground(new Color(30, 144, 255));
+		mntmNewMenuItem.setOpaque(true);
+		mntmNewMenuItem.setBorder(new LineBorder(new Color(34, 139, 34)));
+		mntmNewMenuItem.setBackground(new Color(34, 139, 34));
 		mntmNewMenuItem.setForeground(new Color(230, 230, 250));
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -247,7 +251,7 @@ public class Principal {
 		
 		JMenu mnFuncionarios = new JMenu("Funcionarios");
 		mnFuncionarios.setForeground(new Color(230, 230, 250));
-		mnFuncionarios.setBackground(Color.DARK_GRAY);
+		mnFuncionarios.setBackground(new Color(128, 128, 128));
 		mnFuncionarios.setOpaque(true);
 		menuBar.add(mnFuncionarios);
 		
@@ -262,7 +266,7 @@ public class Principal {
 		
 		JMenu mnNewMenu_1 = new JMenu("Compra de Insumos");
 		mnNewMenu_1.setForeground(new Color(230, 230, 250));
-		mnNewMenu_1.setBackground(Color.DARK_GRAY);
+		mnNewMenu_1.setBackground(new Color(128, 128, 128));
 		mnNewMenu_1.setOpaque(true);
 		menuBar.add(mnNewMenu_1);
 		
@@ -278,7 +282,7 @@ public class Principal {
 		
 		JMenu mnNewMenu_2 = new JMenu("Vendas");
 		mnNewMenu_2.setForeground(new Color(230, 230, 250));
-		mnNewMenu_2.setBackground(Color.DARK_GRAY);
+		mnNewMenu_2.setBackground(new Color(128, 128, 128));
 		mnNewMenu_2.setOpaque(true);
 		menuBar.add(mnNewMenu_2);
 		
@@ -293,7 +297,7 @@ public class Principal {
 		
 		JMenu mnRelatrio = new JMenu("Relat\u00F3rio");
 		mnRelatrio.setForeground(new Color(230, 230, 250));
-		mnRelatrio.setBackground(Color.DARK_GRAY);
+		mnRelatrio.setBackground(new Color(128, 128, 128));
 		mnRelatrio.setOpaque(true);
 		menuBar.add(mnRelatrio);
 		
@@ -308,7 +312,7 @@ public class Principal {
 		
 		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
 		mnOpes.setForeground(new Color(230, 230, 250));
-		mnOpes.setBackground(Color.DARK_GRAY);
+		mnOpes.setBackground(new Color(47, 79, 79));
 		mnOpes.setOpaque(true);
 		menuBar.add(mnOpes);
 		

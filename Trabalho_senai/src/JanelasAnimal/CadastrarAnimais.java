@@ -473,6 +473,7 @@ public class CadastrarAnimais {//teste3
 		bg.add(rdbtnFemea);
 		bg.add(rdbtnMacho);
 		
+		
 		tfDestino = new JTextField();
 		tfDestino.setBounds(506, 170, 164, 20);
 		frmCadastroDeAnimais.getContentPane().add(tfDestino);
