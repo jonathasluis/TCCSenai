@@ -48,7 +48,7 @@ public class CrudVendas {
 		}
 	}
 	
-	public ResultSet selecionaVendas(Vendas venda) {
+	public static ResultSet selecionaVendas(Vendas venda) {
 		ResultSet tabela = null;
 		String sql = "SELECT*FROM vendas where idfazenda=? order by datavenda";
 		try {
@@ -65,7 +65,7 @@ public class CrudVendas {
 		return tabela;
 	}
 	
-	public ResultSet procuraVendas(String letra,Vendas venda) {
+	public static ResultSet procuraVendas(String letra,Vendas venda) {
 		ResultSet tabela = null;
 		String sql = "SELECT * FROM vendas WHERE produto LIKE ? and idfazenda=? order by datavenda";
 		try {
