@@ -10,37 +10,30 @@ import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import com.toedter.calendar.JCalendar;
 
 import DAO.Compras;
 import DAO.Vendas;
 import JanelasAnimal.CadastrarAnimais;
-import JanelasAnimal.ComboBox;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import crud.CrudCompras;
-import crud.CrudFazenda;
 import crud.CrudVendas;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JComboBox;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JCalendar;
-import javax.swing.JCheckBox;
 
 public class Total {//
 
@@ -209,7 +202,7 @@ public class Total {//
 		calendar = new JCalendar();
 		calendar.getDayChooser().setVisible(false);
 		calendar.getMonthChooser().setVisible(false);
-		calendar.setBounds(147, 59, 232, 137);
+		calendar.setBounds(147, 59, 217, 137);
 		frame.getContentPane().add(calendar);
 		
 		chckbxAno = new JCheckBox("Ano");
@@ -222,7 +215,7 @@ public class Total {//
 				}
 			}
 		});
-		chckbxAno.setBounds(566, 59, 97, 23);
+		chckbxAno.setBounds(370, 59, 97, 23);
 		frame.getContentPane().add(chckbxAno);
 		
 		chckbxAnomes = new JCheckBox("Ano-Mes");
@@ -234,7 +227,7 @@ public class Total {//
 				}
 			}
 		});
-		chckbxAnomes.setBounds(566, 88, 97, 23);
+		chckbxAnomes.setBounds(370, 88, 97, 23);
 		frame.getContentPane().add(chckbxAnomes);
 		
 		chckbxAnomesdia = new JCheckBox("Ano-Mes-Dia");
@@ -246,7 +239,7 @@ public class Total {//
 				}
 			}
 		});
-		chckbxAnomesdia.setBounds(566, 114, 97, 23);
+		chckbxAnomesdia.setBounds(370, 114, 97, 23);
 		frame.getContentPane().add(chckbxAnomesdia);
 		
 		ButtonGroup bg = new ButtonGroup();
