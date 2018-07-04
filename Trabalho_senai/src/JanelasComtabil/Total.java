@@ -42,7 +42,7 @@ import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JCalendar;
 import javax.swing.JCheckBox;
 
-public class Total {
+public class Total {//
 
 	private JFrame frame;
 	private JLabel valorGasto;
