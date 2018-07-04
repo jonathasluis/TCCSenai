@@ -33,6 +33,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JComboBox;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JCalendar;
+import javax.swing.JCheckBox;
 
 public class Total {
 
@@ -46,6 +54,10 @@ public class Total {
 	private JTable tabelaReceita;
 	private JScrollPane scrollPaneGasto;
 	private JScrollPane scrollPaneReceita;
+	private JCheckBox chckbxAno;
+	private JCheckBox chckbxAnomes;
+	private JCheckBox chckbxAnomesdia;
+	private JCalendar calendar;
 
 	/**
 	 * Launch the application.
@@ -92,27 +104,27 @@ public class Total {
 		JLabel lblTotalGasto = new JLabel("Total Gasto");
 		lblTotalGasto.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTotalGasto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTotalGasto.setBounds(10, 47, 519, 20);
+		lblTotalGasto.setBounds(10, 219, 519, 20);
 		frame.getContentPane().add(lblTotalGasto);
 		
 		JLabel lblReceita = new JLabel("Receita");
 		lblReceita.setHorizontalAlignment(SwingConstants.CENTER);
 		lblReceita.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblReceita.setBounds(551, 47, 513, 20);
+		lblReceita.setBounds(545, 219, 519, 20);
 		frame.getContentPane().add(lblReceita);
 		
 		valorGasto = new JLabel("");
 		valorGasto.setForeground(Color.BLACK);
 		valorGasto.setFont(new Font("Tahoma", Font.BOLD, 20));
 		valorGasto.setHorizontalAlignment(SwingConstants.TRAILING);
-		valorGasto.setBounds(403, 348, 126, 25);
+		valorGasto.setBounds(409, 505, 126, 25);
 		frame.getContentPane().add(valorGasto);
 		
 		valorReceita = new JLabel("");
 		valorReceita.setFont(new Font("Tahoma", Font.BOLD, 20));
 		valorReceita.setForeground(Color.BLACK);
 		valorReceita.setHorizontalAlignment(SwingConstants.TRAILING);
-		valorReceita.setBounds(932, 348, 126, 25);
+		valorReceita.setBounds(938, 518, 126, 25);
 		frame.getContentPane().add(valorReceita);
 		
 		JLabel lblTotal = new JLabel("Total:");
@@ -129,13 +141,9 @@ public class Total {
 		label.setBounds(124, 609, 350, 51);
 		frame.getContentPane().add(label);
 		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 378, 1054, 2);
-		frame.getContentPane().add(separator);
-		
 		scrollPaneGasto = new JScrollPane();
 		scrollPaneGasto.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPaneGasto.setBounds(10, 78, 519, 259);
+		scrollPaneGasto.setBounds(10, 250, 519, 259);
 		frame.getContentPane().add(scrollPaneGasto);
 		
 		tabelaGasto = new JTable();
@@ -159,12 +167,13 @@ public class Total {
 		tabelaGasto.getColumnModel().getColumn(1).setPreferredWidth(151);
 		tabelaGasto.getColumnModel().getColumn(2).setResizable(false);
 		tabelaGasto.getColumnModel().getColumn(2).setPreferredWidth(167);
+		tabelaGasto.getTableHeader().setReorderingAllowed(false);
 		tabelaGasto.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		scrollPaneGasto.setViewportView(tabelaGasto);
 		
 		scrollPaneReceita = new JScrollPane();
 		scrollPaneReceita.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPaneReceita.setBounds(545, 78, 519, 259);
+		scrollPaneReceita.setBounds(545, 250, 519, 259);
 		frame.getContentPane().add(scrollPaneReceita);
 		
 		tabelaReceita = new JTable();
@@ -188,8 +197,62 @@ public class Total {
 		tabelaReceita.getColumnModel().getColumn(1).setPreferredWidth(151);
 		tabelaReceita.getColumnModel().getColumn(2).setResizable(false);
 		tabelaReceita.getColumnModel().getColumn(2).setPreferredWidth(167);
+		tabelaReceita.getTableHeader().setReorderingAllowed(false);
 		tabelaReceita.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		scrollPaneReceita.setViewportView(tabelaReceita);
+		
+		JLabel lblFiltrarData = new JLabel("Filtrar Data:");
+		lblFiltrarData.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblFiltrarData.setBounds(10, 90, 84, 14);
+		frame.getContentPane().add(lblFiltrarData);
+		
+		calendar = new JCalendar();
+		calendar.getDayChooser().setVisible(false);
+		calendar.getMonthChooser().setVisible(false);
+		calendar.setBounds(147, 59, 232, 137);
+		frame.getContentPane().add(calendar);
+		
+		chckbxAno = new JCheckBox("Ano");
+		chckbxAno.setSelected(true);
+		chckbxAno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbxAno.isSelected()) {
+					calendar.getDayChooser().setVisible(false);
+					calendar.getMonthChooser().setVisible(false);
+				}
+			}
+		});
+		chckbxAno.setBounds(566, 59, 97, 23);
+		frame.getContentPane().add(chckbxAno);
+		
+		chckbxAnomes = new JCheckBox("Ano-Mes");
+		chckbxAnomes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbxAnomes.isSelected()) {
+					calendar.getDayChooser().setVisible(false);
+					calendar.getMonthChooser().setVisible(true);
+				}
+			}
+		});
+		chckbxAnomes.setBounds(566, 88, 97, 23);
+		frame.getContentPane().add(chckbxAnomes);
+		
+		chckbxAnomesdia = new JCheckBox("Ano-Mes-Dia");
+		chckbxAnomesdia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbxAnomesdia.isSelected()) {
+					calendar.getDayChooser().setVisible(true);
+					calendar.getMonthChooser().setVisible(true);
+				}
+			}
+		});
+		chckbxAnomesdia.setBounds(566, 114, 97, 23);
+		frame.getContentPane().add(chckbxAnomesdia);
+		
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(chckbxAno);
+		bg.add(chckbxAnomes);
+		bg.add(chckbxAnomesdia);
 		
 		compras.setIdFazenda(Principal.fazenda.getIdFazenda());
 		vendas.setIdFazenda(Principal.fazenda.getIdFazenda());
