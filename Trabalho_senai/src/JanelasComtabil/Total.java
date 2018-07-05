@@ -7,8 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
@@ -79,6 +82,8 @@ public class Total {//
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		Date data = new Date();
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1080, 720);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -110,7 +115,7 @@ public class Total {//
 		valorGasto.setForeground(Color.BLACK);
 		valorGasto.setFont(new Font("Tahoma", Font.BOLD, 20));
 		valorGasto.setHorizontalAlignment(SwingConstants.TRAILING);
-		valorGasto.setBounds(409, 505, 126, 25);
+		valorGasto.setBounds(403, 518, 126, 25);
 		frame.getContentPane().add(valorGasto);
 		
 		valorReceita = new JLabel("");
@@ -131,7 +136,7 @@ public class Total {//
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setForeground(Color.BLACK);
 		label.setFont(new Font("Tahoma", Font.BOLD, 20));
-		label.setBounds(124, 609, 350, 51);
+		label.setBounds(403, 609, 350, 51);
 		frame.getContentPane().add(label);
 		
 		scrollPaneGasto = new JScrollPane();
@@ -147,6 +152,10 @@ public class Total {//
 				"Produto", "Pre\u00E7o", "Data"
 			}
 		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false
 			};
@@ -159,7 +168,7 @@ public class Total {//
 		tabelaGasto.getColumnModel().getColumn(1).setResizable(false);
 		tabelaGasto.getColumnModel().getColumn(1).setPreferredWidth(151);
 		tabelaGasto.getColumnModel().getColumn(2).setResizable(false);
-		tabelaGasto.getColumnModel().getColumn(2).setPreferredWidth(167);
+		tabelaGasto.getColumnModel().getColumn(2).setPreferredWidth(166);
 		tabelaGasto.getTableHeader().setReorderingAllowed(false);
 		tabelaGasto.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		scrollPaneGasto.setViewportView(tabelaGasto);
@@ -177,6 +186,10 @@ public class Total {//
 				"Produto", "Pre\u00E7o", "Data"
 			}
 		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false
 			};
@@ -189,7 +202,7 @@ public class Total {//
 		tabelaReceita.getColumnModel().getColumn(1).setResizable(false);
 		tabelaReceita.getColumnModel().getColumn(1).setPreferredWidth(151);
 		tabelaReceita.getColumnModel().getColumn(2).setResizable(false);
-		tabelaReceita.getColumnModel().getColumn(2).setPreferredWidth(167);
+		tabelaReceita.getColumnModel().getColumn(2).setPreferredWidth(166);
 		tabelaReceita.getTableHeader().setReorderingAllowed(false);
 		tabelaReceita.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		scrollPaneReceita.setViewportView(tabelaReceita);
@@ -200,6 +213,39 @@ public class Total {//
 		frame.getContentPane().add(lblFiltrarData);
 		
 		calendar = new JCalendar();
+		calendar.getDayChooser().addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				if(chckbxAnomesdia.isSelected()) {
+					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+				}
+			}
+		});
+		calendar.getMonthChooser().addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				
+				if(chckbxAnomes.isSelected()) {
+					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
+				}
+				if(c) {
+					
+				}
+				
+			}
+		});
+		calendar.getYearChooser().addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				
+				if(chckbxAno.isSelected()) {
+					colocaDadosNaTabelaGasto(new CrudCompras()
+							.procurarCompraDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
+				}
+
+			}
+		});
+		
 		calendar.getDayChooser().setVisible(false);
 		calendar.getMonthChooser().setVisible(false);
 		calendar.setBounds(147, 59, 217, 137);
@@ -212,6 +258,9 @@ public class Total {//
 				if(chckbxAno.isSelected()) {
 					calendar.getDayChooser().setVisible(false);
 					calendar.getMonthChooser().setVisible(false);
+					
+					colocaDadosNaTabelaGasto(new CrudCompras()
+							.procurarCompraDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
 				}
 			}
 		});
@@ -223,7 +272,11 @@ public class Total {//
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxAnomes.isSelected()) {
 					calendar.getDayChooser().setVisible(false);
+					calendar.getMonthChooser().setMonth(data.getMonth());
 					calendar.getMonthChooser().setVisible(true);
+					
+					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
 				}
 			}
 		});
@@ -236,6 +289,11 @@ public class Total {//
 				if(chckbxAnomesdia.isSelected()) {
 					calendar.getDayChooser().setVisible(true);
 					calendar.getMonthChooser().setVisible(true);
+					calendar.getMonthChooser().setMonth(data.getMonth());
+					calendar.getDayChooser().setDay(data.getDay());
+					
+					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 				}
 			}
 		});

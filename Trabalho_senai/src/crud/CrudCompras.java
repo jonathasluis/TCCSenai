@@ -89,6 +89,67 @@ public class CrudCompras {
 		}
 		return tabela;
 	}
+	
+	public ResultSet procurarCompraDataAno(String ano,int idFazenda) {
+		ResultSet tabela = null;
+		String sql = "SELECT*FROM compras_insumos WHERE id_fazenda=? and year(data_compra) = ? order by produto";
+		try {
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			stmt.setInt(1,idFazenda);
+			stmt.setString(2, ano);
+			tabela = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Erro selecionar");
+		}
+		return tabela;
+	}
+	
+	public ResultSet procurarCompraDataAnoMes(String ano,String mes,int idFazenda) {
+		ResultSet tabela = null;
+		String sql = "SELECT*FROM compras_insumos WHERE id_fazenda=? and year(data_compra) = ? and month(data_compra) = ? order by produto";
+		try {
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			stmt.setInt(1,idFazenda);
+			stmt.setString(2, ano);
+			stmt.setString(3, mes);
+			tabela = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Erro selecionar");
+		}
+		return tabela;
+	}
+	
+	public ResultSet procurarCompraDataAnoDia(String ano,String mes,String dia,int idFazenda) {
+		ResultSet tabela = null;
+		String sql = "SELECT*FROM compras_insumos WHERE id_fazenda=? and year(data_compra) = ? "
+				+ "and month(data_compra) = ? and day(data_compra) = ? order by produto";
+		try {
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			stmt.setInt(1,idFazenda);
+			stmt.setString(2, ano);
+			stmt.setString(3, mes);
+			stmt.setString(4, dia);
+			tabela = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Erro selecionar");
+		}
+		return tabela;
+	}
 }
 
 
