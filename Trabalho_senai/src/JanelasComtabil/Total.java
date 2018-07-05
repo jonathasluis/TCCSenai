@@ -225,12 +225,14 @@ public class Total {//
 		calendar.getMonthChooser().addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				
-				if(chckbxAnomes.isSelected()) {
+				if(chckbxAnomes.isSelected()) {   
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
 				}
-				if(c) {
-					
+				if(chckbxAnomesdia.isSelected()) {
+					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 				}
 				
 			}
@@ -242,6 +244,16 @@ public class Total {//
 					colocaDadosNaTabelaGasto(new CrudCompras()
 							.procurarCompraDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
 				}
+				if (chckbxAnomes.isSelected()) {
+					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
+				}
+				if(chckbxAnomesdia.isSelected()) {
+					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+				}
+				
 
 			}
 		});
@@ -272,7 +284,6 @@ public class Total {//
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxAnomes.isSelected()) {
 					calendar.getDayChooser().setVisible(false);
-					calendar.getMonthChooser().setMonth(data.getMonth());
 					calendar.getMonthChooser().setVisible(true);
 					
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
@@ -289,8 +300,7 @@ public class Total {//
 				if(chckbxAnomesdia.isSelected()) {
 					calendar.getDayChooser().setVisible(true);
 					calendar.getMonthChooser().setVisible(true);
-					calendar.getMonthChooser().setMonth(data.getMonth());
-					calendar.getDayChooser().setDay(data.getDay());
+
 					
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));

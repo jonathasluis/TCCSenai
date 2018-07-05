@@ -210,7 +210,7 @@ public class Principal {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Principal.frmPrincipal.setVisible(true);
-				frmPrincipal.dispose();
+				//frmPrincipal.dispose();
 			}
 		});
 		menuBar.add(mnInicio);
