@@ -164,11 +164,10 @@ public class NovaCompra {////
 		
 		//VARIAVEL PARA PEGAR A DATA DO DIA ATUAL DO SEU COMPUTADOR
 		Date data = new Date();
-		SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 		String formatada = formato.format(data);
 		
 		tfData = new JTextField();
-		tfData.setEditable(false);
 		tfData.setForeground(SystemColor.controlText);
 		tfData.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tfData.setToolTipText("As datas s\u00E3o obtidas a partir do seu computador.\r\nCorrija se for necess\u00E1rio.");

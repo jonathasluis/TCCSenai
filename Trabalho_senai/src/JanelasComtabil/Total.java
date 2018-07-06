@@ -54,6 +54,7 @@ public class Total {//
 	private JCheckBox chckbxAnomes;
 	private JCheckBox chckbxAnomesdia;
 	private JCalendar calendar;
+	Date data = new Date();
 
 	/**
 	 * Launch the application.
@@ -82,7 +83,6 @@ public class Total {//
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		Date data = new Date();
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1080, 720);
@@ -214,23 +214,35 @@ public class Total {//
 		
 		calendar = new JCalendar();
 		calendar.getDayChooser().addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
+			public void propertyChange(PropertyChangeEvent evt) {//evento mudar dia
 				if(chckbxAnomesdia.isSelected()) {
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+					
+					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
 							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 				}
 			}
 		});
 		calendar.getMonthChooser().addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
+			public void propertyChange(PropertyChangeEvent evt) {//evento mudar mes
 				
 				if(chckbxAnomes.isSelected()) {   
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
+					
+					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
 				}
+				
 				if(chckbxAnomesdia.isSelected()) {
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+					
+					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
 							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 				}
@@ -238,18 +250,29 @@ public class Total {//
 			}
 		});
 		calendar.getYearChooser().addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
+			public void propertyChange(PropertyChangeEvent evt) {//evento mudar ano
 				
 				if(chckbxAno.isSelected()) {
 					colocaDadosNaTabelaGasto(new CrudCompras()
 							.procurarCompraDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
+					
+					colocaDadosNaTabelaReceita(new CrudVendas()
+							.procurarVendasDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
 				}
+				
 				if (chckbxAnomes.isSelected()) {
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
+					
+					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
 				}
 				if(chckbxAnomesdia.isSelected()) {
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+					
+					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
 							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 				}
@@ -273,6 +296,9 @@ public class Total {//
 					
 					colocaDadosNaTabelaGasto(new CrudCompras()
 							.procurarCompraDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
+					
+					colocaDadosNaTabelaReceita(new CrudVendas()
+							.procurarVendasDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
 				}
 			}
 		});
@@ -287,6 +313,9 @@ public class Total {//
 					calendar.getMonthChooser().setVisible(true);
 					
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
+					
+					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
 				}
 			}
@@ -303,6 +332,9 @@ public class Total {//
 
 					
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+					
+					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 				}
 			}
@@ -358,7 +390,7 @@ public class Total {//
 	
 	void valor() {
 		ResultSet dados1 = CrudCompras.selecionaCompras(compras);
-		ResultSet dados2 = new CrudVendas().selecionaVendas(vendas);
+		ResultSet dados2 = CrudVendas.selecionaVendas(vendas);
 		
 		float valor1=0,valor2=0,total=0;
 		
