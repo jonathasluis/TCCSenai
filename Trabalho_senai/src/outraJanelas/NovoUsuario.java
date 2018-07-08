@@ -2,6 +2,7 @@ package outraJanelas;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -19,8 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import banco.Conexao;
-import crud.crudUsuarios;
-import java.awt.Toolkit;
 
 public class NovoUsuario {
 	
@@ -80,7 +79,7 @@ public class NovoUsuario {
 		tfUsuario.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if(arg0.getKeyCode() == arg0.VK_ENTER) {
+				if(arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					pfSenha.requestFocus();
 					
 				}
@@ -106,7 +105,6 @@ public class NovoUsuario {
 				String usu = tfUsuario.getText().toString();
 				String senh = String.copyValueOf(pfSenha.getPassword());
 				String senhCon= String.copyValueOf(pfConfirma.getPassword());
-				Conexao c = new Conexao();
 				
 				
 				if (usu.trim().equals("")) {
@@ -116,8 +114,8 @@ public class NovoUsuario {
 				}
 				
 				if (senh.equals(senhCon)) {
-					crudUsuarios crud = new crudUsuarios();
-					crud.addusu(usu, senh);
+					//crudUsuarios crud = new crudUsuarios();
+					//crud.addusu(usu, senh);
 					JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso!");
 					
 					
@@ -156,7 +154,7 @@ public class NovoUsuario {
 		pfSenha.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == e.VK_ENTER) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 					pfConfirma.requestFocus();
 				}
 			}
@@ -168,7 +166,7 @@ public class NovoUsuario {
 		pfConfirma.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					btnSalvar.doClick();
 					
 				}
