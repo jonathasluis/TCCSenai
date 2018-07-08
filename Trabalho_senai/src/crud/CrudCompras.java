@@ -90,7 +90,7 @@ public class CrudCompras {
 		return tabela;
 	}
 	
-	public ResultSet procurarCompraDataAno(String ano,int idFazenda) {
+	public ResultSet procurarCompraDataAno(String ano,int idFazenda) {//seleciona dados de um ano especifico
 		ResultSet tabela = null;
 		String sql = "SELECT*FROM compras_insumos WHERE id_fazenda=? and year(data_compra) = ? order by produto";
 		try {
@@ -109,7 +109,7 @@ public class CrudCompras {
 		return tabela;
 	}
 	
-	public ResultSet procurarCompraDataAnoMes(String ano,String mes,int idFazenda) {
+	public ResultSet procurarCompraDataAnoMes(String ano,String mes,int idFazenda) {//seleciona dados de um mes do ano especifico
 		ResultSet tabela = null;
 		String sql = "SELECT*FROM compras_insumos WHERE id_fazenda=? and year(data_compra) = ? and month(data_compra) = ? order by produto";
 		try {
@@ -129,7 +129,7 @@ public class CrudCompras {
 		return tabela;
 	}
 	
-	public ResultSet procurarCompraDataAnoDia(String ano,String mes,String dia,int idFazenda) {
+	public ResultSet procurarCompraDataAnoDia(String ano,String mes,String dia,int idFazenda) {//seleciona dados de um dia especifico
 		ResultSet tabela = null;
 		String sql = "SELECT*FROM compras_insumos WHERE id_fazenda=? and year(data_compra) = ? "
 				+ "and month(data_compra) = ? and day(data_compra) = ? order by produto";

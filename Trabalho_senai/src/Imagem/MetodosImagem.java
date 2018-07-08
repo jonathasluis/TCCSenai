@@ -17,7 +17,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class MetodosImagem {
 	
 	public File selecionaImg() {//seleciona uma imagem do diretorio
-		File arquivo = null;
 		JFileChooser fileC = new JFileChooser();
 		FileNameExtensionFilter filtro = new FileNameExtensionFilter("imagens em JPEG e PNG", "jpg","png");
 		
