@@ -146,7 +146,7 @@ public class CadastrarAnimais {//teste3
 		ftfDataNascimento.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					ftfDataCompra.requestFocus();
 				}
 			}
@@ -174,7 +174,7 @@ public class CadastrarAnimais {//teste3
 		ftfDataCompra.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					spinnerQuantidade.requestFocus();
 				}
 			}
@@ -193,7 +193,7 @@ public class CadastrarAnimais {//teste3
 		spinnerQuantidade.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					tfDestino.requestFocus();
 				}
 			}
@@ -228,7 +228,7 @@ public class CadastrarAnimais {//teste3
 		tfNomeLote.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode()==arg0.VK_ENTER) {
+				if (arg0.getKeyCode()==KeyEvent.VK_ENTER) {
 					ftfDataNascimento.requestFocus();
 				}
 			}
@@ -485,7 +485,7 @@ public class CadastrarAnimais {//teste3
 		tfProcurar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode()==arg0.VK_ENTER) {
+				if (arg0.getKeyCode()==KeyEvent.VK_ENTER) {
 					btnProcurar.doClick();
 				}
 			}

@@ -188,6 +188,10 @@ public class CadastrarFuncionarios {
 				"ID", "Nome", "Nascimento", "CPF", "RG", "Sexo", "Telefone", "Email", "Cargo", "Salario", "Fazenda", "Status"
 			}
 		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false, false, false, false, false
 			};
@@ -343,7 +347,7 @@ public class CadastrarFuncionarios {
 		tfProcurar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					btnProcurar.doClick();
 				}
 			}
@@ -396,7 +400,7 @@ public class CadastrarFuncionarios {
 		tfNome.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					ftfNascimento.requestFocus();
 				}
 			}
@@ -409,7 +413,7 @@ public class CadastrarFuncionarios {
 		tfRg.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					ftfTelefone.requestFocus();
 				}
 			}
@@ -422,7 +426,7 @@ public class CadastrarFuncionarios {
 		ftfNascimento.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					ftfCpf.requestFocus();
 				}
 			}
@@ -478,7 +482,7 @@ public class CadastrarFuncionarios {
 		ftfTelefone.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					tfEmail.requestFocus();
 				}
 			}
@@ -490,7 +494,7 @@ public class CadastrarFuncionarios {
 		tfEmail.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					tfCargo.requestFocus();
 				}
 			}
@@ -503,7 +507,7 @@ public class CadastrarFuncionarios {
 		tfCargo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					tfSalario.requestFocus();
 				}
 			}
@@ -529,7 +533,7 @@ public class CadastrarFuncionarios {
 		ftfCpf.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					tfRg.requestFocus();
 				}
 			}

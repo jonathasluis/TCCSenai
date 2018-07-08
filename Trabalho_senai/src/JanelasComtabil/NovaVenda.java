@@ -3,6 +3,8 @@ package JanelasComtabil;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -16,6 +18,7 @@ import java.util.Date;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -31,19 +34,11 @@ import javax.swing.SwingConstants;
 
 import JanelasAnimal.CadastrarAnimais;
 import JanelasAnimal.ComboBox;
-
 import JanelasFuncionarios.CadastrarFuncionarios;
-
 import banco.Conexao;
-import crud.CrudAnimal;
-import crud.CrudVendas;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-
-import javax.swing.JEditorPane;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
 
 public class NovaVenda {
 
@@ -94,7 +89,7 @@ public class NovaVenda {
 		frmNovaVenda.setIconImage(Toolkit.getDefaultToolkit().getImage(NovaVenda.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmNovaVenda.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
 		frmNovaVenda.setTitle("Nova Venda");
-		frmNovaVenda.setBounds(100, 100, 720, 450);
+		frmNovaVenda.setBounds(100, 100, 1080, 720);
 		frmNovaVenda.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmNovaVenda.setLocationRelativeTo(null);
 		frmNovaVenda.setResizable(false);

@@ -25,7 +25,7 @@ import java.awt.Toolkit;
 public class Pergunta {
 
 	private JFrame frame;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	static Usuario usuario = new Usuario();
 
 	/**
@@ -70,7 +70,7 @@ public class Pergunta {
 		lblNewLabel.setBounds(10, 11, 324, 28);
 		frame.getContentPane().add(lblNewLabel);
 		
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<String>();
 		comboBox.setBounds(83, 80, 180, 20);
 		frame.getContentPane().add(comboBox);
 		
@@ -129,7 +129,7 @@ public class Pergunta {
 	}
 	
 	public void comboBoxFazenda() {
-		 Fazenda fazenda = new Fazenda();
+		 //Fazenda fazenda = new Fazenda();
 		 ResultSet dados1 = CrudFazenda.selecionaFazenda(usuario);
 		
 			try {

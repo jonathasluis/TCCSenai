@@ -21,7 +21,7 @@ public class NovaRaca {
 
 	private JFrame frmNovaRaa;
 	private JTextField textField;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	Conexao con = new Conexao();
 	String palavra = null;
 
@@ -102,7 +102,7 @@ public class NovaRaca {
 		lblRaa.setBounds(20, 36, 62, 14);
 		frmNovaRaa.getContentPane().add(lblRaa);
 		
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<String>();
 		comboBox.setBounds(83, 9, 168, 20);
 		frmNovaRaa.getContentPane().add(comboBox);
 		frmNovaRaa.setLocationRelativeTo(null);
@@ -114,7 +114,6 @@ public class NovaRaca {
 		
 		 ResultSet dados1;
 		
-		Conexao c = new Conexao();// conexão
 		String sql = "SELECT (nome_es) FROM especie";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);

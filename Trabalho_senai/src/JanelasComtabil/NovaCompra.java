@@ -1,67 +1,53 @@
 package JanelasComtabil;
 
+import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JSeparator;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
+import DAO.Compras;
 import JanelasAnimal.CadastrarAnimais;
-
 import JanelasFuncionarios.CadastrarFuncionarios;
 import crud.CrudCompras;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-
-import javax.swing.JEditorPane;
-import java.awt.SystemColor;
-import javax.swing.JSpinner;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
-
-import DAO.Compras;
-import DAO.Fazenda;
-
-import java.awt.Color;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import javax.swing.ImageIcon;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.EmptyBorder;
-import java.awt.ComponentOrientation;
-import javax.swing.SpinnerNumberModel;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.JFormattedTextField;
-import javax.swing.UIManager;
-import java.awt.Toolkit;
 
 public class NovaCompra {////
 	
@@ -149,7 +135,7 @@ public class NovaCompra {////
 			//EVENTO PARA QUANDO APERTAR "ENTER" DAR FOCO EM OUTRA CAIXA DE TEXTO
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode()==arg0.VK_ENTER) 
+				if (arg0.getKeyCode()==KeyEvent.VK_ENTER) 
 					txtFornecedor.requestFocus();
 				}
 			});
@@ -193,7 +179,7 @@ public class NovaCompra {////
 			//EVENTO PARA QUANDO APERTAR "ENTER" DAR FOCO EM OUTRA CAIXA DE TEXTO
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					tfPreco.requestFocus();
 				}
 			}
@@ -229,9 +215,9 @@ public class NovaCompra {////
 		tfPreco.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if (e.getKeyChar() == e.VK_BACK_SPACE || (e.getKeyChar() == e.VK_0)|| (e.getKeyChar() == e.VK_1)|| (e.getKeyChar() == e.VK_2) 
-			            || (e.getKeyChar() == e.VK_3)|| (e.getKeyChar() == e.VK_4)|| (e.getKeyChar() == e.VK_5)|| (e.getKeyChar() == e.VK_6)|| (e.getKeyChar() == e.VK_7)
-			            || (e.getKeyChar() == e.VK_8)|| (e.getKeyChar() == e.VK_9)||(e.getKeyChar() == e.VK_ENTER)||(e.getKeyChar() == e.VK_COMMA))
+				if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE || (e.getKeyChar() == KeyEvent.VK_0)|| (e.getKeyChar() == KeyEvent.VK_1)|| (e.getKeyChar() == KeyEvent.VK_2) 
+			            || (e.getKeyChar() == KeyEvent.VK_3)|| (e.getKeyChar() == KeyEvent.VK_4)|| (e.getKeyChar() == KeyEvent.VK_5)|| (e.getKeyChar() == KeyEvent.VK_6)|| (e.getKeyChar() == KeyEvent.VK_7)
+			            || (e.getKeyChar() == KeyEvent.VK_8)|| (e.getKeyChar() == KeyEvent.VK_9)||(e.getKeyChar() == KeyEvent.VK_ENTER)||(e.getKeyChar() == KeyEvent.VK_COMMA))
 			    { 
 					
 			    }else{
@@ -257,7 +243,7 @@ public class NovaCompra {////
 			//EVENTO PARA QUANDO APERTAR "ENTER" DAR FOCO EM OUTRA CAIXA DE TEXTO
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==e.VK_ENTER) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					tfCNPJ.requestFocus();
 				}
 			}
@@ -340,7 +326,8 @@ public class NovaCompra {////
 							int x = (teste*16)+scrollPane.getHeight();
 							scrollPane.setBounds(26, 290, 1024, x);	
 						}
-						criaTabela(new CrudCompras().selecionaCompras(compra));
+						new CrudCompras();
+						criaTabela(CrudCompras.selecionaCompras(compra));
 						btnLimpar.doClick();
 					}
 					//TESTE DE SALVAR AS ALTERAÇÕES 
@@ -350,7 +337,8 @@ public class NovaCompra {////
 							x1=0;
 							update();
 							new CrudCompras().updCompras(addCompras);
-							criaTabela(new CrudCompras().selecionaCompras(compra));
+							new CrudCompras();
+							criaTabela(CrudCompras.selecionaCompras(compra));
 							btnCancelar.doClick();
 						
 						}
@@ -448,7 +436,8 @@ public class NovaCompra {////
 						scrollPane.setBounds(26, 290, 1024, x2);
 					}
 				}else {
-					criaTabela(new CrudCompras().selecionaCompras(compra));
+					new CrudCompras();
+					criaTabela(CrudCompras.selecionaCompras(compra));
 		
 				}
 				//FIM DO TRATAMENTO 
@@ -471,7 +460,7 @@ public class NovaCompra {////
 			tfCNPJ.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent arg0) {
-					if (arg0.getKeyCode()==arg0.VK_ENTER) {
+					if (arg0.getKeyCode()==KeyEvent.VK_ENTER) {
 						tfNota.requestFocus();
 					}
 				}
@@ -523,6 +512,10 @@ public class NovaCompra {////
 				"ID da compra", "Produto", "Fornecedor", "CNPJ fornecedor", "N\u00FAmero da nota", "Quantidade ", "Pre\u00E7o", "Data da compra"
 			}
 		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				true, false, false, false, false, false, false, false
 			};
@@ -569,7 +562,8 @@ public class NovaCompra {////
 		
 		//CHAMAR MÉTODO
 		x1=1;
-		criaTabela(new CrudCompras().selecionaCompras(compra));
+		new CrudCompras();
+		criaTabela(CrudCompras.selecionaCompras(compra));
 		menu();
 	}
 		//MÉTODO PARA COLOCAR OS DADOS NA TABELA
