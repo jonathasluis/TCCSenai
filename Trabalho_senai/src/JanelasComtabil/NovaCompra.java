@@ -646,19 +646,6 @@ public class NovaCompra {////
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Visualizar Animais");
-		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 12));
-		mntmNewMenuItem.setBorder(null);
-		mntmNewMenuItem.setBackground(new Color(0, 128, 0));
-		mntmNewMenuItem.setForeground(new Color(230, 230, 250));
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CadastrarAnimais.main(null);
-				frmCompraDeInsumos.dispose();
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem);
-		
 		JMenu mnFuncionarios = new JMenu("Funcionarios");
 		mnFuncionarios.setFont(new Font("Arial", Font.PLAIN, 12));
 		mnFuncionarios.setForeground(new Color(230, 230, 250));

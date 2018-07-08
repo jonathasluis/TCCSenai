@@ -99,152 +99,7 @@ public class NovaVenda {
 		frmNovaVenda.setLocationRelativeTo(null);
 		frmNovaVenda.setResizable(false);
 		
-		JMenuBar menuBar = new JMenuBar();
-		frmNovaVenda.setJMenuBar(menuBar);
 		
-		JMenu mnInicio = new JMenu("Inicio");
-		mnInicio.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				Principal.frmPrincipal.setVisible(true);
-				frmNovaVenda.dispose();
-			}
-		});
-		menuBar.add(mnInicio);
-		
-		JMenu mnNewMenu = new JMenu("Animais");
-		menuBar.add(mnNewMenu);
-		
-		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
-		mntmCadastrarAnimais.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CadastrarAnimais.main(null);
-				frmNovaVenda.dispose();
-			}
-		});
-		mnNewMenu.add(mntmCadastrarAnimais);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Visualizar Animais");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				frmNovaVenda.dispose();
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem);
-		
-		JMenu mnFuncionarios = new JMenu("Funcionarios");
-		menuBar.add(mnFuncionarios);
-		
-		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Cadastrar funcionarios");
-		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				CadastrarFuncionarios.main(null);
-				frmNovaVenda.dispose();
-			}
-		});
-		mnFuncionarios.add(mntmCadastrarFuncionarios);
-		
-		JMenuItem mntmVisualizarFuncionarios = new JMenuItem("Visualizar funcionarios");
-		mntmVisualizarFuncionarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				frmNovaVenda.dispose();
-			}
-		});
-		mnFuncionarios.add(mntmVisualizarFuncionarios);
-		
-		JMenu mnNewMenu_1 = new JMenu("Compra de Insumos");
-		menuBar.add(mnNewMenu_1);
-		
-		JMenuItem mntmCompra = new JMenuItem("Nova Compra");
-		mntmCompra.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				NovaCompra.main(null);
-				frmNovaVenda.dispose();
-			}
-		});
-		mnNewMenu_1.add(mntmCompra);
-		
-		JMenuItem mntmVisualizarCompra = new JMenuItem("Visualizar Compras");
-		mntmVisualizarCompra.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				frmNovaVenda.dispose();
-			}
-		});
-		mnNewMenu_1.add(mntmVisualizarCompra);
-		
-		JMenu mnNewMenu_2 = new JMenu("Vendas");
-		menuBar.add(mnNewMenu_2);
-		
-		JMenuItem mntmNovaVenda = new JMenuItem("Nova Venda");
-		mntmNovaVenda.setEnabled(false);
-		mntmNovaVenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				NovaVenda.main(null);
-				frmNovaVenda.dispose();
-			}
-		});
-		mnNewMenu_2.add(mntmNovaVenda);
-		
-		JMenuItem mntmVisualizarVendas = new JMenuItem("Visualizar Vendas");
-		mntmVisualizarVendas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				frmNovaVenda.dispose();
-			}
-		});
-		mnNewMenu_2.add(mntmVisualizarVendas);
-		
-		JMenu mnRelatrio = new JMenu("Relat\u00F3rio");
-		menuBar.add(mnRelatrio);
-		
-		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
-		menuBar.add(mnOpes);
-		
-		JMenuItem mntmTotal = new JMenuItem("Total");
-		mntmTotal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Total.main(null);
-				frmNovaVenda.dispose();
-			}
-		});
-		mnRelatrio.add(mntmTotal);
-		
-		JMenuItem mntmNovaFazenda = new JMenuItem("Nova fazenda");
-		mntmNovaFazenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				NovaFazenda.main(null);
-				frmNovaVenda.dispose();
-			}
-		});
-		mnOpes.add(mntmNovaFazenda);
-		
-		JMenuItem mntmVisualizarFazenda = new JMenuItem("Visualizar Fazenda");
-		mntmVisualizarFazenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-				frmNovaVenda.dispose();
-			}
-		});
-		mnOpes.add(mntmVisualizarFazenda);
-		
-		JMenuItem mntmSada = new JMenuItem("Sair");
-		mntmSada.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		
-		JMenuItem mntmMudarFazenda = new JMenuItem("Mudar Fazenda");
-		mntmMudarFazenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Pergunta.main(null);
-			}
-		});
-		mnOpes.add(mntmMudarFazenda);
-		mnOpes.add(mntmSada);
 		frmNovaVenda.getContentPane().setLayout(null);
 		
 		JLabel lblNovaVenda = new JLabel("Nova Venda");
@@ -455,6 +310,8 @@ public class NovaVenda {
 		dtrpnUmaVezSalvo.setBounds(417, 298, 287, 57);
 		frmNovaVenda.getContentPane().add(dtrpnUmaVezSalvo);
 		
+		menu();
+		
 		//cb.comboBoxAnimal();
 		//cb.comboBoxFazenda();
 	}
@@ -478,5 +335,109 @@ public class NovaVenda {
 			e.printStackTrace();
 			
 		}
+	}
+	
+	void menu() {
+		JMenuBar menuBar = new JMenuBar();
+		frmNovaVenda.setJMenuBar(menuBar);
+		
+		JMenu mnInicio = new JMenu("Inicio");
+		mnInicio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Principal.frmPrincipal.setVisible(true);
+				frmNovaVenda.dispose();
+			}
+		});
+		menuBar.add(mnInicio);
+		
+		JMenu mnNewMenu = new JMenu("Animais");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
+		mntmCadastrarAnimais.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastrarAnimais.main(null);
+				frmNovaVenda.dispose();
+			}
+		});
+		mnNewMenu.add(mntmCadastrarAnimais);
+		
+		JMenu mnFuncionarios = new JMenu("Funcionarios");
+		menuBar.add(mnFuncionarios);
+		
+		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Cadastrar funcionarios");
+		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CadastrarFuncionarios.main(null);
+				frmNovaVenda.dispose();
+			}
+		});
+		mnFuncionarios.add(mntmCadastrarFuncionarios);
+		
+		JMenu mnNewMenu_1 = new JMenu("Compra de Insumos");
+		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmCompra = new JMenuItem("Nova Compra");
+		mntmCompra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NovaCompra.main(null);
+				frmNovaVenda.dispose();
+			}
+		});
+		mnNewMenu_1.add(mntmCompra);
+
+		JMenu mnNewMenu_2 = new JMenu("Vendas");
+		menuBar.add(mnNewMenu_2);
+		
+		JMenuItem mntmNovaVenda = new JMenuItem("Nova Venda");
+		mntmNovaVenda.setEnabled(false);
+		mntmNovaVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NovaVenda.main(null);
+				frmNovaVenda.dispose();
+			}
+		});
+		mnNewMenu_2.add(mntmNovaVenda);
+		
+		JMenu mnRelatrio = new JMenu("Relat\u00F3rio");
+		menuBar.add(mnRelatrio);
+		
+		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
+		menuBar.add(mnOpes);
+		
+		JMenuItem mntmTotal = new JMenuItem("Total");
+		mntmTotal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Total.main(null);
+				frmNovaVenda.dispose();
+			}
+		});
+		mnRelatrio.add(mntmTotal);
+		
+		JMenuItem mntmNovaFazenda = new JMenuItem("Nova fazenda");
+		mntmNovaFazenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NovaFazenda.main(null);
+				frmNovaVenda.dispose();
+			}
+		});
+		mnOpes.add(mntmNovaFazenda);
+
+		JMenuItem mntmSada = new JMenuItem("Sair");
+		mntmSada.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		JMenuItem mntmMudarFazenda = new JMenuItem("Mudar Fazenda");
+		mntmMudarFazenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Pergunta.main(null);
+			}
+		});
+		mnOpes.add(mntmMudarFazenda);
+		mnOpes.add(mntmSada);
 	}
 }
