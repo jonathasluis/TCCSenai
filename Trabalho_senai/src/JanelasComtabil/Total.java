@@ -37,10 +37,11 @@ import crud.CrudVendas;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
+import java.awt.Toolkit;
 
 public class Total {//
 
-	private JFrame frame;
+	private JFrame frmRelattio;
 	private JLabel valorGasto;
 	private JLabel valorReceita;
 	private JLabel label;
@@ -64,7 +65,7 @@ public class Total {//
 			public void run() {
 				try {
 					Total window = new Total();
-					window.frame.setVisible(true);
+					window.frmRelattio.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -84,65 +85,67 @@ public class Total {//
 	 */
 	private void initialize() {
 		
-		frame = new JFrame();
-		frame.setBounds(100, 100, 1080, 720);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
+		frmRelattio = new JFrame();
+		frmRelattio.setTitle("Relat\u00F3tio");
+		frmRelattio.setIconImage(Toolkit.getDefaultToolkit().getImage(Total.class.getResource("/img/logo-pequena-sem-texto.png")));
+		frmRelattio.setBounds(100, 100, 1080, 720);
+		frmRelattio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmRelattio.setResizable(false);
+		frmRelattio.setLocationRelativeTo(null);
 		
 		
-		frame.getContentPane().setLayout(null);
+		frmRelattio.getContentPane().setLayout(null);
 		
 		JLabel lblRelatorioContabil = new JLabel("Relat\u00F3rio Cont\u00E1bil");
 		lblRelatorioContabil.setBounds(10, 11, 1054, 25);
 		lblRelatorioContabil.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRelatorioContabil.setFont(new Font("Tahoma", Font.BOLD, 25));
-		frame.getContentPane().add(lblRelatorioContabil);
+		frmRelattio.getContentPane().add(lblRelatorioContabil);
 		
 		JLabel lblTotalGasto = new JLabel("Total Gasto");
 		lblTotalGasto.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTotalGasto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTotalGasto.setBounds(10, 219, 519, 20);
-		frame.getContentPane().add(lblTotalGasto);
+		frmRelattio.getContentPane().add(lblTotalGasto);
 		
 		JLabel lblReceita = new JLabel("Receita");
 		lblReceita.setHorizontalAlignment(SwingConstants.CENTER);
 		lblReceita.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblReceita.setBounds(545, 219, 519, 20);
-		frame.getContentPane().add(lblReceita);
+		frmRelattio.getContentPane().add(lblReceita);
 		
 		valorGasto = new JLabel("");
 		valorGasto.setForeground(Color.BLACK);
 		valorGasto.setFont(new Font("Tahoma", Font.BOLD, 20));
 		valorGasto.setHorizontalAlignment(SwingConstants.TRAILING);
 		valorGasto.setBounds(403, 518, 126, 25);
-		frame.getContentPane().add(valorGasto);
+		frmRelattio.getContentPane().add(valorGasto);
 		
 		valorReceita = new JLabel("");
 		valorReceita.setFont(new Font("Tahoma", Font.BOLD, 20));
 		valorReceita.setForeground(Color.BLACK);
 		valorReceita.setHorizontalAlignment(SwingConstants.TRAILING);
 		valorReceita.setBounds(938, 518, 126, 25);
-		frame.getContentPane().add(valorReceita);
+		frmRelattio.getContentPane().add(valorReceita);
 		
 		JLabel lblTotal = new JLabel("Total:");
 		lblTotal.setForeground(new Color(0, 0, 0));
 		lblTotal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblTotal.setBounds(10, 609, 104, 51);
-		frame.getContentPane().add(lblTotal);
+		frmRelattio.getContentPane().add(lblTotal);
 		
 		label = new JLabel("0.0");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setForeground(Color.BLACK);
 		label.setFont(new Font("Tahoma", Font.BOLD, 20));
 		label.setBounds(403, 609, 350, 51);
-		frame.getContentPane().add(label);
+		frmRelattio.getContentPane().add(label);
 		
 		scrollPaneGasto = new JScrollPane();
 		scrollPaneGasto.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPaneGasto.setBounds(10, 250, 519, 259);
-		frame.getContentPane().add(scrollPaneGasto);
+		frmRelattio.getContentPane().add(scrollPaneGasto);
 		
 		tabelaGasto = new JTable();
 		tabelaGasto.setModel(new DefaultTableModel(
@@ -176,7 +179,7 @@ public class Total {//
 		scrollPaneReceita = new JScrollPane();
 		scrollPaneReceita.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPaneReceita.setBounds(545, 250, 519, 259);
-		frame.getContentPane().add(scrollPaneReceita);
+		frmRelattio.getContentPane().add(scrollPaneReceita);
 		
 		tabelaReceita = new JTable();
 		tabelaReceita.setModel(new DefaultTableModel(
@@ -210,7 +213,7 @@ public class Total {//
 		JLabel lblFiltrarData = new JLabel("Filtrar Data:");
 		lblFiltrarData.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblFiltrarData.setBounds(10, 90, 84, 14);
-		frame.getContentPane().add(lblFiltrarData);
+		frmRelattio.getContentPane().add(lblFiltrarData);
 		
 		calendar = new JCalendar();
 		calendar.getDayChooser().addPropertyChangeListener(new PropertyChangeListener() {
@@ -284,7 +287,7 @@ public class Total {//
 		calendar.getDayChooser().setVisible(false);
 		calendar.getMonthChooser().setVisible(false);
 		calendar.setBounds(147, 59, 217, 137);
-		frame.getContentPane().add(calendar);
+		frmRelattio.getContentPane().add(calendar);
 		
 		chckbxAno = new JCheckBox("Ano");
 		chckbxAno.setSelected(true);
@@ -303,7 +306,7 @@ public class Total {//
 			}
 		});
 		chckbxAno.setBounds(370, 59, 97, 23);
-		frame.getContentPane().add(chckbxAno);
+		frmRelattio.getContentPane().add(chckbxAno);
 		
 		chckbxAnomes = new JCheckBox("Ano-Mes");
 		chckbxAnomes.addActionListener(new ActionListener() {
@@ -321,7 +324,7 @@ public class Total {//
 			}
 		});
 		chckbxAnomes.setBounds(370, 88, 97, 23);
-		frame.getContentPane().add(chckbxAnomes);
+		frmRelattio.getContentPane().add(chckbxAnomes);
 		
 		chckbxAnomesdia = new JCheckBox("Ano-Mes-Dia");
 		chckbxAnomesdia.addActionListener(new ActionListener() {
@@ -340,7 +343,7 @@ public class Total {//
 			}
 		});
 		chckbxAnomesdia.setBounds(370, 114, 97, 23);
-		frame.getContentPane().add(chckbxAnomesdia);
+		frmRelattio.getContentPane().add(chckbxAnomesdia);
 		
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(chckbxAno);
@@ -421,14 +424,14 @@ public class Total {//
 	
 	void menu() {
 		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+		frmRelattio.setJMenuBar(menuBar);
 		
 		JMenu mnInicio = new JMenu("Inicio");
 		mnInicio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Principal.frmPrincipal.setVisible(true);
-				frame.dispose();
+				frmRelattio.dispose();
 			}
 		});
 		
@@ -441,7 +444,7 @@ public class Total {//
 		mntmCadastrarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarAnimais.main(null);
-				frame.dispose();
+				frmRelattio.dispose();
 			}
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
@@ -453,7 +456,7 @@ public class Total {//
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastrarFuncionarios.main(null);
-				frame.dispose();
+				frmRelattio.dispose();
 			}
 		});
 		mnFuncionarios.add(mntmCadastrarFuncionarios);
@@ -465,7 +468,7 @@ public class Total {//
 		mntmCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaCompra.main(null);
-				frame.dispose();
+				frmRelattio.dispose();
 			}
 		});
 		mnNewMenu_1.add(mntmCompra);
@@ -477,7 +480,7 @@ public class Total {//
 		mntmNovaVenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaVenda.main(null);
-				frame.dispose();
+				frmRelattio.dispose();
 			}
 		});
 		mnNewMenu_2.add(mntmNovaVenda);
@@ -496,7 +499,7 @@ public class Total {//
 		mntmNovaFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaFazenda.main(null);
-				frame.dispose();
+				frmRelattio.dispose();
 			}
 		});
 		mnOpes.add(mntmNovaFazenda);

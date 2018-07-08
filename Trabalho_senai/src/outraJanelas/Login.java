@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 
 import DAO.Usuario;
 import banco.Conexao;
+import java.awt.Toolkit;
 
 public class Login {
 	Conexao c = new Conexao();
@@ -61,6 +62,7 @@ public class Login {
 	 */
 	private void initialize() {
 		frmLogin = new JFrame();
+		frmLogin.setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmLogin.setTitle("Login");
 		frmLogin.setBounds(100, 100, 309, 243);
 		frmLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

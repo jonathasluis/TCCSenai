@@ -60,6 +60,7 @@ import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class CadastrarAnimais {//teste3
 
@@ -128,6 +129,7 @@ public class CadastrarAnimais {//teste3
 		}//fim formatação mascara
 		
 		frmCadastroDeAnimais = new JFrame();
+		frmCadastroDeAnimais.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarAnimais.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmCadastroDeAnimais.setTitle("Cadastro de Animais");
 		frmCadastroDeAnimais.setBounds(100, 100, 1080, 720);
 		frmCadastroDeAnimais.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

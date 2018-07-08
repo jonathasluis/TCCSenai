@@ -20,6 +20,7 @@ import DAO.Usuario;
 import banco.Conexao;
 import crud.CrudFazenda;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 public class Pergunta {
 
@@ -55,6 +56,7 @@ public class Pergunta {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Pergunta.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frame.setResizable(false);
 		frame.setType(Type.UTILITY);
 		frame.setBounds(100, 100, 350, 250);

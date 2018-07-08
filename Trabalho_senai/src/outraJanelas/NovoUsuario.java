@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 
 import banco.Conexao;
 import crud.crudUsuarios;
+import java.awt.Toolkit;
 
 public class NovoUsuario {
 	
@@ -57,6 +58,7 @@ public class NovoUsuario {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(NovoUsuario.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frame.setBounds(100, 100, 447, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);

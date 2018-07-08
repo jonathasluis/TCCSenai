@@ -61,6 +61,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.UIManager;
+import java.awt.Toolkit;
 
 public class NovaCompra {////
 	
@@ -119,6 +120,7 @@ public class NovaCompra {////
 		
 		
 		frmCompraDeInsumos = new JFrame();
+		frmCompraDeInsumos.setIconImage(Toolkit.getDefaultToolkit().getImage(NovaCompra.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmCompraDeInsumos.setTitle("Compra de Insumos");
 		frmCompraDeInsumos.setBounds(100, 100, 1080, 720);
 		frmCompraDeInsumos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

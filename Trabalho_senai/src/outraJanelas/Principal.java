@@ -37,6 +37,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import java.awt.Toolkit;
 
 
 public class Principal {
@@ -81,6 +82,7 @@ public class Principal {
 	 */
 	private void initialize() {
 		frmPrincipal = new JFrame();
+		frmPrincipal.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmPrincipal.setTitle("Principal");
 		frmPrincipal.setBounds(100, 100, 1080, 720);
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -235,19 +237,6 @@ public class Principal {
 			}
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Visualizar Animais");
-		mntmNewMenuItem.setOpaque(true);
-		mntmNewMenuItem.setBorder(new LineBorder(new Color(34, 139, 34)));
-		mntmNewMenuItem.setBackground(new Color(34, 139, 34));
-		mntmNewMenuItem.setForeground(new Color(230, 230, 250));
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CadastrarAnimais.main(null);
-				frmPrincipal.dispose();
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenu mnFuncionarios = new JMenu("Funcionarios");
 		mnFuncionarios.setForeground(new Color(230, 230, 250));

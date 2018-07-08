@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import banco.Conexao;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class CadastrarEspecie extends CadastrarAnimais{
 
@@ -55,6 +56,7 @@ public class CadastrarEspecie extends CadastrarAnimais{
 	 */
 	private void initialize() {
 		frmNovaEspecie = new JFrame();
+		frmNovaEspecie.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarEspecie.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmNovaEspecie.setTitle("Nova Especie");
 		frmNovaEspecie.setResizable(false);
 		frmNovaEspecie.setBounds(100, 100, 300, 150);

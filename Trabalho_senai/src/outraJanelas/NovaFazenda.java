@@ -37,6 +37,7 @@ import JanelasComtabil.VisualizarVendas;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import JanelasFuncionarios.VisualizarFuncionarios;
 import crud.CrudFazenda;
+import java.awt.Toolkit;
 
 public class NovaFazenda {
 
@@ -80,6 +81,7 @@ public class NovaFazenda {
 	 */
 	private void initialize() {
 		frmNovaFazenda = new JFrame();
+		frmNovaFazenda.setIconImage(Toolkit.getDefaultToolkit().getImage(NovaFazenda.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmNovaFazenda.setTitle("Nova Fazenda");
 		frmNovaFazenda.setBounds(100, 100, 720, 450);
 		frmNovaFazenda.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

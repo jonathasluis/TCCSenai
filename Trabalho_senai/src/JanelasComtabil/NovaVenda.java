@@ -43,6 +43,7 @@ import outraJanelas.Principal;
 
 import javax.swing.JEditorPane;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 public class NovaVenda {
 
@@ -90,6 +91,7 @@ public class NovaVenda {
 	 */
 	private void initialize() {
 		frmNovaVenda = new JFrame();
+		frmNovaVenda.setIconImage(Toolkit.getDefaultToolkit().getImage(NovaVenda.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmNovaVenda.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
 		frmNovaVenda.setTitle("Nova Venda");
 		frmNovaVenda.setBounds(100, 100, 720, 450);

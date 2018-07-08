@@ -51,6 +51,7 @@ import outraJanelas.Pergunta;
 import outraJanelas.Principal;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
 
 public class CadastrarFuncionarios {
 
@@ -120,6 +121,7 @@ public class CadastrarFuncionarios {
 		}//fim formatação mascara
 		
 		frmCadastrarFuncionarios = new JFrame();
+		frmCadastrarFuncionarios.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmCadastrarFuncionarios.setTitle("Cadastrar Funcionarios");
 		frmCadastrarFuncionarios.setBounds(100, 100, 1080, 720);
 		frmCadastrarFuncionarios.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
