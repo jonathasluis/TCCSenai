@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
@@ -39,6 +40,10 @@ import banco.Conexao;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JFormattedTextField;
+import javax.swing.border.BevelBorder;
 
 public class NovaVenda {
 
@@ -49,14 +54,14 @@ public class NovaVenda {
 	private JRadioButton rdbtnSubproduto;
 	private JTextField tfPreco;
 	private JTextField tfCliente;
-	private JTextField tfData;
 	public static JComboBox<String> cbAnimal;
-	public static JComboBox<String> cbFazenda;
 	ComboBox cb = new ComboBox();
 	private JLabel lblProduto;
 	private JLabel lblAnimal;
 	int id;
 	private JButton btnLimpar;
+	private JTable table;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -93,19 +98,25 @@ public class NovaVenda {
 		frmNovaVenda.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmNovaVenda.setLocationRelativeTo(null);
 		frmNovaVenda.setResizable(false);
-		
-		
 		frmNovaVenda.getContentPane().setLayout(null);
+		
+		ImageIcon icon = new ImageIcon("src/img/compra1.png");
+		icon.setImage(icon.getImage().getScaledInstance(57, 55, 100));
+		JLabel label = new JLabel("");
+		label.setBounds(941, 11, 57, 55);
+		label.setIcon(icon);
+		frmNovaVenda.getContentPane().add(label);
+		
 		
 		JLabel lblNovaVenda = new JLabel("Nova Venda");
 		lblNovaVenda.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNovaVenda.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNovaVenda.setBounds(0, 0, 714, 19);
+		lblNovaVenda.setFont(new Font("Arial", Font.BOLD, 25));
+		lblNovaVenda.setBounds(0, 11, 1074, 39);
 		frmNovaVenda.getContentPane().add(lblNovaVenda);
 		
 		JLabel lblTipoDoProduto = new JLabel("Tipo do Produto:");
 		lblTipoDoProduto.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblTipoDoProduto.setBounds(10, 50, 107, 20);
+		lblTipoDoProduto.setBounds(10, 80, 107, 20);
 		frmNovaVenda.getContentPane().add(lblTipoDoProduto);
 		
 		rdbtnAnimal = new JRadioButton("Animal");
@@ -117,7 +128,7 @@ public class NovaVenda {
 				lblAnimal.setVisible(true);
 			}
 		});
-		rdbtnAnimal.setBounds(123, 50, 66, 20);
+		rdbtnAnimal.setBounds(123, 80, 66, 20);
 		frmNovaVenda.getContentPane().add(rdbtnAnimal);
 		
 		rdbtnSubproduto = new JRadioButton("Subproduto");
@@ -130,7 +141,7 @@ public class NovaVenda {
 				lblAnimal.setVisible(true);
 			}
 		});
-		rdbtnSubproduto.setBounds(191, 50, 94, 20);
+		rdbtnSubproduto.setBounds(191, 80, 94, 20);
 		frmNovaVenda.getContentPane().add(rdbtnSubproduto);
 		
 		rdbtnPlantio = new JRadioButton("Plantio");
@@ -142,7 +153,7 @@ public class NovaVenda {
 				tfProduto.setVisible(true);
 			}
 		});
-		rdbtnPlantio.setBounds(287, 50, 66, 20);
+		rdbtnPlantio.setBounds(287, 80, 66, 20);
 		frmNovaVenda.getContentPane().add(rdbtnPlantio);
 		
 		ButtonGroup bg = new ButtonGroup();
@@ -152,79 +163,58 @@ public class NovaVenda {
 		
 		lblProduto = new JLabel("Produto:");
 		lblProduto.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblProduto.setBounds(10, 80, 74, 20);
+		lblProduto.setBounds(10, 111, 78, 20);
 		frmNovaVenda.getContentPane().add(lblProduto);
 		
 		tfProduto = new JTextField();
-		tfProduto.setBounds(79, 80, 210, 20);
+		tfProduto.setBounds(108, 111, 200, 20);
 		frmNovaVenda.getContentPane().add(tfProduto);
 		tfProduto.setColumns(10);
 		
-		lblAnimal = new JLabel("Animal:");
+		lblAnimal = new JLabel("Lote de animais:");
 		lblAnimal.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblAnimal.setBounds(10, 110, 74, 20);
+		lblAnimal.setBounds(405, 111, 131, 20);
 		frmNovaVenda.getContentPane().add(lblAnimal);
 		
 		cbAnimal = new JComboBox<String>();
 		cbAnimal.setBackground(Color.WHITE);
-		cbAnimal.setBounds(79, 110, 210, 20);
+		cbAnimal.setBounds(546, 111, 188, 20);
 		frmNovaVenda.getContentPane().add(cbAnimal);
 		
 		JLabel lblQuantidade = new JLabel("Quantidade:");
 		lblQuantidade.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblQuantidade.setBounds(460, 80, 94, 20);
+		lblQuantidade.setBounds(787, 111, 89, 20);
 		frmNovaVenda.getContentPane().add(lblQuantidade);
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-		spinner.setBounds(564, 81, 78, 20);
+		spinner.setBounds(886, 112, 164, 20);
 		frmNovaVenda.getContentPane().add(spinner);
 		
-		JLabel lblPreo = new JLabel("Pre\u00E7o:");
-		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblPreo.setBounds(460, 110, 74, 20);
-		frmNovaVenda.getContentPane().add(lblPreo);
+		JLabel lblPreco = new JLabel("Pre\u00E7o:");
+		lblPreco.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPreco.setBounds(787, 80, 57, 20);
+		frmNovaVenda.getContentPane().add(lblPreco);
 		
 		tfPreco = new JTextField();
 		tfPreco.setColumns(10);
-		tfPreco.setBounds(532, 110, 110, 20);
+		tfPreco.setBounds(886, 81, 164, 20);
 		frmNovaVenda.getContentPane().add(tfPreco);
-		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 200, 720, 1);
-		frmNovaVenda.getContentPane().add(separator);
 		
 		JLabel lblCliente = new JLabel("Cliente:");
 		lblCliente.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblCliente.setBounds(10, 210, 74, 20);
+		lblCliente.setBounds(10, 142, 100, 20);
 		frmNovaVenda.getContentPane().add(lblCliente);
 		
 		tfCliente = new JTextField();
 		tfCliente.setColumns(10);
-		tfCliente.setBounds(79, 210, 210, 20);
+		tfCliente.setBounds(108, 142, 200, 20);
 		frmNovaVenda.getContentPane().add(tfCliente);
-		
-		JLabel lblFazenda = new JLabel("Fazenda:");
-		lblFazenda.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblFazenda.setBounds(10, 240, 74, 20);
-		frmNovaVenda.getContentPane().add(lblFazenda);
-		
-		cbFazenda = new JComboBox<String>();
-		cbFazenda.setBackground(Color.WHITE);
-		cbFazenda.setBounds(79, 240, 210, 20);
-		frmNovaVenda.getContentPane().add(cbFazenda);
 		
 		JLabel lblDataDaVenda = new JLabel("Data da Venda:");
 		lblDataDaVenda.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDataDaVenda.setBounds(10, 270, 107, 20);
+		lblDataDaVenda.setBounds(405, 80, 125, 20);
 		frmNovaVenda.getContentPane().add(lblDataDaVenda);
-		
-		tfData = new JTextField();
-		tfData.setHorizontalAlignment(SwingConstants.CENTER);
-		tfData.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		tfData.setColumns(10);
-		tfData.setBounds(124, 270, 165, 20);
-		frmNovaVenda.getContentPane().add(tfData);
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
@@ -264,21 +254,21 @@ public class NovaVenda {
 				
 			}
 		});
-		btnSalvar.setBounds(615, 366, 89, 23);
+		btnSalvar.setBounds(975, 637, 89, 23);
 		frmNovaVenda.getContentPane().add(btnSalvar);
 		
 		btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tfCliente.setText(null);
-				tfData.setText(null);
+				ftf.setText(null);
 				tfPreco.setText(null);
 				tfProduto.setText(null);
 				rdbtnSubproduto.setSelected(true);
 				spinner.setValue(0);
 			}
 		});
-		btnLimpar.setBounds(516, 366, 89, 23);
+		btnLimpar.setBounds(876, 637, 89, 23);
 		frmNovaVenda.getContentPane().add(btnLimpar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -288,22 +278,39 @@ public class NovaVenda {
 				Principal.frmPrincipal.setVisible(true);
 			}
 		});
-		btnCancelar.setBounds(417, 366, 89, 23);
+		btnCancelar.setBounds(777, 637, 89, 23);
 		frmNovaVenda.getContentPane().add(btnCancelar);
 		
 		Date data = new Date();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MMMMMMMM/yyyy");
 		String formatada = formato.format(data);
 		
-		tfData.setText(formatada);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(26, 290, 1024, 336);
+		frmNovaVenda.getContentPane().add(scrollPane);
 		
-		JEditorPane dtrpnUmaVezSalvo = new JEditorPane();
-		dtrpnUmaVezSalvo.setEditable(false);
-		dtrpnUmaVezSalvo.setFont(new Font("Tahoma", Font.BOLD, 12));
-		dtrpnUmaVezSalvo.setBackground(SystemColor.control);
-		dtrpnUmaVezSalvo.setText("Uma vez salvo as vendas nao poder\u00E3o ser \r\ndeletadas e nem atualizadas");
-		dtrpnUmaVezSalvo.setBounds(417, 298, 287, 57);
-		frmNovaVenda.getContentPane().add(dtrpnUmaVezSalvo);
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		JFormattedTextField ftfData = new JFormattedTextField();
+		ftfData.setBounds(546, 80, 188, 20);
+		frmNovaVenda.getContentPane().add(ftfData);
+		
+		textField = new JTextField();
+		textField.setToolTipText("");
+		textField.setForeground(Color.BLACK);
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textField.setColumns(10);
+		textField.setBounds(26, 259, 369, 20);
+		frmNovaVenda.getContentPane().add(textField);
+		
+		JButton button = new JButton("Proucurar");
+		button.setForeground(Color.WHITE);
+		button.setFont(new Font("Arial", Font.BOLD, 12));
+		button.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		button.setBackground(Color.DARK_GRAY);
+		button.setBounds(405, 259, 118, 23);
+		frmNovaVenda.getContentPane().add(button);
 		
 		menu();
 		

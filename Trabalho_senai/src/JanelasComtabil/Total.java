@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -95,6 +96,13 @@ public class Total {//
 		
 		
 		frmRelattio.getContentPane().setLayout(null);
+		
+		ImageIcon icon = new ImageIcon("src/img/relatorio.png");
+		icon.setImage(icon.getImage().getScaledInstance(60, 58, 100));
+		JLabel lblIcone = new JLabel("");
+		lblIcone.setBounds(941, 11, 57, 55);
+		lblIcone.setIcon(icon);
+		frmRelattio.getContentPane().add(lblIcone);
 		
 		JLabel lblRelatorioContabil = new JLabel("Relat\u00F3rio Cont\u00E1bil");
 		lblRelatorioContabil.setBounds(10, 11, 1054, 25);
