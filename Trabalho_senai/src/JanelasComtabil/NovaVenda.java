@@ -3,7 +3,6 @@ package JanelasComtabil;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,19 +19,21 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
-import javax.swing.JSeparator;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.text.MaskFormatter;
 
 import JanelasAnimal.CadastrarAnimais;
 import JanelasAnimal.ComboBox;
@@ -40,10 +42,6 @@ import banco.Conexao;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JFormattedTextField;
-import javax.swing.border.BevelBorder;
 
 public class NovaVenda {
 
@@ -62,6 +60,8 @@ public class NovaVenda {
 	private JButton btnLimpar;
 	private JTable table;
 	private JTextField textField;
+	private JFormattedTextField ftfData;
+	private MaskFormatter mask;
 
 	/**
 	 * Launch the application.
@@ -90,6 +90,13 @@ public class NovaVenda {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		try {//inicio formatação mascara
+			mask = new MaskFormatter("####-##-##");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//fim formatação mascara
+		
 		frmNovaVenda = new JFrame();
 		frmNovaVenda.setIconImage(Toolkit.getDefaultToolkit().getImage(NovaVenda.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmNovaVenda.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -217,43 +224,6 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblDataDaVenda);
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String tipo=null;
-				String animal;
-				
-				if(rdbtnAnimal.isSelected()) {
-					tipo="animal";
-					animal=cbAnimal.getSelectedItem().toString();
-					idAnimal(cbAnimal.getSelectedItem().toString());
-					//new CrudAnimal().removeAnimal(id);
-					JOptionPane.showMessageDialog(null, "animal removido com sucesso");
-				}
-					
-				if(rdbtnPlantio.isSelected()) {
-					tipo="plantio";
-					animal=null;
-				}
-					
-				if(rdbtnSubproduto.isSelected()) {
-					tipo="subproduto";
-					animal=cbAnimal.getSelectedItem().toString();
-				}
-					
-				
-				String qtd = String.valueOf(spinner.getValue());
-				
-				if(tfProduto.getText().trim().equals("") && (rdbtnPlantio.isSelected() || rdbtnSubproduto.isSelected())) {
-					JOptionPane.showMessageDialog(null, "insira o  produto");
-					tfProduto.requestFocus();
-				} else if(!tfPreco.getText().trim().equals("")){
-					//new CrudVendas().addvendas(tfProduto.getText(), id, Double.parseDouble(tfPreco.getText()), tfCliente.getText(), qtd, tfData.getText(), cbFazenda.getSelectedItem().toString());
-					JOptionPane.showMessageDialog(null, "salvo com sucesso");
-					btnLimpar.doClick();
-				}
-				
-			}
-		});
 		btnSalvar.setBounds(975, 637, 89, 23);
 		frmNovaVenda.getContentPane().add(btnSalvar);
 		
@@ -261,7 +231,7 @@ public class NovaVenda {
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tfCliente.setText(null);
-				ftf.setText(null);
+				ftfData.setValue(null);
 				tfPreco.setText(null);
 				tfProduto.setText(null);
 				rdbtnSubproduto.setSelected(true);
@@ -282,7 +252,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(btnCancelar);
 		
 		Date data = new Date();
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MMMMMMMM/yyyy");
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 		String formatada = formato.format(data);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -292,7 +262,8 @@ public class NovaVenda {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		JFormattedTextField ftfData = new JFormattedTextField();
+		ftfData = new JFormattedTextField(mask);
+		ftfData.setText(formatada);
 		ftfData.setBounds(546, 80, 188, 20);
 		frmNovaVenda.getContentPane().add(ftfData);
 		
@@ -322,7 +293,7 @@ public class NovaVenda {
 		String sql = "SELECT (idanimal) from animais where nome_a=?";
 		ResultSet rs= null;
 		try {
-			PreparedStatement stmt = new Conexao().getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, cbAnimal.getSelectedItem().toString());
 			rs = stmt.executeQuery();
 			stmt.execute();
