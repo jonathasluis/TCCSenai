@@ -26,7 +26,6 @@ public class CadastrarEspecie extends CadastrarAnimais{
 	private JFrame frmNovaEspecie;
 	private JTextField textField;
 	private JButton btnSalvar;
-	String palavra = null;
 
 	/**
 	 * Launch the application.
@@ -86,20 +85,13 @@ public class CadastrarEspecie extends CadastrarAnimais{
 		btnSalvar.setBackground(SystemColor.controlHighlight);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				verificaSeTemEspecie();
 				
-				if(palavra == "tem") {
-					JOptionPane.showMessageDialog(null, "Especie já cadastrada!");
-					textField.selectAll();
-					palavra=null;
-					return;
-				}
 				if(textField.getText().trim().equals("")) {
-					JOptionPane.showInternalMessageDialog(null, "campo vazio");
+					JOptionPane.showMessageDialog(null, "campo vazio");
 					return;	
 				}
-				cbEspecie.removeAllItems();
-				Salvar();
+				
+				verificaSeTemEspecie();
 			}
 		});
 		btnSalvar.setBounds(199, 88, 85, 23);
@@ -116,7 +108,7 @@ public class CadastrarEspecie extends CadastrarAnimais{
 		frmNovaEspecie.getContentPane().add(btnCancelar);
 		frmNovaEspecie.setLocationRelativeTo(null);
 		
-		ComboBox.comboBoxEspecie();
+		//ComboBox.comboBoxEspecie();
 	}
 	
 	void Salvar() {
@@ -129,6 +121,7 @@ public class CadastrarEspecie extends CadastrarAnimais{
 			stmt.execute();
 			stmt.close();
 			JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+			cbEspecie();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -138,19 +131,20 @@ public class CadastrarEspecie extends CadastrarAnimais{
 	
 	void verificaSeTemEspecie() {
 		ResultSet dados=null;
-		String sql = "select * from especie";
+		String sql = "select * from especie where nome_es = ?";
 		
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			stmt.setString(1, textField.getText().toLowerCase());
 			dados = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();
 			
-			while(dados.next()) {
-				if(textField.getText().equalsIgnoreCase(dados.getString("nome_es"))) {
-					palavra = "tem";
-					break;
-				}
+			if(!dados.next()) {
+				Salvar();
+			}else {
+				JOptionPane.showMessageDialog(null, "Espécie já cadastrada!");
+				textField.selectAll();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -211,8 +211,10 @@ public class CadastrarAnimais {//teste3
 		cbEspecie.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
 		cbEspecie.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				cbRaca.removeAllItems();
-				ComboBox.comboBoxRaca(ComboBox.pegaIdEspecie(cbEspecie.getSelectedItem().toString()));
+				if(cbEspecie.getItemCount() > 0) {
+					cbRaca.removeAllItems();
+					ComboBox.comboBoxRaca(ComboBox.pegaIdEspecie(cbEspecie.getSelectedItem().toString()));
+				}
 			}
 		});
 		cbEspecie.setBackground(SystemColor.controlHighlight);
@@ -666,6 +668,11 @@ public class CadastrarAnimais {//teste3
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
 			}
+	}
+	
+	static void cbEspecie() {
+		cbEspecie.removeAllItems();
+		ComboBox.comboBoxEspecie();
 	}
 	
 	Runnable thread = new Runnable() {	

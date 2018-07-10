@@ -91,7 +91,7 @@ public class Login {
 		tfUsuario.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode() == arg0.VK_ENTER) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					pfSenha.requestFocus();
 				}
 			}
@@ -104,7 +104,7 @@ public class Login {
 		pfSenha.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == e.VK_ENTER) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					btnEntrar.doClick();
 				}
 			}
