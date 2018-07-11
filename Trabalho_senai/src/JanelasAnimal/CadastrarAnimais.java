@@ -61,6 +61,8 @@ import outraJanelas.Pergunta;
 import outraJanelas.Principal;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowEvent;
 
 public class CadastrarAnimais {//teste3
 
@@ -80,7 +82,7 @@ public class CadastrarAnimais {//teste3
 	private JPanel panel;
 	private File img;
 	private MaskFormatter mask;
-	private int contador=0;//contar quantos cliques
+	protected static int contador=0;//contar quantos cliques
 	private MetodosImagem mI = new MetodosImagem();
 	private JLabel lblImagem;
 	private Animal animal = new Animal();
@@ -129,6 +131,12 @@ public class CadastrarAnimais {//teste3
 		}//fim formatação mascara
 		
 		frmCadastroDeAnimais = new JFrame();
+		frmCadastroDeAnimais.addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent arg0) {
+			}
+			public void windowLostFocus(WindowEvent arg0) {
+			}
+		});
 		frmCadastroDeAnimais.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarAnimais.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmCadastroDeAnimais.setTitle("Cadastro de Animais");
 		frmCadastroDeAnimais.setBounds(100, 100, 1080, 720);
@@ -252,7 +260,15 @@ public class CadastrarAnimais {//teste3
 		lblImagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {//evento de clique para selecionar imagem
-				contador++;
+				
+				if(arg0.getClickCount()==2) {
+					img = mI.selecionaImg();
+					if(img != null) {
+						lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
+					}
+				}
+				
+				/*contador++;
 				new Thread(thread).start();	
 				if(contador == 2) {
 					img = mI.selecionaImg();
@@ -263,7 +279,7 @@ public class CadastrarAnimais {//teste3
 					contador=0;
 				}else {
 					return;
-				}
+				}*/
 			}
 		});
 		panel.setLayout(new CardLayout(0, 0));
@@ -531,6 +547,7 @@ public class CadastrarAnimais {//teste3
 		btnCadastrarNovaEspecie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastrarEspecie.main(null);
+				new Thread(thread).start();
 			}
 		});
 		btnCadastrarNovaEspecie.setBackground(SystemColor.controlHighlight);
@@ -672,7 +689,7 @@ public class CadastrarAnimais {//teste3
 	
 	static void cbEspecie() {
 		cbEspecie.removeAllItems();
-		ComboBox.comboBoxEspecie();
+		//ComboBox.comboBoxEspecie();
 	}
 	
 	Runnable thread = new Runnable() {	
@@ -681,7 +698,13 @@ public class CadastrarAnimais {//teste3
 			try {
 				while(true) {
 					Thread.sleep(1500);
-					contador=0;
+					//contador=0;
+					System.out.println(contador);
+					if(contador==1) {
+						cbEspecie();
+						contador=0;
+						break;
+					}
 				}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

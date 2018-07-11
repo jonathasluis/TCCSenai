@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 public class Splash {
 
@@ -43,7 +47,7 @@ public class Splash {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 450, 289);
+		frame.setBounds(100, 100, 420, 250);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setUndecorated(true); //tirar os botoes de cima e a borda
 		frame.getContentPane().setBackground(new Color(1.0f,1.0f,1.0f,0.0f)); //tranparente
@@ -51,17 +55,38 @@ public class Splash {
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 		
+		JLabel lblX = new JLabel("X");
+		lblX.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblX.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblX.setForeground(Color.RED);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblX.setForeground(Color.black);
+			}
+		});
+		lblX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblX.setHorizontalAlignment(SwingConstants.CENTER);
+		lblX.setBounds(391, 11, 19, 14);
+		frame.getContentPane().add(lblX);
+		
 		JLabel label = new JLabel("");
-		label.setBounds(0, 0, 450, 283);
+		label.setBounds(0, 0, 420, 239);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setIcon(new ImageIcon(Splash.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frame.getContentPane().add(label);
 		
 		progressBar = new JProgressBar();
-		progressBar.setBounds(0, 277, 450, 12);
+		progressBar.setBounds(0, 238, 420, 12);
 		progressBar.setForeground(UIManager.getColor("ProgressBar.foreground"));
 		progressBar.setStringPainted(true);
-		progressBar.setMaximum(50);
+		progressBar.setMaximum(70);
 		frame.getContentPane().add(progressBar);
 		
 		new Thread(proximaJanela).start();	//inicia a tarefa paralela
@@ -76,7 +101,7 @@ public class Splash {
 					Thread.sleep(100);
 					 x++;
 					 progressBar.setValue(x);
-					 if(x==50) {
+					 if(x==70) {
 						 break;
 					 }
 				}
@@ -89,5 +114,4 @@ public class Splash {
 		}
 	};
 	private JProgressBar progressBar;
-
 }

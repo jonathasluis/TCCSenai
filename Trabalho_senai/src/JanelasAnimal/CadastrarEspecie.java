@@ -92,6 +92,7 @@ public class CadastrarEspecie extends CadastrarAnimais{
 				}
 				
 				verificaSeTemEspecie();
+				contador=1;	
 			}
 		});
 		btnSalvar.setBounds(199, 88, 85, 23);
@@ -121,7 +122,6 @@ public class CadastrarEspecie extends CadastrarAnimais{
 			stmt.execute();
 			stmt.close();
 			JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-			cbEspecie();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

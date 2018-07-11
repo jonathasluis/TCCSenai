@@ -18,11 +18,10 @@ public class ComboBox extends CadastrarAnimais{
 			dados1 = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();
-
+			cbEspecie.removeAllItems();
 			while(dados1.next()) {
 					cbEspecie.addItem(dados1.getString("nome_es"));
-			}
-			
+			}	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
