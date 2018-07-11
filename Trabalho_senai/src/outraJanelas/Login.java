@@ -1,5 +1,4 @@
 package outraJanelas;
-///
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -124,26 +123,41 @@ public class Login {
 	
 	public void logar() {
 		ResultSet rs = null;
+		String campoUsuario = tfUsuario.getText();
+		String senha = String.valueOf(pfSenha.getPassword());
 		  
-		String sql = "select*from usuario where usuario=? and senha=?";
+		String sql = "select*from usuario";
 		try {
 			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
-			stmt.setString(1, tfUsuario.getText().toString());
-			stmt.setString(2, String.valueOf(pfSenha.getPassword()));
 			rs = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+			
 			if(rs.next()) {
-				
-				Usuario usuario = new Usuario();
-				usuario.setIdUsuario(rs.getInt("idusuario"));
-				usuario.setUsuario(rs.getString("usuario"));
-				usuario.setEmail(rs.getString("email"));
-				usuario.setSenha(rs.getString("senha"));
-				Pergunta.usuario = usuario;
-				
-				frmLogin.dispose();
-				Principal.main(null);
-			}else {
-				JOptionPane.showMessageDialog(null, "Usuario e/ou Senha inválido(s)!");						
+				rs.beforeFirst();
+				while(rs.next()) {
+					String teste = rs.getString("usuario");
+					if(teste.equals(campoUsuario)) {
+						if (senha.equals(rs.getString("senha"))) {
+							Usuario usuario = new Usuario();
+							usuario.setEmail(rs.getString("email"));
+							usuario.setIdUsuario(rs.getInt("idusuario"));
+							usuario.setSenha(rs.getString("senha"));
+							usuario.setUsuario(rs.getString("usuario"));
+							Pergunta.usuario = usuario;
+							JOptionPane.showMessageDialog(null, "Bem-Vindo "+usuario.getUsuario());
+							frmLogin.dispose();
+							Principal.main(null);
+						}else {//if senha
+							JOptionPane.showMessageDialog(null, "A senha inserida está incorreta.",null, JOptionPane.ERROR_MESSAGE);
+							pfSenha.selectAll();
+						}
+					}else {//if usuario
+						JOptionPane.showMessageDialog(null, "<html>&emsp;&emsp;O usuario inserido não "
+								+ "\ncorresponde a nenhuma conta.", null, JOptionPane.ERROR_MESSAGE);
+						pfSenha.selectAll();
+					}
+				}
 			}
 
 		} catch (SQLException e1) {

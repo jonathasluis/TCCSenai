@@ -84,7 +84,6 @@ public class Principal {
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrincipal.setResizable(false);
 		frmPrincipal.setLocationRelativeTo(null);
-		
 		Pergunta.main(null);
 		
 		

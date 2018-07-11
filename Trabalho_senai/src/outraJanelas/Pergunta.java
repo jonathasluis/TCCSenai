@@ -64,6 +64,8 @@ public class Pergunta {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		
+		Principal.frmPrincipal.setVisible(false);
+		
 		JLabel lblNewLabel = new JLabel("Selecione a Fazenda");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -79,6 +81,7 @@ public class Pergunta {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String resp = String.valueOf(comboBox.getSelectedItem());
+				Principal.frmPrincipal.setVisible(true);
 				passa(resp);
 				Principal.pega();
 				frame.dispose();
