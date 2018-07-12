@@ -18,11 +18,11 @@ public class Conexao {
 		String sql = "jdbc:mysql://"+ip+":"+porta+"/"+banco;
 		try {
 			conexao = DriverManager.getConnection(sql, usuario, usuario);
-			System.out.println("ok");
+			System.out.println("conectado ao banco");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("nao");
+			System.out.println("erro ao conectar ao banco");
 		}
 		return conexao;
 	}

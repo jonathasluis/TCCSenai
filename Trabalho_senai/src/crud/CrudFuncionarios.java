@@ -35,7 +35,7 @@ public class CrudFuncionarios {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("erro ao add");
+			System.out.println("erro ao add funcionario");
 			return false;
 		}
 	}
@@ -99,7 +99,7 @@ public class CrudFuncionarios {
 		} catch (SQLException e) {
 				// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("ERRO");
+			System.out.println("ERRO procurar funcionario");
 		}
 			return tabela;
 	}

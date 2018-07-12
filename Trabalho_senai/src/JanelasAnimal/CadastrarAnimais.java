@@ -6,6 +6,7 @@ import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -24,6 +25,7 @@ import java.util.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -59,10 +61,6 @@ import crud.CrudFazenda;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-import javax.swing.ImageIcon;
-import java.awt.Toolkit;
-import java.awt.event.WindowFocusListener;
-import java.awt.event.WindowEvent;
 
 public class CadastrarAnimais {//teste3
 
@@ -131,12 +129,6 @@ public class CadastrarAnimais {//teste3
 		}//fim formatação mascara
 		
 		frmCadastroDeAnimais = new JFrame();
-		frmCadastroDeAnimais.addWindowFocusListener(new WindowFocusListener() {
-			public void windowGainedFocus(WindowEvent arg0) {
-			}
-			public void windowLostFocus(WindowEvent arg0) {
-			}
-		});
 		frmCadastroDeAnimais.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarAnimais.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmCadastroDeAnimais.setTitle("Cadastro de Animais");
 		frmCadastroDeAnimais.setBounds(100, 100, 1080, 720);
@@ -153,7 +145,7 @@ public class CadastrarAnimais {//teste3
 		ftfDataNascimento = new JFormattedTextField(mask);
 		ftfDataNascimento.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {//evento de apertar ENTER e mudar de componente
 				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					ftfDataCompra.requestFocus();
 				}
@@ -181,7 +173,7 @@ public class CadastrarAnimais {//teste3
 		ftfDataCompra = new JFormattedTextField(mask);//define a mascara
 		ftfDataCompra.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {//evento de apertar ENTER e mudar de componente
 				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					spinnerQuantidade.requestFocus();
 				}
@@ -200,7 +192,7 @@ public class CadastrarAnimais {//teste3
 		spinnerQuantidade = new JSpinner();
 		spinnerQuantidade.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {//evento de apertar ENTER e mudar de componente
 				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 					tfDestino.requestFocus();
 				}
@@ -237,7 +229,7 @@ public class CadastrarAnimais {//teste3
 		tfNomeLote = new JTextField();
 		tfNomeLote.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent arg0) {
+			public void keyPressed(KeyEvent arg0) {//evento de apertar ENTER e mudar de componente
 				if (arg0.getKeyCode()==KeyEvent.VK_ENTER) {
 					ftfDataNascimento.requestFocus();
 				}
@@ -468,7 +460,7 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(btnLimpar);
 		
 		btnDeletar = new JButton("Deletar");
-		btnDeletar.addActionListener(new ActionListener() {
+		btnDeletar.addActionListener(new ActionListener() {//inicio evento botao deletar
 			public void actionPerformed(ActionEvent arg0) {
 				int resposta = JOptionPane.showConfirmDialog(null, "Deseja deletar esse dado?", "ALERTA!",
 						JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
@@ -477,7 +469,7 @@ public class CadastrarAnimais {//teste3
 					colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));
 				}
 			}
-		});
+		});//fim evento botao deletar
 		btnDeletar.setEnabled(false);
 		btnDeletar.setBackground(SystemColor.controlHighlight);
 		btnDeletar.setBounds(876, 637, 89, 23);
@@ -502,7 +494,7 @@ public class CadastrarAnimais {//teste3
 		tfProcurar = new JTextField();
 		tfProcurar.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent arg0) {
+			public void keyPressed(KeyEvent arg0) {//evento de apertar ENTER e mudar de componente
 				if (arg0.getKeyCode()==KeyEvent.VK_ENTER) {
 					btnProcurar.doClick();
 				}
@@ -550,6 +542,11 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(btnCadastrarNovaEspecie);
 		
 		JButton btnCadastrarNovaRaca = new JButton("...");
+		btnCadastrarNovaRaca.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				NovaRaca.main(null);
+			}
+		});
 		btnCadastrarNovaRaca.setToolTipText("Cadastrar nova Ra\u00E7a");
 		btnCadastrarNovaRaca.setBackground(SystemColor.controlHighlight);
 		btnCadastrarNovaRaca.setBounds(675, 135, 20, 20);

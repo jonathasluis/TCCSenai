@@ -16,14 +16,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import banco.Conexao;
+import javax.swing.SwingConstants;
+import java.awt.Window.Type;
+import java.awt.SystemColor;
 
 public class NovaRaca {
 
-	private JFrame frmNovaRaa;
+	private JFrame frmNovaRaca;
 	private JTextField textField;
 	private JComboBox<String> comboBox;
-	Conexao con = new Conexao();
-	String palavra = null;
+	private JButton btnSalvar;
 
 	/**
 	 * Launch the application.
@@ -33,7 +35,7 @@ public class NovaRaca {
 			public void run() {
 				try {
 					NovaRaca window = new NovaRaca();
-					window.frmNovaRaa.setVisible(true);
+					window.frmNovaRaca.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,60 +54,56 @@ public class NovaRaca {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmNovaRaa = new JFrame();
-		frmNovaRaa.setTitle("Nova Ra\u00E7a");
-		frmNovaRaa.setResizable(false);
-		frmNovaRaa.setBounds(100, 100, 450, 175);
-		frmNovaRaa.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frmNovaRaa.getContentPane().setLayout(null);
+		frmNovaRaca = new JFrame();
+		frmNovaRaca.setType(Type.UTILITY);
+		frmNovaRaca.setTitle("Nova Ra\u00E7a");
+		frmNovaRaca.setResizable(false);
+		frmNovaRaca.setBounds(100, 100, 300, 200);
+		frmNovaRaca.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmNovaRaca.getContentPane().setLayout(null);
 		
 		JLabel lblDespcie = new JLabel("Esp\u00E9cie:");
+		lblDespcie.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDespcie.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDespcie.setBounds(20, 11, 80, 14);
-		frmNovaRaa.getContentPane().add(lblDespcie);
+		lblDespcie.setBounds(10, 16, 274, 14);
+		frmNovaRaca.getContentPane().add(lblDespcie);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(83, 36, 270, 20);
-		frmNovaRaa.getContentPane().add(textField);
+		textField.setBounds(10, 97, 274, 20);
+		frmNovaRaca.getContentPane().add(textField);
 		
 		JButton button = new JButton("Cancelar");
+		button.setBackground(SystemColor.controlHighlight);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmNovaRaa.dispose();
+				frmNovaRaca.dispose();
 			}
 		});
-		button.setBounds(224, 113, 100, 23);
-		frmNovaRaa.getContentPane().add(button);
+		button.setBounds(104, 138, 85, 23);
+		frmNovaRaca.getContentPane().add(button);
 		
-		JButton button_1 = new JButton("Salvar");
-		button_1.addActionListener(new ActionListener() {
+		btnSalvar = new JButton("Salvar");
+		btnSalvar.setBackground(SystemColor.controlHighlight);
+		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				result();
-				
-				if(!(palavra == "tem"))
-					if(!textField.getText().trim().equals("")) {
-						Salvar();
-					}else
-						JOptionPane.showMessageDialog(null, "campo vazio");
-				else {
-					JOptionPane.showMessageDialog(null, "Raça já cadastrada!");
-					textField.selectAll();
-				}
+			
 			}
 		});
-		button_1.setBounds(334, 113, 100, 23);
-		frmNovaRaa.getContentPane().add(button_1);
+		btnSalvar.setBounds(199, 138, 85, 23);
+		frmNovaRaca.getContentPane().add(btnSalvar);
 		
 		JLabel lblRaa = new JLabel("Ra\u00E7a:");
+		lblRaa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRaa.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblRaa.setBounds(20, 36, 62, 14);
-		frmNovaRaa.getContentPane().add(lblRaa);
+		lblRaa.setBounds(10, 72, 274, 14);
+		frmNovaRaca.getContentPane().add(lblRaa);
 		
 		comboBox = new JComboBox<String>();
-		comboBox.setBounds(83, 9, 168, 20);
-		frmNovaRaa.getContentPane().add(comboBox);
-		frmNovaRaa.setLocationRelativeTo(null);
+		comboBox.setBackground(SystemColor.controlHighlight);
+		comboBox.setBounds(10, 41, 274, 20);
+		frmNovaRaca.getContentPane().add(comboBox);
+		frmNovaRaca.setLocationRelativeTo(null);
 		
 		comboBoxEspecie();
 	}
@@ -147,32 +145,6 @@ void Salvar() {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
-		}
-	}
-	
-	void result() {
-		ResultSet dados=null;
-		String sql = "select * from raca";
-		
-		try {
-			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
-			dados = stmt.executeQuery();
-			stmt.execute();
-			stmt.close();
-			
-			while(dados.next()) {
-				if(textField.getText().equalsIgnoreCase(dados.getString("nome_ra"))) {
-					if(comboBox.getSelectedItem().toString().equalsIgnoreCase(dados.getString("especie_ra"))) {
-						palavra = "tem";
-						
-					}
-				} else
-					palavra=null;
-					
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 }

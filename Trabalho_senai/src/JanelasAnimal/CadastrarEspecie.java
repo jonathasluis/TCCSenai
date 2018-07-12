@@ -97,7 +97,7 @@ public class CadastrarEspecie{
 				//contador=1;	
 			}
 		});
-		btnSalvar.setBounds(199, 88, 85, 23);
+		btnSalvar.setBounds(199, 92, 85, 23);
 		frmNovaEspecie.getContentPane().add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -107,7 +107,7 @@ public class CadastrarEspecie{
 				frmNovaEspecie.dispose();
 			}
 		});
-		btnCancelar.setBounds(104, 88, 85, 23);
+		btnCancelar.setBounds(104, 92, 85, 23);
 		frmNovaEspecie.getContentPane().add(btnCancelar);
 		frmNovaEspecie.setLocationRelativeTo(null);
 		

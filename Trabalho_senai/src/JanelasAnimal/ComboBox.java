@@ -25,7 +25,7 @@ public class ComboBox {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("foi nao");
+			System.out.println("erro ao preencher comboBox especie");
 		}
 	}
 	
@@ -45,7 +45,7 @@ public class ComboBox {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("foi nao");
+			System.out.println("erro ao selecionar id especie");
 		}
 		return id;
 	}
@@ -68,7 +68,7 @@ public class ComboBox {
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-			System.out.println("foi nao");
+			System.out.println("erro ao selecionar nome especie");
 		}
 		return valor;
 	}
@@ -88,7 +88,7 @@ public class ComboBox {
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-			System.out.println("foi nao");
+			System.out.println("ero ao preencher comboBox raça");
 		}
 	}
 	
@@ -108,7 +108,7 @@ public class ComboBox {
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-			System.out.println("foi nao");
+			System.out.println("erro ao selecionar id raça");
 		}
 		return id;
 	}
@@ -129,7 +129,7 @@ public class ComboBox {
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-			System.out.println("foi nao");
+			System.out.println("erro selecionar nome raça");
 		}
 		return valor;
 	}

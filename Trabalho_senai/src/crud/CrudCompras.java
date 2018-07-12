@@ -85,7 +85,7 @@ public class CrudCompras {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Erro selecionar");
+			System.out.println("Erro selecionar compra");
 		}
 		return tabela;
 	}
@@ -104,7 +104,7 @@ public class CrudCompras {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Erro selecionar");
+			System.out.println("Erro selecionar Compra Data Ano");
 		}
 		return tabela;
 	}
@@ -124,7 +124,7 @@ public class CrudCompras {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Erro selecionar");
+			System.out.println("Erro selecionar compra Data Ano Mes");
 		}
 		return tabela;
 	}
@@ -146,7 +146,7 @@ public class CrudCompras {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Erro selecionar");
+			System.out.println("Erro selecionar compra Data ano Dia");
 		}
 		return tabela;
 	}

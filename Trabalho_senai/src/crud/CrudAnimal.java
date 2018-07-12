@@ -104,7 +104,7 @@ public class CrudAnimal {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("erro ao selecionar");
+			System.out.println("erro ao selecionar animal");
 			return tabela=null;
 		}
 		return tabela;

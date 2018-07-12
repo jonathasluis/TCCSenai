@@ -97,7 +97,7 @@ public class CrudVendas {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Erro selecionar");
+			System.out.println("Erro selecionar Vendas Data Ano");
 		}
 		return tabela;
 	}
@@ -117,7 +117,7 @@ public class CrudVendas {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Erro selecionar");
+			System.out.println("Erro selecionar vendas Data Ano Mes");
 		}
 		return tabela;
 	}
@@ -139,7 +139,7 @@ public class CrudVendas {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Erro selecionar");
+			System.out.println("Erro selecionar Vendas Data Ano Dia");
 		}
 		return tabela;
 	}
