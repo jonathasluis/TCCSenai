@@ -751,7 +751,7 @@ public class NovaCompra {////
 		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
 		mntmEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmCompraDeInsumos.dispose();
+				//frmCompraDeInsumos.dispose();
 				EnviarEmail.main(null);
 			}
 		});

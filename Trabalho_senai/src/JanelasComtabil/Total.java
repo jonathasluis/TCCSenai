@@ -542,7 +542,7 @@ public class Total {//
 		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
 		mntmEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmRelattio.dispose();
+				//frmRelattio.dispose();
 				EnviarEmail.main(null);
 			}
 		});

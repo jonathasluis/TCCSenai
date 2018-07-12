@@ -365,7 +365,7 @@ public class NovaFazenda {
 		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
 		mntmEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmNovaFazenda.dispose();
+				//frmNovaFazenda.dispose();
 				EnviarEmail.main(null);
 			}
 		});

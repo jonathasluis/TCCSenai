@@ -807,7 +807,7 @@ public class CadastrarFuncionarios {
 		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
 		mntmEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmCadastrarFuncionarios.dispose();
+				//frmCadastrarFuncionarios.dispose();
 				EnviarEmail.main(null);
 			}
 		});

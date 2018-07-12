@@ -336,7 +336,7 @@ public class Principal {
 		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
 		mntmEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmPrincipal.dispose();
+				//frmPrincipal.dispose();
 				EnviarEmail.main(null);
 			}
 		});

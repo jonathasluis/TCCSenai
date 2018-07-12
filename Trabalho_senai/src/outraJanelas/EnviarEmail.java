@@ -3,10 +3,12 @@ package outraJanelas;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import java.awt.Window.Type;
+import java.awt.Toolkit;
 
 public class EnviarEmail {
 
-	private JFrame frame;
+	private JFrame frmEnviarFeedback;
 
 	/**
 	 * Launch the application.
@@ -16,7 +18,7 @@ public class EnviarEmail {
 			public void run() {
 				try {
 					EnviarEmail window = new EnviarEmail();
-					window.frame.setVisible(true);
+					window.frmEnviarFeedback.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -35,9 +37,14 @@ public class EnviarEmail {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmEnviarFeedback = new JFrame();
+		frmEnviarFeedback.setTitle("Enviar feedback");
+		frmEnviarFeedback.setIconImage(Toolkit.getDefaultToolkit().getImage(EnviarEmail.class.getResource("/img/logo-pequena-sem-texto.png")));
+		frmEnviarFeedback.setResizable(false);
+		frmEnviarFeedback.setBounds(100, 100, 450, 300);
+		frmEnviarFeedback.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmEnviarFeedback.setLocationRelativeTo(null);
+		frmEnviarFeedback.getContentPane().setLayout(null);
 	}
 
 }

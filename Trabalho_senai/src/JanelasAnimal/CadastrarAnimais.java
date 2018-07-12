@@ -809,7 +809,7 @@ public class CadastrarAnimais {//teste3
 		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
 		mntmEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmCadastroDeAnimais.dispose();
+				//frmCadastroDeAnimais.dispose();
 				EnviarEmail.main(null);
 			}
 		});

@@ -427,7 +427,7 @@ public class NovaVenda {
 		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
 		mntmEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmNovaVenda.dispose();
+				//frmNovaVenda.dispose();
 				EnviarEmail.main(null);
 			}
 		});
