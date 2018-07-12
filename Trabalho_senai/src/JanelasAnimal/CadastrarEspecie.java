@@ -21,18 +21,22 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import banco.Conexao;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class CadastrarEspecie{
 
-	private JFrame frmNovaEspecie;
+	static JFrame frmNovaEspecie;
 	private JTextField textField;
 	private JButton btnSalvar;
+	static int limit=0; //limita apenas uma janela aberta
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@SuppressWarnings("static-access")
 			public void run() {
 				try {
 					CadastrarEspecie window = new CadastrarEspecie();
@@ -56,6 +60,12 @@ public class CadastrarEspecie{
 	 */
 	private void initialize() {
 		frmNovaEspecie = new JFrame();
+		frmNovaEspecie.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				limit = 0;
+			}
+		});
 		frmNovaEspecie.setType(Type.UTILITY);
 		frmNovaEspecie.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarEspecie.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmNovaEspecie.setTitle("Nova Especie");
@@ -104,6 +114,7 @@ public class CadastrarEspecie{
 		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				limit = 0;
 				frmNovaEspecie.dispose();
 			}
 		});
@@ -144,7 +155,8 @@ public class CadastrarEspecie{
 			stmt.close();
 			JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 			
-			comboBoxEspecie();
+			
+
 			frmNovaEspecie.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

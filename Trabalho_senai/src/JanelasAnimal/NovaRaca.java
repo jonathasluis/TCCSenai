@@ -19,19 +19,25 @@ import banco.Conexao;
 import javax.swing.SwingConstants;
 import java.awt.Window.Type;
 import java.awt.SystemColor;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class NovaRaca {
 
-	private JFrame frmNovaRaca;
+	static JFrame frmNovaRaca;
 	private JTextField textField;
 	private JComboBox<String> comboBox;
 	private JButton btnSalvar;
+	static int limit=0; //limita apenas uma janela aberta
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@SuppressWarnings("static-access")
 			public void run() {
 				try {
 					NovaRaca window = new NovaRaca();
@@ -55,6 +61,12 @@ public class NovaRaca {
 	 */
 	private void initialize() {
 		frmNovaRaca = new JFrame();
+		frmNovaRaca.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				limit = 0;
+			}
+		});
 		frmNovaRaca.setType(Type.UTILITY);
 		frmNovaRaca.setTitle("Nova Ra\u00E7a");
 		frmNovaRaca.setResizable(false);
@@ -69,6 +81,14 @@ public class NovaRaca {
 		frmNovaRaca.getContentPane().add(lblDespcie);
 		
 		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					btnSalvar.doClick();
+				}
+			}
+		});
 		textField.setColumns(10);
 		textField.setBounds(10, 97, 274, 20);
 		frmNovaRaca.getContentPane().add(textField);
@@ -77,6 +97,7 @@ public class NovaRaca {
 		button.setBackground(SystemColor.controlHighlight);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				limit = 0;
 				frmNovaRaca.dispose();
 			}
 		});
@@ -87,7 +108,12 @@ public class NovaRaca {
 		btnSalvar.setBackground(SystemColor.controlHighlight);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				if(textField.getText().trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "campo vazio");
+					return;	
+				}
+				
+				verificaSeTemRaca();
 			}
 		});
 		btnSalvar.setBounds(199, 138, 85, 23);
@@ -108,10 +134,64 @@ public class NovaRaca {
 		comboBoxEspecie();
 	}
 	
+	void Salvar() {
+		int idEspecie= ComboBox.pegaIdEspecie(comboBox.getSelectedItem().toString());
+		
+		String sql = "INSERT INTO raca (nome_ra,id_especie) VALUES (?,?)";
+		try {
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			stmt.setString(1, textField.getText().toLowerCase());
+			stmt.setInt(2, idEspecie);
+			stmt.execute();
+			stmt.close();
+			JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+			
+			if(CadastrarAnimais.indexCbEspecie==0) {
+				CadastrarAnimais.cbEspecie.setSelectedIndex(CadastrarAnimais.indexCbEspecie+1);
+				CadastrarAnimais.cbEspecie.setSelectedIndex(CadastrarAnimais.indexCbEspecie);
+
+			}else {
+				CadastrarAnimais.cbEspecie.setSelectedIndex(CadastrarAnimais.indexCbEspecie-1);
+				CadastrarAnimais.cbEspecie.setSelectedIndex(CadastrarAnimais.indexCbEspecie);
+
+			}
+			
+			frmNovaRaca.dispose();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+	}
+	
+	void verificaSeTemRaca() {
+		int idEspecie= ComboBox.pegaIdEspecie(comboBox.getSelectedItem().toString());
+		
+		ResultSet dados=null;
+		String sql = "select * from raca where nome_ra = ? and id_especie=?";
+		
+		try {
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			stmt.setString(1, textField.getText().toLowerCase());
+			stmt.setInt(2, idEspecie);
+			dados = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+			
+			if(!dados.next()) {
+				Salvar();
+			}else {
+				JOptionPane.showMessageDialog(null, "Raça já cadastrada!");
+				textField.selectAll();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void comboBoxEspecie() {
-		
-		 ResultSet dados1;
-		
+		ResultSet dados1;
 		String sql = "SELECT (nome_es) FROM especie";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
@@ -122,29 +202,10 @@ public class NovaRaca {
 			while(dados1.next()) {
 					comboBox.addItem(dados1.getString("nome_es"));
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("foi nao");
-		}
-	}
-	
-void Salvar() {
-		
-		String sql = "INSERT INTO raca (nome_ra,especie_ra) VALUES (?,?)";
-		
-		try {
-			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
-			stmt.setString(1, textField.getText().toLowerCase());
-			stmt.setString(2, comboBox.getSelectedItem().toString());
-			stmt.execute();
-			stmt.close();
-			JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
 		}
 	}
 }

@@ -82,6 +82,8 @@ public class ComboBox {
 			dados1 = st.executeQuery();
 			st.execute();
 			st.close();
+			
+			CadastrarAnimais.cbRaca.removeAllItems();
 			while(dados1.next()) {
 				CadastrarAnimais.cbRaca.addItem(dados1.getString("nome_ra"));
 				}

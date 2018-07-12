@@ -93,6 +93,7 @@ public class CadastrarAnimais {//teste3
 	private JButton btnSalvar;
 	static int teste = 1; 
 	static int x1=1;
+	static int indexCbEspecie;
 	/**
 	 *
 	 * Launch the application.
@@ -533,7 +534,12 @@ public class CadastrarAnimais {//teste3
 		JButton btnCadastrarNovaEspecie = new JButton("...");
 		btnCadastrarNovaEspecie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {//açao do botao cadastrar especie
-				CadastrarEspecie.main(null);
+				if(CadastrarEspecie.limit == 0) {
+					CadastrarEspecie.main(null);
+					CadastrarEspecie.limit = 1;
+				}else {
+					CadastrarEspecie.frmNovaEspecie.requestFocus();
+				}
 			}
 		});
 		btnCadastrarNovaEspecie.setBackground(SystemColor.controlHighlight);
@@ -544,7 +550,14 @@ public class CadastrarAnimais {//teste3
 		JButton btnCadastrarNovaRaca = new JButton("...");
 		btnCadastrarNovaRaca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				NovaRaca.main(null);
+				indexCbEspecie = cbEspecie.getSelectedIndex();
+				if(NovaRaca.limit == 0) {
+					NovaRaca.main(null);
+					NovaRaca.limit = 1;
+				}else {
+					NovaRaca.frmNovaRaca.requestFocus();
+				}
+				
 			}
 		});
 		btnCadastrarNovaRaca.setToolTipText("Cadastrar nova Ra\u00E7a");
