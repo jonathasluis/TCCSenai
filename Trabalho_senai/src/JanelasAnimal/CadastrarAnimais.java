@@ -71,8 +71,8 @@ public class CadastrarAnimais {//teste3
 	private JTable tabela;
 	private JTextField tfDestino;
 	private JTextField tfProcurar;
-	protected static JComboBox<String> cbEspecie;
-	protected static JComboBox<String> cbRaca;
+	static JComboBox<String> cbEspecie;
+	static JComboBox<String> cbRaca;
 	private JFormattedTextField ftfDataNascimento;
 	private JFormattedTextField ftfDataCompra;
 	private JSpinner spinnerQuantidade;
@@ -217,14 +217,14 @@ public class CadastrarAnimais {//teste3
 		
 		cbEspecie = new JComboBox<String>();
 		cbEspecie.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
-		cbEspecie.addItemListener(new ItemListener() {
+		cbEspecie.addItemListener(new ItemListener() {//inicio evento mudar item comboBox especie
 			public void itemStateChanged(ItemEvent arg0) {
 				if(cbEspecie.getItemCount() > 0) {
 					cbRaca.removeAllItems();
 					ComboBox.comboBoxRaca(ComboBox.pegaIdEspecie(cbEspecie.getSelectedItem().toString()));
 				}
 			}
-		});
+		});//fim evento mudar item comboBox especie
 		cbEspecie.setBackground(SystemColor.controlHighlight);
 		cbEspecie.setBounds(506, 100, 164, 20);
 		frmCadastroDeAnimais.getContentPane().add(cbEspecie);
@@ -515,10 +515,8 @@ public class CadastrarAnimais {//teste3
 		btnProcurar = new JButton("Procurar");
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {//inicio da açao do botao procurar
-
 				//VARIAVEL PARA REGULAR O TAMNHO DA TABELA
 				x1=0;	
-				
 				//TRATAMENTO PARA AUMENTAR E DIMINUIR TABELA
 				int table = tabela.getRowCount();
 				int linha = table*16;
@@ -530,13 +528,10 @@ public class CadastrarAnimais {//teste3
 						colocaDadosNaTabela(CrudAnimal.procuraAnimal(tfProcurar.getText(), animal));
 						int x2 = 21;
 						scrollPane.setBounds(10, 253, 1054, x2);
-						
 					}
 				}else {
 					colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));
-		
 				}
-				
 			}
 		});//fim da açao do botao procurar
 		btnProcurar.setBackground(SystemColor.controlHighlight);
@@ -545,9 +540,8 @@ public class CadastrarAnimais {//teste3
 		
 		JButton btnCadastrarNovaEspecie = new JButton("...");
 		btnCadastrarNovaEspecie.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {//açao do botao cadastrar especie
 				CadastrarEspecie.main(null);
-				new Thread(thread).start();
 			}
 		});
 		btnCadastrarNovaEspecie.setBackground(SystemColor.controlHighlight);
@@ -562,7 +556,8 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(btnCadastrarNovaRaca);
 		
 		menu();
-		ComboBox.comboBoxEspecie();
+		new ComboBox().comboBoxEspecie();
+		
 		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
 		colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));	
 		//VerificaSeTemDadosNaTabela();
@@ -570,7 +565,7 @@ public class CadastrarAnimais {//teste3
 				if (tabela.getRowCount()==0) {
 					scrollPane.setVisible(false);
 				}
-	}
+	}//fim do inicialize
 	
 	void preencherDAOAnimalParaSalvarNovo() {
 		animal.setNomeLote(tfNomeLote.getText());
@@ -686,33 +681,7 @@ public class CadastrarAnimais {//teste3
 				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
 			}
 	}
-	
-	static void cbEspecie() {
-		cbEspecie.removeAllItems();
-		//ComboBox.comboBoxEspecie();
-	}
-	
-	Runnable thread = new Runnable() {	
-		@Override
-		public void run() {
-			try {
-				while(true) {
-					Thread.sleep(1500);
-					//contador=0;
-					System.out.println(contador);
-					if(contador==1) {
-						cbEspecie();
-						contador=0;
-						break;
-					}
-				}
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	};
-	
+
 	void menu() {
 		JMenuBar menuBar = new JMenuBar();
 		frmCadastroDeAnimais.setJMenuBar(menuBar);

@@ -2,6 +2,9 @@ package JanelasAnimal;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
+import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -15,13 +18,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import banco.Conexao;
-import java.awt.SystemColor;
-import javax.swing.SwingConstants;
-import java.awt.Toolkit;
 
-public class CadastrarEspecie extends CadastrarAnimais{
+public class CadastrarEspecie{
 
 	private JFrame frmNovaEspecie;
 	private JTextField textField;
@@ -55,6 +56,7 @@ public class CadastrarEspecie extends CadastrarAnimais{
 	 */
 	private void initialize() {
 		frmNovaEspecie = new JFrame();
+		frmNovaEspecie.setType(Type.UTILITY);
 		frmNovaEspecie.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarEspecie.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmNovaEspecie.setTitle("Nova Especie");
 		frmNovaEspecie.setResizable(false);
@@ -92,7 +94,7 @@ public class CadastrarEspecie extends CadastrarAnimais{
 				}
 				
 				verificaSeTemEspecie();
-				contador=1;	
+				//contador=1;	
 			}
 		});
 		btnSalvar.setBounds(199, 88, 85, 23);
@@ -109,7 +111,26 @@ public class CadastrarEspecie extends CadastrarAnimais{
 		frmNovaEspecie.getContentPane().add(btnCancelar);
 		frmNovaEspecie.setLocationRelativeTo(null);
 		
-		//ComboBox.comboBoxEspecie();
+		this.comboBoxEspecie();
+	}
+	
+	public void comboBoxEspecie() {
+		ResultSet dados1=null;
+		String sql = "SELECT (nome_es) FROM especie";
+		try {
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			dados1 = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+			CadastrarAnimais.cbEspecie.removeAllItems();
+			while(dados1.next()) {
+				CadastrarAnimais.cbEspecie.addItem(dados1.getString("nome_es"));
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("foi nao");
+		}
 	}
 	
 	void Salvar() {
@@ -122,6 +143,9 @@ public class CadastrarEspecie extends CadastrarAnimais{
 			stmt.execute();
 			stmt.close();
 			JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+			
+			comboBoxEspecie();
+			frmNovaEspecie.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

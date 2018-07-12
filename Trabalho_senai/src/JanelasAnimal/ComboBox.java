@@ -8,9 +8,9 @@ import banco.Conexao;
 
 
 
-public class ComboBox extends CadastrarAnimais{
+public class ComboBox {
 		
-	public static void comboBoxEspecie() {
+	public void comboBoxEspecie() {
 		ResultSet dados1=null;
 		String sql = "SELECT (nome_es) FROM especie";
 		try {
@@ -18,9 +18,9 @@ public class ComboBox extends CadastrarAnimais{
 			dados1 = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();
-			cbEspecie.removeAllItems();
+			CadastrarAnimais.cbEspecie.removeAllItems();
 			while(dados1.next()) {
-					cbEspecie.addItem(dados1.getString("nome_es"));
+				CadastrarAnimais.cbEspecie.addItem(dados1.getString("nome_es"));
 			}	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -83,7 +83,7 @@ public class ComboBox extends CadastrarAnimais{
 			st.execute();
 			st.close();
 			while(dados1.next()) {
-				  cbRaca.addItem(dados1.getString("nome_ra"));
+				CadastrarAnimais.cbRaca.addItem(dados1.getString("nome_ra"));
 				}
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
