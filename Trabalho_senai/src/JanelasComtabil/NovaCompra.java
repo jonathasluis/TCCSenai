@@ -45,6 +45,8 @@ import DAO.Compras;
 import JanelasAnimal.CadastrarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import crud.CrudCompras;
+import outraJanelas.EnviarEmail;
+import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
@@ -735,6 +737,25 @@ public class NovaCompra {////
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);
+		
+		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
+		mntmDeslogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmCompraDeInsumos.dispose();
+				Principal.frmPrincipal.dispose();
+				Login.main(null);
+			}
+		});
+		mnOpes.add(mntmDeslogar);
+		
+		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
+		mntmEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmCompraDeInsumos.dispose();
+				EnviarEmail.main(null);
+			}
+		});
+		mnOpes.add(mntmEnviar);
 		mnOpes.add(mntmSada);
 		frmCompraDeInsumos.getContentPane().setLayout(null);
 	}

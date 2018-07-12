@@ -351,6 +351,26 @@ public class NovaFazenda {
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);
+		
+		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
+		mntmDeslogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmNovaFazenda.dispose();
+				Principal.frmPrincipal.dispose();
+				Login.main(null);
+			}
+		});
+		mnOpes.add(mntmDeslogar);
+		
+		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
+		mntmEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmNovaFazenda.dispose();
+				EnviarEmail.main(null);
+			}
+		});
+		mnOpes.add(mntmEnviar);
+		
 		mnOpes.add(mntmSada);
 	}
 }

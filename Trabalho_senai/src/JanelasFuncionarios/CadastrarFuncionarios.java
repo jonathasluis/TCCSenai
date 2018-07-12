@@ -46,6 +46,8 @@ import JanelasComtabil.Total;
 import banco.Conexao;
 import crud.CrudFazenda;
 import crud.CrudFuncionarios;
+import outraJanelas.EnviarEmail;
+import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
@@ -783,7 +785,6 @@ public class CadastrarFuncionarios {
 				System.exit(0);
 			}
 		});
-		mnOpes.add(mntmSada);
 		
 		JMenuItem mntmMudarFazenda = new JMenuItem("Mudar Fazenda");
 		mntmMudarFazenda.addActionListener(new ActionListener() {
@@ -792,5 +793,25 @@ public class CadastrarFuncionarios {
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);
+		
+		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
+		mntmDeslogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmCadastrarFuncionarios.dispose();
+				Principal.frmPrincipal.dispose();
+				Login.main(null);
+			}
+		});
+		mnOpes.add(mntmDeslogar);
+		
+		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
+		mntmEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmCadastrarFuncionarios.dispose();
+				EnviarEmail.main(null);
+			}
+		});
+		mnOpes.add(mntmEnviar);
+		mnOpes.add(mntmSada);
 	}
 }

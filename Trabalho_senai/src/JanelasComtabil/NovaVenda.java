@@ -39,6 +39,8 @@ import JanelasAnimal.CadastrarAnimais;
 import JanelasAnimal.ComboBox;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import banco.Conexao;
+import outraJanelas.EnviarEmail;
+import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
@@ -411,6 +413,25 @@ public class NovaVenda {
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);
+		
+		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
+		mntmDeslogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmNovaVenda.dispose();
+				Principal.frmPrincipal.dispose();
+				Login.main(null);
+			}
+		});
+		mnOpes.add(mntmDeslogar);
+		
+		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
+		mntmEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmNovaVenda.dispose();
+				EnviarEmail.main(null);
+			}
+		});
+		mnOpes.add(mntmEnviar);
 		mnOpes.add(mntmSada);
 	}
 }

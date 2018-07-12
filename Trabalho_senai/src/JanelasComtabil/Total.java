@@ -35,6 +35,8 @@ import JanelasAnimal.CadastrarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import crud.CrudCompras;
 import crud.CrudVendas;
+import outraJanelas.EnviarEmail;
+import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
@@ -518,7 +520,6 @@ public class Total {//
 				System.exit(0);
 			}
 		});
-		mnOpes.add(mntmSada);
 		
 		JMenuItem mntmMudarFazenda = new JMenuItem("Mudar Fazenda");
 		mntmMudarFazenda.addActionListener(new ActionListener() {
@@ -527,5 +528,26 @@ public class Total {//
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);
+		
+		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
+		mntmDeslogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmRelattio.dispose();
+				Principal.frmPrincipal.dispose();
+				Login.main(null);
+			}
+		});
+		mnOpes.add(mntmDeslogar);
+		
+		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
+		mntmEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmRelattio.dispose();
+				EnviarEmail.main(null);
+			}
+		});
+		mnOpes.add(mntmEnviar);
+		
+		mnOpes.add(mntmSada);
 	}
 }

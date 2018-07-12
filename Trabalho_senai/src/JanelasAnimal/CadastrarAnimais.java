@@ -58,6 +58,8 @@ import JanelasFuncionarios.CadastrarFuncionarios;
 import banco.Conexao;
 import crud.CrudAnimal;
 import crud.CrudFazenda;
+import outraJanelas.EnviarEmail;
+import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
@@ -793,6 +795,25 @@ public class CadastrarAnimais {//teste3
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);
+		
+		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
+		mntmDeslogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmCadastroDeAnimais.dispose();
+				Principal.frmPrincipal.dispose();
+				Login.main(null);
+			}
+		});
+		mnOpes.add(mntmDeslogar);
+		
+		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
+		mntmEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmCadastroDeAnimais.dispose();
+				EnviarEmail.main(null);
+			}
+		});
+		mnOpes.add(mntmEnviar);
 		mnOpes.add(mntmSada);
 	}
 }
