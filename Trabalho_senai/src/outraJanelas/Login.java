@@ -22,7 +22,7 @@ import DAO.Usuario;
 import banco.Conexao;
 import java.awt.Toolkit;
 
-public class Login {
+public class Login {//
 	Conexao c = new Conexao();
 	
 	
