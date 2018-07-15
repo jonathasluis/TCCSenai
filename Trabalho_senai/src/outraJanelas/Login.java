@@ -126,18 +126,18 @@ public class Login {
 		String campoUsuario = tfUsuario.getText();
 		String senha = String.valueOf(pfSenha.getPassword());
 		  
-		String sql = "select*from usuario";
+		String sql = "select*from usuario where usuario=?";
 		try {
 			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			stmt.setString(1, campoUsuario);
 			rs = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();
 			
 			if(rs.next()) {
-				rs.beforeFirst();
-				while(rs.next()) {
-					String teste = rs.getString("usuario");
-					if(teste.equals(campoUsuario)) {
+				String teste = rs.getString("usuario");
+				
+				if(teste.equals(campoUsuario)) {
 						if (senha.equals(rs.getString("senha"))) {
 							Usuario usuario = new Usuario();
 							usuario.setEmail(rs.getString("email"));
@@ -152,12 +152,11 @@ public class Login {
 							JOptionPane.showMessageDialog(null, "A senha inserida está incorreta.",null, JOptionPane.ERROR_MESSAGE);
 							pfSenha.selectAll();
 						}
-					}else {//if usuario
-						JOptionPane.showMessageDialog(null, "<html>&emsp;&emsp;O usuario inserido não "
-								+ "\ncorresponde a nenhuma conta.", null, JOptionPane.ERROR_MESSAGE);
-						pfSenha.selectAll();
 					}
-				}
+			}else {//if usuario
+				JOptionPane.showMessageDialog(null, "<html>&emsp;&emsp;O usuario inserido não "
+						+ "\ncorresponde a nenhuma conta.", null, JOptionPane.ERROR_MESSAGE);
+				tfUsuario.selectAll();
 			}
 
 		} catch (SQLException e1) {
