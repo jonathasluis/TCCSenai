@@ -133,9 +133,9 @@ public class Login {//
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(!tfUsuario.getText().trim().equals("")) {
-					String sistema = "jonathassousasgs@gmail.com";
-					String senha = "99652127";
-					String destino = "jonathas_sousasgs@hotmail.com";
+					String sistema = "";
+					String senha = "";
+					String destino = "";
 					String titulo = "Nova senha";
 					String novaSenha = gerarSenhaAleatoria();
 					String msg = "sua nova senha é "+novaSenha;
