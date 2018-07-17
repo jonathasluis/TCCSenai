@@ -3,6 +3,10 @@ package outraJanelas;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
+
 import java.awt.Window.Type;
 import java.awt.Toolkit;
 
@@ -45,6 +49,44 @@ public class EnviarEmail {
 		frmEnviarFeedback.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmEnviarFeedback.setLocationRelativeTo(null);
 		frmEnviarFeedback.getContentPane().setLayout(null);
+	}
+	
+	void enviarEmail(String de,String senha,String para,String titulo,String msg ) {
+		//remetente
+		//String de
+		boolean ssl = true;
+		
+		//if(cbSsl.isSelected()) {
+		//	ssl=true;
+		//}else
+		//	ssl=false;
+		
+		String smtp = "smtp.gmail.com";
+		int porta = 445;
+		//String senha = psSenha.getText().toString();
+		
+		//destinatario
+		//String para = tfPara.getText().toString();
+		//String titulo = tfTitulo.getText().toString();
+		//String msg = editorPane.getText().toString();
+		
+		//enviando email
+		try {
+			SimpleEmail email = new SimpleEmail();
+			email.setFrom(de);
+			email.setSSLOnConnect(ssl);
+			email.setHostName(smtp);
+			email.setSmtpPort(porta);
+			email.setAuthentication(de, senha);
+			
+			email.addTo(para);
+			email.setSubject(titulo);
+			email.setMsg(msg);
+			email.send();
+		} catch (EmailException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

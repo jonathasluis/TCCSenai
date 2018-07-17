@@ -1,5 +1,6 @@
 package outraJanelas;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -20,7 +21,11 @@ import javax.swing.SwingConstants;
 
 import DAO.Usuario;
 import banco.Conexao;
+import crud.crudUsuarios;
+
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Login {//
 	Conexao c = new Conexao();
@@ -114,6 +119,37 @@ public class Login {//
 		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(99, 181, 105, 23);
 		frmLogin.getContentPane().add(btnEntrar);
+		
+		JLabel lblEsqueceuSuaSenha = new JLabel("Esqueceu sua Senha");
+		lblEsqueceuSuaSenha.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				lblEsqueceuSuaSenha.setForeground(Color.red);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblEsqueceuSuaSenha.setForeground(Color.black);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!tfUsuario.getText().trim().equals("")) {
+					String sistema = "jonathassousasgs@gmail.com";
+					String senha = "99652127";
+					String destino = "jonathas_sousasgs@hotmail.com";
+					String titulo = "Nova senha";
+					String novaSenha = gerarSenhaAleatoria();
+					String msg = "sua nova senha é "+novaSenha;
+					
+					new crudUsuarios().updSenhaUsuario(novaSenha, tfUsuario.getText());
+					new EnviarEmail().enviarEmail(sistema, senha, destino, titulo, msg);
+				}else {
+					JOptionPane.showMessageDialog(null, "");
+				}
+			}
+		});
+		lblEsqueceuSuaSenha.setFont(new Font("Tahoma", Font.BOLD, 10));
+		lblEsqueceuSuaSenha.setBounds(178, 118, 105, 14);
+		frmLogin.getContentPane().add(lblEsqueceuSuaSenha);
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logar();
@@ -166,4 +202,24 @@ public class Login {//
 	
 
 	}
+
+	private static String gerarSenhaAleatoria() {
+        int qtdeMaximaCaracteres = 8;
+        String[] caracteres = {"1", "2", "4", "5", "6", "7", "8", "3",
+        					   "9", "a", "b", "c", "d", "e", "f", "g",
+        					   "h", "i", "j", "k", "l", "m", "n", "o",
+        					   "p", "q", "r", "s", "t", "u", "v", "w",
+        					   "x", "y", "z", "A", "B", "C", "D", "E", 
+        					   "F", "G", "H", "I", "J", "K", "L", "M", 
+        					   "N", "O", "P", "Q", "R", "S", "T", "U",
+        					   "V", "W", "X", "Y", "Z", "ç", "Ç", "0" };
+       
+        StringBuilder senha = new StringBuilder();
+
+        for (int i = 0; i < qtdeMaximaCaracteres; i++) {
+            int posicao = (int) (Math.random() * caracteres.length);
+            senha.append(caracteres[posicao]);
+        }
+        return senha.toString();
+    }
 }

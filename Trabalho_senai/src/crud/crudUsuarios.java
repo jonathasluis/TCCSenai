@@ -75,4 +75,20 @@ public class crudUsuarios {
 		}
 		return tabela;
 	}
+	
+	public boolean updSenhaUsuario(String senha,String usuario) {
+		String sql = "UPDATE usuario SET senha=? WHERE usuario=?";
+		try {
+			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			stmt.setString(1,senha);
+			stmt.setString(2, usuario);
+			stmt.execute();
+			stmt.close();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
