@@ -72,11 +72,11 @@ public class CadastrarFuncionarios {
 	private JButton btnLimpar;
 	private JPanel panel;
 	private JLabel lblImagem;
+	private JButton btnProcurar;
 	private JButton btnDeletar;
 	private JButton btnCancelar;
 	private JFormattedTextField ftfCpf;
 	private MetodosImagem mI = new MetodosImagem();
-	private int contador=0;//contar quantos cliques
 	private MaskFormatter maskaraData, maskaraTelefone,maskaraCpf;
 	private JRadioButton rdbtnFeminino;
 	private JRadioButton rdbtnAtivo;
@@ -149,17 +149,12 @@ public class CadastrarFuncionarios {
 		lblImagem.addMouseListener(new MouseAdapter() {//inicio evento para escolher e abrir imagem
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				contador++;
-				new Thread(thread).start();	
-				if(contador == 2) {
+				if(arg0.getClickCount()==2) {
 					img = mI.selecionaImg();
 					if(img != null) {
 						lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
 					}
 					mI.abrirImagem(img, img, panel, lblImagem,null);
-					contador=0;
-				}else {
-					return;
 				}
 			}// fim evento para escolher e abrir imagem
 		});
@@ -174,7 +169,7 @@ public class CadastrarFuncionarios {
 		tabela = new JTable();
 		tabela.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {//evento de clique na tabela
 				lblImagem.setIcon(null);
 				contadorParaEditar=1;
 				btnLimpar.setEnabled(false);
@@ -676,21 +671,7 @@ public class CadastrarFuncionarios {
 		
 	}
 	
-	Runnable thread = new Runnable() {	//inicio da tarefa paralela de contar cliques
-		@Override
-		public void run() {
-			try {
-				while(true) {
-					Thread.sleep(1500);
-					contador=0;
-				}
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	};//fim da tarefa paralela de contar cliques
-	private JButton btnProcurar;
+	
 	
 	void menu() {
 		JMenuBar menuBar = new JMenuBar();

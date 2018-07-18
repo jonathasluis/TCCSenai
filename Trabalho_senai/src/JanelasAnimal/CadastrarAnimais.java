@@ -261,20 +261,8 @@ public class CadastrarAnimais {//teste3
 					if(img != null) {
 						lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
 					}
-				}
-				
-				/*contador++;
-				new Thread(thread).start();	
-				if(contador == 2) {
-					img = mI.selecionaImg();
-					if(img != null) {
-						lblImagem.setHorizontalAlignment(SwingConstants.LEADING);
-					}
 					mI.abrirImagem(img, img, panel, lblImagem,null);
-					contador=0;
-				}else {
-					return;
-				}*/
+				}
 			}
 		});
 		panel.setLayout(new CardLayout(0, 0));
@@ -380,11 +368,6 @@ public class CadastrarAnimais {//teste3
 				if(ftfDataCompra.getText().contains(" ")){
 					JOptionPane.showMessageDialog(null, "insira a Data da \"Compra\"", "ALERTA!",JOptionPane.WARNING_MESSAGE);
 					ftfDataCompra.requestFocus();
-					return;
-				}
-				if(cbEspecie.getSelectedIndex()==0){
-					JOptionPane.showMessageDialog(null, "insira uma Especie valida", "ALERTA!",JOptionPane.WARNING_MESSAGE);
-					cbEspecie.requestFocus();
 					return;
 				}
 				if(tfDestino.getText().trim().equals("")){
@@ -572,7 +555,6 @@ public class CadastrarAnimais {//teste3
 		
 		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
 		colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));	
-		//VerificaSeTemDadosNaTabela();
 		//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
 				if (tabela.getRowCount()==0) {
 					scrollPane.setVisible(false);

@@ -126,7 +126,7 @@ public class Login {//
 		btnEntrar.setBounds(99, 181, 105, 23);
 		frmLogin.getContentPane().add(btnEntrar);
 		
-		JLabel lblEsqueceuSuaSenha = new JLabel("Esqueceu sua \r\nSenha\r\n");
+		JLabel lblEsqueceuSuaSenha = new JLabel("Esqueceu sua Senha?");
 		lblEsqueceuSuaSenha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {//evento de mudar a cor do label
