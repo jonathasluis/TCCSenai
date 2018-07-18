@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
-import java.awt.Window.Type;
 import java.awt.Toolkit;
 
 public class EnviarEmail {

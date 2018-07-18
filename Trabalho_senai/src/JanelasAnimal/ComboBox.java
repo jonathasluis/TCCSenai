@@ -12,7 +12,7 @@ public class ComboBox {
 		
 	public void comboBoxEspecie() {
 		ResultSet dados1=null;
-		String sql = "SELECT (nome_es) FROM especie";
+		String sql = "SELECT (nome_es) FROM especie order by nome_es";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			dados1 = stmt.executeQuery();
@@ -75,7 +75,7 @@ public class ComboBox {
 	
 	public static void comboBoxRaca(int idEspecie) {
 		ResultSet dados1=null;
-		String sql = "SELECT * FROM raca where id_especie = ?";
+		String sql = "SELECT * FROM raca where id_especie = ? order by nome_ra";
 		try {
 			PreparedStatement st = Conexao.conexao.prepareStatement(sql);
 			st.setInt(1, idEspecie);
@@ -90,7 +90,7 @@ public class ComboBox {
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-			System.out.println("ero ao preencher comboBox raça");
+			System.out.println("erro ao preencher comboBox raça");
 		}
 	}
 	

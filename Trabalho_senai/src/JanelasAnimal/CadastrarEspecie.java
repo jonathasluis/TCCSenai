@@ -127,7 +127,7 @@ public class CadastrarEspecie{
 	
 	public void comboBoxEspecie() {
 		ResultSet dados1=null;
-		String sql = "SELECT (nome_es) FROM especie";
+		String sql = "SELECT (nome_es) FROM especie order by nome_es";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			dados1 = stmt.executeQuery();
@@ -154,9 +154,7 @@ public class CadastrarEspecie{
 			stmt.execute();
 			stmt.close();
 			JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-			
-			
-
+			this.comboBoxEspecie();
 			frmNovaEspecie.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

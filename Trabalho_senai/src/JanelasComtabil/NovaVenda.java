@@ -3,14 +3,14 @@ package JanelasComtabil;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -36,9 +37,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.text.MaskFormatter;
 
 import JanelasAnimal.CadastrarAnimais;
-import JanelasAnimal.ComboBox;
 import JanelasFuncionarios.CadastrarFuncionarios;
-import banco.Conexao;
 import outraJanelas.EnviarEmail;
 import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
@@ -55,7 +54,6 @@ public class NovaVenda {
 	private JTextField tfPreco;
 	private JTextField tfCliente;
 	public static JComboBox<String> cbAnimal;
-	ComboBox cb = new ComboBox();
 	private JLabel lblProduto;
 	private JLabel lblAnimal;
 	int id;
@@ -64,6 +62,7 @@ public class NovaVenda {
 	private JTextField textField;
 	private JFormattedTextField ftfData;
 	private MaskFormatter mask;
+	static String numero=null;
 
 	/**
 	 * Launch the application.
@@ -131,10 +130,8 @@ public class NovaVenda {
 		rdbtnAnimal = new JRadioButton("Animal");
 		rdbtnAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cbAnimal.setVisible(true);
-				lblProduto.setVisible(false);
-				tfProduto.setVisible(false);
-				lblAnimal.setVisible(true);
+				cbAnimal.setEnabled(true);
+				tfProduto.setEnabled(false);
 			}
 		});
 		rdbtnAnimal.setBounds(123, 80, 66, 20);
@@ -144,10 +141,8 @@ public class NovaVenda {
 		rdbtnSubproduto.setSelected(true);
 		rdbtnSubproduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cbAnimal.setVisible(true);
-				lblProduto.setVisible(true);
-				tfProduto.setVisible(true);
-				lblAnimal.setVisible(true);
+				cbAnimal.setEnabled(true);
+				tfProduto.setEnabled(true);
 			}
 		});
 		rdbtnSubproduto.setBounds(191, 80, 94, 20);
@@ -156,10 +151,8 @@ public class NovaVenda {
 		rdbtnPlantio = new JRadioButton("Plantio");
 		rdbtnPlantio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cbAnimal.setVisible(false);
-				lblAnimal.setVisible(false);
-				lblProduto.setVisible(true);
-				tfProduto.setVisible(true);
+				cbAnimal.setEnabled(false);
+				tfProduto.setEnabled(true);
 			}
 		});
 		rdbtnPlantio.setBounds(287, 80, 66, 20);
@@ -186,7 +179,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblAnimal);
 		
 		cbAnimal = new JComboBox<String>();
-		cbAnimal.setBackground(Color.WHITE);
+		cbAnimal.setBackground(SystemColor.controlHighlight);
 		cbAnimal.setBounds(546, 111, 188, 20);
 		frmNovaVenda.getContentPane().add(cbAnimal);
 		
@@ -208,6 +201,19 @@ public class NovaVenda {
 		tfPreco = new JTextField();
 		tfPreco.setColumns(10);
 		tfPreco.setBounds(886, 81, 164, 20);
+		tfPreco.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE || (e.getKeyChar() == KeyEvent.VK_0)|| (e.getKeyChar() == KeyEvent.VK_1)|| (e.getKeyChar() == KeyEvent.VK_2) 
+			            || (e.getKeyChar() == KeyEvent.VK_3)|| (e.getKeyChar() == KeyEvent.VK_4)|| (e.getKeyChar() == KeyEvent.VK_5)|| (e.getKeyChar() == KeyEvent.VK_6)|| (e.getKeyChar() == KeyEvent.VK_7)
+			            || (e.getKeyChar() == KeyEvent.VK_8)|| (e.getKeyChar() == KeyEvent.VK_9)||(e.getKeyChar() == KeyEvent.VK_ENTER)||(e.getKeyChar() == KeyEvent.VK_COMMA))
+			    { 
+					
+			    }else{
+			         e.consume();
+			    }
+			}
+		});
 		frmNovaVenda.getContentPane().add(tfPreco);
 		
 		JLabel lblCliente = new JLabel("Cliente:");
@@ -226,6 +232,36 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblDataDaVenda);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(tfCliente.getText().trim().equals("")) {//inicio do tratamento de informaçao 
+					JOptionPane.showMessageDialog(null, "Insira o nome do Cliente", "ALERTA!", JOptionPane.WARNING_MESSAGE);
+					tfCliente.requestFocus();
+					return;
+				}
+				if(ftfData.getText().contains(" ")) {
+					JOptionPane.showMessageDialog(null, "Insira a data da Venda", "ALERTA!", JOptionPane.WARNING_MESSAGE);
+					ftfData.requestFocus();
+					return;
+				}
+				if(tfPreco.getText().trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "Insira o valor", "ALERTA!", JOptionPane.WARNING_MESSAGE);
+					tfPreco.requestFocus();
+					return;
+				}
+				if (spinner.getValue().equals(0)) {
+					JOptionPane.showMessageDialog(null, "Insira uma quantidade!", "ALERTA!",JOptionPane.WARNING_MESSAGE);
+					spinner.requestFocus();
+					return;
+				}//fim do tratamento de informaçao 
+				
+				//TESTE DE CADASTRO DE PREÇO
+				numero = tfPreco.getText().toString();
+				numero = numero.replace(".", ",");
+				//FIM DO TESTE
+			}
+		});
 		btnSalvar.setBounds(975, 637, 89, 23);
 		frmNovaVenda.getContentPane().add(btnSalvar);
 		
@@ -286,30 +322,6 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(button);
 		
 		menu();
-		
-		//cb.comboBoxAnimal();
-		//cb.comboBoxFazenda();
-	}
-	
-	void idAnimal(String nome) {
-		String sql = "SELECT (idanimal) from animais where nome_a=?";
-		ResultSet rs= null;
-		try {
-			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
-			stmt.setString(1, cbAnimal.getSelectedItem().toString());
-			rs = stmt.executeQuery();
-			stmt.execute();
-			stmt.close();
-			
-			while(rs.next()) {
-				id = rs.getInt("idanimal");
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		}
 	}
 	
 	void menu() {
