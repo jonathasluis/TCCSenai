@@ -37,8 +37,8 @@ public class Login {//
 	private JPasswordField pfSenha;
 	String armazenar ;
 	private JButton btnEntrar;
-	String emailSistema = "jonathassousasgs@gmail.com";
-	String senha = "99652127";
+	String emailSistema = "@gmail.com";
+	String senha = "";
 	String destino;
 	String titulo = "Nova senha";
 	String novaSenha;
