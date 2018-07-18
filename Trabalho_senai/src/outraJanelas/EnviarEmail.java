@@ -53,24 +53,11 @@ public class EnviarEmail {
 	
 	void enviarEmail(String de,String senha,String para,String titulo,String msg ) {
 		//remetente
-		//String de
 		boolean ssl = true;
-		
-		//if(cbSsl.isSelected()) {
-		//	ssl=true;
-		//}else
-		//	ssl=false;
 		
 		String smtp = "smtp.gmail.com";
 		int porta = 445;
-		//String senha = psSenha.getText().toString();
-		
-		//destinatario
-		//String para = tfPara.getText().toString();
-		//String titulo = tfTitulo.getText().toString();
-		//String msg = editorPane.getText().toString();
-		
-		//enviando email
+
 		try {
 			SimpleEmail email = new SimpleEmail();
 			email.setFrom(de);

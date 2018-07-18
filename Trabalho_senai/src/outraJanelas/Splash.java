@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+
+import banco.Conexao;
+
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -90,6 +93,7 @@ public class Splash {
 		frame.getContentPane().add(progressBar);
 		
 		new Thread(proximaJanela).start();	//inicia a tarefa paralela
+		Conexao.getConexao();//estabelece conexao
 	}
 	
 	Runnable proximaJanela = new Runnable() {	

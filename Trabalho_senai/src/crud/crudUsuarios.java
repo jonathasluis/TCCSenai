@@ -79,7 +79,7 @@ public class crudUsuarios {
 	public boolean updSenhaUsuario(String senha,String usuario) {
 		String sql = "UPDATE usuario SET senha=? WHERE usuario=?";
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1,senha);
 			stmt.setString(2, usuario);
 			stmt.execute();
@@ -90,5 +90,22 @@ public class crudUsuarios {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public ResultSet selectUsuarioPeloNome(String usuario) {
+		ResultSet tabela = null;
+		String sql = "SELECT*FROM usuario where usuario=?";
+		try {
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			stmt.setString(1, usuario);
+			tabela = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return tabela=null;
+		}
+		return tabela;
 	}
 }

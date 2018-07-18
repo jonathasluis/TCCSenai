@@ -3,13 +3,17 @@ package outraJanelas;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,10 +27,6 @@ import DAO.Usuario;
 import banco.Conexao;
 import crud.crudUsuarios;
 
-import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 public class Login {//
 	Conexao c = new Conexao();
 	
@@ -37,6 +37,12 @@ public class Login {//
 	private JPasswordField pfSenha;
 	String armazenar ;
 	private JButton btnEntrar;
+	String emailSistema = "jonathassousasgs@gmail.com";
+	String senha = "99652127";
+	String destino;
+	String titulo = "Nova senha";
+	String novaSenha;
+	String msg;
 
 	/**
 	 * Launch the application.
@@ -94,7 +100,7 @@ public class Login {//
 		tfUsuario = new JTextField();
 		tfUsuario.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent arg0) {
+			public void keyPressed(KeyEvent arg0) {//evento de apertar ENTER
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					pfSenha.requestFocus();
 				}
@@ -107,7 +113,7 @@ public class Login {//
 		pfSenha = new JPasswordField();
 		pfSenha.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {//evento de apertar ENTER
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					btnEntrar.doClick();
 				}
@@ -120,32 +126,54 @@ public class Login {//
 		btnEntrar.setBounds(99, 181, 105, 23);
 		frmLogin.getContentPane().add(btnEntrar);
 		
-		JLabel lblEsqueceuSuaSenha = new JLabel("Esqueceu sua Senha");
+		JLabel lblEsqueceuSuaSenha = new JLabel("Esqueceu sua \r\nSenha\r\n");
 		lblEsqueceuSuaSenha.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseEntered(MouseEvent arg0) {
+			public void mouseEntered(MouseEvent arg0) {//evento de mudar a cor do label
 				lblEsqueceuSuaSenha.setForeground(Color.red);
 			}
 			@Override
-			public void mouseExited(MouseEvent e) {
+			public void mouseExited(MouseEvent e) {//evento de mudar a cor do label
 				lblEsqueceuSuaSenha.setForeground(Color.black);
 			}
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(!tfUsuario.getText().trim().equals("")) {
-					String sistema = "";
-					String senha = "";
-					String destino = "";
-					String titulo = "Nova senha";
-					String novaSenha = gerarSenhaAleatoria();
-					String msg = "sua nova senha é "+novaSenha;
-					
-					new crudUsuarios().updSenhaUsuario(novaSenha, tfUsuario.getText());
-					new EnviarEmail().enviarEmail(sistema, senha, destino, titulo, msg);
-				}else {
-					JOptionPane.showMessageDialog(null, "");
+			public void mouseClicked(MouseEvent e) {//evento de clique no label
+				if(tfUsuario.getText().trim().equals("")) {// verivicaçao se o campo tfUsuario esta vazio
+					JOptionPane.showMessageDialog(null, "Insira um usuario");
+					tfUsuario.requestFocus();
+					return;
 				}
-			}
+				
+				ResultSet rs = new crudUsuarios().selectUsuarioPeloNome(tfUsuario.getText());//select para selecionar o usuario do tfUsuario
+				try {
+					if(rs.next()) { // verificaçao se tem usurio
+						destino = rs.getString("email");
+						novaSenha = gerarSenhaAleatoria();
+						msg = "sua nova senha é "+novaSenha;
+						
+					}else {
+						JOptionPane.showMessageDialog(null, "<html><body><p width='150px' align='center'>O usuario inserido não "+ "\n<html><body><p width='150px'"
+								+ " align='center'>corresponde a nenhuma conta.", null, JOptionPane.ERROR_MESSAGE);
+						tfUsuario.selectAll();
+						return;
+					} //fim verificaçao se tem usurio
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				
+				int resposta = JOptionPane.showConfirmDialog(null, "<html><body><p width='230px' align='center'>A sua senha sera alterada e enviada para o e-mail:\n"
+						+"<html><body><p width='230px' align='center'>"+destino +"\n<html><body><p width='230px' align='center'>Deseja continuar?" , 
+						"Alerta", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+				
+				if(resposta != JOptionPane.YES_OPTION) {//resposta do JOptionPane
+					return;
+				}
+				
+				new crudUsuarios().updSenhaUsuario(novaSenha, tfUsuario.getText());//atualiza a senha
+				new EnviarEmail().enviarEmail(emailSistema, senha, destino, titulo, msg);//envia o email
+			
+			}//fim evento de clique no label
 		});
 		lblEsqueceuSuaSenha.setFont(new Font("Tahoma", Font.BOLD, 10));
 		lblEsqueceuSuaSenha.setBounds(178, 118, 105, 14);
@@ -155,16 +183,23 @@ public class Login {//
 				logar();
 			}			
 		});
+		
+		Conexao.getConexao();
 	}	
 	
 	public void logar() {
 		ResultSet rs = null;
 		String campoUsuario = tfUsuario.getText();
 		String senha = String.valueOf(pfSenha.getPassword());
-		  
 		String sql = "select*from usuario where usuario=?";
+		
+		if(tfUsuario.getText().trim().equals("")) {
+			JOptionPane.showMessageDialog(null, "Insira um usuario");
+			return;
+		}
+		
 		try {
-			PreparedStatement stmt = Conexao.getConexao().prepareStatement(sql);
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, campoUsuario);
 			rs = stmt.executeQuery();
 			stmt.execute();
@@ -190,8 +225,8 @@ public class Login {//
 						}
 					}
 			}else {//if usuario
-				JOptionPane.showMessageDialog(null, "<html>&emsp;&emsp;O usuario inserido não "
-						+ "\ncorresponde a nenhuma conta.", null, JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "<html><body><p width='150px' align='center'>O usuario inserido não "
+						+ "\n<html><body><p width='150px' align='center'>corresponde a nenhuma conta.", null, JOptionPane.ERROR_MESSAGE);
 				tfUsuario.selectAll();
 			}
 
@@ -215,9 +250,10 @@ public class Login {//
         					   "V", "W", "X", "Y", "Z", "ç", "Ç", "0" };
        
         StringBuilder senha = new StringBuilder();
+        Random random = new Random();
 
         for (int i = 0; i < qtdeMaximaCaracteres; i++) {
-            int posicao = (int) (Math.random() * caracteres.length);
+            int posicao =  random.nextInt(caracteres.length);
             senha.append(caracteres[posicao]);
         }
         return senha.toString();
