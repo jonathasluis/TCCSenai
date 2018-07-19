@@ -11,6 +11,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,8 +39,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.text.MaskFormatter;
 
+import DAO.Vendas;
 import JanelasAnimal.CadastrarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
+import banco.Conexao;
 import outraJanelas.EnviarEmail;
 import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
@@ -63,6 +68,8 @@ public class NovaVenda {
 	private JFormattedTextField ftfData;
 	private MaskFormatter mask;
 	static String numero=null;
+	Vendas venda = new Vendas();
+	private JSpinner spinner;
 
 	/**
 	 * Launch the application.
@@ -188,7 +195,7 @@ public class NovaVenda {
 		lblQuantidade.setBounds(787, 111, 89, 20);
 		frmNovaVenda.getContentPane().add(lblQuantidade);
 		
-		JSpinner spinner = new JSpinner();
+		spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spinner.setBounds(886, 112, 164, 20);
 		frmNovaVenda.getContentPane().add(spinner);
@@ -260,6 +267,8 @@ public class NovaVenda {
 				numero = tfPreco.getText().toString();
 				numero = numero.replace(".", ",");
 				//FIM DO TESTE
+				
+				
 			}
 		});
 		btnSalvar.setBounds(975, 637, 89, 23);
@@ -322,6 +331,34 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(button);
 		
 		menu();
+	}
+	
+	void preencherDAOparaSalvarCompra() {
+		venda.setCliente(tfCliente.getText());
+		venda.setDataVenda(ftfData.getText());
+		venda.setPreco(Double.parseDouble(numero));
+		venda.setProduto(tfProduto.getText());
+		venda.setQuantidade((int) spinner.getValue());
+		venda.setIdFazenda(Principal.fazenda.getIdFazenda());
+	}
+	
+	void comboBoxAnimal() {
+		ResultSet dados1=null;
+		String sql = "SELECT (nome_es) FROM especie order by nome_es";
+		try {
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			dados1 = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+			cbAnimal.removeAllItems();
+			while(dados1.next()) {
+				cbAnimal.addItem(dados1.getString("nome_es"));
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("erro ao preencher comboBox especie");
+		}
 	}
 	
 	void menu() {
