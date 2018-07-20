@@ -348,6 +348,7 @@ public class NovaFazenda {
 		mntmMudarFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Pergunta.main(null);
+				Pergunta.contador = 1;
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);

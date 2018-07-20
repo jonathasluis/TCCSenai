@@ -29,6 +29,7 @@ public class Pergunta {
 	private JComboBox<String> comboBox;
 	static Usuario usuario = new Usuario();
 	private JButton btnOk;
+	public static int contador=0;
 
 	/**
 	 * Launch the application.
@@ -49,7 +50,7 @@ public class Pergunta {
 	/**
 	 * Create the application.
 	 */
-	public Pergunta() {
+	public Pergunta( ) {
 		initialize();
 	}
 
@@ -61,11 +62,16 @@ public class Pergunta {
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Pergunta.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 350, 250);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		if(contador==0) {
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			Principal.frmPrincipal.setVisible(false);
+		}else {
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		}
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		
-		Principal.frmPrincipal.setVisible(false);
+		
 		
 		JLabel lblNewLabel = new JLabel("Selecione a Fazenda");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -90,7 +96,10 @@ public class Pergunta {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String resp = String.valueOf(comboBox.getSelectedItem());
-				Principal.frmPrincipal.setVisible(true);
+				if (contador==0) {
+					Principal.frmPrincipal.setVisible(true);
+				}
+				
 				passa(resp);
 				Principal.pega();
 				frame.dispose();

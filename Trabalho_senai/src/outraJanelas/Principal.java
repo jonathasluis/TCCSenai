@@ -85,7 +85,7 @@ public class Principal {
 		frmPrincipal.setResizable(false);
 		frmPrincipal.setLocationRelativeTo(null);
 		Pergunta.main(null);
-		
+		Pergunta.contador = 0;		
 		
 		frmPrincipal.getContentPane().setLayout(null);
 		
@@ -320,6 +320,7 @@ public class Principal {
 		mntmMudarFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Pergunta.main(null);
+				Pergunta.contador = 1;
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);

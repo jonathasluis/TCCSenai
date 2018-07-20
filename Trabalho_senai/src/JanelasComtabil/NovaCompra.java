@@ -279,10 +279,10 @@ public class NovaCompra {////
 						JOptionPane.showMessageDialog(null, "Insira um Fornecedor!", "ALERTA!",JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					if(tfCNPJ.getText().trim().equals("")) {
-						int x = JOptionPane.showConfirmDialog(null, "Você deseja deixar o CNPJ nulo?", "ALERTA!",JOptionPane.WARNING_MESSAGE,JOptionPane.YES_NO_OPTION);
-						if (x==0) {
-							tfCNPJ.setText("0000");
+					if(tfCNPJ.getText().contains(" ")) {
+						int x = JOptionPane.showConfirmDialog(null, "Você deseja deixar o CNPJ nulo?", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+						if (x== JOptionPane.YES_OPTION) {
+							tfCNPJ.setText("000.000.000/0000-00");
 							tfNota.requestFocus();
 							return;
 						}else {
@@ -291,8 +291,8 @@ public class NovaCompra {////
 						}
 					}	
 					if(tfNota.getText().trim().equals("")) {
-						int x = JOptionPane.showConfirmDialog(null, "Você deseja deixar a nota como nulo?", "ALERTA!",JOptionPane.WARNING_MESSAGE,JOptionPane.YES_NO_OPTION);
-						if (x==0) {
+						int x = JOptionPane.showConfirmDialog(null, "Você deseja deixar a nota como nulo?", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+						if (x==JOptionPane.YES_OPTION) {
 							tfNota.setText("0000");
 							tfPreco.requestFocus();
 							return;
@@ -334,7 +334,7 @@ public class NovaCompra {////
 					}
 					//TESTE DE SALVAR AS ALTERAÇÕES 
 					if (editar==0) {
-						int resposta = JOptionPane.showConfirmDialog(null, "Você deseja alterar os dados já salvos?","ALERTA",JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION);
+						int resposta = JOptionPane.showConfirmDialog(null, "Você deseja alterar os dados já salvos?","ALERTA",JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
 						if (resposta == 0) {
 							x1=0;
 							update();
@@ -734,6 +734,7 @@ public class NovaCompra {////
 		mntmMudarFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Pergunta.main(null);
+				Pergunta.contador = 1;
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);
