@@ -84,6 +84,7 @@ public class CadastrarFuncionarios {
 	private CrudFuncionarios funcionario = new CrudFuncionarios();
 	private Funcionario DAOFuncionario = new Funcionario();
 	int contadorParaEditar = 0;
+	private JScrollPane scrollPane;
 	
 	/**
 	 * Launch the application.
@@ -161,7 +162,7 @@ public class CadastrarFuncionarios {
 		lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblImagem, "name_12082521761208");
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 253, 1054, 373);
 		frmCadastrarFuncionarios.getContentPane().add(scrollPane);
@@ -542,6 +543,7 @@ public class CadastrarFuncionarios {
 		DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
 		colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
 	}
+	
 	
 	void preencherDAOFuncionarioParaSalvarNovo() {
 		DAOFuncionario.setNome(tfNome.getText());
