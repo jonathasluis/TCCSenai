@@ -360,14 +360,16 @@ public class CadastrarAnimais {//teste3
 					tfNomeLote.requestFocus();
 					return;
 				}
-				if(ftfDataNascimento.getText().contains(" ")){
-					JOptionPane.showMessageDialog(null, "insira uma Data de Nascimento", "ALERTA!",JOptionPane.WARNING_MESSAGE);
+				if(ftfDataNascimento.getText().contains(" ") || ftfDataNascimento.getText().equals("0000-00-00")){
+					JOptionPane.showMessageDialog(null, "insira uma Data de Nascimento válida", "ALERTA!",JOptionPane.WARNING_MESSAGE);
 					ftfDataNascimento.requestFocus();
+					ftfDataNascimento.selectAll();
 					return;
 				}
-				if(ftfDataCompra.getText().contains(" ")){
-					JOptionPane.showMessageDialog(null, "insira a Data da \"Compra\"", "ALERTA!",JOptionPane.WARNING_MESSAGE);
+				if(ftfDataCompra.getText().contains(" ") || ftfDataCompra.getText().equals("0000-00-00")){
+					JOptionPane.showMessageDialog(null, "insira a Data da \"Compra\" válida", "ALERTA!",JOptionPane.WARNING_MESSAGE);
 					ftfDataCompra.requestFocus();
+					ftfDataCompra.selectAll();
 					return;
 				}
 				if(tfDestino.getText().trim().equals("")){
