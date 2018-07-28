@@ -26,7 +26,6 @@ import javax.swing.SwingConstants;
 import DAO.Usuario;
 import banco.Conexao;
 import crud.crudUsuarios;
-import teste.NovaPrincipalTeste;
 
 public class Login {//
 	Conexao c = new Conexao();
@@ -219,7 +218,7 @@ public class Login {//
 							Pergunta.usuario = usuario;
 							JOptionPane.showMessageDialog(null, "Bem-Vindo "+usuario.getUsuario());
 							frmLogin.dispose();
-							NovaPrincipalTeste.main(null);
+							Principal.main(null);
 						}else {//if senha
 							JOptionPane.showMessageDialog(null, "A senha inserida está incorreta.",null, JOptionPane.ERROR_MESSAGE);
 							pfSenha.selectAll();

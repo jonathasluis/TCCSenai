@@ -22,7 +22,6 @@ import DAO.Fazenda;
 import DAO.Usuario;
 import banco.Conexao;
 import crud.CrudFazenda;
-import teste.NovaPrincipalTeste;
 
 public class Pergunta {
 
@@ -65,7 +64,7 @@ public class Pergunta {
 		frame.setBounds(100, 100, 350, 250);
 		if(contador==0) {
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			NovaPrincipalTeste.frmPrincipal.setVisible(false);
+			Principal.frmPrincipal.setVisible(false);
 		}else {
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		}
@@ -98,7 +97,7 @@ public class Pergunta {
 			public void actionPerformed(ActionEvent arg0) {
 				String resp = String.valueOf(comboBox.getSelectedItem());
 				if (contador==0) {
-					NovaPrincipalTeste.frmPrincipal.setVisible(true);
+					Principal.frmPrincipal.setVisible(true);
 				}
 				
 				passa(resp);
