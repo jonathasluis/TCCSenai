@@ -178,7 +178,7 @@ public class Principal {
 		
 		
 	
-		pega();
+		//pega();
 		menu();
 	}
 	
