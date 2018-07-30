@@ -557,6 +557,7 @@ public class CadastrarAnimais {//teste3
 		
 		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
 		colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));	
+		
 		//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
 				if (tabela.getRowCount()==0) {
 					scrollPane.setVisible(false);
@@ -680,9 +681,13 @@ public class CadastrarAnimais {//teste3
 
 	void menu() {
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBorder(new LineBorder(new Color(64,64,64)));
+		menuBar.setBackground(Color.GRAY);
 		frmCadastroDeAnimais.setJMenuBar(menuBar);
 		
 		JMenu mnInicio = new JMenu("Inicio");
+		mnInicio.setForeground(new Color(230, 230, 250));
+		mnInicio.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/Home.png")));
 		mnInicio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -692,7 +697,9 @@ public class CadastrarAnimais {//teste3
 		});
 		menuBar.add(mnInicio);
 		
-		JMenu mnNewMenu = new JMenu("Animais");
+		JMenu mnNewMenu = new JMenu("Gest\u00E3o");
+		mnNewMenu.setForeground(new Color(230, 230, 250));
+		mnNewMenu.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/gestao.png")));
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
@@ -705,19 +712,18 @@ public class CadastrarAnimais {//teste3
 		mntmCadastrarAnimais.setEnabled(false);
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
-		JMenu mnFuncionarios = new JMenu("Funcionarios");
-		menuBar.add(mnFuncionarios);
-		
 		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Cadastrar funcionarios");
+		mnNewMenu.add(mntmCadastrarFuncionarios);
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastrarFuncionarios.main(null);
 				frmCadastroDeAnimais.dispose();
 			}
 		});
-		mnFuncionarios.add(mntmCadastrarFuncionarios);
 		
-		JMenu mnNewMenu_1 = new JMenu("Compra de Insumos");
+		JMenu mnNewMenu_1 = new JMenu("Financeiro");
+		mnNewMenu_1.setForeground(new Color(230, 230, 250));
+		mnNewMenu_1.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/money.png")));
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmCompra = new JMenuItem("Nova Compra");
@@ -729,31 +735,27 @@ public class CadastrarAnimais {//teste3
 		});
 		mnNewMenu_1.add(mntmCompra);
 		
-		JMenu mnNewMenu_2 = new JMenu("Vendas");
-		menuBar.add(mnNewMenu_2);
-		
 		JMenuItem mntmNovaVenda = new JMenuItem("Nova Venda");
+		mnNewMenu_1.add(mntmNovaVenda);
 		mntmNovaVenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaVenda.main(null);
 				frmCadastroDeAnimais.dispose();
 			}
 		});
-		mnNewMenu_2.add(mntmNovaVenda);
-		
-		JMenu mnRelatrio = new JMenu("Relat\u00F3rio");
-		menuBar.add(mnRelatrio);
 		
 		JMenuItem mntmTotal = new JMenuItem("Total");
+		mnNewMenu_1.add(mntmTotal);
 		mntmTotal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Total.main(null);
 				frmCadastroDeAnimais.dispose();
 			}
 		});
-		mnRelatrio.add(mntmTotal);
 		
 		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
+		mnOpes.setForeground(new Color(230, 230, 250));
+		mnOpes.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/options.png")));
 		menuBar.add(mnOpes);
 		
 		JMenuItem mntmNovaFazenda = new JMenuItem("Nova fazenda");

@@ -79,18 +79,22 @@ public class Splash {
 		lblX.setBounds(391, 11, 19, 14);
 		frame.getContentPane().add(lblX);
 		
-		JLabel label = new JLabel("");
-		label.setBounds(0, 0, 420, 239);
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setIcon(new ImageIcon(Splash.class.getResource("/img/logo-pequena-sem-texto.png")));
-		frame.getContentPane().add(label);
-		
 		progressBar = new JProgressBar();
+		progressBar.setOpaque(true);
 		progressBar.setBounds(0, 238, 420, 12);
 		progressBar.setForeground(UIManager.getColor("ProgressBar.foreground"));
 		progressBar.setStringPainted(true);
 		progressBar.setMaximum(70);
 		frame.getContentPane().add(progressBar);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Splash.class.getResource("/img/logo-pequena-sem-texto.png")));
+		label.setBounds(0, 9, 420, 226);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		frame.getContentPane().add(label);
+		
+		ImageIcon iconAnimal = new ImageIcon("G:/img/fundo.jpeg");
+		iconAnimal.setImage(iconAnimal.getImage().getScaledInstance(420, 250 ,100));
 		
 		new Thread(proximaJanela).start();	//inicia a tarefa paralela
 		Conexao.getConexao();//estabelece conexao

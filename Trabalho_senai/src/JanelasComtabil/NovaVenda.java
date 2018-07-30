@@ -48,6 +48,7 @@ import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
+import javax.swing.border.LineBorder;
 
 public class NovaVenda {
 
@@ -363,9 +364,14 @@ public class NovaVenda {
 	
 	void menu() {
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBorder(new LineBorder(Color.DARK_GRAY));
+		menuBar.setBackground(new Color(128, 128, 128));
 		frmNovaVenda.setJMenuBar(menuBar);
 		
 		JMenu mnInicio = new JMenu("Inicio");
+		mnInicio.setForeground(new Color(230, 230, 250));
+		mnInicio.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/Home.png")));
+		mnInicio.setBackground(new Color(128, 128, 128));
 		mnInicio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -375,7 +381,10 @@ public class NovaVenda {
 		});
 		menuBar.add(mnInicio);
 		
-		JMenu mnNewMenu = new JMenu("Animais");
+		JMenu mnNewMenu = new JMenu("Gest\u00E3o");
+		mnNewMenu.setForeground(new Color(230, 230, 250));
+		mnNewMenu.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/gestao.png")));
+		mnNewMenu.setBackground(new Color(128, 128, 128));
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
@@ -387,19 +396,19 @@ public class NovaVenda {
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
-		JMenu mnFuncionarios = new JMenu("Funcionarios");
-		menuBar.add(mnFuncionarios);
-		
 		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Cadastrar funcionarios");
+		mnNewMenu.add(mntmCadastrarFuncionarios);
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastrarFuncionarios.main(null);
 				frmNovaVenda.dispose();
 			}
 		});
-		mnFuncionarios.add(mntmCadastrarFuncionarios);
 		
-		JMenu mnNewMenu_1 = new JMenu("Compra de Insumos");
+		JMenu mnNewMenu_1 = new JMenu("Financeiro");
+		mnNewMenu_1.setForeground(new Color(230, 230, 250));
+		mnNewMenu_1.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/money.png")));
+		mnNewMenu_1.setBackground(new Color(128, 128, 128));
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmCompra = new JMenuItem("Nova Compra");
@@ -410,34 +419,31 @@ public class NovaVenda {
 			}
 		});
 		mnNewMenu_1.add(mntmCompra);
-
-		JMenu mnNewMenu_2 = new JMenu("Vendas");
-		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmNovaVenda = new JMenuItem("Nova Venda");
+		mnNewMenu_1.add(mntmNovaVenda);
 		mntmNovaVenda.setEnabled(false);
-		mntmNovaVenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				NovaVenda.main(null);
-				frmNovaVenda.dispose();
-			}
-		});
-		mnNewMenu_2.add(mntmNovaVenda);
-		
-		JMenu mnRelatrio = new JMenu("Relat\u00F3rio");
-		menuBar.add(mnRelatrio);
-		
-		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
-		menuBar.add(mnOpes);
 		
 		JMenuItem mntmTotal = new JMenuItem("Total");
+		mnNewMenu_1.add(mntmTotal);
 		mntmTotal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Total.main(null);
 				frmNovaVenda.dispose();
 			}
 		});
-		mnRelatrio.add(mntmTotal);
+		mntmNovaVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NovaVenda.main(null);
+				frmNovaVenda.dispose();
+			}
+		});
+		
+		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
+		mnOpes.setForeground(new Color(230, 230, 250));
+		mnOpes.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/options.png")));
+		mnOpes.setBackground(new Color(128, 128, 128));
+		menuBar.add(mnOpes);
 		
 		JMenuItem mntmNovaFazenda = new JMenuItem("Nova fazenda");
 		mntmNovaFazenda.addActionListener(new ActionListener() {

@@ -50,6 +50,7 @@ import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
+import javax.swing.border.LineBorder;
 
 public class NovaCompra {////
 	
@@ -602,16 +603,18 @@ public class NovaCompra {////
 	public void menu() {
 
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBorder(new LineBorder(new Color(64, 64, 64)));
 		menuBar.setFont(new Font("Arial", Font.PLAIN, 12));
 		menuBar.setForeground(new Color(230, 230, 250));
-		menuBar.setBackground(Color.DARK_GRAY);
+		menuBar.setBackground(new Color(128, 128, 128));
 		frmCompraDeInsumos.setJMenuBar(menuBar);
 		
 		JMenu mnInicio = new JMenu("Inicio");
+		mnInicio.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/Home.png")));
 		mnInicio.setFont(new Font("Arial", Font.PLAIN, 12));
 		mnInicio.setOpaque(true);
 		mnInicio.setForeground(new Color(230, 230, 250));
-		mnInicio.setBackground(Color.DARK_GRAY);
+		mnInicio.setBackground(new Color(128, 128, 128));
 		mnInicio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -621,18 +624,19 @@ public class NovaCompra {////
 		});
 		menuBar.add(mnInicio);
 		
-		JMenu mnNewMenu = new JMenu("Animais");
+		JMenu mnNewMenu = new JMenu("Gest\u00E3o");
+		mnNewMenu.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/gestao.png")));
 		mnNewMenu.setFont(new Font("Arial", Font.PLAIN, 12));
 		mnNewMenu.setOpaque(true);
 		mnNewMenu.setFocusPainted(true);
 		mnNewMenu.setBorder(new CompoundBorder());
-		mnNewMenu.setBackground(Color.DARK_GRAY);
+		mnNewMenu.setBackground(new Color(128, 128, 128));
 		mnNewMenu.setForeground(new Color(230, 230, 250));
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
 		mntmCadastrarAnimais.setFont(new Font("Arial", Font.PLAIN, 12));
-		mntmCadastrarAnimais.setForeground(new Color(230, 230, 250));
+		mntmCadastrarAnimais.setForeground(new Color(0, 0, 0));
 		mntmCadastrarAnimais.setBackground(new Color(0, 128, 0));
 		mntmCadastrarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -642,26 +646,20 @@ public class NovaCompra {////
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
-		JMenu mnFuncionarios = new JMenu("Funcionarios");
-		mnFuncionarios.setFont(new Font("Arial", Font.PLAIN, 12));
-		mnFuncionarios.setForeground(new Color(230, 230, 250));
-		mnFuncionarios.setBackground(Color.DARK_GRAY);
-		mnFuncionarios.setOpaque(true);
-		menuBar.add(mnFuncionarios);
-		
 		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Cadastrar funcionarios");
+		mnNewMenu.add(mntmCadastrarFuncionarios);
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastrarFuncionarios.main(null);
 				frmCompraDeInsumos.dispose();
 			}
 		});
-		mnFuncionarios.add(mntmCadastrarFuncionarios);
 		
-		JMenu mnNewMenu_1 = new JMenu("Compra de Insumos");
+		JMenu mnNewMenu_1 = new JMenu("Financeiro");
+		mnNewMenu_1.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/money.png")));
 		mnNewMenu_1.setFont(new Font("Arial", Font.PLAIN, 12));
 		mnNewMenu_1.setForeground(new Color(230, 230, 250));
-		mnNewMenu_1.setBackground(Color.DARK_GRAY);
+		mnNewMenu_1.setBackground(new Color(128, 128, 128));
 		mnNewMenu_1.setOpaque(true);
 		menuBar.add(mnNewMenu_1);
 		
@@ -675,42 +673,29 @@ public class NovaCompra {////
 		});
 		mnNewMenu_1.add(mntmCompra);
 		
-		JMenu mnNewMenu_2 = new JMenu("Vendas");
-		mnNewMenu_2.setFont(new Font("Arial", Font.PLAIN, 12));
-		mnNewMenu_2.setForeground(new Color(230, 230, 250));
-		mnNewMenu_2.setBackground(Color.DARK_GRAY);
-		mnNewMenu_2.setOpaque(true);
-		menuBar.add(mnNewMenu_2);
-		
 		JMenuItem mntmNovaVenda = new JMenuItem("Nova Venda");
-		mntmNovaVenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				NovaVenda.main(null);
-				frmCompraDeInsumos.dispose();
-			}
-		});
-		mnNewMenu_2.add(mntmNovaVenda);
-		
-		JMenu mnRelatrio = new JMenu("Relat\u00F3rio");
-		mnRelatrio.setFont(new Font("Arial", Font.PLAIN, 12));
-		mnRelatrio.setForeground(new Color(230, 230, 250));
-		mnRelatrio.setBackground(Color.DARK_GRAY);
-		mnRelatrio.setOpaque(true);
-		menuBar.add(mnRelatrio);
+		mnNewMenu_1.add(mntmNovaVenda);
 		
 		JMenuItem mntmTotal = new JMenuItem("Total");
+		mnNewMenu_1.add(mntmTotal);
 		mntmTotal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Total.main(null);
 				frmCompraDeInsumos.dispose();
 			}
 		});
-		mnRelatrio.add(mntmTotal);
+		mntmNovaVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NovaVenda.main(null);
+				frmCompraDeInsumos.dispose();
+			}
+		});
 		
 		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
+		mnOpes.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/options.png")));
 		mnOpes.setFont(new Font("Arial", Font.PLAIN, 12));
 		mnOpes.setForeground(new Color(230, 230, 250));
-		mnOpes.setBackground(Color.DARK_GRAY);
+		mnOpes.setBackground(new Color(128, 128, 128));
 		mnOpes.setOpaque(true);
 		menuBar.add(mnOpes);
 		
