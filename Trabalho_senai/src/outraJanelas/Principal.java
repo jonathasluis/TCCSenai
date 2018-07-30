@@ -290,6 +290,7 @@ public class Principal {
 		menuBar.add(mnInicio);
 		
 		JMenu mnNewMenu = new JMenu("Gest\u00E3o");
+		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/img/gestao.png")));
 		mnNewMenu.setOpaque(true);
 		mnNewMenu.setFocusPainted(true);
 		mnNewMenu.setBorder(new CompoundBorder());
@@ -320,6 +321,7 @@ public class Principal {
 		});
 		
 		JMenu mnNewMenu_1 = new JMenu("Financeiro");
+		mnNewMenu_1.setIcon(new ImageIcon(Principal.class.getResource("/img/money.png")));
 		mnNewMenu_1.setForeground(new Color(230, 230, 250));
 		mnNewMenu_1.setBackground(new Color(128, 128, 128));
 		mnNewMenu_1.setOpaque(true);
