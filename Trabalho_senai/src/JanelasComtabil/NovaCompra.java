@@ -552,7 +552,7 @@ public class NovaCompra {////
 		img.setImage(img.getImage().getScaledInstance(1074, 671, 100));
 		frmCompraDeInsumos.getContentPane().add(llll);
 		JLabel label = new JLabel("");
-		//label.setIcon(img);
+		label.setIcon(img);
 		label.setBounds(0, 0, 1074, 671);
 		frmCompraDeInsumos.getContentPane().add(label);
 		

@@ -89,6 +89,12 @@ public class Principal {
 		ImageIcon iconAnimal = new ImageIcon("src/img/Vaca.png");
 		iconAnimal.setImage(iconAnimal.getImage().getScaledInstance(116, 58 ,100));
 		JButton btnAnimais = new JButton("");
+		btnAnimais.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CadastrarAnimais.main(null);
+				frmPrincipal.setVisible(false);
+			}
+		});
 		btnAnimais.setContentAreaFilled(false);
 		btnAnimais.setBackground(Color.GRAY);
 		btnAnimais.setBounds(10, 145, 120,60);
@@ -105,6 +111,12 @@ public class Principal {
 		ImageIcon iconFuncionarios = new ImageIcon("src/img/funcionario.png");
 		iconFuncionarios.setImage(iconFuncionarios.getImage().getScaledInstance(116, 58 ,100));
 		JButton btnFuncionarios = new JButton("");
+		btnFuncionarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CadastrarFuncionarios.main(null);
+				frmPrincipal.setVisible(false);
+			}
+		});
 		btnFuncionarios.setContentAreaFilled(false);
 		btnFuncionarios.setBounds(245, 145, 120,60);
 		btnFuncionarios.setIcon(iconFuncionarios);
@@ -120,6 +132,12 @@ public class Principal {
 		ImageIcon iconCompras = new ImageIcon("src/img/compra1.png");
 		iconCompras.setImage(iconCompras.getImage().getScaledInstance(116, 58 ,100));
 		JButton btnCompras = new JButton("");
+		btnCompras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NovaCompra.main(null);
+				frmPrincipal.setVisible(false);
+			}
+		});
 		btnCompras.setContentAreaFilled(false);
 		btnCompras.setBounds(470, 145, 120,60);
 		btnCompras.setIcon(iconCompras);
@@ -135,6 +153,12 @@ public class Principal {
 		ImageIcon iconVendas = new ImageIcon("src/img/venda.png");
 		iconVendas.setImage(iconVendas.getImage().getScaledInstance(116, 58 ,100));
 		JButton btnVendas = new JButton("");
+		btnVendas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NovaVenda.main(null);
+				frmPrincipal.setVisible(false);
+			}
+		});
 		btnVendas.setContentAreaFilled(false);
 		btnVendas.setBounds(700, 145, 120,60);
 		btnVendas.setIcon(iconVendas);
@@ -149,7 +173,13 @@ public class Principal {
 		
 		ImageIcon iconUsuario = new ImageIcon("src/img/user.png");
 		iconUsuario.setImage(iconUsuario.getImage().getScaledInstance(116, 58 ,100));
-		JButton btnUsuario = new JButton("Usuario");
+		JButton btnUsuario = new JButton("");
+		btnUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Usuario.main(null);
+				//frmPrincipal.setVisible(false);
+			}
+		});
 		btnUsuario.setContentAreaFilled(false);
 		btnUsuario.setBounds(920, 145, 120,60);
 		btnUsuario.setIcon(iconUsuario);

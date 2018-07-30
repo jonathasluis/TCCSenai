@@ -123,7 +123,7 @@ public class Login {//
 		frmLogin.getContentPane().add(pfSenha);
 		
 		btnEntrar = new JButton("Entrar");
-		btnEntrar.setBounds(99, 181, 105, 23);
+		btnEntrar.setBounds(178, 180, 105, 23);
 		frmLogin.getContentPane().add(btnEntrar);
 		
 		JLabel lblEsqueceuSuaSenha = new JLabel("Esqueceu sua Senha?");
@@ -178,6 +178,10 @@ public class Login {//
 		lblEsqueceuSuaSenha.setFont(new Font("Tahoma", Font.BOLD, 10));
 		lblEsqueceuSuaSenha.setBounds(178, 118, 105, 14);
 		frmLogin.getContentPane().add(lblEsqueceuSuaSenha);
+		
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBounds(63, 180, 105, 23);
+		frmLogin.getContentPane().add(btnCadastrar);
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logar();
