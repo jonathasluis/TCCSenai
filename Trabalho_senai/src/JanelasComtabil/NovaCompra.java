@@ -335,7 +335,7 @@ public class NovaCompra {////
 					}
 					//TESTE DE SALVAR AS ALTERAÇÕES 
 					if (editar==0) {
-						int resposta = JOptionPane.showConfirmDialog(null, "Você deseja alterar os dados já salvos?","ALERTA",JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
+						int resposta = JOptionPane.showConfirmDialog(null, "Você deseja alterar os dados já salvos?","ALERTA", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 						if (resposta == 0) {
 							x1=0;
 							update();

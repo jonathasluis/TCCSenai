@@ -31,6 +31,7 @@ import JanelasComtabil.NovaCompra;
 import JanelasComtabil.NovaVenda;
 import JanelasComtabil.Total;
 import JanelasFuncionarios.CadastrarFuncionarios;
+import java.awt.SystemColor;
 
 
 public class Principal {
@@ -298,11 +299,11 @@ public class Principal {
 		mnNewMenu.setForeground(new Color(230, 230, 250));
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
+		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
 		mntmCadastrarAnimais.setBorder(new LineBorder(new Color(34, 139, 34)));
 		mntmCadastrarAnimais.setOpaque(true);
-		mntmCadastrarAnimais.setForeground(new Color(230, 230, 250));
-		mntmCadastrarAnimais.setBackground(new Color(34, 139, 34));
+		mntmCadastrarAnimais.setForeground(new Color(0, 0, 0));
+		mntmCadastrarAnimais.setBackground(SystemColor.menu);
 		mntmCadastrarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarAnimais.main(null);
@@ -311,7 +312,7 @@ public class Principal {
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
-		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Cadastrar funcionarios");
+		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Funcionarios");
 		mnNewMenu.add(mntmCadastrarFuncionarios);
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
