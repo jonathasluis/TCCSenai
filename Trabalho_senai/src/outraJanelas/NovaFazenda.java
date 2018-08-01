@@ -248,6 +248,11 @@ public class NovaFazenda {
 		lblDescrio_1.setBounds(10, 239, 378, 14);
 		frmNovaFazenda.getContentPane().add(lblDescrio_1);
 		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/gradiente_Branco.jpg")));
+		label.setBounds(0, 0, 1074, 670);
+		frmNovaFazenda.getContentPane().add(label);
+		
 		menu();
 	}
 	
@@ -276,7 +281,7 @@ public class NovaFazenda {
 		mnNewMenu.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/gestao.png")));
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
+		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
 		mntmCadastrarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarAnimais.main(null);
@@ -285,7 +290,7 @@ public class NovaFazenda {
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
-		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Cadastrar funcionarios");
+		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Funcionarios");
 		mnNewMenu.add(mntmCadastrarFuncionarios);
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -300,7 +305,7 @@ public class NovaFazenda {
 		mnNewMenu_1.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/money.png")));
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmCompra = new JMenuItem("Nova Compra");
+		JMenuItem mntmCompra = new JMenuItem("Compra");
 		mntmCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaCompra.main(null);
@@ -309,7 +314,7 @@ public class NovaFazenda {
 		});
 		mnNewMenu_1.add(mntmCompra);
 		
-		JMenuItem mntmNovaVenda = new JMenuItem("Nova Venda");
+		JMenuItem mntmNovaVenda = new JMenuItem("Venda");
 		mnNewMenu_1.add(mntmNovaVenda);
 		
 		JMenuItem mntmTotal = new JMenuItem("Total");
@@ -333,7 +338,7 @@ public class NovaFazenda {
 		mnOpes.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/options.png")));
 		menuBar.add(mnOpes);
 		
-		JMenuItem mntmNovaFazenda = new JMenuItem("Nova fazenda");
+		JMenuItem mntmNovaFazenda = new JMenuItem("Fazenda");
 		mntmNovaFazenda.setEnabled(false);
 		mntmNovaFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

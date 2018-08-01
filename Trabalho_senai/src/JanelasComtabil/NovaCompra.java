@@ -148,7 +148,7 @@ public class NovaCompra {////
 		tfProduto.setColumns(10);
 		
 		JLabel lblDataDaCompra = new JLabel("Data da Compra:");
-		lblDataDaCompra.setForeground(Color.WHITE);
+		lblDataDaCompra.setForeground(Color.BLACK);
 		lblDataDaCompra.setFont(new Font("Arial", Font.BOLD, 14));
 		lblDataDaCompra.setBounds(405, 80, 125, 20);
 		frmCompraDeInsumos.getContentPane().add(lblDataDaCompra);
@@ -170,7 +170,7 @@ public class NovaCompra {////
 		tfData.setText(formatada);
 		
 		JLabel lblNumeroDaNota = new JLabel("Numero da Nota:");
-		lblNumeroDaNota.setForeground(Color.WHITE);
+		lblNumeroDaNota.setForeground(Color.BLACK);
 		lblNumeroDaNota.setFont(new Font("Arial", Font.BOLD, 14));
 		lblNumeroDaNota.setBounds(405, 111, 131, 20);
 		frmCompraDeInsumos.getContentPane().add(lblNumeroDaNota);
@@ -193,7 +193,7 @@ public class NovaCompra {////
 		frmCompraDeInsumos.getContentPane().add(tfNota);
 		
 		JLabel lblPreo = new JLabel("Pre\u00E7o:");
-		lblPreo.setForeground(Color.WHITE);
+		lblPreo.setForeground(Color.BLACK);
 		lblPreo.setFont(new Font("Arial", Font.BOLD, 14));
 		lblPreo.setBounds(787, 80, 57, 20);
 		frmCompraDeInsumos.getContentPane().add(lblPreo);
@@ -235,7 +235,7 @@ public class NovaCompra {////
 		
 		JLabel lblFornecedor = new JLabel("Fornecedor:");
 		lblFornecedor.setBackground(Color.GRAY);
-		lblFornecedor.setForeground(Color.GRAY);
+		lblFornecedor.setForeground(Color.BLACK);
 		lblFornecedor.setFont(new Font("Arial", Font.BOLD, 14));
 		lblFornecedor.setBounds(10, 111, 100, 20);
 		frmCompraDeInsumos.getContentPane().add(lblFornecedor);
@@ -258,7 +258,7 @@ public class NovaCompra {////
 		txtFornecedor.setColumns(10);
 	
 		JLabel lblCnpj = new JLabel("CNPJ:");
-		lblCnpj.setForeground(Color.WHITE);
+		lblCnpj.setForeground(Color.BLACK);
 		lblCnpj.setFont(new Font("Arial", Font.BOLD, 14));
 		lblCnpj.setBounds(10, 142, 66, 20);
 		frmCompraDeInsumos.getContentPane().add(lblCnpj);
@@ -267,6 +267,7 @@ public class NovaCompra {////
 		
 		//BOTÃO SALVAR E ADD OS DADOS NA TABELA DO BD
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBackground(SystemColor.controlHighlight);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -362,6 +363,7 @@ public class NovaCompra {////
 		
 		//LIMPAR TODOS OS DADOS 
 		btnLimpar = new JButton("Limpar");
+		btnLimpar.setBackground(SystemColor.controlHighlight);
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -385,6 +387,7 @@ public class NovaCompra {////
 		
 		//CANCELAR A OPERAÇÃO E VOLTAR PARA A TELA PRINCIPAL
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(editar==1) {
@@ -402,7 +405,7 @@ public class NovaCompra {////
 		
 		
 		JLabel lblQuantidade = new JLabel("Quantidade:");
-		lblQuantidade.setForeground(Color.WHITE);
+		lblQuantidade.setForeground(Color.BLACK);
 		lblQuantidade.setFont(new Font("Arial", Font.BOLD, 14));
 		lblQuantidade.setBounds(787, 111, 89, 20);
 		frmCompraDeInsumos.getContentPane().add(lblQuantidade);

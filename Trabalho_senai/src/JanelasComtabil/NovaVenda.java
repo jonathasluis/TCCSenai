@@ -136,6 +136,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblTipoDoProduto);
 		
 		rdbtnAnimal = new JRadioButton("Animal");
+		rdbtnAnimal.setOpaque(false);
 		rdbtnAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cbAnimal.setEnabled(true);
@@ -146,6 +147,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(rdbtnAnimal);
 		
 		rdbtnSubproduto = new JRadioButton("Subproduto");
+		rdbtnSubproduto.setOpaque(false);
 		rdbtnSubproduto.setSelected(true);
 		rdbtnSubproduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -157,6 +159,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(rdbtnSubproduto);
 		
 		rdbtnPlantio = new JRadioButton("Plantio");
+		rdbtnPlantio.setOpaque(false);
 		rdbtnPlantio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cbAnimal.setEnabled(false);
@@ -240,6 +243,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblDataDaVenda);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBackground(SystemColor.controlHighlight);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -276,6 +280,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(btnSalvar);
 		
 		btnLimpar = new JButton("Limpar");
+		btnLimpar.setBackground(SystemColor.controlHighlight);
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tfCliente.setText(null);
@@ -290,6 +295,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(btnLimpar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmNovaVenda.dispose();

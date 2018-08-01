@@ -706,7 +706,7 @@ public class CadastrarFuncionarios {
 		mnNewMenu.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/gestao.png")));
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
+		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
 		mntmCadastrarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarAnimais.main(null);
@@ -715,7 +715,7 @@ public class CadastrarFuncionarios {
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
-		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Cadastrar funcionarios");
+		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Funcionarios");
 		mnNewMenu.add(mntmCadastrarFuncionarios);
 		mntmCadastrarFuncionarios.setEnabled(false);
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
@@ -731,7 +731,7 @@ public class CadastrarFuncionarios {
 		mnNewMenu_1.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/money.png")));
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmCompra = new JMenuItem("Nova Compra");
+		JMenuItem mntmCompra = new JMenuItem("Compra");
 		mntmCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaCompra.main(null);
@@ -740,7 +740,7 @@ public class CadastrarFuncionarios {
 		});
 		mnNewMenu_1.add(mntmCompra);
 		
-		JMenuItem mntmNovaVenda = new JMenuItem("Nova Venda");
+		JMenuItem mntmNovaVenda = new JMenuItem("Venda");
 		mnNewMenu_1.add(mntmNovaVenda);
 		
 		JMenuItem mntmTotal = new JMenuItem("Total");
@@ -764,7 +764,7 @@ public class CadastrarFuncionarios {
 		mnOpes.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/options.png")));
 		menuBar.add(mnOpes);
 		
-		JMenuItem mntmNovaFazenda = new JMenuItem("Nova fazenda");
+		JMenuItem mntmNovaFazenda = new JMenuItem("Fazenda");
 		mntmNovaFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaFazenda.main(null);

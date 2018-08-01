@@ -53,8 +53,8 @@ public class Splash {
 		frame.setBounds(100, 100, 420, 250);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setUndecorated(true); //tirar os botoes de cima e a borda
-		frame.getContentPane().setBackground(new Color(1.0f,1.0f,1.0f,0.0f)); //tranparente
-		frame.setBackground(new Color(1.0f,1.0f,1.0f,0.0f));				  //tranparente
+		//frame.getContentPane().setBackground(new Color(1.0f,1.0f,1.0f,0.0f)); //tranparente
+		//frame.setBackground(new Color(1.0f,1.0f,1.0f,0.0f));				  //tranparente
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 		
@@ -87,14 +87,13 @@ public class Splash {
 		progressBar.setMaximum(70);
 		frame.getContentPane().add(progressBar);
 		
+		ImageIcon iconAnimal = new ImageIcon("/img/gradiente_Branco.jpg");
+		iconAnimal.setImage(iconAnimal.getImage().getScaledInstance(420, 250 ,100));
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(Splash.class.getResource("/img/logo-pequena-sem-texto.png")));
-		label.setBounds(0, 9, 420, 226);
+		label.setBounds(0, 0, 420, 250);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(label);
-		
-		ImageIcon iconAnimal = new ImageIcon("G:/img/fundo.jpeg");
-		iconAnimal.setImage(iconAnimal.getImage().getScaledInstance(420, 250 ,100));
 		
 		new Thread(proximaJanela).start();	//inicia a tarefa paralela
 		Conexao.getConexao();//estabelece conexao

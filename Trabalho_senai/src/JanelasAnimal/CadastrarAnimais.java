@@ -243,6 +243,7 @@ public class CadastrarAnimais {//teste3
 		tfNomeLote.setColumns(10);
 		
 		panel = new JPanel();
+		panel.setOpaque(false);
 		panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBounds(774, 25, 290, 217);
@@ -274,11 +275,13 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(lblSexo);
 		
 		rdbtnMacho = new JRadioButton("Macho");
+		rdbtnMacho.setOpaque(false);
 		rdbtnMacho.setSelected(true);
 		rdbtnMacho.setBounds(62, 170, 68, 23);
 		frmCadastroDeAnimais.getContentPane().add(rdbtnMacho);
 		
 		rdbtnFemea = new JRadioButton("Femea");
+		rdbtnFemea.setOpaque(false);
 		rdbtnFemea.setBounds(140, 170, 80, 23);
 		frmCadastroDeAnimais.getContentPane().add(rdbtnFemea);
 		
@@ -293,6 +296,7 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(cbRaca);
 		
 		scrollPane =  new JScrollPane();
+		scrollPane.setOpaque(false);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 253, 1054, 39);
 		frmCadastroDeAnimais.getContentPane().add(scrollPane);
@@ -707,7 +711,7 @@ public class CadastrarAnimais {//teste3
 		mnNewMenu.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/gestao.png")));
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
+		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
 		mntmCadastrarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarAnimais.main(null);
@@ -717,7 +721,7 @@ public class CadastrarAnimais {//teste3
 		mntmCadastrarAnimais.setEnabled(false);
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
-		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Cadastrar funcionarios");
+		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Funcionarios");
 		mnNewMenu.add(mntmCadastrarFuncionarios);
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -731,7 +735,7 @@ public class CadastrarAnimais {//teste3
 		mnNewMenu_1.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/money.png")));
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmCompra = new JMenuItem("Nova Compra");
+		JMenuItem mntmCompra = new JMenuItem("Compra");
 		mntmCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaCompra.main(null);
@@ -740,7 +744,7 @@ public class CadastrarAnimais {//teste3
 		});
 		mnNewMenu_1.add(mntmCompra);
 		
-		JMenuItem mntmNovaVenda = new JMenuItem("Nova Venda");
+		JMenuItem mntmNovaVenda = new JMenuItem("Venda");
 		mnNewMenu_1.add(mntmNovaVenda);
 		mntmNovaVenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -763,7 +767,7 @@ public class CadastrarAnimais {//teste3
 		mnOpes.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/options.png")));
 		menuBar.add(mnOpes);
 		
-		JMenuItem mntmNovaFazenda = new JMenuItem("Nova fazenda");
+		JMenuItem mntmNovaFazenda = new JMenuItem("Fazenda");
 		mntmNovaFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaFazenda.main(null);
