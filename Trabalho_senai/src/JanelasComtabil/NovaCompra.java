@@ -126,7 +126,7 @@ public class NovaCompra {////
 		frmCompraDeInsumos.getContentPane().add(lblCompraDeInsumos);
 		
 		JLabel lblProduto = new JLabel("Produto:");
-		lblProduto.setForeground(Color.WHITE);
+		lblProduto.setForeground(Color.BLACK);
 		lblProduto.setFont(new Font("Arial", Font.BOLD, 14));
 		lblProduto.setBounds(10, 80, 78, 20);
 		frmCompraDeInsumos.getContentPane().add(lblProduto);
@@ -234,7 +234,8 @@ public class NovaCompra {////
 		tfPreco.setColumns(10);
 		
 		JLabel lblFornecedor = new JLabel("Fornecedor:");
-		lblFornecedor.setForeground(Color.WHITE);
+		lblFornecedor.setBackground(Color.GRAY);
+		lblFornecedor.setForeground(Color.GRAY);
 		lblFornecedor.setFont(new Font("Arial", Font.BOLD, 14));
 		lblFornecedor.setBounds(10, 111, 100, 20);
 		frmCompraDeInsumos.getContentPane().add(lblFornecedor);
@@ -332,6 +333,14 @@ public class NovaCompra {////
 						new CrudCompras();
 						criaTabela(CrudCompras.selecionaCompras(compra));
 						btnLimpar.doClick();
+						System.out.println(addCompras.getCnpj());
+						System.out.println(addCompras.getDataCompra());
+						System.out.println(addCompras.getFornecedor());
+						System.out.println(addCompras.getNumeroNota());
+						System.out.println(addCompras.getPreco());
+						System.out.println(addCompras.getProduto());
+						System.out.println(addCompras.getCnpj()); 
+						
 					}
 					//TESTE DE SALVAR AS ALTERAÇÕES 
 					if (editar==0) {
@@ -340,7 +349,7 @@ public class NovaCompra {////
 							x1=0;
 							update();
 							new CrudCompras().updCompras(addCompras);
-							new CrudCompras();
+						
 							criaTabela(CrudCompras.selecionaCompras(compra));
 							btnCancelar.doClick();
 						
@@ -549,11 +558,12 @@ public class NovaCompra {////
 		
 		
 		//IMAGEICON PARA COLOCAR IMAGEM NA TELA E REDIMENSIONAR 
-		ImageIcon img = new ImageIcon("src/img/fundo3.jpg");
-		img.setImage(img.getImage().getScaledInstance(1074, 671, 100));
+		//ImageIcon img = new ImageIcon("src/img/fundo3.jpg");
+		//img.setImage(img.getImage().getScaledInstance(1074, 671, 100));
 		frmCompraDeInsumos.getContentPane().add(llll);
 		JLabel label = new JLabel("");
-		label.setIcon(img);
+		label.setIcon(new ImageIcon("E:\\gradiente_Branco.jpg"));
+		//label.setIcon(img);
 		label.setBounds(0, 0, 1074, 671);
 		frmCompraDeInsumos.getContentPane().add(label);
 		
@@ -783,12 +793,11 @@ public class NovaCompra {////
 		
 		numero = tfPreco.getText().toString();
 		numero = numero.replace(",", ".");
-		System.out.println(numero);
 		addCompras.setProduto(tfProduto.getText().toString());
 		addCompras.setCnpj(tfCNPJ.getText().toString());
 		addCompras.setFornecedor(txtFornecedor.getText().toString());
 		addCompras.setNumeroNota(tfNota.getText().toString());
-		addCompras.setQuantidade(teste);
+		addCompras.setQuantidade((int) spinner.getValue());
 		addCompras.setPreco(Double.parseDouble(numero));
 		addCompras.setIdFazenda(Principal.fazenda.getIdFazenda());
 		

@@ -255,15 +255,16 @@ public class Principal {
 		lblVersao.setBounds(984, 645, 80, 14);
 		frmPrincipal.getContentPane().add(lblVersao);
 		
-		ImageIcon icon = new ImageIcon("src/img/Principal3.jpg");
-		icon.setImage(icon.getImage().getScaledInstance(1074, 671, 100));
+	//	ImageIcon icon = new ImageIcon("src/img/Principal3.jpg");
+		//icon.setImage(icon.getImage().getScaledInstance(1074, 671, 100));
 		JLabel foto = new JLabel("");
+		foto.setIcon(new ImageIcon("E:\\gradiente_Branco.jpg"));
 		foto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		foto.setForeground(Color.WHITE);
 		foto.setBorder(null);
 		foto.setBounds(0, 0, 1074, 671);
 		frmPrincipal.getContentPane().add(foto);
-		foto.setIcon(icon);
+		//foto.setIcon(icon);
 		
 		menu();
 	}
