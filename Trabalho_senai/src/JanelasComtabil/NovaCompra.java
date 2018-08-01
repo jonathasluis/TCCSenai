@@ -562,7 +562,7 @@ public class NovaCompra {////
 		//img.setImage(img.getImage().getScaledInstance(1074, 671, 100));
 		frmCompraDeInsumos.getContentPane().add(llll);
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("E:\\gradiente_Branco.jpg"));
+		label.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/gradiente_Branco.jpg")));
 		//label.setIcon(img);
 		label.setBounds(0, 0, 1074, 671);
 		frmCompraDeInsumos.getContentPane().add(label);
@@ -644,7 +644,7 @@ public class NovaCompra {////
 		mnNewMenu.setForeground(new Color(230, 230, 250));
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
+		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
 		mntmCadastrarAnimais.setFont(new Font("Arial", Font.PLAIN, 12));
 		mntmCadastrarAnimais.setForeground(new Color(0, 0, 0));
 		mntmCadastrarAnimais.setBackground(new Color(0, 128, 0));
@@ -656,7 +656,7 @@ public class NovaCompra {////
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
-		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Cadastrar funcionarios");
+		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Funcionarios");
 		mnNewMenu.add(mntmCadastrarFuncionarios);
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -673,7 +673,7 @@ public class NovaCompra {////
 		mnNewMenu_1.setOpaque(true);
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmCompra = new JMenuItem("Nova Compra");
+		JMenuItem mntmCompra = new JMenuItem("Compra");
 		mntmCompra.setEnabled(false);
 		mntmCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -683,7 +683,7 @@ public class NovaCompra {////
 		});
 		mnNewMenu_1.add(mntmCompra);
 		
-		JMenuItem mntmNovaVenda = new JMenuItem("Nova Venda");
+		JMenuItem mntmNovaVenda = new JMenuItem("Venda");
 		mnNewMenu_1.add(mntmNovaVenda);
 		
 		JMenuItem mntmTotal = new JMenuItem("Total");
@@ -709,7 +709,7 @@ public class NovaCompra {////
 		mnOpes.setOpaque(true);
 		menuBar.add(mnOpes);
 		
-		JMenuItem mntmNovaFazenda = new JMenuItem("Nova fazenda");
+		JMenuItem mntmNovaFazenda = new JMenuItem("Fazenda");
 		mntmNovaFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaFazenda.main(null);

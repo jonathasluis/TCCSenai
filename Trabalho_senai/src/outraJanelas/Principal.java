@@ -103,7 +103,7 @@ public class Principal {
 		frmPrincipal.getContentPane().add(btnAnimais);
 		
 		JLabel lblAnimais = new JLabel("Animais");
-		lblAnimais.setForeground(Color.WHITE);
+		lblAnimais.setForeground(Color.BLACK);
 		lblAnimais.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblAnimais.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAnimais.setBounds(10, 206, 120, 14);
@@ -125,7 +125,7 @@ public class Principal {
 		
 		JLabel lblFuncionarios = new JLabel("Funcionarios");
 		lblFuncionarios.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFuncionarios.setForeground(Color.WHITE);
+		lblFuncionarios.setForeground(Color.BLACK);
 		lblFuncionarios.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblFuncionarios.setBounds(245, 207, 120, 14);
 		frmPrincipal.getContentPane().add(lblFuncionarios);
@@ -146,7 +146,7 @@ public class Principal {
 		
 		JLabel lblCompras = new JLabel("Compras");
 		lblCompras.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCompras.setForeground(Color.WHITE);
+		lblCompras.setForeground(Color.BLACK);
 		lblCompras.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblCompras.setBounds(470, 207, 120, 14);
 		frmPrincipal.getContentPane().add(lblCompras);
@@ -167,7 +167,7 @@ public class Principal {
 		
 		JLabel lblVendas = new JLabel("Vendas");
 		lblVendas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVendas.setForeground(Color.WHITE);
+		lblVendas.setForeground(Color.BLACK);
 		lblVendas.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblVendas.setBounds(700, 207, 120, 14);
 		frmPrincipal.getContentPane().add(lblVendas);
@@ -188,7 +188,7 @@ public class Principal {
 		
 		JLabel lblUsuario = new JLabel("Usuario");
 		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsuario.setForeground(Color.WHITE);
+		lblUsuario.setForeground(Color.BLACK);
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblUsuario.setBounds(920, 207, 120, 14);
 		frmPrincipal.getContentPane().add(lblUsuario);
@@ -250,21 +250,18 @@ public class Principal {
 		panelPdf.add(lblManual, BorderLayout.CENTER);
 		
 		JLabel lblVersao = new JLabel("Versao 2.0");
-		lblVersao.setForeground(Color.WHITE);
+		lblVersao.setForeground(Color.BLACK);
 		lblVersao.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblVersao.setBounds(984, 645, 80, 14);
 		frmPrincipal.getContentPane().add(lblVersao);
 		
-	//	ImageIcon icon = new ImageIcon("src/img/Principal3.jpg");
-		//icon.setImage(icon.getImage().getScaledInstance(1074, 671, 100));
 		JLabel foto = new JLabel("");
-		foto.setIcon(new ImageIcon("E:\\gradiente_Branco.jpg"));
+		foto.setIcon(new ImageIcon(Principal.class.getResource("/img/gradiente_Branco.jpg")));
 		foto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		foto.setForeground(Color.WHITE);
 		foto.setBorder(null);
 		foto.setBounds(0, 0, 1074, 671);
 		frmPrincipal.getContentPane().add(foto);
-		//foto.setIcon(icon);
 		
 		menu();
 	}
@@ -329,7 +326,7 @@ public class Principal {
 		mnNewMenu_1.setOpaque(true);
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmCompra = new JMenuItem("Nova Compra");
+		JMenuItem mntmCompra = new JMenuItem("Compra");
 		mntmCompra.setEnabled(true);
 		mntmCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -339,7 +336,7 @@ public class Principal {
 		});
 		mnNewMenu_1.add(mntmCompra);
 		
-		JMenuItem mntmNovaVenda = new JMenuItem("Nova Venda");
+		JMenuItem mntmNovaVenda = new JMenuItem("Venda");
 		mnNewMenu_1.add(mntmNovaVenda);
 		
 		JMenuItem mntmTotal = new JMenuItem("Total");
@@ -364,7 +361,7 @@ public class Principal {
 		mnOpes.setOpaque(true);
 		menuBar.add(mnOpes);
 		
-		JMenuItem mntmNovaFazenda = new JMenuItem("Nova fazenda");
+		JMenuItem mntmNovaFazenda = new JMenuItem("Fazenda");
 		mntmNovaFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaFazenda.main(null);

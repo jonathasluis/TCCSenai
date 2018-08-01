@@ -412,6 +412,11 @@ public class Total {//
 		bg.add(chckbxAnomes);
 		bg.add(chckbxAnomesdia);
 		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(Total.class.getResource("/img/gradiente_Branco.jpg")));
+		label_1.setBounds(0, 0, 1074, 670);
+		frmRelattio.getContentPane().add(label_1);
+		
 		compras.setIdFazenda(Principal.fazenda.getIdFazenda());
 		vendas.setIdFazenda(Principal.fazenda.getIdFazenda());
 		
@@ -507,7 +512,7 @@ public class Total {//
 		mnNewMenu.setIcon(new ImageIcon(Total.class.getResource("/img/gestao.png")));
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmCadastrarAnimais = new JMenuItem("Cadastrar Animais");
+		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
 		mntmCadastrarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarAnimais.main(null);
@@ -516,7 +521,7 @@ public class Total {//
 		});
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
-		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Cadastrar funcionarios");
+		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Funcionarios");
 		mnNewMenu.add(mntmCadastrarFuncionarios);
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -531,7 +536,7 @@ public class Total {//
 		mnNewMenu_1.setIcon(new ImageIcon(Total.class.getResource("/img/money.png")));
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmCompra = new JMenuItem("Nova Compra");
+		JMenuItem mntmCompra = new JMenuItem("Compra");
 		mntmCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaCompra.main(null);
@@ -540,7 +545,7 @@ public class Total {//
 		});
 		mnNewMenu_1.add(mntmCompra);
 		
-		JMenuItem mntmNovaVenda = new JMenuItem("Nova Venda");
+		JMenuItem mntmNovaVenda = new JMenuItem("Venda");
 		mnNewMenu_1.add(mntmNovaVenda);
 		mntmNovaVenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -559,7 +564,7 @@ public class Total {//
 		mnOpes.setIcon(new ImageIcon(Total.class.getResource("/img/options.png")));
 		menuBar.add(mnOpes);
 		
-		JMenuItem mntmNovaFazenda = new JMenuItem("Nova fazenda");
+		JMenuItem mntmNovaFazenda = new JMenuItem("Fazenda");
 		mntmNovaFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaFazenda.main(null);

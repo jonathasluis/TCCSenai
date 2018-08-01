@@ -540,6 +540,11 @@ public class CadastrarFuncionarios {
 		ftfCpf.setBounds(89, 122, 174, 20);
 		frmCadastrarFuncionarios.getContentPane().add(ftfCpf);
 		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/gradiente_Branco.jpg")));
+		label.setBounds(0, 0, 1074, 670);
+		frmCadastrarFuncionarios.getContentPane().add(label);
+		
 		menu();
 		DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
 		colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));

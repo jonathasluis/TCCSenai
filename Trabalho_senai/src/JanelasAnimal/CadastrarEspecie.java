@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -120,6 +121,13 @@ public class CadastrarEspecie{
 		});
 		btnCancelar.setBounds(104, 92, 85, 23);
 		frmNovaEspecie.getContentPane().add(btnCancelar);
+		
+		ImageIcon icon = new ImageIcon("/img/gradiente_Branco.jpg");
+		icon.setImage(icon.getImage().getScaledInstance(294, 121 ,100));
+		JLabel label = new JLabel("");
+		label.setBounds(0, 0, 294, 121);
+		label.setIcon(icon);
+		frmNovaEspecie.getContentPane().add(label);
 		frmNovaEspecie.setLocationRelativeTo(null);
 		
 		this.comboBoxEspecie();

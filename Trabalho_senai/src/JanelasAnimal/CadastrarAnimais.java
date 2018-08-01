@@ -552,6 +552,11 @@ public class CadastrarAnimais {//teste3
 		btnCadastrarNovaRaca.setBounds(675, 135, 20, 20);
 		frmCadastroDeAnimais.getContentPane().add(btnCadastrarNovaRaca);
 		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/gradiente_Branco.jpg")));
+		label_1.setBounds(0, 0, 1074, 670);
+		frmCadastroDeAnimais.getContentPane().add(label_1);
+		
 		menu();
 		new ComboBox().comboBoxEspecie();
 		

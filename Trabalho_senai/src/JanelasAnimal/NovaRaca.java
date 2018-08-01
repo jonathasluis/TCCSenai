@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -31,7 +32,6 @@ public class NovaRaca {
 	private JComboBox<String> comboBox;
 	private JButton btnSalvar;
 	static int limit=0; //limita apenas uma janela aberta
-
 	/**
 	 * Launch the application.
 	 */
@@ -129,7 +129,14 @@ public class NovaRaca {
 		comboBox.setBackground(SystemColor.controlHighlight);
 		comboBox.setBounds(10, 41, 274, 20);
 		frmNovaRaca.getContentPane().add(comboBox);
-		frmNovaRaca.setLocationRelativeTo(null);
+		
+		ImageIcon icon = new ImageIcon("/img/gradiente_Branco.jpg");
+		icon.setImage(icon.getImage().getScaledInstance(294, 171 ,100));
+		JLabel label = new JLabel("");
+		label.setBounds(0, 0, 294, 171);
+		frmNovaRaca.getContentPane().add(label);
+		label.setIcon(icon);
+		
 		
 		comboBoxEspecie();
 	}
