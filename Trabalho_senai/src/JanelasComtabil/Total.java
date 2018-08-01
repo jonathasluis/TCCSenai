@@ -237,6 +237,13 @@ public class Total {//
 					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
 							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+					
+					valor(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),//soma dos valores
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()),
+						new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 				}
 			}
 		});
@@ -249,6 +256,11 @@ public class Total {//
 					
 					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
+					
+					valor(new CrudCompras().procurarCompraDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()), 
+						new CrudVendas().procurarVendasDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
 				}
 				
 				if(chckbxAnomesdia.isSelected()) {
@@ -257,6 +269,13 @@ public class Total {//
 							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 					
 					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+					
+					valor(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()),
+						new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
 							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 				}
@@ -272,6 +291,11 @@ public class Total {//
 					
 					colocaDadosNaTabelaReceita(new CrudVendas()
 							.procurarVendasDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
+					
+					valor(new CrudCompras()
+							.procurarCompraDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()),
+						new CrudVendas()
+							.procurarVendasDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
 				}
 				
 				if (chckbxAnomes.isSelected()) {
@@ -280,6 +304,11 @@ public class Total {//
 					
 					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
+					
+					valor(new CrudCompras().procurarCompraDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()),
+						new CrudVendas().procurarVendasDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
 				}
 				if(chckbxAnomesdia.isSelected()) {
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
@@ -287,6 +316,13 @@ public class Total {//
 							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 					
 					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+					
+					valor(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
+							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()),
+						new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
 							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 				}
@@ -313,6 +349,11 @@ public class Total {//
 					
 					colocaDadosNaTabelaReceita(new CrudVendas()
 							.procurarVendasDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
+					
+					valor(new CrudCompras()
+							.procurarCompraDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()),
+						new CrudVendas()
+							.procurarVendasDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
 				}
 			}
 		});
@@ -330,6 +371,11 @@ public class Total {//
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
 					
 					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
+					
+					valor(new CrudCompras().procurarCompraDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()),
+						new CrudVendas().procurarVendasDataAnoMes(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), Principal.fazenda.getIdFazenda()));
 				}
 			}
@@ -350,6 +396,11 @@ public class Total {//
 					
 					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+				
+					valor(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()),
+						new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
+							String.valueOf(calendar.getMonthChooser().getMonth()+1), String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
 				}
 			}
 		});
@@ -364,7 +415,6 @@ public class Total {//
 		compras.setIdFazenda(Principal.fazenda.getIdFazenda());
 		vendas.setIdFazenda(Principal.fazenda.getIdFazenda());
 		
-		valor();
 		menu();
 		
 		colocaDadosNaTabelaGasto(CrudCompras.selecionaCompras(compras));
@@ -402,19 +452,17 @@ public class Total {//
 		}
 	}
 	
-	void valor() {
-		ResultSet dados1 = CrudCompras.selecionaCompras(compras);
-		ResultSet dados2 = CrudVendas.selecionaVendas(vendas);
+	void valor(ResultSet dadosCompras, ResultSet dadosVendas) {
 		
 		float valor1=0,valor2=0,total=0;
 		
 		try {
-			while(dados1.next()) {
-				valor1 = valor1 + dados1.getFloat("preco");
+			while(dadosCompras.next()) {
+				valor1 = valor1 + dadosCompras.getFloat("preco");
 			}
 			
-			while(dados2.next()) {
-				valor2 = valor2 + dados2.getFloat("preco");
+			while(dadosVendas.next()) {
+				valor2 = valor2 + dadosVendas.getFloat("preco");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

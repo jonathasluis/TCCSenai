@@ -22,8 +22,8 @@ public class MetodosImagem {
 		
 		fileC.addChoosableFileFilter(filtro);
 		fileC.setAcceptAllFileFilterUsed(false);
-		fileC.setDialogType(JFileChooser.OPEN_DIALOG);
 		fileC.setCurrentDirectory(new File("D:"));
+		fileC.setDialogType(JFileChooser.OPEN_DIALOG);
 		fileC.showOpenDialog(fileC);
 		
 		return fileC.getSelectedFile();
