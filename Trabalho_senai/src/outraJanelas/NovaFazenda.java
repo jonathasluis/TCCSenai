@@ -52,7 +52,7 @@ public class NovaFazenda {
 	MetodosImagem mI = new MetodosImagem();
 	private JButton btnLimpar;
 	private JTextField tfQtdAnimais;
-	private JTextField textField_1;
+	private JTextField tfQtdFuncionarios;
 	int contadorEditar = 0;
 	private JButton btnDeletar;
 	private JTextArea taDescricao;
@@ -136,7 +136,7 @@ public class NovaFazenda {
 					return;
 				}
 				if (tfEscritura.getText().trim().equals("")) {
-					int resposta = JOptionPane.showConfirmDialog(null, "Deseja deixar esse campo nulo", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					int resposta = JOptionPane.showConfirmDialog(null, "Deseja deixar o campo escritura nulo", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 					if (resposta == JOptionPane.YES_OPTION) {
 						tfEscritura.setText("00000");
 					}else {
@@ -150,7 +150,7 @@ public class NovaFazenda {
 					return;
 				}
 				if (taDescricao.getText().trim().equals("")) {
-					int resposta = JOptionPane.showConfirmDialog(null, "Deseja deixar esse campo nulo", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					int resposta = JOptionPane.showConfirmDialog(null, "Deseja deixar o campo descrição nulo", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 					if (resposta == JOptionPane.YES_OPTION) {
 						taDescricao.setText(null);
 					}else {
@@ -162,6 +162,7 @@ public class NovaFazenda {
 				if (contadorEditar==0) {
 					DAOFazenda();
 					new CrudFazenda().addFazenda(fazenda);
+					JOptionPane.showMessageDialog(null, "Fazenda cadastrada com sucesso!");
 					btnLimpar.doClick();
 				}
 				
@@ -317,14 +318,14 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(tfQtdAnimais);
 		tfQtdAnimais.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setText("0");
-		textField_1.setOpaque(false);
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		textField_1.setBorder(null);
-		textField_1.setBounds(197, 210, 76, 20);
-		frmNovaFazenda.getContentPane().add(textField_1);
+		tfQtdFuncionarios = new JTextField();
+		tfQtdFuncionarios.setText("0");
+		tfQtdFuncionarios.setOpaque(false);
+		tfQtdFuncionarios.setEditable(false);
+		tfQtdFuncionarios.setColumns(10);
+		tfQtdFuncionarios.setBorder(null);
+		tfQtdFuncionarios.setBounds(197, 210, 76, 20);
+		frmNovaFazenda.getContentPane().add(tfQtdFuncionarios);
 		
 		btnDeletar = new JButton("Deletar");
 		btnDeletar.setEnabled(false);
@@ -355,7 +356,7 @@ public class NovaFazenda {
 		fazenda.setProprietario(tfProprietario.getText());
 		fazenda.setDescricao(taDescricao.getText());
 		fazenda.setImg(mI.getImagem(img, panel));
-		fazenda.setIdUsuario(Principal.fazenda.getIdUsuario());
+		fazenda.setIdUsuario(Pergunta.usuario.getIdUsuario());
 	}
 	
 	void menu(){
