@@ -87,9 +87,10 @@ public class Principal {
 		lblNomeDoSistema.setBounds(10, 11, 1054, 43);
 		frmPrincipal.getContentPane().add(lblNomeDoSistema);
 		
-		ImageIcon iconAnimal = new ImageIcon("src/img/Vaca.png");
+		ImageIcon iconAnimal = new ImageIcon("src/img/t2.png");
 		iconAnimal.setImage(iconAnimal.getImage().getScaledInstance(116, 58 ,100));
 		JButton btnAnimais = new JButton("");
+		btnAnimais.setBorderPainted(false);
 		btnAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastrarAnimais.main(null);
@@ -109,17 +110,19 @@ public class Principal {
 		lblAnimais.setBounds(10, 206, 120, 14);
 		frmPrincipal.getContentPane().add(lblAnimais);
 		
-		ImageIcon iconFuncionarios = new ImageIcon("src/img/funcionario.png");
-		iconFuncionarios.setImage(iconFuncionarios.getImage().getScaledInstance(116, 58 ,100));
+		ImageIcon iconFuncionarios = new ImageIcon("src/img/t3.png");
+		iconFuncionarios.setImage(iconFuncionarios.getImage().getScaledInstance(135, 101 ,100));
 		JButton btnFuncionarios = new JButton("");
+		btnFuncionarios.setBorderPainted(false);
 		btnFuncionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastrarFuncionarios.main(null);
 				frmPrincipal.setVisible(false);
+				
 			}
 		});
 		btnFuncionarios.setContentAreaFilled(false);
-		btnFuncionarios.setBounds(245, 145, 120,60);
+		btnFuncionarios.setBounds(245, 104, 135,101);
 		btnFuncionarios.setIcon(iconFuncionarios);
 		frmPrincipal.getContentPane().add(btnFuncionarios);
 		
@@ -127,7 +130,7 @@ public class Principal {
 		lblFuncionarios.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFuncionarios.setForeground(Color.BLACK);
 		lblFuncionarios.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblFuncionarios.setBounds(245, 207, 120, 14);
+		lblFuncionarios.setBounds(255, 206, 120, 14);
 		frmPrincipal.getContentPane().add(lblFuncionarios);
 		
 		ImageIcon iconCompras = new ImageIcon("src/img/compra1.png");
@@ -151,7 +154,7 @@ public class Principal {
 		lblCompras.setBounds(470, 207, 120, 14);
 		frmPrincipal.getContentPane().add(lblCompras);
 		
-		ImageIcon iconVendas = new ImageIcon("src/img/venda.png");
+		ImageIcon iconVendas = new ImageIcon("src/img/t1.png");
 		iconVendas.setImage(iconVendas.getImage().getScaledInstance(116, 58 ,100));
 		JButton btnVendas = new JButton("");
 		btnVendas.addActionListener(new ActionListener() {
@@ -256,7 +259,7 @@ public class Principal {
 		frmPrincipal.getContentPane().add(lblVersao);
 		
 		JLabel foto = new JLabel("");
-		foto.setIcon(new ImageIcon(Principal.class.getResource("/img/gradiente_Branco.jpg")));
+		foto.setIcon(new ImageIcon("E:\\TCC\\Fundo.jpg"));
 		foto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		foto.setForeground(Color.WHITE);
 		foto.setBorder(null);
@@ -270,15 +273,15 @@ public class Principal {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBorder(new LineBorder(Color.DARK_GRAY));
 		menuBar.setForeground(Color.GREEN);
-		menuBar.setBackground(new Color(128, 128, 128));
+		menuBar.setBackground(new Color(192, 192, 192));
 		frmPrincipal.setJMenuBar(menuBar);
 		
 		JMenu mnInicio = new JMenu("Inicio");
 		mnInicio.setIcon(new ImageIcon(Principal.class.getResource("/img/Home.png")));
 		mnInicio.setOpaque(true);
 		mnInicio.setEnabled(false);
-		mnInicio.setForeground(new Color(230, 230, 250));
-		mnInicio.setBackground(new Color(128, 128, 128));
+		mnInicio.setForeground(new Color(0, 0, 0));
+		mnInicio.setBackground(new Color(192, 192, 192));
 		mnInicio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -289,12 +292,12 @@ public class Principal {
 		menuBar.add(mnInicio);
 		
 		JMenu mnNewMenu = new JMenu("Gest\u00E3o");
-		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/img/gestao.png")));
+		mnNewMenu.setIcon(new ImageIcon("C:\\Users\\SENAI\\Downloads\\34e58714874b2e18f0f210b5e80e6fe6.png"));
 		mnNewMenu.setOpaque(true);
 		mnNewMenu.setFocusPainted(true);
 		mnNewMenu.setBorder(new CompoundBorder());
-		mnNewMenu.setBackground(new Color(128, 128, 128));
-		mnNewMenu.setForeground(new Color(230, 230, 250));
+		mnNewMenu.setBackground(new Color(192, 192, 192));
+		mnNewMenu.setForeground(new Color(0, 0, 0));
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
@@ -321,8 +324,8 @@ public class Principal {
 		
 		JMenu mnNewMenu_1 = new JMenu("Financeiro");
 		mnNewMenu_1.setIcon(new ImageIcon(Principal.class.getResource("/img/money.png")));
-		mnNewMenu_1.setForeground(new Color(230, 230, 250));
-		mnNewMenu_1.setBackground(new Color(128, 128, 128));
+		mnNewMenu_1.setForeground(new Color(0, 0, 0));
+		mnNewMenu_1.setBackground(new Color(192, 192, 192));
 		mnNewMenu_1.setOpaque(true);
 		menuBar.add(mnNewMenu_1);
 		
@@ -356,8 +359,8 @@ public class Principal {
 		
 		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
 		mnOpes.setIcon(new ImageIcon(Principal.class.getResource("/img/options.png")));
-		mnOpes.setForeground(new Color(230, 230, 250));
-		mnOpes.setBackground(new Color(128, 128, 128));
+		mnOpes.setForeground(new Color(0, 0, 0));
+		mnOpes.setBackground(new Color(192, 192, 192));
 		mnOpes.setOpaque(true);
 		menuBar.add(mnOpes);
 		

@@ -56,7 +56,7 @@ public class NovaCompra {////
 	
 	int editar = 1;
 	int x = 0;
-	
+	int testebtnProucurarar=0;
 	private JFrame frmCompraDeInsumos;
 	private JTextField tfProduto;
 	private JTextField tfData;
@@ -119,7 +119,7 @@ public class NovaCompra {////
 		 compra.setIdFazenda(Principal.fazenda.getIdFazenda());
 		
 		JLabel lblCompraDeInsumos = new JLabel("Compra de Insumos");
-		lblCompraDeInsumos.setForeground(Color.WHITE);
+		lblCompraDeInsumos.setForeground(Color.BLACK);
 		lblCompraDeInsumos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCompraDeInsumos.setFont(new Font("Arial", Font.BOLD, 25));
 		lblCompraDeInsumos.setBounds(0, 11, 1074, 39);
@@ -286,8 +286,7 @@ public class NovaCompra {////
 						int x = JOptionPane.showConfirmDialog(null, "Você deseja deixar o CNPJ nulo?", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 						if (x== JOptionPane.YES_OPTION) {
 							tfCNPJ.setText("000.000.000/0000-00");
-							tfNota.requestFocus();
-							return;
+							
 						}else {
 							tfCNPJ.requestFocus();
 							return;
@@ -296,9 +295,9 @@ public class NovaCompra {////
 					if(tfNota.getText().trim().equals("")) {
 						int x = JOptionPane.showConfirmDialog(null, "Você deseja deixar a nota como nulo?", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 						if (x==JOptionPane.YES_OPTION) {
-							tfNota.setText("0000");
+							tfNota.setText("00000000000000000");
 							tfPreco.requestFocus();
-							return;
+							
 						}else {
 							tfNota.requestFocus();
 							return;
@@ -434,6 +433,7 @@ public class NovaCompra {////
 		
 		JButton button = new JButton("Proucurar");
 		button.addActionListener(new ActionListener() {
+			
 			//BOTÃO PROUCURAR
 			public void actionPerformed(ActionEvent arg0) {
 				//VARIAVEL PARA REGULAR O TAMNHO DA TABELA
@@ -489,6 +489,7 @@ public class NovaCompra {////
 	
 		
 		scrollPane = new JScrollPane();
+		scrollPane.setBackground(new Color(169, 169, 169));
 		scrollPane.setFont(new Font("Arial", Font.BOLD, 13));
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		scrollPane.setBounds(26, 290, 1024, 21);
@@ -514,11 +515,10 @@ public class NovaCompra {////
 		table.setToolTipText("Clique para editar os dados\r\n");
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table.setIgnoreRepaint(true);
-		table.setRowSelectionAllowed(false);
 		table.setFont(new Font("Arial", Font.PLAIN, 13));
 		table.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		table.setForeground(SystemColor.controlText);
-		table.setBackground(SystemColor.controlHighlight);
+		table.setBackground(new Color(169, 169, 169));
 		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -565,7 +565,8 @@ public class NovaCompra {////
 		//img.setImage(img.getImage().getScaledInstance(1074, 671, 100));
 		frmCompraDeInsumos.getContentPane().add(llll);
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/gradiente_Branco.jpg")));
+		label.setBackground(Color.WHITE);
+		label.setIcon(new ImageIcon("E:\\TCC\\Fundo.jpg"));
 		//label.setIcon(img);
 		label.setBounds(0, 0, 1074, 671);
 		frmCompraDeInsumos.getContentPane().add(label);
