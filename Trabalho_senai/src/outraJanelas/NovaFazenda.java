@@ -16,25 +16,28 @@ import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import DAO.Fazenda;
 import Imagem.MetodosImagem;
 import JanelasAnimal.CadastrarAnimais;
 import JanelasComtabil.NovaCompra;
 import JanelasComtabil.NovaVenda;
 import JanelasComtabil.Total;
 import JanelasFuncionarios.CadastrarFuncionarios;
+import crud.CrudFazenda;
 
 public class NovaFazenda {
 
@@ -42,15 +45,18 @@ public class NovaFazenda {
 	private JTextField tfNome;
 	private JTextField tfTamanho;
 	private JTextField tfEscritura;
-	private JTextField textField;
+	private JTextField tfProprietario;
 	public static JLabel lblImg;
 	public static JPanel panel;
 	public static File img;
 	MetodosImagem mI = new MetodosImagem();
-	private JEditorPane dtrpnDes;
 	private JButton btnLimpar;
 	private JTextField tfQtdAnimais;
 	private JTextField textField_1;
+	int contadorEditar = 0;
+	private JButton btnDeletar;
+	private JTextArea taDescricao;
+	Fazenda fazenda = new Fazenda();
 
 	/**
 	 * Launch the application.
@@ -116,28 +122,51 @@ public class NovaFazenda {
 		panel.add(lblImg, "name_20449716211995");
 		
 		JButton btnSalvar = new JButton("Salvar");
-		/*btnSalvar.addActionListener(new ActionListener() {
+		btnSalvar.setBackground(SystemColor.controlHighlight);
+		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!tfNome.getText().trim().equals("")) {
-					if(!tfTamanho.getText().trim().equals("")) {
-						if(! textField.getText().trim().equals("")) {
-							new CrudFazenda().addfazenda(tfNome.getText(), tfTamanho.getText(), textField.getText(), 
-								tfEscritura.getText(),dtrpnDes.getText() , i.getImagem());
-							btnLimpar.doClick();
-						}else {
-							textField.requestFocus();
-							JOptionPane.showMessageDialog(null, "Insira o nome do propietario!");
-						}
-					}else {
-						tfTamanho.requestFocus();
-						JOptionPane.showMessageDialog(null, "Insira o tamanho!");
-					}
-				}else {
+				if(tfNome.getText().trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "insira um nome", "ALERTA!",JOptionPane.WARNING_MESSAGE);
 					tfNome.requestFocus();
-					JOptionPane.showMessageDialog(null, "Insira um nome!");
+					return;
 				}
+				if(tfTamanho.getText().trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "insira o tamanho da propriedade", "ALERTA!",JOptionPane.WARNING_MESSAGE);
+					tfTamanho.requestFocus();
+					return;
+				}
+				if (tfEscritura.getText().trim().equals("")) {
+					int resposta = JOptionPane.showConfirmDialog(null, "Deseja deixar esse campo nulo", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					if (resposta == JOptionPane.YES_OPTION) {
+						tfEscritura.setText("00000");
+					}else {
+						tfEscritura.requestFocus();
+						return;
+					}
+				}
+				if (tfProprietario.getText().trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "insira o nome do proprietário", "ALERTA!",JOptionPane.WARNING_MESSAGE);
+					tfProprietario.requestFocus();
+					return;
+				}
+				if (taDescricao.getText().trim().equals("")) {
+					int resposta = JOptionPane.showConfirmDialog(null, "Deseja deixar esse campo nulo", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					if (resposta == JOptionPane.YES_OPTION) {
+						taDescricao.setText(null);
+					}else {
+						taDescricao.requestFocus();
+						return;
+					}
+				}
+				
+				if (contadorEditar==0) {
+					DAOFazenda();
+					new CrudFazenda().addFazenda(fazenda);
+					btnLimpar.doClick();
+				}
+				
 			}
-		});*/
+		});
 		btnSalvar.setBounds(975, 636, 89, 23);
 		frmNovaFazenda.getContentPane().add(btnSalvar);
 		
@@ -147,15 +176,30 @@ public class NovaFazenda {
 				tfEscritura.setText(null);
 				tfNome.setText(null);
 				tfTamanho.setText(null);
-				textField.setText(null);
-				dtrpnDes.setText(null);
-				
+				tfProprietario.setText(null);
+				taDescricao.setText(null);
+				lblImg.setHorizontalAlignment(SwingConstants.CENTER);
+				lblImg.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/logo-pequena-sem-texto.png")));
 			}
 		});
 		btnLimpar.setBounds(876, 636, 89, 23);
 		frmNovaFazenda.getContentPane().add(btnLimpar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (contadorEditar==0) {
+					Principal.frmPrincipal.setVisible(true);
+					frmNovaFazenda.dispose();
+				}
+				if(contadorEditar==1) {
+					contadorEditar=0;
+					btnDeletar.setEnabled(false);
+					btnLimpar.setEnabled(true);
+					btnLimpar.doClick();
+				}
+			}
+		});
 		btnCancelar.setBounds(777, 636, 89, 23);
 		frmNovaFazenda.getContentPane().add(btnCancelar);
 		
@@ -181,7 +225,6 @@ public class NovaFazenda {
 		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNome.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNome.setBounds(10, 60, 60, 20);
 		frmNovaFazenda.getContentPane().add(lblNome);
 		
@@ -200,7 +243,6 @@ public class NovaFazenda {
 		tfTamanho.setColumns(10);
 		
 		JLabel lblTamanho = new JLabel("Tamanho:");
-		lblTamanho.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTamanho.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblTamanho.setBounds(10, 91, 60, 20);
 		frmNovaFazenda.getContentPane().add(lblTamanho);
@@ -211,50 +253,42 @@ public class NovaFazenda {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					textField.requestFocus();
+					tfProprietario.requestFocus();
 				}
 			}
 		});
 		tfEscritura.setColumns(10);
-		tfEscritura.setBounds(500, 60, 200, 20);
+		tfEscritura.setBounds(80, 123, 200, 20);
 		frmNovaFazenda.getContentPane().add(tfEscritura);
 		
 		JLabel lblEscritura = new JLabel("Escritura:");
-		lblEscritura.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEscritura.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblEscritura.setBounds(420, 60, 60, 20);
+		lblEscritura.setBounds(10, 123, 60, 20);
 		frmNovaFazenda.getContentPane().add(lblEscritura);
 		
-		textField = new JTextField();
-		textField.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
-		textField.addKeyListener(new KeyAdapter() {
+		tfProprietario = new JTextField();
+		tfProprietario.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
+		tfProprietario.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					dtrpnDes.requestFocus();
+					taDescricao.requestFocus();
 				}
 			}
 		});
-		textField.setColumns(10);
-		textField.setBounds(520, 92, 180, 20);
-		frmNovaFazenda.getContentPane().add(textField);
+		tfProprietario.setColumns(10);
+		tfProprietario.setBounds(510, 61, 190, 20);
+		frmNovaFazenda.getContentPane().add(tfProprietario);
 		
 		JLabel lblPro = new JLabel("Propriet\u00E1rio:");
-		lblPro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPro.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPro.setBounds(420, 91, 80, 20);
+		lblPro.setBounds(420, 61, 80, 20);
 		frmNovaFazenda.getContentPane().add(lblPro);
-		
-		dtrpnDes = new JEditorPane();
-		dtrpnDes.setOpaque(false);
-		dtrpnDes.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
-		dtrpnDes.setBounds(80, 123, 200, 107);
-		frmNovaFazenda.getContentPane().add(dtrpnDes);
 		
 		JLabel lblDescrio_1 = new JLabel("Descri\u00E7\u00E3o:");
 		lblDescrio_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDescrio_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDescrio_1.setBounds(10, 123, 70, 107);
+		lblDescrio_1.setBounds(420, 92, 70, 150);
 		frmNovaFazenda.getContentPane().add(lblDescrio_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -266,12 +300,12 @@ public class NovaFazenda {
 		
 		JLabel lblQuantidadeDeAnimais = new JLabel("Quantidade de animais:");
 		lblQuantidadeDeAnimais.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblQuantidadeDeAnimais.setBounds(420, 122, 157, 20);
+		lblQuantidadeDeAnimais.setBounds(10, 178, 157, 20);
 		frmNovaFazenda.getContentPane().add(lblQuantidadeDeAnimais);
 		
 		JLabel lblQuantidadeDeFuncionaris = new JLabel("Quantidade de funcionarios:");
 		lblQuantidadeDeFuncionaris.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblQuantidadeDeFuncionaris.setBounds(420, 153, 180, 20);
+		lblQuantidadeDeFuncionaris.setBounds(10, 209, 180, 20);
 		frmNovaFazenda.getContentPane().add(lblQuantidadeDeFuncionaris);
 		
 		tfQtdAnimais = new JTextField();
@@ -279,7 +313,7 @@ public class NovaFazenda {
 		tfQtdAnimais.setEditable(false);
 		tfQtdAnimais.setBorder(null);
 		tfQtdAnimais.setOpaque(false);
-		tfQtdAnimais.setBounds(607, 123, 76, 20);
+		tfQtdAnimais.setBounds(197, 179, 76, 20);
 		frmNovaFazenda.getContentPane().add(tfQtdAnimais);
 		tfQtdAnimais.setColumns(10);
 		
@@ -289,8 +323,22 @@ public class NovaFazenda {
 		textField_1.setEditable(false);
 		textField_1.setColumns(10);
 		textField_1.setBorder(null);
-		textField_1.setBounds(607, 154, 76, 20);
+		textField_1.setBounds(197, 210, 76, 20);
 		frmNovaFazenda.getContentPane().add(textField_1);
+		
+		btnDeletar = new JButton("Deletar");
+		btnDeletar.setEnabled(false);
+		btnDeletar.setBounds(678, 636, 89, 23);
+		frmNovaFazenda.getContentPane().add(btnDeletar);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(510, 92, 190, 150);
+		frmNovaFazenda.getContentPane().add(scrollPane_1);
+		
+		taDescricao = new JTextArea();
+		taDescricao.setLineWrap(true);
+		taDescricao.setWrapStyleWord(true);
+		scrollPane_1.setViewportView(taDescricao);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/gradiente_Branco.jpg")));
@@ -298,6 +346,16 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(label);
 		
 		menu();
+	}
+	
+	void DAOFazenda() {
+		fazenda.setNome(tfNome.getText());
+		fazenda.setTamanho(tfTamanho.getText());
+		fazenda.setEscritura(tfEscritura.getText());
+		fazenda.setProprietario(tfProprietario.getText());
+		fazenda.setDescricao(taDescricao.getText());
+		fazenda.setImg(mI.getImagem(img, panel));
+		fazenda.setIdUsuario(Principal.fazenda.getIdUsuario());
 	}
 	
 	void menu(){
