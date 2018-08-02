@@ -227,6 +227,9 @@ public class Total {//
 		frmRelattio.getContentPane().add(lblFiltrarData);
 		
 		calendar = new JCalendar();
+		calendar.getDayChooser().setOpaque(false);
+		calendar.setOpaque(false);
+		calendar.getDayChooser().getDayPanel().setOpaque(false);
 		calendar.getDayChooser().addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {//evento mudar dia
 				if(chckbxAnomesdia.isSelected()) {
@@ -337,6 +340,7 @@ public class Total {//
 		frmRelattio.getContentPane().add(calendar);
 		
 		chckbxAno = new JCheckBox("Ano");
+		chckbxAno.setOpaque(false);
 		chckbxAno.setSelected(true);
 		chckbxAno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -361,6 +365,7 @@ public class Total {//
 		frmRelattio.getContentPane().add(chckbxAno);
 		
 		chckbxAnomes = new JCheckBox("Ano-Mes");
+		chckbxAnomes.setOpaque(false);
 		chckbxAnomes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxAnomes.isSelected()) {
@@ -384,6 +389,7 @@ public class Total {//
 		frmRelattio.getContentPane().add(chckbxAnomes);
 		
 		chckbxAnomesdia = new JCheckBox("Ano-Mes-Dia");
+		chckbxAnomesdia.setOpaque(false);
 		chckbxAnomesdia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxAnomesdia.isSelected()) {

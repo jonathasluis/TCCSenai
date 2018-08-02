@@ -53,8 +53,8 @@ public class Splash {
 		frame.setBounds(100, 100, 420, 250);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setUndecorated(true); //tirar os botoes de cima e a borda
-		//frame.getContentPane().setBackground(new Color(1.0f,1.0f,1.0f,0.0f)); //tranparente
-		//frame.setBackground(new Color(1.0f,1.0f,1.0f,0.0f));				  //tranparente
+		frame.getContentPane().setBackground(new Color(1.0f,1.0f,1.0f,0.0f)); //tranparente
+		frame.setBackground(new Color(1.0f,1.0f,1.0f,0.0f));				  //tranparente
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 		

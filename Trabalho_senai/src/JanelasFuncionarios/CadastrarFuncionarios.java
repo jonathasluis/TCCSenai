@@ -140,6 +140,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(lblFuncionarios);
 		
 		panel = new JPanel();
+		panel.setOpaque(false);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBounds(774, 25, 290, 217);
 		frmCadastrarFuncionarios.getContentPane().add(panel);

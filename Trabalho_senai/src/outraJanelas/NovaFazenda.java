@@ -87,7 +87,7 @@ public class NovaFazenda {
 		
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(398, 11, 306, 288);
+		panel.setBounds(774, 25, 290, 217);
 		frmNovaFazenda.getContentPane().add(panel);
 		panel.setLayout(new CardLayout(0, 0));
 		
