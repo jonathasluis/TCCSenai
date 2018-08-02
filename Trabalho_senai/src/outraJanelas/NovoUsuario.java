@@ -21,7 +21,7 @@ import javax.swing.SwingConstants;
 
 import banco.Conexao;
 
-public class NovoUsuario {//
+public class NovoUsuario {///
 	
 
 	private JFrame frame;
