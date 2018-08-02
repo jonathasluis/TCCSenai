@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
@@ -22,16 +23,18 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import Imagem.MetodosImagem;
 import JanelasAnimal.CadastrarAnimais;
 import JanelasComtabil.NovaCompra;
 import JanelasComtabil.NovaVenda;
 import JanelasComtabil.Total;
 import JanelasFuncionarios.CadastrarFuncionarios;
-import javax.swing.ImageIcon;
 
 public class NovaFazenda {
 
@@ -43,9 +46,11 @@ public class NovaFazenda {
 	public static JLabel lblImg;
 	public static JPanel panel;
 	public static File img;
-//	ImagemFazenda i = new ImagemFazenda();
+	MetodosImagem mI = new MetodosImagem();
 	private JEditorPane dtrpnDes;
 	private JButton btnLimpar;
+	private JTextField tfQtdAnimais;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -86,26 +91,29 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
+		panel.setToolTipText("2 cliques para selecionar a imagem");
+		panel.setOpaque(false);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBounds(774, 25, 290, 217);
 		frmNovaFazenda.getContentPane().add(panel);
 		panel.setLayout(new CardLayout(0, 0));
 		
 		lblImg = new JLabel("");
-		panel.add(lblImg, "name_20449716211995");
-		
-		JPanel nada = new JPanel();
-		nada.setBounds(398, 299, 306, 33);
-		frmNovaFazenda.getContentPane().add(nada);
-		
-		JButton btnFoto = new JButton("Foto");
-		btnFoto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//img = i.selecionaImg();
-				//i.abrirImagem(img);
+		lblImg.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount()==2) {
+					img = mI.selecionaImg();
+					if(img != null) {
+						lblImg.setHorizontalAlignment(SwingConstants.LEADING);
+					}
+					mI.abrirImagem(img, img, panel, lblImg,null);
+				}
 			}
 		});
-		nada.add(btnFoto);
+		lblImg.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImg.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/logo-pequena-sem-texto.png")));
+		panel.add(lblImg, "name_20449716211995");
 		
 		JButton btnSalvar = new JButton("Salvar");
 		/*btnSalvar.addActionListener(new ActionListener() {
@@ -130,7 +138,7 @@ public class NovaFazenda {
 				}
 			}
 		});*/
-		btnSalvar.setBounds(615, 366, 89, 23);
+		btnSalvar.setBounds(975, 636, 89, 23);
 		frmNovaFazenda.getContentPane().add(btnSalvar);
 		
 		btnLimpar = new JButton("Limpar");
@@ -144,17 +152,17 @@ public class NovaFazenda {
 				
 			}
 		});
-		btnLimpar.setBounds(516, 366, 89, 23);
+		btnLimpar.setBounds(876, 636, 89, 23);
 		frmNovaFazenda.getContentPane().add(btnLimpar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(417, 366, 89, 23);
+		btnCancelar.setBounds(777, 636, 89, 23);
 		frmNovaFazenda.getContentPane().add(btnCancelar);
 		
 		JLabel lblNonaFazenda = new JLabel("Nova Fazenda");
-		lblNonaFazenda.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNonaFazenda.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNonaFazenda.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNonaFazenda.setBounds(10, 7, 378, 23);
+		lblNonaFazenda.setBounds(10, 11, 1054, 25);
 		frmNovaFazenda.getContentPane().add(lblNonaFazenda);
 		
 		tfNome = new JTextField();
@@ -167,14 +175,14 @@ public class NovaFazenda {
 				}
 			}
 		});
-		tfNome.setBounds(10, 65, 378, 30);
+		tfNome.setBounds(80, 61, 200, 20);
 		frmNovaFazenda.getContentPane().add(tfNome);
 		tfNome.setColumns(10);
 		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNome.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNome.setBounds(10, 51, 378, 14);
+		lblNome.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNome.setBounds(10, 60, 60, 20);
 		frmNovaFazenda.getContentPane().add(lblNome);
 		
 		tfTamanho = new JTextField();
@@ -187,14 +195,14 @@ public class NovaFazenda {
 				}
 			}
 		});
-		tfTamanho.setBounds(10, 128, 175, 30);
+		tfTamanho.setBounds(80, 92, 200, 20);
 		frmNovaFazenda.getContentPane().add(tfTamanho);
 		tfTamanho.setColumns(10);
 		
 		JLabel lblTamanho = new JLabel("Tamanho:");
 		lblTamanho.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTamanho.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblTamanho.setBounds(10, 114, 175, 14);
+		lblTamanho.setBounds(10, 91, 60, 20);
 		frmNovaFazenda.getContentPane().add(lblTamanho);
 		
 		tfEscritura = new JTextField();
@@ -208,13 +216,13 @@ public class NovaFazenda {
 			}
 		});
 		tfEscritura.setColumns(10);
-		tfEscritura.setBounds(213, 128, 175, 30);
+		tfEscritura.setBounds(500, 60, 200, 20);
 		frmNovaFazenda.getContentPane().add(tfEscritura);
 		
 		JLabel lblEscritura = new JLabel("Escritura:");
 		lblEscritura.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEscritura.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblEscritura.setBounds(213, 114, 175, 14);
+		lblEscritura.setBounds(420, 60, 60, 20);
 		frmNovaFazenda.getContentPane().add(lblEscritura);
 		
 		textField = new JTextField();
@@ -228,25 +236,61 @@ public class NovaFazenda {
 			}
 		});
 		textField.setColumns(10);
-		textField.setBounds(10, 191, 378, 30);
+		textField.setBounds(520, 92, 180, 20);
 		frmNovaFazenda.getContentPane().add(textField);
 		
 		JLabel lblPro = new JLabel("Propriet\u00E1rio:");
 		lblPro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPro.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPro.setBounds(10, 177, 378, 14);
+		lblPro.setBounds(420, 91, 80, 20);
 		frmNovaFazenda.getContentPane().add(lblPro);
 		
 		dtrpnDes = new JEditorPane();
+		dtrpnDes.setOpaque(false);
 		dtrpnDes.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
-		dtrpnDes.setBounds(10, 254, 378, 78);
+		dtrpnDes.setBounds(80, 123, 200, 107);
 		frmNovaFazenda.getContentPane().add(dtrpnDes);
 		
 		JLabel lblDescrio_1 = new JLabel("Descri\u00E7\u00E3o:");
-		lblDescrio_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDescrio_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDescrio_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDescrio_1.setBounds(10, 239, 378, 14);
+		lblDescrio_1.setBounds(10, 123, 70, 107);
 		frmNovaFazenda.getContentPane().add(lblDescrio_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setOpaque(false);
+		scrollPane.setInheritsPopupMenu(true);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(10, 253, 1054, 373);
+		frmNovaFazenda.getContentPane().add(scrollPane);
+		
+		JLabel lblQuantidadeDeAnimais = new JLabel("Quantidade de animais:");
+		lblQuantidadeDeAnimais.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblQuantidadeDeAnimais.setBounds(420, 122, 157, 20);
+		frmNovaFazenda.getContentPane().add(lblQuantidadeDeAnimais);
+		
+		JLabel lblQuantidadeDeFuncionaris = new JLabel("Quantidade de funcionarios:");
+		lblQuantidadeDeFuncionaris.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblQuantidadeDeFuncionaris.setBounds(420, 153, 180, 20);
+		frmNovaFazenda.getContentPane().add(lblQuantidadeDeFuncionaris);
+		
+		tfQtdAnimais = new JTextField();
+		tfQtdAnimais.setText("0");
+		tfQtdAnimais.setEditable(false);
+		tfQtdAnimais.setBorder(null);
+		tfQtdAnimais.setOpaque(false);
+		tfQtdAnimais.setBounds(607, 123, 76, 20);
+		frmNovaFazenda.getContentPane().add(tfQtdAnimais);
+		tfQtdAnimais.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setText("0");
+		textField_1.setOpaque(false);
+		textField_1.setEditable(false);
+		textField_1.setColumns(10);
+		textField_1.setBorder(null);
+		textField_1.setBounds(607, 154, 76, 20);
+		frmNovaFazenda.getContentPane().add(textField_1);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/gradiente_Branco.jpg")));
