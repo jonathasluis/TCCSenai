@@ -211,6 +211,8 @@ public class NovaFazenda {
 				taDescricao.setText(null);
 				lblImg.setHorizontalAlignment(SwingConstants.CENTER);
 				lblImg.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/logo-pequena-sem-texto.png")));
+				tfQtdAnimais.setText("0");
+				tfQtdFuncionarios.setText("0");
 			}
 		});
 		btnLimpar.setBounds(678, 636, 89, 23);
@@ -498,6 +500,7 @@ public class NovaFazenda {
 			tfEscritura.setText(fazenda.getEscritura());
 			taDescricao.setText(fazenda.getDescricao());
 			tfProprietario.setText(fazenda.getProprietario());
+			contaQtdAnimaisFuncionarios(fazenda.getIdFazenda());
 			
 			if(fazenda.getImg()!= null) {
 				lblImg.setHorizontalAlignment(SwingConstants.LEADING);
@@ -509,6 +512,44 @@ public class NovaFazenda {
 			
 		} catch (SQLException e) {
 				// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void contaQtdAnimaisFuncionarios(int idFazenda) {
+		int qtdAnimais=0;
+		ResultSet rsAnimais = null;
+		String sqlAnimais = "SELECT quantidade FROM animais where idfazenda=?";
+		try {
+			PreparedStatement stmtAnimais = Conexao.conexao.prepareStatement(sqlAnimais);
+			stmtAnimais.setInt(1, idFazenda);
+			rsAnimais = stmtAnimais.executeQuery();
+			stmtAnimais.execute();
+			stmtAnimais.close();
+			
+			while (rsAnimais.next()) {
+				qtdAnimais += rsAnimais.getInt("quantidade");
+			}
+			tfQtdAnimais.setText(String.valueOf(qtdAnimais));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ResultSet rsFuncionarios = null;
+		String sqlFuncionarios = "SELECT count(nome_fun) AS qtdFuncionarios FROM funcionarios where idfazenda=?";
+		try {
+			PreparedStatement stmtFuncionarios = Conexao.conexao.prepareStatement(sqlFuncionarios);
+			stmtFuncionarios.setInt(1, idFazenda);
+			rsFuncionarios = stmtFuncionarios.executeQuery();
+			stmtFuncionarios.execute();
+			stmtFuncionarios.close();
+			
+			if (rsFuncionarios.next()) {
+				tfQtdFuncionarios.setText(rsFuncionarios.getString("qtdFuncionarios"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
