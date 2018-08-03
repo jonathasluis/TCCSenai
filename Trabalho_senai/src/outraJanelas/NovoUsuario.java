@@ -21,7 +21,7 @@ import javax.swing.SwingConstants;
 
 import banco.Conexao;
 
-public class NovoUsuario {
+public class NovoUsuario {///
 	
 
 	private JFrame frame;
@@ -108,7 +108,7 @@ public class NovoUsuario {
 				
 				
 				if (usu.trim().equals("")) {
-					JOptionPane.showMessageDialog(null, "Informe um usuario v·lido");
+					JOptionPane.showMessageDialog(null, "Informe um usuario v√°lido");
 					tfUsuario.requestFocus();
 					return;
 				}
@@ -120,7 +120,7 @@ public class NovoUsuario {
 					
 					
 				}if(!(senh.equals(senhCon))) {
-					JOptionPane.showMessageDialog(null, "As senhas n„o est„o se relacioando"
+					JOptionPane.showMessageDialog(null, "As senhas n√£o est√£o se relacioando"
 							+ "");
 				}
 				
@@ -137,7 +137,7 @@ public class NovoUsuario {
 						Principal.main(null);
 					}else {
 
-						JOptionPane.showMessageDialog(null, "Usuario e/ou Senha inv·lido(s)!");						
+						JOptionPane.showMessageDialog(null, "Usuario e/ou Senha inv√°lido(s)!");						
 					}
 
 				} catch (SQLException e1) {
