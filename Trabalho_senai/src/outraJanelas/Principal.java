@@ -32,7 +32,7 @@ import JanelasComtabil.NovaVenda;
 import JanelasComtabil.Total;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import java.awt.SystemColor;
-
+//
 
 public class Principal {
 
