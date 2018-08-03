@@ -385,9 +385,12 @@ public class CadastrarAnimais {//teste3
 				preencherDAOAnimalParaSalvarNovo();
 				
 				if(contadorParaEditar==0) {
-					
+					x1=0;
 					crud.addAnimal(animal);
-					
+					if (tabela.getRowCount()<=19) {
+						int x = (teste*16)+scrollPane.getHeight();
+						scrollPane.setBounds(10, 253, 1054, x);
+					}
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
 					
 					btnLimpar.doClick();
@@ -439,7 +442,7 @@ public class CadastrarAnimais {//teste3
 				tfDestino.setText(null);
 				rdbtnMacho.setSelected(true);
 				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
-				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
+				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);	
 				ftfDataCompra.setValue(null);
 				ftfDataNascimento.setValue(null);
 			}
@@ -454,8 +457,19 @@ public class CadastrarAnimais {//teste3
 				int resposta = JOptionPane.showConfirmDialog(null, "Deseja deletar esse dado?", "ALERTA!",
 						JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 				if(resposta==JOptionPane.YES_OPTION) {
+					x1=0;
+					btnCancelar.doClick();
 					crud.removeAnimal(animal);
 					colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));
+					
+					
+					if (tabela.getRowCount()<=19) {
+						int x = scrollPane.getHeight()-16;
+						scrollPane.setBounds(10, 253, 1054, x);
+					}
+					
+					
+					
 				}
 			}
 		});//fim evento botao deletar
@@ -496,6 +510,22 @@ public class CadastrarAnimais {//teste3
 		btnProcurar = new JButton("Procurar");
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {//inicio da açao do botao procurar
+				//variavel para delimitar o tamanho da tabela
+				x1=0;
+				//tratamento para almentar a tabela
+				colocaDadosNaTabela(CrudAnimal.procuraAnimal(tfProcurar.getText(),animal ));	
+				int animal = new Animal().getIdAnimal();
+				
+				int tabel = tabela.getRowCount();
+				int linha = tabel*16;
+				int valor = 21+linha;
+				scrollPane.setBounds(10, 253, 1054, valor);
+				if (!(tfProcurar.getText()).trim().equals("")) {
+					if (tabela.getRowCount()==0) {
+						int x2 = 21;
+						scrollPane.setBounds(10, 253, 1054, x2);
+					}
+				}
 				
 			}
 		});//fim da açao do botao procurar
@@ -541,6 +571,7 @@ public class CadastrarAnimais {//teste3
 		label_1.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/gradiente_Branco.jpg")));
 		label_1.setBounds(0, 0, 1074, 670);
 		frmCadastroDeAnimais.getContentPane().add(label_1);
+		
 		
 		
 		x1=1;

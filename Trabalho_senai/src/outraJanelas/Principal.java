@@ -87,8 +87,8 @@ public class Principal {
 		lblNomeDoSistema.setBounds(10, 11, 1054, 43);
 		frmPrincipal.getContentPane().add(lblNomeDoSistema);
 		
-		ImageIcon iconAnimal = new ImageIcon("src/img/t2.png");
-		iconAnimal.setImage(iconAnimal.getImage().getScaledInstance(116, 58 ,100));
+		ImageIcon iconAnimal = new ImageIcon("src/img/vaca1.png");
+		iconAnimal.setImage(iconAnimal.getImage().getScaledInstance(135,101 ,100));
 		JButton btnAnimais = new JButton("");
 		btnAnimais.setBorderPainted(false);
 		btnAnimais.addActionListener(new ActionListener() {
@@ -99,7 +99,7 @@ public class Principal {
 		});
 		btnAnimais.setContentAreaFilled(false);
 		btnAnimais.setBackground(Color.GRAY);
-		btnAnimais.setBounds(10, 145, 120,60);
+		btnAnimais.setBounds(10, 104, 135,101);
 		btnAnimais.setIcon(iconAnimal);
 		frmPrincipal.getContentPane().add(btnAnimais);
 		
@@ -133,9 +133,10 @@ public class Principal {
 		lblFuncionarios.setBounds(255, 206, 120, 14);
 		frmPrincipal.getContentPane().add(lblFuncionarios);
 		
-		ImageIcon iconCompras = new ImageIcon("src/img/compra1.png");
-		iconCompras.setImage(iconCompras.getImage().getScaledInstance(116, 58 ,100));
+		ImageIcon iconCompras = new ImageIcon("src/img/compra12.png");
+		iconCompras.setImage(iconCompras.getImage().getScaledInstance(135,101 ,100));
 		JButton btnCompras = new JButton("");
+		btnCompras.setBorderPainted(false);
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaCompra.main(null);
@@ -143,7 +144,7 @@ public class Principal {
 			}
 		});
 		btnCompras.setContentAreaFilled(false);
-		btnCompras.setBounds(470, 145, 120,60);
+		btnCompras.setBounds(470, 104, 135,101);
 		btnCompras.setIcon(iconCompras);
 		frmPrincipal.getContentPane().add(btnCompras);
 		
@@ -155,8 +156,9 @@ public class Principal {
 		frmPrincipal.getContentPane().add(lblCompras);
 		
 		ImageIcon iconVendas = new ImageIcon("src/img/t1.png");
-		iconVendas.setImage(iconVendas.getImage().getScaledInstance(116, 58 ,100));
+		iconVendas.setImage(iconVendas.getImage().getScaledInstance(135,101 ,100));
 		JButton btnVendas = new JButton("");
+		btnVendas.setBorderPainted(false);
 		btnVendas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NovaVenda.main(null);
@@ -164,7 +166,7 @@ public class Principal {
 			}
 		});
 		btnVendas.setContentAreaFilled(false);
-		btnVendas.setBounds(700, 145, 120,60);
+		btnVendas.setBounds(700, 104, 135,101);
 		btnVendas.setIcon(iconVendas);
 		frmPrincipal.getContentPane().add(btnVendas);
 		
@@ -175,9 +177,10 @@ public class Principal {
 		lblVendas.setBounds(700, 207, 120, 14);
 		frmPrincipal.getContentPane().add(lblVendas);
 		
-		ImageIcon iconUsuario = new ImageIcon("src/img/user.png");
-		iconUsuario.setImage(iconUsuario.getImage().getScaledInstance(116, 58 ,100));
+		ImageIcon iconUsuario = new ImageIcon("src/img/usu1.png");
+		iconUsuario.setImage(iconUsuario.getImage().getScaledInstance(135,101 ,100));
 		JButton btnUsuario = new JButton("");
+		btnUsuario.setBorderPainted(false);
 		btnUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Usuario.main(null);
@@ -185,7 +188,7 @@ public class Principal {
 			}
 		});
 		btnUsuario.setContentAreaFilled(false);
-		btnUsuario.setBounds(920, 145, 120,60);
+		btnUsuario.setBounds(920, 104, 135,101);
 		btnUsuario.setIcon(iconUsuario);
 		frmPrincipal.getContentPane().add(btnUsuario);
 		

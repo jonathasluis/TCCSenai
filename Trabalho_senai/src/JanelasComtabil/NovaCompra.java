@@ -318,7 +318,7 @@ public class NovaCompra {////
 						new CrudCompras();
 						criaTabela(CrudCompras.selecionaCompras(compra));
 						btnLimpar.doClick();
-						s
+						
 						
 					}
 					//TESTE DE SALVAR AS ALTERAÇÕES 
