@@ -59,7 +59,6 @@ public class NovaCompra {////
 	int testebtnProucurarar=0;
 	private JFrame frmCompraDeInsumos;
 	private JTextField tfProduto;
-	private JTextField tfData;
 	private JTextField tfNota;
 	private JTextField tfPreco;
 	private JTextField txtFornecedor;
@@ -79,6 +78,7 @@ public class NovaCompra {////
 	private JFormattedTextField tfCNPJ;
 	int mouseClick = 0;
 	static String numero=null;
+	private JFormattedTextField tfData;
 	/**
 	 * Launch the application.
 	 */
@@ -152,22 +152,7 @@ public class NovaCompra {////
 		lblDataDaCompra.setFont(new Font("Arial", Font.BOLD, 14));
 		lblDataDaCompra.setBounds(405, 80, 125, 20);
 		frmCompraDeInsumos.getContentPane().add(lblDataDaCompra);
-		
-		//VARIAVEL PARA PEGAR A DATA DO DIA ATUAL DO SEU COMPUTADOR
-		Date data = new Date();
-		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-		String formatada = formato.format(data);
-		
-		tfData = new JTextField();
-		tfData.setForeground(SystemColor.controlText);
-		tfData.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		tfData.setToolTipText("As datas s\u00E3o obtidas a partir do seu computador.\r\nCorrija se for necess\u00E1rio.");
-		tfData.setFont(new Font("Arial", Font.PLAIN, 13));
-		tfData.setHorizontalAlignment(SwingConstants.CENTER);
-		tfData.setBounds(546, 80, 188, 20);
-		frmCompraDeInsumos.getContentPane().add(tfData);
-		tfData.setColumns(10);
-		tfData.setText(formatada);
+	
 		
 		JLabel lblNumeroDaNota = new JLabel("Numero da Nota:");
 		lblNumeroDaNota.setForeground(Color.BLACK);
@@ -333,13 +318,7 @@ public class NovaCompra {////
 						new CrudCompras();
 						criaTabela(CrudCompras.selecionaCompras(compra));
 						btnLimpar.doClick();
-						System.out.println(addCompras.getCnpj());
-						System.out.println(addCompras.getDataCompra());
-						System.out.println(addCompras.getFornecedor());
-						System.out.println(addCompras.getNumeroNota());
-						System.out.println(addCompras.getPreco());
-						System.out.println(addCompras.getProduto());
-						System.out.println(addCompras.getCnpj()); 
+						
 						
 					}
 					//TESTE DE SALVAR AS ALTERAÇÕES 
@@ -373,11 +352,9 @@ public class NovaCompra {////
 				tfPreco.setText(null);
 				txtFornecedor.setText(null);
 				tfProduto.requestFocus();
-				tfData.setEnabled(true);
-				tfData.setText(formatada);
-				tfData.setEditable(false);
-				tfData.setToolTipText("As datas são obtidas a partir do seu computador.\r\n" + 
-					"Corrija se for necessário.");
+				tfData.setText(null);
+				
+				
 				
 			}
 		});
@@ -564,6 +541,22 @@ public class NovaCompra {////
 		//ImageIcon img = new ImageIcon("src/img/fundo3.jpg");
 		//img.setImage(img.getImage().getScaledInstance(1074, 671, 100));
 		frmCompraDeInsumos.getContentPane().add(llll);
+		
+		Date data = new Date();
+		SimpleDateFormat formato = new SimpleDateFormat("yyyyMMdd");
+		String formatada = formato.format(data);
+		
+		try {
+			tfData = new JFormattedTextField(new MaskFormatter("####-##-##"));
+			tfData.setBounds(546, 81, 186, 20);
+			frmCompraDeInsumos.getContentPane().add(tfData);
+			tfData.setText(formatada);
+			tfData.setToolTipText("aaaa-mm-dd");
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		JLabel label = new JLabel("");
 		label.setBackground(Color.WHITE);
 		label.setIcon(new ImageIcon("E:\\TCC\\Fundo.jpg"));
@@ -807,18 +800,4 @@ public class NovaCompra {////
 		
 
 	}
-/*	Runnable thread = new Runnable() {	
-		@Override
-		public void run() {
-			try {
-				while(true) { 
-					Thread.sleep(1200);
-					mouseClick=0;
-				}
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	};*/
 }

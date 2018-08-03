@@ -298,7 +298,7 @@ public class CadastrarAnimais {//teste3
 		scrollPane =  new JScrollPane();
 		scrollPane.setOpaque(false);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(10, 253, 1054, 39);
+		scrollPane.setBounds(10, 253, 1054, 23);
 		frmCadastroDeAnimais.getContentPane().add(scrollPane);
 		
 		tabela = new JTable();
@@ -385,14 +385,11 @@ public class CadastrarAnimais {//teste3
 				preencherDAOAnimalParaSalvarNovo();
 				
 				if(contadorParaEditar==0) {
-					x1=0;
+					
 					crud.addAnimal(animal);
 					
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
-					if (tabela.getRowCount()<=19) {
-						int x = (teste*16)+scrollPane.getHeight();
-						scrollPane.setBounds(10, 253, 1054, x);		
-					}
+					
 					btnLimpar.doClick();
 				}
 				else if(contadorParaEditar==1) {
@@ -499,23 +496,7 @@ public class CadastrarAnimais {//teste3
 		btnProcurar = new JButton("Procurar");
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {//inicio da açao do botao procurar
-				//VARIAVEL PARA REGULAR O TAMNHO DA TABELA
-				x1=0;	
-				//TRATAMENTO PARA AUMENTAR E DIMINUIR TABELA
-				int table = tabela.getRowCount();
-				int linha = table*16;
-				int valor = 21+linha;
-				scrollPane.setBounds(10, 253, 1054, valor);
-				if (!(tfProcurar.getText().trim().equals(""))) {
-					
-					if (tabela.getRowCount()!=0) {
-						colocaDadosNaTabela(CrudAnimal.procuraAnimal(tfProcurar.getText(), animal));
-						int x2 = 21;
-						scrollPane.setBounds(10, 253, 1054, x2);
-					}
-				}else {
-					colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));
-				}
+				
 			}
 		});//fim da açao do botao procurar
 		btnProcurar.setBackground(SystemColor.controlHighlight);
@@ -561,9 +542,10 @@ public class CadastrarAnimais {//teste3
 		label_1.setBounds(0, 0, 1074, 670);
 		frmCadastroDeAnimais.getContentPane().add(label_1);
 		
+		
+		x1=1;
 		menu();
 		new ComboBox().comboBoxEspecie();
-		
 		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
 		colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));	
 		
@@ -571,6 +553,8 @@ public class CadastrarAnimais {//teste3
 				if (tabela.getRowCount()==0) {
 					scrollPane.setVisible(false);
 				}
+				
+				
 	}//fim do inicialize
 	
 	void preencherDAOAnimalParaSalvarNovo() {
@@ -600,6 +584,7 @@ public class CadastrarAnimais {//teste3
 				ResultSet rs2 = new CrudFazenda().selecionaFazendaEspecifica(rs.getInt("idfazenda"));
 				String fazenda=null;
 				
+				
 				if(rs2.next())
 					fazenda = rs2.getString("nome");
 				
@@ -611,14 +596,13 @@ public class CadastrarAnimais {//teste3
 						ComboBox.pegaNomeEspecie(rs.getInt("raca")),ComboBox.pegaNomeRaca(rs.getInt("raca")),sexo,rs.getString("destino"),rs.getString("quantidade"),
 						rs.getString("datacompra"),fazenda});
 				
-				//IF PARA FAZER A TABELA AUMENTAR 
-				
 				if (x1==1) {
-					if (tabela.getRowCount() > teste  & tabela.getRowCount() <=19 ) {
-						
+					if (tabela.getRowCount() >= teste & tabela.getRowCount() <=19) {
+						teste=1;
 						teste=+1;
 						int x = (teste*16)+scrollPane.getHeight();
-						scrollPane.setBounds(10, 253, 1054, x);		
+						scrollPane.setBounds(10, 253, 1054, x
+								);
 					}
 				}
 				
