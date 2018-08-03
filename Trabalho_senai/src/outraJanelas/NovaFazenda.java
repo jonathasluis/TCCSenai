@@ -236,6 +236,28 @@ public class NovaFazenda {
 		btnCancelar.setBounds(777, 636, 89, 23);
 		frmNovaFazenda.getContentPane().add(btnCancelar);
 		
+		btnDeletar = new JButton("Deletar");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int resposta = JOptionPane.showConfirmDialog(null, "Todos os dados dessa Fazenda serão excluidos,deseja continuar", "ALERTA!",
+						JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+				if(resposta==JOptionPane.YES_OPTION) {
+					new CrudFazenda().deletaFazenda(fazenda);
+					btnCancelar.doClick();//para zerar variavel editar e habilitar os botoes
+					btnLimpar.doClick();
+					colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
+					
+					if(fazenda.getIdFazenda()==Principal.fazenda.getIdFazenda()) {//se a fazenda logada for excluida manda mudar
+						Pergunta.main(null);
+						Pergunta.contador = 1;
+					}
+				}
+			}
+		});
+		btnDeletar.setEnabled(false);
+		btnDeletar.setBounds(876, 636, 89, 23);
+		frmNovaFazenda.getContentPane().add(btnDeletar);
+		
 		JLabel lblNonaFazenda = new JLabel("Fazendas");
 		lblNonaFazenda.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNonaFazenda.setHorizontalAlignment(SwingConstants.CENTER);
@@ -404,28 +426,6 @@ public class NovaFazenda {
 		tfQtdFuncionarios.setBounds(197, 210, 76, 20);
 		frmNovaFazenda.getContentPane().add(tfQtdFuncionarios);
 		
-		btnDeletar = new JButton("Deletar");
-		btnDeletar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int resposta = JOptionPane.showConfirmDialog(null, "Todos os dados dessa Fazenda serão excluidos,deseja continuar", "ALERTA!",
-						JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-				if(resposta==JOptionPane.YES_OPTION) {
-					new CrudFazenda().deletaFazenda(fazenda);
-					btnCancelar.doClick();//para zerar variavel editar e habilitar os botoes
-					btnLimpar.doClick();
-					colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
-					
-					if(fazenda.getIdFazenda()==Principal.fazenda.getIdFazenda()) {//se a fazenda logada for excluida manda mudar
-						Pergunta.main(null);
-						Pergunta.contador = 1;
-					}
-				}
-			}
-		});
-		btnDeletar.setEnabled(false);
-		btnDeletar.setBounds(876, 636, 89, 23);
-		frmNovaFazenda.getContentPane().add(btnDeletar);
-		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(510, 92, 190, 150);
 		frmNovaFazenda.getContentPane().add(scrollPane_1);
@@ -479,8 +479,6 @@ public class NovaFazenda {
 		fazenda.setDescricao(table.getValueAt(linha, 4).toString());
 		fazenda.setProprietario(table.getValueAt(linha, 5).toString());
 		
-		//"ID ", "Nome da Fazenda", "Tamanho da Fazenda", "Escritura da Fazenda", "Descri\u00E7\u00E3o da Fazenda", "Proprietario"
-		
 		ResultSet rs = null;
 		String sql = "SELECT (img) FROM fazenda WHERE idfazenda=?";
 		
@@ -528,7 +526,7 @@ public class NovaFazenda {
 			stmtAnimais.close();
 			
 			while (rsAnimais.next()) {
-				qtdAnimais += rsAnimais.getInt("quantidade");
+				qtdAnimais += rsAnimais.getInt("quantidade");//faz a soma da quantidade de animais
 			}
 			tfQtdAnimais.setText(String.valueOf(qtdAnimais));
 		} catch (SQLException e) {
@@ -537,7 +535,7 @@ public class NovaFazenda {
 		}
 		
 		ResultSet rsFuncionarios = null;
-		String sqlFuncionarios = "SELECT count(nome_fun) AS qtdFuncionarios FROM funcionarios where idfazenda=?";
+		String sqlFuncionarios = "SELECT count(nome_fun) AS qtdFuncionarios FROM funcionarios where idfazenda=?";//vai retornar um valor contado a qtd de linhas
 		try {
 			PreparedStatement stmtFuncionarios = Conexao.conexao.prepareStatement(sqlFuncionarios);
 			stmtFuncionarios.setInt(1, idFazenda);
