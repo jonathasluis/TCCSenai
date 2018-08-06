@@ -438,7 +438,7 @@ public class Total {//
 				if (tabelaGasto.getRowCount()== 0) {
 					scrollPaneGasto.setVisible(false);
 				}
-				//tabela
+				//tabela/
 	}
 	
 	void colocaDadosNaTabelaGasto(ResultSet rs) {
