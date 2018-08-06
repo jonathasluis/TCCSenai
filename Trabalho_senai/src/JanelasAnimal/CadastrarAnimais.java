@@ -93,8 +93,12 @@ public class CadastrarAnimais {//teste3
 	private JButton btnDeletar;
 	private JButton btnCancelar;
 	private JButton btnSalvar;
+	
+	//tabela
 	static int teste = 1; 
 	static int x1=1;
+	//tabela
+	
 	static int indexCbEspecie;
 	/**
 	 *
@@ -385,17 +389,21 @@ public class CadastrarAnimais {//teste3
 				preencherDAOAnimalParaSalvarNovo();
 				
 				if(contadorParaEditar==0) {
-					x1=0;
 					crud.addAnimal(animal);
+					//tabela
+					x1=0;
 					if (tabela.getRowCount()<=19) {
 						int x = (teste*16)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
+					//tabela
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
-					
 					btnLimpar.doClick();
 				}
 				else if(contadorParaEditar==1) {
+					//tabela
+					x1=0;
+					//tabela
 					int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar esse(s) Animal? ", "alerta",
 							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 					if(resposta == JOptionPane.YES_OPTION) {
@@ -457,17 +465,17 @@ public class CadastrarAnimais {//teste3
 				int resposta = JOptionPane.showConfirmDialog(null, "Deseja deletar esse dado?", "ALERTA!",
 						JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 				if(resposta==JOptionPane.YES_OPTION) {
-					x1=0;
+					
 					btnCancelar.doClick();
 					crud.removeAnimal(animal);
 					colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));
-					
-					
+					//tabela
+					x1=0;
 					if (tabela.getRowCount()<=19) {
 						int x = scrollPane.getHeight()-16;
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
-					
+					//tabela
 					
 					
 				}
@@ -573,17 +581,21 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(label_1);
 		
 		
-		
+		//tabela
 		x1=1;
+		//tabela
 		menu();
 		new ComboBox().comboBoxEspecie();
 		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
 		colocaDadosNaTabela(CrudAnimal.selecionaAnimais(animal));	
 		
+		//tabela
 		//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
-				if (tabela.getRowCount()==0) {
-					scrollPane.setVisible(false);
-				}
+		if (tabela.getRowCount()== 0) {
+			scrollPane.setVisible(false);
+		}
+		//tabela
+	
 				
 				
 	}//fim do inicialize
@@ -606,7 +618,9 @@ public class CadastrarAnimais {//teste3
 	void colocaDadosNaTabela(ResultSet rs) {
 		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
 		String sexo;
-		
+		//tabela
+		scrollPane.setVisible(true);
+		//tabela
 		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
 		modelo.setNumRows(0);
 		
@@ -626,16 +640,16 @@ public class CadastrarAnimais {//teste3
 				modelo.addRow(new Object[] {rs.getInt("idanimal"),rs.getString("nomelote"),rs.getString("datadenascimento"),
 						ComboBox.pegaNomeEspecie(rs.getInt("raca")),ComboBox.pegaNomeRaca(rs.getInt("raca")),sexo,rs.getString("destino"),rs.getString("quantidade"),
 						rs.getString("datacompra"),fazenda});
-				
+				//tabela
 				if (x1==1) {
 					if (tabela.getRowCount() >= teste & tabela.getRowCount() <=19) {
 						teste=1;
 						teste=+1;
 						int x = (teste*16)+scrollPane.getHeight();
-						scrollPane.setBounds(10, 253, 1054, x
-								);
+						scrollPane.setBounds(10, 253, 1054, x);
 					}
 				}
+				//tabela
 				
 			}
 		} catch (SQLException e) {
