@@ -389,6 +389,12 @@ public class CadastrarAnimais {//teste3
 				preencherDAOAnimalParaSalvarNovo();
 				
 				if(contadorParaEditar==0) {
+					if(verificaSeTemAnimal(tfNomeLote.getText().trim())) {
+						JOptionPane.showMessageDialog(null, "Ja possui um lote com este nome!");
+						tfNomeLote.requestFocus();
+						tfNomeLote.selectAll();
+						return;
+					}
 					crud.addAnimal(animal);
 					//tabela
 					x1=0;
@@ -599,6 +605,28 @@ public class CadastrarAnimais {//teste3
 				
 				
 	}//fim do inicialize
+	
+	boolean verificaSeTemAnimal(String valor) {
+		boolean resposta=false;
+		 ResultSet rs = CrudAnimal.selecionaAnimais(animal);
+		 try {
+			 while(rs.next()) {
+				 String nome = rs.getString("nomelote");
+				 if(nome.equalsIgnoreCase(valor)) {
+					 resposta=true;
+					 break;
+				 }
+				 else {
+					 resposta=false;
+				 }
+			 }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return resposta;
+	}
 	
 	void preencherDAOAnimalParaSalvarNovo() {
 		animal.setNomeLote(tfNomeLote.getText());

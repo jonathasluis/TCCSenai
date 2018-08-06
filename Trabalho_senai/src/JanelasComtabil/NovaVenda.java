@@ -43,6 +43,7 @@ import DAO.Vendas;
 import JanelasAnimal.CadastrarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import banco.Conexao;
+import crud.CrudVendas;
 import outraJanelas.EnviarEmail;
 import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
@@ -71,6 +72,7 @@ public class NovaVenda {
 	static String numero=null;
 	Vendas venda = new Vendas();
 	private JSpinner spinner;
+	int contadorEditar = 0;
 
 	/**
 	 * Launch the application.
@@ -266,6 +268,12 @@ public class NovaVenda {
 					JOptionPane.showMessageDialog(null, "Insira uma quantidade!", "ALERTA!",JOptionPane.WARNING_MESSAGE);
 					spinner.requestFocus();
 					return;
+				}
+				if((rdbtnSubproduto.isSelected() && tfProduto.getText().trim().equals("")) ||
+						(rdbtnPlantio.isSelected() && tfProduto.getText().trim().equals(""))) {
+					JOptionPane.showMessageDialog(null, "Insira o produto", "ALERTA!", JOptionPane.WARNING_MESSAGE);
+					tfProduto.requestFocus();
+					return;
 				}//fim do tratamento de informaçao 
 				
 				//TESTE DE CADASTRO DE PREÇO
@@ -273,7 +281,11 @@ public class NovaVenda {
 				numero = numero.replace(".", ",");
 				//FIM DO TESTE
 				
-				
+				if (contadorEditar==0) {
+					preencherDAOparaSalvarVenda();
+					new CrudVendas().addvendas(venda);
+					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
+				}
 			}
 		});
 		btnSalvar.setBounds(975, 637, 89, 23);
@@ -345,13 +357,24 @@ public class NovaVenda {
 		menu();
 	}
 	
-	void preencherDAOparaSalvarCompra() {
+	void preencherDAOparaSalvarVenda() {
 		venda.setCliente(tfCliente.getText());
 		venda.setDataVenda(ftfData.getText());
 		venda.setPreco(Double.parseDouble(numero));
-		venda.setProduto(tfProduto.getText());
 		venda.setQuantidade((int) spinner.getValue());
 		venda.setIdFazenda(Principal.fazenda.getIdFazenda());
+		
+		if (rdbtnAnimal.isSelected()) {
+			venda.setProduto(null);
+			venda.setIdanimal(id);
+		}
+		if (rdbtnSubproduto.isSelected()) {
+			venda.setProduto(tfProduto.getText());
+			venda.setIdanimal(id);
+		}
+		if (rdbtnPlantio.isSelected()) {
+			venda.setProduto(tfProduto.getText());
+		}
 	}
 	
 	void comboBoxAnimal() {
