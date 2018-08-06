@@ -53,13 +53,18 @@ public class Total {//
 	private Compras compras = new Compras();
 	private JTable tabelaGasto;
 	private JTable tabelaReceita;
-	private JScrollPane scrollPaneGasto;
 	private JScrollPane scrollPaneReceita;
 	private JCheckBox chckbxAno;
 	private JCheckBox chckbxAnomes;
 	private JCheckBox chckbxAnomesdia;
 	private JCalendar calendar;
 	Date data = new Date();
+	
+	//tabela
+		static int teste = 1; 
+		static int x1=1;
+		private JScrollPane scrollPaneGasto;
+		//tabela
 
 	/**
 	 * Launch the application.
@@ -155,7 +160,7 @@ public class Total {//
 		
 		scrollPaneGasto = new JScrollPane();
 		scrollPaneGasto.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPaneGasto.setBounds(10, 250, 519, 259);
+		scrollPaneGasto.setBounds(10, 250, 519, 23);
 		frmRelattio.getContentPane().add(scrollPaneGasto);
 		
 		tabelaGasto = new JTable();
@@ -166,10 +171,6 @@ public class Total {//
 				"Produto", "Pre\u00E7o", "Data"
 			}
 		) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false
 			};
@@ -189,7 +190,7 @@ public class Total {//
 		
 		scrollPaneReceita = new JScrollPane();
 		scrollPaneReceita.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPaneReceita.setBounds(545, 250, 519, 259);
+		scrollPaneReceita.setBounds(545, 250, 519, 23);
 		frmRelattio.getContentPane().add(scrollPaneReceita);
 		
 		tabelaReceita = new JTable();
@@ -425,11 +426,19 @@ public class Total {//
 		
 		compras.setIdFazenda(Principal.fazenda.getIdFazenda());
 		vendas.setIdFazenda(Principal.fazenda.getIdFazenda());
-		
+		//tabela
+				x1=1;
+				//tabela
 		menu();
 		
 		colocaDadosNaTabelaGasto(CrudCompras.selecionaCompras(compras));
 		colocaDadosNaTabelaReceita(CrudVendas.selecionaVendas(vendas));
+		//tabela
+				//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
+				if (tabelaGasto.getRowCount()== 0) {
+					scrollPaneGasto.setVisible(false);
+				}
+				//tabela
 	}
 	
 	void colocaDadosNaTabelaGasto(ResultSet rs) {
@@ -440,7 +449,16 @@ public class Total {//
 		try {
 			while (rs.next()) {
 				modelo.addRow(new Object[] {rs.getString("produto"),rs.getString("preco"),rs.getString("data_compra")});
-				
+				//tabela
+				if (x1==1) {
+					if (tabelaGasto.getRowCount() >= teste & tabelaGasto.getRowCount() <=14) {
+						teste=1;
+						teste=+1;
+						int x = (teste*16)+scrollPaneGasto.getHeight();
+						scrollPaneGasto.setBounds(10, 250, 519, x);
+					}
+				}
+				//tabela
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

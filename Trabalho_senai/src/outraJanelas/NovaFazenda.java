@@ -64,7 +64,13 @@ public class NovaFazenda {
 	private JButton btnDeletar;
 	private JTextArea taDescricao;
 	Fazenda fazenda = new Fazenda();
-	private JTable table;
+	private JTable tabela;
+	
+	//tabela
+	static int teste = 1; 
+	static int x1=1;
+	private JScrollPane scrollPane;
+	//tabela
 
 	/**
 	 * Launch the application.
@@ -169,12 +175,22 @@ public class NovaFazenda {
 				
 				if (contadorEditar==0) {
 					DAOFazenda();
+					//tabela
+					x1=0;
+					if (tabela.getRowCount()<=19) {
+						int x = (teste*16)+scrollPane.getHeight();
+						scrollPane.setBounds(10, 253, 1054, x);
+					}
+					//tabela
 					new CrudFazenda().addFazenda(fazenda);
 					JOptionPane.showMessageDialog(null, "Fazenda cadastrada com sucesso!");
 					btnLimpar.doClick();
 					colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
 				}
 				if (contadorEditar==1) {
+					//tabela
+					x1=0;
+					//tabela
 					int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar esse Fazenda? ", "alerta",
 							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 					if(resposta==JOptionPane.YES_OPTION) {
@@ -186,15 +202,7 @@ public class NovaFazenda {
 					}
 				}
 				
-				int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar para essa Fazenda? ", "alerta",
-						JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-				if(resposta==JOptionPane.YES_OPTION) {
-					Pergunta.main(null);
-					Pergunta.contador = 1;
-					Pergunta.comboBox.setSelectedItem(fazenda.getNome());
-				}else {
-					return;
-				}
+
 				
 			}
 		});
@@ -246,6 +254,14 @@ public class NovaFazenda {
 					btnCancelar.doClick();//para zerar variavel editar e habilitar os botoes
 					btnLimpar.doClick();
 					colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
+					
+					//tabela
+					x1=0;
+					if (tabela.getRowCount()<=19) {
+						int x = scrollPane.getHeight()-16;
+						scrollPane.setBounds(10, 253, 1054, x);
+					}
+					//tabela
 					
 					if(fazenda.getIdFazenda()==Principal.fazenda.getIdFazenda()) {//se a fazenda logada for excluida manda mudar
 						Pergunta.main(null);
@@ -346,15 +362,15 @@ public class NovaFazenda {
 		lblDescrio_1.setBounds(420, 92, 70, 150);
 		frmNovaFazenda.getContentPane().add(lblDescrio_1);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setOpaque(false);
 		scrollPane.setInheritsPopupMenu(true);
-		scrollPane.setBounds(10, 253, 1054, 373);
+		scrollPane.setBounds(10, 253, 1054, 23);
 		frmNovaFazenda.getContentPane().add(scrollPane);
 		
-		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
+		tabela = new JTable();
+		tabela.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				pegaDadosDaTabela();
@@ -363,18 +379,13 @@ public class NovaFazenda {
 				contadorEditar=1;
 			}
 		});
-		table.setModel(new DefaultTableModel(
+		tabela.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null},
 			},
 			new String[] {
 				"ID ", "Nome da Fazenda", "Tamanho da Fazenda", "Escritura da Fazenda", "Descri\u00E7\u00E3o da Fazenda", "Proprietario"
 			}
 		) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false
 			};
@@ -382,21 +393,21 @@ public class NovaFazenda {
 				return columnEditables[column];
 			}
 		});
-		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(0).setPreferredWidth(99);
-		table.getColumnModel().getColumn(1).setResizable(false);
-		table.getColumnModel().getColumn(1).setPreferredWidth(203);
-		table.getColumnModel().getColumn(2).setResizable(false);
-		table.getColumnModel().getColumn(2).setPreferredWidth(160);
-		table.getColumnModel().getColumn(3).setResizable(false);
-		table.getColumnModel().getColumn(3).setPreferredWidth(160);
-		table.getColumnModel().getColumn(4).setResizable(false);
-		table.getColumnModel().getColumn(4).setPreferredWidth(270);
-		table.getColumnModel().getColumn(5).setResizable(false);
-		table.getColumnModel().getColumn(5).setPreferredWidth(160);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(table);
+		tabela.getColumnModel().getColumn(0).setResizable(false);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(99);
+		tabela.getColumnModel().getColumn(1).setResizable(false);
+		tabela.getColumnModel().getColumn(1).setPreferredWidth(203);
+		tabela.getColumnModel().getColumn(2).setResizable(false);
+		tabela.getColumnModel().getColumn(2).setPreferredWidth(160);
+		tabela.getColumnModel().getColumn(3).setResizable(false);
+		tabela.getColumnModel().getColumn(3).setPreferredWidth(160);
+		tabela.getColumnModel().getColumn(4).setResizable(false);
+		tabela.getColumnModel().getColumn(4).setPreferredWidth(270);
+		tabela.getColumnModel().getColumn(5).setResizable(false);
+		tabela.getColumnModel().getColumn(5).setPreferredWidth(160);
+		tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(tabela);
 		
 		JLabel lblQuantidadeDeAnimais = new JLabel("Quantidade de animais:");
 		lblQuantidadeDeAnimais.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -440,8 +451,18 @@ public class NovaFazenda {
 		label.setBounds(0, 0, 1074, 670);
 		frmNovaFazenda.getContentPane().add(label);
 		
+		//tabela
+				x1=1;
+				//tabela
 		menu();
 		colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
+		
+		//tabela
+				//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
+				if (tabela.getRowCount()== 0) {
+					scrollPane.setVisible(false);
+				}
+				//tabela
 	}
 	
 	void DAOFazenda() {
@@ -455,14 +476,30 @@ public class NovaFazenda {
 	}
 	
 	void colocaDadosNaTabela(ResultSet rs) {
-		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+		//tabela
+				scrollPane.setVisible(true);
+				//tabela
+		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
 		modelo.setNumRows(0);
 		
 		try {
 			while (rs.next()) {
 				modelo.addRow(new Object[] {rs.getInt("idfazenda"),rs.getString("nome"),rs.getString("tamanho"),rs.getString("escritura"),rs.getString("descri"),
 						rs.getString("proprietario")});	
+				
+				//tabela
+				if (x1==1) {
+					if (tabela.getRowCount() >= teste & tabela.getRowCount() <=19) {
+						teste=1;
+						teste=+1;
+						int x = (teste*16)+scrollPane.getHeight();
+						scrollPane.setBounds(10, 253, 1054, x);
+					}
+				}
+				//tabela
 			}
+			
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -470,21 +507,21 @@ public class NovaFazenda {
 	}
 	
 	void pegaDadosDaTabela() {
-		int linha = table.getSelectedRow();
+		int linha = tabela.getSelectedRow();
 		
-		fazenda.setIdFazenda(Integer.parseInt(table.getValueAt(linha, 0).toString()));
-		fazenda.setNome(table.getValueAt(linha, 1).toString());
-		fazenda.setTamanho(table.getValueAt(linha, 2).toString());
-		fazenda.setEscritura(table.getValueAt(linha, 3).toString());
-		fazenda.setDescricao(table.getValueAt(linha, 4).toString());
-		fazenda.setProprietario(table.getValueAt(linha, 5).toString());
+		fazenda.setIdFazenda(Integer.parseInt(tabela.getValueAt(linha, 0).toString()));
+		fazenda.setNome(tabela.getValueAt(linha, 1).toString());
+		fazenda.setTamanho(tabela.getValueAt(linha, 2).toString());
+		fazenda.setEscritura(tabela.getValueAt(linha, 3).toString());
+		fazenda.setDescricao(tabela.getValueAt(linha, 4).toString());
+		fazenda.setProprietario(tabela.getValueAt(linha, 5).toString());
 		
 		ResultSet rs = null;
 		String sql = "SELECT (img) FROM fazenda WHERE idfazenda=?";
 		
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
-			stmt.setInt(1, Integer.parseInt(table.getValueAt(linha, 0).toString()));
+			stmt.setInt(1, Integer.parseInt(tabela.getValueAt(linha, 0).toString()));
 			rs = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();

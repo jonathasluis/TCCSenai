@@ -37,6 +37,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import DAO.Animal;
 import DAO.Funcionario;
 import Imagem.MetodosImagem;
 import JanelasAnimal.CadastrarAnimais;
@@ -44,6 +45,7 @@ import JanelasComtabil.NovaCompra;
 import JanelasComtabil.NovaVenda;
 import JanelasComtabil.Total;
 import banco.Conexao;
+import crud.CrudAnimal;
 import crud.CrudFazenda;
 import crud.CrudFuncionarios;
 import outraJanelas.EnviarEmail;
@@ -86,6 +88,11 @@ public class CadastrarFuncionarios {
 	private Funcionario DAOFuncionario = new Funcionario();
 	int contadorParaEditar = 0;
 	private JScrollPane scrollPane;
+	
+	//tabela
+		static int teste = 1; 
+		static int x1=1;
+		//tabela
 	
 	/**
 	 * Launch the application.
@@ -166,7 +173,7 @@ public class CadastrarFuncionarios {
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(10, 253, 1054, 373);
+		scrollPane.setBounds(10, 253, 1054, 23);
 		frmCadastrarFuncionarios.getContentPane().add(scrollPane);
 		
 		tabela = new JTable();
@@ -182,16 +189,11 @@ public class CadastrarFuncionarios {
 		});
 		tabela.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
 				"ID", "Nome", "Nascimento", "CPF", "RG", "Sexo", "Telefone", "Email", "Cargo", "Salario", "Fazenda", "Status"
 			}
 		) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false, false, false, false, false
 			};
@@ -264,11 +266,23 @@ public class CadastrarFuncionarios {
 				
 				preencherDAOFuncionarioParaSalvarNovo();
 				if(contadorParaEditar==0) {
+					//tabela
+					x1=0;
+					if (tabela.getRowCount()<=19) {
+						int x = (teste*16)+scrollPane.getHeight();
+						scrollPane.setBounds(10, 253, 1054, x);
+					}
+					//tabela
 					funcionario.addFun(DAOFuncionario);
 					btnLimpar.doClick();
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
+					
+					
 				}
 				if(contadorParaEditar==1) {
+					//tabela
+					x1=0;
+					//tabela
 					int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar esse Funcionario? ", "alerta",
 							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 					if(resposta==JOptionPane.YES_OPTION) {
@@ -310,6 +324,7 @@ public class CadastrarFuncionarios {
 		
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {//inicio do evento do botao cancelar
 				if(contadorParaEditar==0) {
 					Principal.frmPrincipal.setVisible(true);
@@ -335,6 +350,13 @@ public class CadastrarFuncionarios {
 				if(resposta==JOptionPane.YES_OPTION) {
 					funcionario.removeFun(DAOFuncionario);
 					colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
+					//tabela
+					x1=0;
+					if (tabela.getRowCount()<=19) {
+						int x = scrollPane.getHeight()-16;
+						scrollPane.setBounds(10, 253, 1054, x);
+					}
+					//tabela
 				}
 			}
 		});//fim do evento do botao deletar
@@ -360,10 +382,21 @@ public class CadastrarFuncionarios {
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
-				if(tfProcurar.getText().trim().equals("")) {
-					colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
-				}else {
-					colocaDadosNaTabela(CrudFuncionarios.procurafuncionario(tfProcurar.getText(), DAOFuncionario));
+				//variavel para delimitar o tamanho da tabela
+				x1=0;
+				//tratamento para almentar a tabela
+				colocaDadosNaTabela(CrudFuncionarios.procurafuncionario(tfProcurar.getText(),DAOFuncionario ));	
+				int animal = new Animal().getIdAnimal();
+				
+				int tabel = tabela.getRowCount();
+				int linha = tabel*16;
+				int valor = 23+linha;
+				scrollPane.setBounds(10, 253, 1054, valor);
+				if (!(tfProcurar.getText()).trim().equals("")) {
+					if (tabela.getRowCount()==0) {
+						int x2 = 23;
+						scrollPane.setBounds(10, 253, 1054, x2);
+					}
 				}
 			}
 		});
@@ -546,9 +579,19 @@ public class CadastrarFuncionarios {
 		label.setBounds(0, 0, 1074, 670);
 		frmCadastrarFuncionarios.getContentPane().add(label);
 		
+		//tabela
+				x1=1;
+				//tabela
 		menu();
 		DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
 		colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
+		
+		//tabela
+				//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
+				if (tabela.getRowCount()== 0) {
+					scrollPane.setVisible(false);
+				}
+				//tabela
 	}
 	
 	
@@ -579,7 +622,9 @@ public class CadastrarFuncionarios {
 	void colocaDadosNaTabela(ResultSet rs) {
 		DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
 		String sexo;
-		
+		//tabela
+				scrollPane.setVisible(true);
+				//tabela
 		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
 		modelo.setNumRows(0);
 		
@@ -606,7 +651,16 @@ public class CadastrarFuncionarios {
 				modelo.addRow(new Object[] {rs.getInt("idfuncionarios"),rs.getString("nome_fun"),rs.getString("data_nasc"),
 						rs.getString("cpf_fun"),rs.getString("rg_fun"),sexo,rs.getString("fone_fun"),rs.getString("email_fun"),
 						rs.getString("cargo"),rs.getString("salario"),fazenda,status});
-				
+				//tabela
+				if (x1==1) {
+					if (tabela.getRowCount() >= teste & tabela.getRowCount() <=19) {
+						teste=1;
+						teste=+1;
+						int x = (teste*16)+scrollPane.getHeight();
+						scrollPane.setBounds(10, 253, 1054, x);
+					}
+				}
+				//tabela
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

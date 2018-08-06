@@ -526,11 +526,11 @@ public class CadastrarAnimais {//teste3
 				
 				int tabel = tabela.getRowCount();
 				int linha = tabel*16;
-				int valor = 21+linha;
+				int valor = 23+linha;
 				scrollPane.setBounds(10, 253, 1054, valor);
 				if (!(tfProcurar.getText()).trim().equals("")) {
 					if (tabela.getRowCount()==0) {
-						int x2 = 21;
+						int x2 = 23;
 						scrollPane.setBounds(10, 253, 1054, x2);
 					}
 				}
