@@ -65,6 +65,7 @@ public class NovaFazenda {
 	private JTextArea taDescricao;
 	Fazenda fazenda = new Fazenda();
 	private JTable table;
+	JButton btnCancelar;
 
 	/**
 	 * Launch the application.
@@ -100,7 +101,6 @@ public class NovaFazenda {
 		frmNovaFazenda.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmNovaFazenda.setLocationRelativeTo(null);
 		frmNovaFazenda.setResizable(false);
-		
 		
 		frmNovaFazenda.getContentPane().setLayout(null);
 		
@@ -173,29 +173,30 @@ public class NovaFazenda {
 					JOptionPane.showMessageDialog(null, "Fazenda cadastrada com sucesso!");
 					btnLimpar.doClick();
 					colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
-				}
-				if (contadorEditar==1) {
-					int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar esse Fazenda? ", "alerta",
+					
+					int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar para essa Fazenda? ", "alerta",
 							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 					if(resposta==JOptionPane.YES_OPTION) {
-						DAOFazenda();
-						new CrudFazenda().updFazenda(fazenda);
-						JOptionPane.showMessageDialog(null, "Fazenda alterada com sucesso!");
+						Pergunta.main(null);
+						Pergunta.contador = 1;
+						Pergunta.comboBox.setSelectedItem(fazenda.getNome());
 					}else {
 						return;
 					}
 				}
-				
-				int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar para essa Fazenda? ", "alerta",
-						JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-				if(resposta==JOptionPane.YES_OPTION) {
-					Pergunta.main(null);
-					Pergunta.contador = 1;
-					Pergunta.comboBox.setSelectedItem(fazenda.getNome());
-				}else {
-					return;
-				}
-				
+				if (contadorEditar==1) {
+					int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar essa Fazenda? ", "alerta",
+							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					if(resposta==JOptionPane.YES_OPTION) {
+						DAOFazenda();
+						new CrudFazenda().updFazenda(fazenda);
+						btnCancelar.doClick();
+						JOptionPane.showMessageDialog(null, "Fazenda alterada com sucesso!");
+						colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
+					}else {
+						return;
+					}
+				}	
 			}
 		});
 		btnSalvar.setBounds(975, 636, 89, 23);
@@ -216,9 +217,10 @@ public class NovaFazenda {
 			}
 		});
 		btnLimpar.setBounds(678, 636, 89, 23);
+		btnLimpar.setBackground(SystemColor.controlHighlight);
 		frmNovaFazenda.getContentPane().add(btnLimpar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (contadorEditar==0) {
@@ -234,6 +236,7 @@ public class NovaFazenda {
 			}
 		});
 		btnCancelar.setBounds(777, 636, 89, 23);
+		btnCancelar.setBackground(SystemColor.controlHighlight);
 		frmNovaFazenda.getContentPane().add(btnCancelar);
 		
 		btnDeletar = new JButton("Deletar");
@@ -256,6 +259,7 @@ public class NovaFazenda {
 		});
 		btnDeletar.setEnabled(false);
 		btnDeletar.setBounds(876, 636, 89, 23);
+		btnDeletar.setBackground(SystemColor.controlHighlight);
 		frmNovaFazenda.getContentPane().add(btnDeletar);
 		
 		JLabel lblNonaFazenda = new JLabel("Fazendas");
