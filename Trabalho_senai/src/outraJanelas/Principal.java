@@ -81,6 +81,7 @@ public class Principal {
 		Pergunta.contador = 0;	
 		
 		JLabel lblNomeDoSistema = new JLabel("Nome do sistema");
+		lblNomeDoSistema.setBackground(Color.GRAY);
 		lblNomeDoSistema.setForeground(Color.WHITE);
 		lblNomeDoSistema.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNomeDoSistema.setHorizontalAlignment(SwingConstants.CENTER);
@@ -262,7 +263,7 @@ public class Principal {
 		frmPrincipal.getContentPane().add(lblVersao);
 		
 		JLabel foto = new JLabel("");
-		foto.setIcon(new ImageIcon("E:\\TCC\\Fundo.jpg"));
+		foto.setIcon(new ImageIcon(Principal.class.getResource("/img/gradiente_Branco.jpg")));
 		foto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		foto.setForeground(Color.WHITE);
 		foto.setBorder(null);
@@ -276,15 +277,15 @@ public class Principal {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBorder(new LineBorder(Color.DARK_GRAY));
 		menuBar.setForeground(Color.GREEN);
-		menuBar.setBackground(new Color(192, 192, 192));
+		menuBar.setBackground(Color.DARK_GRAY);
 		frmPrincipal.setJMenuBar(menuBar);
 		
 		JMenu mnInicio = new JMenu("Inicio");
-		mnInicio.setIcon(new ImageIcon(Principal.class.getResource("/img/Home.png")));
+		mnInicio.setIcon(new ImageIcon("D:\\Icones_40x40\\casa.png"));
 		mnInicio.setOpaque(true);
 		mnInicio.setEnabled(false);
-		mnInicio.setForeground(new Color(0, 0, 0));
-		mnInicio.setBackground(new Color(192, 192, 192));
+		mnInicio.setForeground(Color.WHITE);
+		mnInicio.setBackground(Color.DARK_GRAY);
 		mnInicio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -295,12 +296,12 @@ public class Principal {
 		menuBar.add(mnInicio);
 		
 		JMenu mnNewMenu = new JMenu("Gest\u00E3o");
-		mnNewMenu.setIcon(new ImageIcon("C:\\Users\\SENAI\\Downloads\\34e58714874b2e18f0f210b5e80e6fe6.png"));
+		mnNewMenu.setIcon(new ImageIcon("D:\\Icones_40x40\\icone_Conferencia.png"));
 		mnNewMenu.setOpaque(true);
 		mnNewMenu.setFocusPainted(true);
 		mnNewMenu.setBorder(new CompoundBorder());
-		mnNewMenu.setBackground(new Color(192, 192, 192));
-		mnNewMenu.setForeground(new Color(0, 0, 0));
+		mnNewMenu.setBackground(Color.DARK_GRAY);
+		mnNewMenu.setForeground(Color.WHITE);
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
@@ -326,9 +327,9 @@ public class Principal {
 		});
 		
 		JMenu mnNewMenu_1 = new JMenu("Financeiro");
-		mnNewMenu_1.setIcon(new ImageIcon(Principal.class.getResource("/img/money.png")));
-		mnNewMenu_1.setForeground(new Color(0, 0, 0));
-		mnNewMenu_1.setBackground(new Color(192, 192, 192));
+		mnNewMenu_1.setIcon(new ImageIcon("D:\\Icones_40x40\\icone_$Colorido.png"));
+		mnNewMenu_1.setForeground(Color.WHITE);
+		mnNewMenu_1.setBackground(Color.DARK_GRAY);
 		mnNewMenu_1.setOpaque(true);
 		menuBar.add(mnNewMenu_1);
 		
@@ -361,9 +362,9 @@ public class Principal {
 		});
 		
 		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
-		mnOpes.setIcon(new ImageIcon(Principal.class.getResource("/img/options.png")));
-		mnOpes.setForeground(new Color(0, 0, 0));
-		mnOpes.setBackground(new Color(192, 192, 192));
+		mnOpes.setIcon(new ImageIcon("D:\\Icones_40x40\\icone_Engrenagens.png"));
+		mnOpes.setForeground(Color.WHITE);
+		mnOpes.setBackground(Color.DARK_GRAY);
 		mnOpes.setOpaque(true);
 		menuBar.add(mnOpes);
 		

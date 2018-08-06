@@ -389,12 +389,6 @@ public class CadastrarAnimais {//teste3
 				preencherDAOAnimalParaSalvarNovo();
 				
 				if(contadorParaEditar==0) {
-					if(verificaSeTemAnimal(tfNomeLote.getText().trim())) {
-						JOptionPane.showMessageDialog(null, "Ja possui um lote com este nome!");
-						tfNomeLote.requestFocus();
-						tfNomeLote.selectAll();
-						return;
-					}
 					crud.addAnimal(animal);
 					//tabela
 					x1=0;
@@ -606,28 +600,6 @@ public class CadastrarAnimais {//teste3
 				
 	}//fim do inicialize
 	
-	boolean verificaSeTemAnimal(String valor) {
-		boolean resposta=false;
-		 ResultSet rs = CrudAnimal.selecionaAnimais(animal);
-		 try {
-			 while(rs.next()) {
-				 String nome = rs.getString("nomelote");
-				 if(nome.equalsIgnoreCase(valor)) {
-					 resposta=true;
-					 break;
-				 }
-				 else {
-					 resposta=false;
-				 }
-			 }
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return resposta;
-	}
-	
 	void preencherDAOAnimalParaSalvarNovo() {
 		animal.setNomeLote(tfNomeLote.getText());
 		animal.setDataDeNascimento(ftfDataNascimento.getText());
@@ -753,7 +725,7 @@ public class CadastrarAnimais {//teste3
 		
 		JMenu mnInicio = new JMenu("Inicio");
 		mnInicio.setForeground(new Color(230, 230, 250));
-		mnInicio.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/Home.png")));
+		mnInicio.setIcon(new ImageIcon("D:\\Icones_40x40\\casa.png"));
 		mnInicio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {

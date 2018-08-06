@@ -430,19 +430,20 @@ public class Total {//
 				x1=1;
 				//tabela
 		menu();
+		//tabela
+		//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
+		if (tabelaGasto.getRowCount()== 0) {
+			scrollPaneGasto.setVisible(false);
+		}
+		//tabela/
 		
 		colocaDadosNaTabelaGasto(CrudCompras.selecionaCompras(compras));
 		colocaDadosNaTabelaReceita(CrudVendas.selecionaVendas(vendas));
-		//tabela
-				//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
-				if (tabelaGasto.getRowCount()== 0) {
-					scrollPaneGasto.setVisible(false);
-				}
-				//tabela/
+		
 	}
 	
 	void colocaDadosNaTabelaGasto(ResultSet rs) {
-		
+		scrollPaneGasto.setVisible(true);
 		DefaultTableModel modelo = (DefaultTableModel) tabelaGasto.getModel();
 		modelo.setNumRows(0);
 		
@@ -452,9 +453,9 @@ public class Total {//
 				//tabela
 				if (x1==1) {
 					if (tabelaGasto.getRowCount() >= teste & tabelaGasto.getRowCount() <=14) {
-						teste=1;
-						teste=+1;
-						int x = (teste*16)+scrollPaneGasto.getHeight();
+						teste = tabelaGasto.getRowCount();
+						System.out.println(teste);
+						int x = (teste*17);
 						scrollPaneGasto.setBounds(10, 250, 519, x);
 					}
 				}
