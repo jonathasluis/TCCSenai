@@ -13,6 +13,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,11 +27,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import DAO.Fazenda;
 import Imagem.MetodosImagem;
@@ -37,6 +43,7 @@ import JanelasComtabil.NovaCompra;
 import JanelasComtabil.NovaVenda;
 import JanelasComtabil.Total;
 import JanelasFuncionarios.CadastrarFuncionarios;
+import banco.Conexao;
 import crud.CrudFazenda;
 
 public class NovaFazenda {
@@ -57,6 +64,7 @@ public class NovaFazenda {
 	private JButton btnDeletar;
 	private JTextArea taDescricao;
 	Fazenda fazenda = new Fazenda();
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -164,6 +172,28 @@ public class NovaFazenda {
 					new CrudFazenda().addFazenda(fazenda);
 					JOptionPane.showMessageDialog(null, "Fazenda cadastrada com sucesso!");
 					btnLimpar.doClick();
+					colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
+				}
+				if (contadorEditar==1) {
+					int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar esse Fazenda? ", "alerta",
+							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					if(resposta==JOptionPane.YES_OPTION) {
+						DAOFazenda();
+						new CrudFazenda().updFazenda(fazenda);
+						JOptionPane.showMessageDialog(null, "Fazenda alterada com sucesso!");
+					}else {
+						return;
+					}
+				}
+				
+				int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar para essa Fazenda? ", "alerta",
+						JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+				if(resposta==JOptionPane.YES_OPTION) {
+					Pergunta.main(null);
+					Pergunta.contador = 1;
+					Pergunta.comboBox.setSelectedItem(fazenda.getNome());
+				}else {
+					return;
 				}
 				
 			}
@@ -181,9 +211,11 @@ public class NovaFazenda {
 				taDescricao.setText(null);
 				lblImg.setHorizontalAlignment(SwingConstants.CENTER);
 				lblImg.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/logo-pequena-sem-texto.png")));
+				tfQtdAnimais.setText("0");
+				tfQtdFuncionarios.setText("0");
 			}
 		});
-		btnLimpar.setBounds(876, 636, 89, 23);
+		btnLimpar.setBounds(678, 636, 89, 23);
 		frmNovaFazenda.getContentPane().add(btnLimpar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -204,7 +236,29 @@ public class NovaFazenda {
 		btnCancelar.setBounds(777, 636, 89, 23);
 		frmNovaFazenda.getContentPane().add(btnCancelar);
 		
-		JLabel lblNonaFazenda = new JLabel("Nova Fazenda");
+		btnDeletar = new JButton("Deletar");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int resposta = JOptionPane.showConfirmDialog(null, "Todos os dados dessa Fazenda serão excluidos,deseja continuar", "ALERTA!",
+						JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+				if(resposta==JOptionPane.YES_OPTION) {
+					new CrudFazenda().deletaFazenda(fazenda);
+					btnCancelar.doClick();//para zerar variavel editar e habilitar os botoes
+					btnLimpar.doClick();
+					colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
+					
+					if(fazenda.getIdFazenda()==Principal.fazenda.getIdFazenda()) {//se a fazenda logada for excluida manda mudar
+						Pergunta.main(null);
+						Pergunta.contador = 1;
+					}
+				}
+			}
+		});
+		btnDeletar.setEnabled(false);
+		btnDeletar.setBounds(876, 636, 89, 23);
+		frmNovaFazenda.getContentPane().add(btnDeletar);
+		
+		JLabel lblNonaFazenda = new JLabel("Fazendas");
 		lblNonaFazenda.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNonaFazenda.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNonaFazenda.setBounds(10, 11, 1054, 25);
@@ -293,11 +347,56 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(lblDescrio_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setOpaque(false);
 		scrollPane.setInheritsPopupMenu(true);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 253, 1054, 373);
 		frmNovaFazenda.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pegaDadosDaTabela();
+				btnLimpar.setEnabled(false);
+				btnDeletar.setEnabled(true);
+				contadorEditar=1;
+			}
+		});
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"ID ", "Nome da Fazenda", "Tamanho da Fazenda", "Escritura da Fazenda", "Descri\u00E7\u00E3o da Fazenda", "Proprietario"
+			}
+		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(0).setPreferredWidth(99);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(1).setPreferredWidth(203);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(2).setPreferredWidth(160);
+		table.getColumnModel().getColumn(3).setResizable(false);
+		table.getColumnModel().getColumn(3).setPreferredWidth(160);
+		table.getColumnModel().getColumn(4).setResizable(false);
+		table.getColumnModel().getColumn(4).setPreferredWidth(270);
+		table.getColumnModel().getColumn(5).setResizable(false);
+		table.getColumnModel().getColumn(5).setPreferredWidth(160);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(table);
 		
 		JLabel lblQuantidadeDeAnimais = new JLabel("Quantidade de animais:");
 		lblQuantidadeDeAnimais.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -327,11 +426,6 @@ public class NovaFazenda {
 		tfQtdFuncionarios.setBounds(197, 210, 76, 20);
 		frmNovaFazenda.getContentPane().add(tfQtdFuncionarios);
 		
-		btnDeletar = new JButton("Deletar");
-		btnDeletar.setEnabled(false);
-		btnDeletar.setBounds(678, 636, 89, 23);
-		frmNovaFazenda.getContentPane().add(btnDeletar);
-		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(510, 92, 190, 150);
 		frmNovaFazenda.getContentPane().add(scrollPane_1);
@@ -347,6 +441,7 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(label);
 		
 		menu();
+		colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
 	}
 	
 	void DAOFazenda() {
@@ -357,6 +452,104 @@ public class NovaFazenda {
 		fazenda.setDescricao(taDescricao.getText());
 		fazenda.setImg(mI.getImagem(img, panel));
 		fazenda.setIdUsuario(Pergunta.usuario.getIdUsuario());
+	}
+	
+	void colocaDadosNaTabela(ResultSet rs) {
+		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+		modelo.setNumRows(0);
+		
+		try {
+			while (rs.next()) {
+				modelo.addRow(new Object[] {rs.getInt("idfazenda"),rs.getString("nome"),rs.getString("tamanho"),rs.getString("escritura"),rs.getString("descri"),
+						rs.getString("proprietario")});	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void pegaDadosDaTabela() {
+		int linha = table.getSelectedRow();
+		
+		fazenda.setIdFazenda(Integer.parseInt(table.getValueAt(linha, 0).toString()));
+		fazenda.setNome(table.getValueAt(linha, 1).toString());
+		fazenda.setTamanho(table.getValueAt(linha, 2).toString());
+		fazenda.setEscritura(table.getValueAt(linha, 3).toString());
+		fazenda.setDescricao(table.getValueAt(linha, 4).toString());
+		fazenda.setProprietario(table.getValueAt(linha, 5).toString());
+		
+		ResultSet rs = null;
+		String sql = "SELECT (img) FROM fazenda WHERE idfazenda=?";
+		
+		try {
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			stmt.setInt(1, Integer.parseInt(table.getValueAt(linha, 0).toString()));
+			rs = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+				
+			if(rs.next()) {
+				fazenda.setImg(rs.getBytes("img"));
+			}
+				
+			tfNome.setText(fazenda.getNome());
+			tfTamanho.setText(fazenda.getTamanho());
+			tfEscritura.setText(fazenda.getEscritura());
+			taDescricao.setText(fazenda.getDescricao());
+			tfProprietario.setText(fazenda.getProprietario());
+			contaQtdAnimaisFuncionarios(fazenda.getIdFazenda());
+			
+			if(fazenda.getImg()!= null) {
+				lblImg.setHorizontalAlignment(SwingConstants.LEADING);
+				mI.abrirImagem(fazenda.getImg(), null, panel, lblImg, fazenda.getImg());
+			}else {
+				lblImg.setHorizontalAlignment(SwingConstants.CENTER);
+				lblImg.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
+			}
+			
+		} catch (SQLException e) {
+				// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void contaQtdAnimaisFuncionarios(int idFazenda) {
+		int qtdAnimais=0;
+		ResultSet rsAnimais = null;
+		String sqlAnimais = "SELECT quantidade FROM animais where idfazenda=?";
+		try {
+			PreparedStatement stmtAnimais = Conexao.conexao.prepareStatement(sqlAnimais);
+			stmtAnimais.setInt(1, idFazenda);
+			rsAnimais = stmtAnimais.executeQuery();
+			stmtAnimais.execute();
+			stmtAnimais.close();
+			
+			while (rsAnimais.next()) {
+				qtdAnimais += rsAnimais.getInt("quantidade");//faz a soma da quantidade de animais
+			}
+			tfQtdAnimais.setText(String.valueOf(qtdAnimais));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ResultSet rsFuncionarios = null;
+		String sqlFuncionarios = "SELECT count(nome_fun) AS qtdFuncionarios FROM funcionarios where idfazenda=?";//vai retornar um valor contado a qtd de linhas
+		try {
+			PreparedStatement stmtFuncionarios = Conexao.conexao.prepareStatement(sqlFuncionarios);
+			stmtFuncionarios.setInt(1, idFazenda);
+			rsFuncionarios = stmtFuncionarios.executeQuery();
+			stmtFuncionarios.execute();
+			stmtFuncionarios.close();
+			
+			if (rsFuncionarios.next()) {
+				tfQtdFuncionarios.setText(rsFuncionarios.getString("qtdFuncionarios"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	void menu(){

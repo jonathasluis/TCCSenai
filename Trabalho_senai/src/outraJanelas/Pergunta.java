@@ -26,7 +26,7 @@ import crud.CrudFazenda;
 public class Pergunta {
 
 	private JFrame frame;
-	private JComboBox<String> comboBox;
+	static JComboBox<String> comboBox;
 	static Usuario usuario = new Usuario();
 	private JButton btnOk;
 	public static int contador=0;
