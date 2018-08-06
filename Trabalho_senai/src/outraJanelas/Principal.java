@@ -132,7 +132,7 @@ public class Principal {
 		lblFuncionarios.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblFuncionarios.setBounds(255, 206, 120, 14);
 		frmPrincipal.getContentPane().add(lblFuncionarios);
-		//a
+		//aa
 		ImageIcon iconCompras = new ImageIcon("src/img/compra12.png");
 		iconCompras.setImage(iconCompras.getImage().getScaledInstance(135,101 ,100));
 		JButton btnCompras = new JButton("");

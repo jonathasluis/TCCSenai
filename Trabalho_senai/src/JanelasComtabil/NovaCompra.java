@@ -576,7 +576,7 @@ public class NovaCompra {////
 		criaTabela(CrudCompras.selecionaCompras(compra));
 		menu();
 	}
-		//MÉTODO PARA COLOCAR OS DADOS NA TABELA
+		//MÉTODO PARA COLOCAR OS DADOS NA TABELA a
 	public void criaTabela(ResultSet rs) {
 		
 		DefaultTableModel tabela = (DefaultTableModel) table.getModel();
