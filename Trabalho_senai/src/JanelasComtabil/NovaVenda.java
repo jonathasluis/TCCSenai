@@ -66,7 +66,7 @@ public class NovaVenda {
 	int id;
 	private JButton btnLimpar;
 	private JTable table;
-	private JTextField textField;
+	private JTextField tfProcurar;
 	private JFormattedTextField ftfData;
 	private MaskFormatter mask;
 	static String numero=null;
@@ -282,6 +282,7 @@ public class NovaVenda {
 				//FIM DO TESTE
 				
 				if (contadorEditar==0) {
+					id=1;
 					preencherDAOparaSalvarVenda();
 					new CrudVendas().addvendas(venda);
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
@@ -301,6 +302,7 @@ public class NovaVenda {
 				tfProduto.setText(null);
 				rdbtnSubproduto.setSelected(true);
 				spinner.setValue(0);
+				cbAnimal.setSelectedIndex(0);
 			}
 		});
 		btnLimpar.setBounds(876, 637, 89, 23);
@@ -322,7 +324,7 @@ public class NovaVenda {
 		String formatada = formato.format(data);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(26, 290, 1024, 336);
+		scrollPane.setBounds(10, 253, 1054, 23);
 		frmNovaVenda.getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -333,21 +335,21 @@ public class NovaVenda {
 		ftfData.setBounds(546, 80, 188, 20);
 		frmNovaVenda.getContentPane().add(ftfData);
 		
-		textField = new JTextField();
-		textField.setToolTipText("");
-		textField.setForeground(Color.BLACK);
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField.setColumns(10);
-		textField.setBounds(26, 259, 369, 20);
-		frmNovaVenda.getContentPane().add(textField);
+		tfProcurar = new JTextField();
+		tfProcurar.setToolTipText("");
+		tfProcurar.setForeground(Color.BLACK);
+		tfProcurar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		tfProcurar.setColumns(10);
+		tfProcurar.setBounds(10, 222, 331, 20);
+		frmNovaVenda.getContentPane().add(tfProcurar);
 		
-		JButton button = new JButton("Proucurar");
-		button.setForeground(Color.WHITE);
-		button.setFont(new Font("Arial", Font.BOLD, 12));
-		button.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		button.setBackground(Color.DARK_GRAY);
-		button.setBounds(405, 259, 118, 23);
-		frmNovaVenda.getContentPane().add(button);
+		JButton btnProcurar = new JButton("Proucurar");
+		btnProcurar.setForeground(Color.WHITE);
+		btnProcurar.setFont(new Font("Arial", Font.BOLD, 12));
+		btnProcurar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnProcurar.setBackground(Color.DARK_GRAY);
+		btnProcurar.setBounds(351, 222, 89, 20);
+		frmNovaVenda.getContentPane().add(btnProcurar);
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/gradiente_Branco.jpg")));
@@ -355,6 +357,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(label_1);
 		
 		menu();
+		comboBoxAnimal();
 	}
 	
 	void preencherDAOparaSalvarVenda() {
@@ -373,27 +376,47 @@ public class NovaVenda {
 			venda.setIdanimal(id);
 		}
 		if (rdbtnPlantio.isSelected()) {
+			venda.setIdanimal(1);
 			venda.setProduto(tfProduto.getText());
 		}
 	}
 	
 	void comboBoxAnimal() {
-		ResultSet dados1=null;
-		String sql = "SELECT (nome_es) FROM especie order by nome_es";
+		ResultSet dados=null;
+		String sql = "SELECT nomeLote, raca.nome_ra, raca FROM animais "
+				+ "INNER JOIN raca ON raca = idraca where idfazenda = ? order by nomeLote";//seleciona o animal com o nome da raça
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
-			dados1 = stmt.executeQuery();
+			stmt.setInt(1, Principal.fazenda.getIdFazenda());
+			dados = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();
 			cbAnimal.removeAllItems();
-			while(dados1.next()) {
-				cbAnimal.addItem(dados1.getString("nome_es"));
+			while(dados.next()) {
+				ResultSet dados2=null;
+				String sql2 = "SELECT  id_especie, especie.nome_es FROM raca " + 
+						"INNER JOIN especie " + 
+						"ON id_especie = idespecie where idraca = ?";//seleciona o nome da especie da raça
+				
+				PreparedStatement stmt2 = Conexao.conexao.prepareStatement(sql2);
+				stmt2.setInt(1, dados.getInt("raca"));
+				dados2 = stmt2.executeQuery();
+				stmt2.execute();
+				stmt2.close();
+				
+				if (dados2.next()) {
+					cbAnimal.addItem(dados.getString("nomeLote")+" - "+dados.getString("nome_ra")+" - "+dados2.getString("nome_es"));
+				}
 			}	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("erro ao preencher comboBox especie");
+			System.out.println("erro ao preencher comboBox animnal");
 		}
+	}
+	
+	void pegaIdAnimal() {
+		
 	}
 	
 	void menu() {
@@ -404,7 +427,6 @@ public class NovaVenda {
 		
 		JMenu mnInicio = new JMenu("Inicio");
 		mnInicio.setForeground(new Color(230, 230, 250));
-		mnInicio.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/Home.png")));
 		mnInicio.setBackground(new Color(128, 128, 128));
 		mnInicio.addMouseListener(new MouseAdapter() {
 			@Override
@@ -417,7 +439,6 @@ public class NovaVenda {
 		
 		JMenu mnNewMenu = new JMenu("Gest\u00E3o");
 		mnNewMenu.setForeground(new Color(230, 230, 250));
-		mnNewMenu.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/gestao.png")));
 		mnNewMenu.setBackground(new Color(128, 128, 128));
 		menuBar.add(mnNewMenu);
 		
@@ -441,7 +462,6 @@ public class NovaVenda {
 		
 		JMenu mnNewMenu_1 = new JMenu("Financeiro");
 		mnNewMenu_1.setForeground(new Color(230, 230, 250));
-		mnNewMenu_1.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/money.png")));
 		mnNewMenu_1.setBackground(new Color(128, 128, 128));
 		menuBar.add(mnNewMenu_1);
 		
@@ -475,7 +495,6 @@ public class NovaVenda {
 		
 		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
 		mnOpes.setForeground(new Color(230, 230, 250));
-		mnOpes.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/options.png")));
 		mnOpes.setBackground(new Color(128, 128, 128));
 		menuBar.add(mnOpes);
 		
