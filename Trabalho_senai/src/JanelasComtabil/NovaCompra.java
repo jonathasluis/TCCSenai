@@ -2,6 +2,7 @@ package JanelasComtabil;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -51,6 +52,7 @@ import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
 import javax.swing.border.LineBorder;
+import javax.swing.border.SoftBevelBorder;
 
 public class NovaCompra {////
 	
@@ -311,9 +313,9 @@ public class NovaCompra {////
 						
 						//ADD LINHA NA TABELA DEPOIS DE SALVAR OS DADOS
 						JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!","SUCESSO!",JOptionPane.INFORMATION_MESSAGE);
-						if (table.getRowCount()<=19) {
+						if (scrollPane.getHeight()<=339) {
 							int x = (teste*16)+scrollPane.getHeight();
-							scrollPane.setBounds(26, 290, 1024, x);	
+							scrollPane.setBounds(10, 253, 1054, x);
 						}
 						new CrudCompras();
 						criaTabela(CrudCompras.selecionaCompras(compra));
@@ -336,7 +338,7 @@ public class NovaCompra {////
 					}
 			}
 		});
-		btnSalvar.setBounds(961, 637, 89, 23);
+		btnSalvar.setBounds(961, 602, 89, 23);
 		frmCompraDeInsumos.getContentPane().add(btnSalvar);
 		
 		//LIMPAR TODOS OS DADOS 
@@ -358,7 +360,7 @@ public class NovaCompra {////
 				
 			}
 		});
-		btnLimpar.setBounds(862, 637, 89, 23);
+		btnLimpar.setBounds(860, 602, 89, 23);
 		frmCompraDeInsumos.getContentPane().add(btnLimpar);
 		
 		//CANCELAR A OPERAÇÃO E VOLTAR PARA A TELA PRINCIPAL
@@ -376,7 +378,7 @@ public class NovaCompra {////
 				}
 			}
 		});
-		btnCancelar.setBounds(763, 637, 89, 23);
+		btnCancelar.setBounds(761, 602, 89, 23);
 		frmCompraDeInsumos.getContentPane().add(btnCancelar);
 		
 		
@@ -401,7 +403,7 @@ public class NovaCompra {////
 		txtProucurarProdutos.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtProucurarProdutos.setForeground(Color.BLACK);
 		txtProucurarProdutos.setColumns(10);
-		txtProucurarProdutos.setBounds(26, 259, 369, 20);
+		txtProucurarProdutos.setBounds(10, 222, 331, 20);
 		frmCompraDeInsumos.getContentPane().add(txtProucurarProdutos);
 		
 		
@@ -418,14 +420,14 @@ public class NovaCompra {////
 				//CRIAR TABELA COM OS DADOS QUE FORAM PROUCURADOS 
 				criaTabela(new CrudCompras().procurarCompra(txtProucurarProdutos.getText().toString(),idfazenda));
 				//TRATAMENTO PARA AUMENTAR E DIMINUIR TABELA
-				int tabela = table.getRowCount();
-				int linha = tabela*16;
-				int valor = 21+linha;
-				scrollPane.setBounds(26, 290, 1024, valor);
+				int tabel = table.getRowCount();
+				int linha = tabel*16;
+				int valor = 23+linha;
+				scrollPane.setBounds(10, 253, 1054, valor);
 				if (!(txtProucurarProdutos.getText()).trim().equals("")) {
 					if (table.getRowCount()==0) {
-						int x2 = 21;
-						scrollPane.setBounds(26, 290, 1024, x2);
+						int x2 = 23;
+						scrollPane.setBounds(10, 253, 1054, x2);
 					}
 				}else {
 					new CrudCompras();
@@ -441,7 +443,7 @@ public class NovaCompra {////
 		button.setForeground(Color.WHITE);
 		button.setBackground(Color.DARK_GRAY);
 		button.setFont(new Font("Arial", Font.BOLD, 12));
-		button.setBounds(405, 258, 118, 23);
+		button.setBounds(351, 222, 89, 20);
 		frmCompraDeInsumos.getContentPane().add(button);
 		
 		try {
@@ -469,7 +471,7 @@ public class NovaCompra {////
 		scrollPane.setBackground(new Color(169, 169, 169));
 		scrollPane.setFont(new Font("Arial", Font.BOLD, 13));
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		scrollPane.setBounds(26, 290, 1024, 21);
+		scrollPane.setBounds(10, 253, 1054, 23);
 		
 		frmCompraDeInsumos.getContentPane().add(scrollPane);
 		
@@ -561,7 +563,7 @@ public class NovaCompra {////
 		label.setBackground(Color.WHITE);
 		label.setIcon(new ImageIcon("E:\\TCC\\Fundo.jpg"));
 		//label.setIcon(img);
-		label.setBounds(0, 0, 1074, 671);
+		label.setBounds(0, -35, 1074, 671);
 		frmCompraDeInsumos.getContentPane().add(label);
 		
 		
@@ -594,163 +596,17 @@ public class NovaCompra {////
 				//IF PARA FAZER A TABELA AUMENTAR 
 				
 				if (x1==1) {
-					if (table.getRowCount() >= teste  & table.getRowCount() <=19 ) {
+					if (tabela.getRowCount() >= teste & scrollPane.getHeight()<=339) {
 						teste=1;
 						teste=+1;
 						int x = (teste*16)+scrollPane.getHeight();
-						scrollPane.setBounds(26,290 , 1024, x);		
+						scrollPane.setBounds(10, 253, 1054, x);
 					}
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-		//MÉTODO PARA COLOCAR O MENU NA TABELA
-	public void menu() {
-
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBorder(new LineBorder(new Color(64, 64, 64)));
-		menuBar.setFont(new Font("Arial", Font.PLAIN, 12));
-		menuBar.setForeground(new Color(230, 230, 250));
-		menuBar.setBackground(new Color(128, 128, 128));
-		frmCompraDeInsumos.setJMenuBar(menuBar);
-		
-		JMenu mnInicio = new JMenu("Inicio");
-		mnInicio.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/Home.png")));
-		mnInicio.setFont(new Font("Arial", Font.PLAIN, 12));
-		mnInicio.setOpaque(true);
-		mnInicio.setForeground(new Color(230, 230, 250));
-		mnInicio.setBackground(new Color(128, 128, 128));
-		mnInicio.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				Principal.frmPrincipal.setVisible(true);
-				frmCompraDeInsumos.dispose();
-			}
-		});
-		menuBar.add(mnInicio);
-		
-		JMenu mnNewMenu = new JMenu("Gest\u00E3o");
-		mnNewMenu.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/gestao.png")));
-		mnNewMenu.setFont(new Font("Arial", Font.PLAIN, 12));
-		mnNewMenu.setOpaque(true);
-		mnNewMenu.setFocusPainted(true);
-		mnNewMenu.setBorder(new CompoundBorder());
-		mnNewMenu.setBackground(new Color(128, 128, 128));
-		mnNewMenu.setForeground(new Color(230, 230, 250));
-		menuBar.add(mnNewMenu);
-		
-		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
-		mntmCadastrarAnimais.setFont(new Font("Arial", Font.PLAIN, 12));
-		mntmCadastrarAnimais.setForeground(new Color(0, 0, 0));
-		mntmCadastrarAnimais.setBackground(new Color(0, 128, 0));
-		mntmCadastrarAnimais.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CadastrarAnimais.main(null);
-				frmCompraDeInsumos.dispose();
-			}
-		});
-		mnNewMenu.add(mntmCadastrarAnimais);
-		
-		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Funcionarios");
-		mnNewMenu.add(mntmCadastrarFuncionarios);
-		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				CadastrarFuncionarios.main(null);
-				frmCompraDeInsumos.dispose();
-			}
-		});
-		
-		JMenu mnNewMenu_1 = new JMenu("Financeiro");
-		mnNewMenu_1.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/money.png")));
-		mnNewMenu_1.setFont(new Font("Arial", Font.PLAIN, 12));
-		mnNewMenu_1.setForeground(new Color(230, 230, 250));
-		mnNewMenu_1.setBackground(new Color(128, 128, 128));
-		mnNewMenu_1.setOpaque(true);
-		menuBar.add(mnNewMenu_1);
-		
-		JMenuItem mntmCompra = new JMenuItem("Compra");
-		mntmCompra.setEnabled(false);
-		mntmCompra.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				NovaCompra.main(null);
-				frmCompraDeInsumos.dispose();
-			}
-		});
-		mnNewMenu_1.add(mntmCompra);
-		
-		JMenuItem mntmNovaVenda = new JMenuItem("Venda");
-		mnNewMenu_1.add(mntmNovaVenda);
-		
-		JMenuItem mntmTotal = new JMenuItem("Total");
-		mnNewMenu_1.add(mntmTotal);
-		mntmTotal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Total.main(null);
-				frmCompraDeInsumos.dispose();
-			}
-		});
-		mntmNovaVenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				NovaVenda.main(null);
-				frmCompraDeInsumos.dispose();
-			}
-		});
-		
-		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");
-		mnOpes.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/options.png")));
-		mnOpes.setFont(new Font("Arial", Font.PLAIN, 12));
-		mnOpes.setForeground(new Color(230, 230, 250));
-		mnOpes.setBackground(new Color(128, 128, 128));
-		mnOpes.setOpaque(true);
-		menuBar.add(mnOpes);
-		
-		JMenuItem mntmNovaFazenda = new JMenuItem("Fazenda");
-		mntmNovaFazenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				NovaFazenda.main(null);
-				frmCompraDeInsumos.dispose();
-			}
-		});
-		mnOpes.add(mntmNovaFazenda);
-		
-		JMenuItem mntmSada = new JMenuItem("Sair");
-		mntmSada.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		
-		JMenuItem mntmMudarFazenda = new JMenuItem("Mudar Fazenda");
-		mntmMudarFazenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Pergunta.main(null);
-				Pergunta.contador = 1;
-			}
-		});
-		mnOpes.add(mntmMudarFazenda);
-		
-		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
-		mntmDeslogar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				frmCompraDeInsumos.dispose();
-				Principal.frmPrincipal.dispose();
-				Login.main(null);
-			}
-		});
-		mnOpes.add(mntmDeslogar);
-		
-		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
-		mntmEnviar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//frmCompraDeInsumos.dispose();
-				EnviarEmail.main(null);
-			}
-		});
-		mnOpes.add(mntmEnviar);
-		mnOpes.add(mntmSada);
-		frmCompraDeInsumos.getContentPane().setLayout(null);
 	}
 	
 	public void colocaDadosDAO() {
@@ -799,5 +655,160 @@ public class NovaCompra {////
 		addCompras.setIdFazenda(Principal.fazenda.getIdFazenda());
 		
 
+	}
+	public void menu() {	
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), new Color(128, 128, 128), new Color(128, 128, 128), new Color(105, 105, 105)));
+		menuBar.setForeground(Color.GREEN);
+		menuBar.setBackground(Color.DARK_GRAY);
+		frmCompraDeInsumos.setJMenuBar(menuBar);
+		
+		JMenu mnInicio = new JMenu("");
+		mnInicio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mnInicio.setOpaque(true);
+		mnInicio.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		mnInicio.setIcon(new ImageIcon(Principal.class.getResource("/img/Icone_Inicio.png")));
+		mnInicio.setForeground(Color.WHITE);
+		mnInicio.setBackground(Color.DARK_GRAY);
+		mnInicio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Principal.frmPrincipal.setVisible(true);
+				frmCompraDeInsumos.dispose();
+			}
+		});
+		menuBar.add(mnInicio);
+		
+		JMenu mnNewMenu = new JMenu("");
+		mnNewMenu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/img/Icone_GEstao.png")));
+		mnNewMenu.setOpaque(true);
+		mnNewMenu.setFocusPainted(true);
+		mnNewMenu.setBorder(new CompoundBorder());
+		mnNewMenu.setBackground(Color.DARK_GRAY);
+		mnNewMenu.setForeground(Color.WHITE);
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
+		mntmCadastrarAnimais.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mntmCadastrarAnimais.setBorder(new LineBorder(new Color(34, 139, 34)));
+		mntmCadastrarAnimais.setOpaque(true);
+		mntmCadastrarAnimais.setForeground(new Color(0, 0, 0));
+		mntmCadastrarAnimais.setBackground(SystemColor.menu);
+		mntmCadastrarAnimais.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastrarAnimais.main(null);
+				frmCompraDeInsumos.dispose();
+			}
+		});
+		mnNewMenu.add(mntmCadastrarAnimais);
+		
+		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Funcionarios");
+		mntmCadastrarFuncionarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mnNewMenu.add(mntmCadastrarFuncionarios);
+		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CadastrarFuncionarios.main(null);
+				frmCompraDeInsumos.dispose();
+			}
+		});
+		
+		JMenu mnNewMenu_1 = new JMenu("");
+		mnNewMenu_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mnNewMenu_1.setIcon(new ImageIcon(Principal.class.getResource("/img/Icone_Financeiro.png")));
+		mnNewMenu_1.setForeground(Color.WHITE);
+		mnNewMenu_1.setBackground(Color.DARK_GRAY);
+		mnNewMenu_1.setOpaque(true);
+		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmCompra = new JMenuItem("Compra");
+		mntmCompra.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mntmCompra.setEnabled(true);
+		mntmCompra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NovaCompra.main(null);
+				frmCompraDeInsumos.dispose();
+			}
+		});
+		mnNewMenu_1.add(mntmCompra);
+		
+		JMenuItem mntmNovaVenda = new JMenuItem("Venda");
+		mntmNovaVenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mnNewMenu_1.add(mntmNovaVenda);
+		
+		JMenuItem mntmTotal = new JMenuItem("Total");
+		mntmTotal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mnNewMenu_1.add(mntmTotal);
+		mntmTotal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Total.main(null);
+				frmCompraDeInsumos.dispose();
+			}
+		});
+		mntmNovaVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NovaVenda.main(null);
+				frmCompraDeInsumos.dispose();
+			}
+		});
+		
+		JMenu mnOpes = new JMenu("");
+		mnOpes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mnOpes.setIcon(new ImageIcon(Principal.class.getResource("/img/Icone_OPCAO.png")));
+		mnOpes.setForeground(Color.WHITE);
+		mnOpes.setBackground(Color.DARK_GRAY);
+		mnOpes.setOpaque(true);
+		menuBar.add(mnOpes);
+		
+		JMenuItem mntmNovaFazenda = new JMenuItem("Fazenda");
+		mntmNovaFazenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mntmNovaFazenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NovaFazenda.main(null);
+				frmCompraDeInsumos.dispose();
+			}
+		});
+		mnOpes.add(mntmNovaFazenda);
+		
+		JMenuItem mntmSada = new JMenuItem("Sair");
+		mntmSada.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mntmSada.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		JMenuItem mntmMudarFazenda = new JMenuItem("Mudar Fazenda");
+		mntmMudarFazenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mntmMudarFazenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Pergunta.main(null);
+				Pergunta.contador = 1;
+			}
+		});
+		mnOpes.add(mntmMudarFazenda);
+		
+		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
+		mntmDeslogar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mntmDeslogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmCompraDeInsumos.dispose();
+				Login.main(null);
+			}
+		});
+		mnOpes.add(mntmDeslogar);
+		
+		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
+		mntmEnviar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mntmEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//frmPrincipal.dispose();
+				EnviarEmail.main(null);
+			}
+		});
+		mnOpes.add(mntmEnviar);
+		
+		mnOpes.add(mntmSada);
+		frmCompraDeInsumos.getContentPane().setLayout(null);
 	}
 }
