@@ -282,7 +282,7 @@ public class NovaVenda {
 				//FIM DO TESTE
 				
 				if (contadorEditar==0) {
-					id=1;
+					pegaIdAnimal();
 					preencherDAOparaSalvarVenda();
 					new CrudVendas().addvendas(venda);
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
@@ -416,7 +416,24 @@ public class NovaVenda {
 	}
 	
 	void pegaIdAnimal() {
-		
+		String palavraCheia = cbAnimal.getSelectedItem().toString();
+		String[] palavraCortada = palavraCheia.split("-");
+		ResultSet rs = null;
+		String sql = "select idanimal from animais where nomeLote=?";
+		try {
+			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			stmt.setString(1, palavraCortada[0]);
+			rs = stmt.executeQuery();
+			stmt.execute();
+			stmt.close();
+			
+			if (rs.next()) {
+				id = rs.getInt("idanimal");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	void menu() {
