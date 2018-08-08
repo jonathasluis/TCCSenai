@@ -10,8 +10,8 @@ import banco.Conexao;
 public class CrudVendas {
 	
 	public boolean addvendas(Vendas venda) {
-		String sql = "INSERT INTO vendas(produto, idanimal, preco, cliente, qtd, idfazenda, datavenda)"
-				+ " VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO vendas(produto, idanimal, preco, cliente, qtd, idfazenda, datavenda,tipodoproduto,numeronota)"
+				+ " VALUES (?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, venda.getProduto());
@@ -21,6 +21,8 @@ public class CrudVendas {
 			stmt.setInt(5, venda.getQuantidade());
 			stmt.setInt(6, venda.getIdFazenda());
 			stmt.setString(7, venda.getDataVenda());
+			stmt.setInt(8, venda.getTipoDoProduto());
+			stmt.setString(9, venda.getNumeroDaNota());
 			stmt.execute();
 			stmt.close();
 			return true;

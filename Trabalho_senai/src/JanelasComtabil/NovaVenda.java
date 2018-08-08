@@ -1,6 +1,7 @@
 package JanelasComtabil;
 
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -36,7 +37,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import DAO.Vendas;
@@ -50,6 +53,8 @@ import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class NovaVenda {
 
@@ -73,6 +78,7 @@ public class NovaVenda {
 	Vendas venda = new Vendas();
 	private JSpinner spinner;
 	int contadorEditar = 0;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -323,11 +329,56 @@ public class NovaVenda {
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 		String formatada = formato.format(data);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 253, 1054, 23);
+		scrollPane = new JScrollPane();
+		scrollPane.setBackground(new Color(169, 169, 169));
+		scrollPane.setFont(new Font("Arial", Font.BOLD, 13));
+		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		scrollPane.setBounds(10, 253, 1054, 136);
+		
 		frmNovaVenda.getContentPane().add(scrollPane);
 		
 		table = new JTable();
+		table.setSelectionBackground(new Color(51, 153, 255));
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+		});
+		
+		table.setToolTipText("Clique para editar os dados\r\n");
+		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		table.setIgnoreRepaint(true);
+		table.setFont(new Font("Arial", Font.PLAIN, 13));
+		table.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		table.setForeground(SystemColor.controlText);
+		table.setBackground(new Color(169, 169, 169));
+		
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID da venda","Tipo do Produto", "Produto", "Animal", "N\u00FAmero da nota", "Quantidade ", "Pre\u00E7o", "Data da venda",
+			}
+		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+			boolean[] columnEditables = new boolean[] {
+				true, false, false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(3).setResizable(false);
+		table.getColumnModel().getColumn(4).setResizable(false);
+		table.getColumnModel().getColumn(5).setResizable(false);
+		table.getColumnModel().getColumn(6).setResizable(false);
+		table.getColumnModel().getColumn(7).setResizable(false);
+	
 		scrollPane.setViewportView(table);
 		
 		ftfData = new JFormattedTextField(mask);
@@ -358,6 +409,8 @@ public class NovaVenda {
 		
 		menu();
 		comboBoxAnimal();
+		venda.setIdFazenda(Principal.fazenda.getIdFazenda());
+		criaTabela(CrudVendas.selecionaVendas(venda));
 	}
 	
 	void preencherDAOparaSalvarVenda() {
@@ -370,16 +423,74 @@ public class NovaVenda {
 		if (rdbtnAnimal.isSelected()) {
 			venda.setProduto(null);
 			venda.setIdanimal(id);
+			venda.setTipoDoProduto(1);
 		}
 		if (rdbtnSubproduto.isSelected()) {
 			venda.setProduto(tfProduto.getText());
 			venda.setIdanimal(id);
+			venda.setTipoDoProduto(2);
 		}
 		if (rdbtnPlantio.isSelected()) {
 			venda.setIdanimal(1);
 			venda.setProduto(tfProduto.getText());
+			venda.setTipoDoProduto(3);
 		}
 	}
+	
+	//MÉTODO PARA COLOCAR OS DADOS NA TABELA a
+		public void criaTabela(ResultSet rs) {
+			
+			DefaultTableModel tabela = (DefaultTableModel) table.getModel();
+			tabela.setRowCount(0);
+			
+			String tipo=null;
+			String animal=null;
+			
+			try {
+				while(rs.next()) {
+					
+					if (rs.getInt("tipodoproduto")==1) {
+						tipo="Animal";
+					}
+					if (rs.getInt("tipodoproduto")==2) {
+						tipo="Subproduto";
+					}
+					if (rs.getInt("tipodoproduto")==3) {
+						tipo="Plantio";
+					}
+					
+					
+					ResultSet dados=null;//inicio do resultset para pegar o nome do animal
+					String sql = "SELECT idvendas, animais.nomelote FROM vendas "+
+							"INNER JOIN animais ON vendas.idanimal = animais.idanimal where idvendas=?";
+					try {
+						PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+						stmt.setInt(1, rs.getInt("idvendas"));
+						dados = stmt.executeQuery();
+						stmt.execute();
+						stmt.close();	
+						
+						if (dados.next()) {
+							animal=dados.getString("nomeLote");
+						}
+						if (rs.getInt("idanimal")==1) {
+							animal=null;
+						}
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						System.out.println("erro ao pegar nome animal");
+					}//fim do resultset para pegar o nome do animal
+					
+					tabela.addRow(new Object[] {rs.getInt("idvendas"),tipo,rs.getString("produto"),animal,rs.getString("numeronota"),
+		 					rs.getInt("qtd"),rs.getDouble("preco"),rs.getString("datavenda")});
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	
 	void comboBoxAnimal() {
 		ResultSet dados=null;

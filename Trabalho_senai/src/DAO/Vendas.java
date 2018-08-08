@@ -8,7 +8,21 @@ public class Vendas {
 	private double preco;
 	private String  cliente;
 	private int quantidade;
+	private int tipoDoProduto;
+	private String numeroDaNota;
 	
+	public String getNumeroDaNota() {
+		return numeroDaNota;
+	}
+	public void setNumeroDaNota(String numeroDaNota) {
+		this.numeroDaNota = numeroDaNota;
+	}
+	public int getTipoDoProduto() {
+		return tipoDoProduto;
+	}
+	public void setTipoDoProduto(int tipoDoProduto) {
+		this.tipoDoProduto = tipoDoProduto;
+	}
 	public int getId() {
 		return id;
 	}
