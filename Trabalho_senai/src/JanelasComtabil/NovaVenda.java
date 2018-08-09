@@ -42,10 +42,12 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import DAO.Animal;
 import DAO.Vendas;
 import JanelasAnimal.CadastrarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import banco.Conexao;
+import crud.CrudAnimal;
 import crud.CrudVendas;
 import outraJanelas.EnviarEmail;
 import outraJanelas.Login;
@@ -79,6 +81,9 @@ public class NovaVenda {
 	private JSpinner spinner;
 	int contadorEditar = 0;
 	private JScrollPane scrollPane;
+	int quantidadeAntes=0;
+	private JTextField tfNota;
+	
 
 	/**
 	 * Launch the application.
@@ -194,22 +199,22 @@ public class NovaVenda {
 		
 		lblAnimal = new JLabel("Lote de animais:");
 		lblAnimal.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblAnimal.setBounds(405, 111, 131, 20);
+		lblAnimal.setBounds(10, 142, 131, 20);
 		frmNovaVenda.getContentPane().add(lblAnimal);
 		
 		cbAnimal = new JComboBox<String>();
 		cbAnimal.setBackground(SystemColor.controlHighlight);
-		cbAnimal.setBounds(546, 111, 188, 20);
+		cbAnimal.setBounds(120, 142, 188, 20);
 		frmNovaVenda.getContentPane().add(cbAnimal);
 		
 		JLabel lblQuantidade = new JLabel("Quantidade:");
 		lblQuantidade.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblQuantidade.setBounds(787, 111, 89, 20);
+		lblQuantidade.setBounds(405, 142, 89, 20);
 		frmNovaVenda.getContentPane().add(lblQuantidade);
 		
 		spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-		spinner.setBounds(886, 112, 164, 20);
+		spinner.setBounds(546, 142, 200, 20);
 		frmNovaVenda.getContentPane().add(spinner);
 		
 		JLabel lblPreco = new JLabel("Pre\u00E7o:");
@@ -219,7 +224,7 @@ public class NovaVenda {
 		
 		tfPreco = new JTextField();
 		tfPreco.setColumns(10);
-		tfPreco.setBounds(886, 81, 164, 20);
+		tfPreco.setBounds(886, 81, 178, 20);
 		tfPreco.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -237,17 +242,17 @@ public class NovaVenda {
 		
 		JLabel lblCliente = new JLabel("Cliente:");
 		lblCliente.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblCliente.setBounds(10, 142, 100, 20);
+		lblCliente.setBounds(405, 80, 100, 20);
 		frmNovaVenda.getContentPane().add(lblCliente);
 		
 		tfCliente = new JTextField();
 		tfCliente.setColumns(10);
-		tfCliente.setBounds(108, 142, 200, 20);
+		tfCliente.setBounds(546, 80, 200, 20);
 		frmNovaVenda.getContentPane().add(tfCliente);
 		
 		JLabel lblDataDaVenda = new JLabel("Data da Venda:");
 		lblDataDaVenda.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDataDaVenda.setBounds(405, 80, 125, 20);
+		lblDataDaVenda.setBounds(787, 111, 113, 20);
 		frmNovaVenda.getContentPane().add(lblDataDaVenda);
 		
 		JButton btnSalvar = new JButton("Salvar");
@@ -259,6 +264,16 @@ public class NovaVenda {
 					JOptionPane.showMessageDialog(null, "Insira o nome do Cliente", "ALERTA!", JOptionPane.WARNING_MESSAGE);
 					tfCliente.requestFocus();
 					return;
+				}
+				if (tfNota.getText().trim().equals("")) {
+					int x = JOptionPane.showConfirmDialog(null, "Você deseja deixar a nota como nulo?", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					if (x==JOptionPane.YES_OPTION) {
+						tfNota.setText("00000000000000000");
+				
+					}else {
+						tfNota.requestFocus();
+						return;
+					}
 				}
 				if(ftfData.getText().contains(" ")) {
 					JOptionPane.showMessageDialog(null, "Insira a data da Venda", "ALERTA!", JOptionPane.WARNING_MESSAGE);
@@ -290,6 +305,12 @@ public class NovaVenda {
 				if (contadorEditar==0) {
 					pegaIdAnimal();
 					preencherDAOparaSalvarVenda();
+					alteraAnimal(false);
+					if (rdbtnAnimal.isSelected() && quantidadeAntes < Integer.parseInt(spinner.getValue().toString())) {
+						JOptionPane.showMessageDialog(null, "Quandidade superior ao numero de animais!", "ALERTA", JOptionPane.WARNING_MESSAGE);
+						return;
+					}
+					alteraAnimal(true);
 					new CrudVendas().addvendas(venda);
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
 				}
@@ -342,6 +363,7 @@ public class NovaVenda {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				contadorEditar=1;
 			}
 		});
 		
@@ -357,20 +379,17 @@ public class NovaVenda {
 			new Object[][] {
 			},
 			new String[] {
-				"ID da venda","Tipo do Produto", "Produto", "Animal", "N\u00FAmero da nota", "Quantidade ", "Pre\u00E7o", "Data da venda",
+				"ID da venda", "Tipo do Produto", "Produto", "Animal", "Cliente", "Numero da Nota", "Quantidade ", "Pre\u00E7o", "Data da venda"
 			}
 		) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
-				true, false, false, false, false, false, false, false
+				false, false, false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
+		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(2).setResizable(false);
 		table.getColumnModel().getColumn(3).setResizable(false);
@@ -378,12 +397,13 @@ public class NovaVenda {
 		table.getColumnModel().getColumn(5).setResizable(false);
 		table.getColumnModel().getColumn(6).setResizable(false);
 		table.getColumnModel().getColumn(7).setResizable(false);
+		table.getColumnModel().getColumn(8).setResizable(false);
 	
 		scrollPane.setViewportView(table);
 		
 		ftfData = new JFormattedTextField(mask);
 		ftfData.setText(formatada);
-		ftfData.setBounds(546, 80, 188, 20);
+		ftfData.setBounds(910, 111, 154, 20);
 		frmNovaVenda.getContentPane().add(ftfData);
 		
 		tfProcurar = new JTextField();
@@ -402,10 +422,20 @@ public class NovaVenda {
 		btnProcurar.setBounds(351, 222, 89, 20);
 		frmNovaVenda.getContentPane().add(btnProcurar);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/gradiente_Branco.jpg")));
-		label_1.setBounds(0, 0, 1074, 670);
-		frmNovaVenda.getContentPane().add(label_1);
+		JLabel lblNumeroDaNota = new JLabel("Numero da Nota:");
+		lblNumeroDaNota.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNumeroDaNota.setBounds(405, 111, 131, 20);
+		frmNovaVenda.getContentPane().add(lblNumeroDaNota);
+		
+		tfNota = new JTextField();
+		tfNota.setColumns(10);
+		tfNota.setBounds(546, 111, 200, 20);
+		frmNovaVenda.getContentPane().add(tfNota);
+		
+		JLabel lblFundo = new JLabel("");
+		lblFundo.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/gradiente_Branco.jpg")));
+		lblFundo.setBounds(0, 0, 1074, 670);
+		frmNovaVenda.getContentPane().add(lblFundo);
 		
 		menu();
 		comboBoxAnimal();
@@ -419,6 +449,7 @@ public class NovaVenda {
 		venda.setPreco(Double.parseDouble(numero));
 		venda.setQuantidade((int) spinner.getValue());
 		venda.setIdFazenda(Principal.fazenda.getIdFazenda());
+		venda.setNumeroDaNota(tfNota.getText());
 		
 		if (rdbtnAnimal.isSelected()) {
 			venda.setProduto(null);
@@ -483,8 +514,8 @@ public class NovaVenda {
 						System.out.println("erro ao pegar nome animal");
 					}//fim do resultset para pegar o nome do animal
 					
-					tabela.addRow(new Object[] {rs.getInt("idvendas"),tipo,rs.getString("produto"),animal,rs.getString("numeronota"),
-		 					rs.getInt("qtd"),rs.getDouble("preco"),rs.getString("datavenda")});
+					tabela.addRow(new Object[] {rs.getInt("idvendas"),tipo,rs.getString("produto"),animal,rs.getString("cliente"),
+		 					rs.getString("numeronota"),rs.getInt("qtd"),rs.getDouble("preco"),rs.getString("datavenda")});
 					
 				}
 			} catch (SQLException e) {
@@ -545,6 +576,69 @@ public class NovaVenda {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	void alteraAnimal(boolean resposta) {
+			Animal animal = new Animal();
+			animal.setIdFazenda(Principal.fazenda.getIdFazenda());
+			ResultSet rs = CrudAnimal.selecionaAnimais(animal);
+			
+				try {
+					while (rs.next()) {
+						if(rs.getInt("idanimal")==id) {
+							quantidadeAntes = rs.getInt("quantidade");
+							break;
+						}
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			if (resposta) {
+				String sql = "UPDATE animais set quantidade=? where idanimal=?";
+				try {
+					PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+						stmt.setInt(1, quantidadeAntes-Integer.parseInt(spinner.getValue().toString()));
+						stmt.setInt(2, id);
+						stmt.execute();
+						stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	}
+	
+	void pegaDadosDaTabela() {
+		int linha = table.getSelectedRow();
+		
+		id= Integer.parseInt(table.getValueAt(linha, 0).toString());
+		
+		if (table.getValueAt(linha, 1).toString().equalsIgnoreCase("animal")) {
+			rdbtnAnimal.setSelected(true);
+		}
+		if (table.getValueAt(linha, 1).toString().equalsIgnoreCase("subproduto")) {
+			rdbtnSubproduto.setSelected(true);
+		}
+		if (table.getValueAt(linha, 1).toString().equalsIgnoreCase("plantio")) {
+			rdbtnPlantio.setSelected(true);
+		}
+		
+		tfProduto.setText(table.getValueAt(linha, 2).toString());
+		tfCliente.setText(table.getValueAt(linha, 4).toString());
+		tfNota.setText(table.getValueAt(linha, 5).toString());
+		spinner.setValue(table.getValueAt(linha, 6));
+		tfPreco.setText(table.getValueAt(linha, 7).toString());
+		ftfData.setText(table.getValueAt(linha, 8).toString());
+		
+		if (!table.getValueAt(linha, 3).toString().equals("")) {
+			
+		}
+		
+		//"ID da venda", "Tipo do Produto", "Produto", "Animal", "Cliente", "Numero da Nota", "Quantidade ", "Pre\u00E7o", "Data da venda"
+		
 	}
 	
 	void menu() {
