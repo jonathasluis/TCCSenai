@@ -29,6 +29,11 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
 import com.toedter.calendar.JCalendar;
 
 import DAO.Compras;
@@ -48,6 +53,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.JButton;
 
 public class Total {//
 
@@ -425,6 +431,24 @@ public class Total {//
 		bg.add(chckbxAnomes);
 		bg.add(chckbxAnomesdia);
 		
+		DefaultPieDataset pizza = new DefaultPieDataset();
+		
+		pizza.setValue("Produto", 5);
+		pizza.setValue("Compra",5);
+		
+		JFreeChart grafico = ChartFactory.createPieChart("sal",pizza,true,true,false);
+		ChartPanel painel = new ChartPanel(grafico);
+		frmRelattio.getContentPane().add(painel);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnNewButton.setBounds(590, 114, 89, 23);
+		frmRelattio.getContentPane().add(btnNewButton);
+		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(Total.class.getResource("/img/gradiente_Branco.jpg")));
 		label_1.setBounds(0, 0, 1074, 670);
@@ -515,7 +539,20 @@ public class Total {//
 			label.setForeground(Color.GREEN);
 		}
 		label.setText(String.valueOf(total));
+		
+		
+		
+	
+		
+		
+		
 	}
+	
+	
+	
+		
+		
+	
 	
 	public void menu() {	
 		JMenuBar menuBar = new JMenuBar();

@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,7 +23,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.LookAndFeel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 
@@ -31,11 +37,17 @@ import JanelasComtabil.NovaCompra;
 import JanelasComtabil.NovaVenda;
 import JanelasComtabil.Total;
 import JanelasFuncionarios.CadastrarFuncionarios;
+
+
 import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
+
+
+
 import javax.swing.border.BevelBorder;
+import javax.swing.JTextField;
 //
 
 public class Principal {
@@ -48,6 +60,11 @@ public class Principal {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		
+		
+		
+		
 		EventQueue.invokeLater(new Runnable() {
 			@SuppressWarnings("static-access")
 			public void run() {
@@ -59,6 +76,8 @@ public class Principal {
 				}
 			}
 		});
+		
+		
 	}
 
 	/**
@@ -72,6 +91,9 @@ public class Principal {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		
+		
 		frmPrincipal = new JFrame();
 		frmPrincipal.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/logo-pequena-sem-texto.png")));
 		frmPrincipal.setTitle("Principal");
@@ -97,7 +119,6 @@ public class Principal {
 		JButton btnAnimais = new JButton("");
 		btnAnimais.setBorderPainted(false);
 		btnAnimais.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAnimais.setFocusCycleRoot(true);
 		btnAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastrarAnimais.main(null);
@@ -111,7 +132,7 @@ public class Principal {
 		frmPrincipal.getContentPane().add(btnAnimais);
 		
 		JLabel lblAnimais = new JLabel("Animais");
-		lblAnimais.setForeground(Color.BLACK);
+		lblAnimais.setForeground(Color.DARK_GRAY);
 		lblAnimais.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblAnimais.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAnimais.setBounds(10, 206, 120, 14);
@@ -136,7 +157,7 @@ public class Principal {
 		
 		JLabel lblFuncionarios = new JLabel("Funcionarios");
 		lblFuncionarios.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFuncionarios.setForeground(Color.BLACK);
+		lblFuncionarios.setForeground(Color.DARK_GRAY);
 		lblFuncionarios.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblFuncionarios.setBounds(255, 206, 120, 14);
 		frmPrincipal.getContentPane().add(lblFuncionarios);
@@ -159,7 +180,7 @@ public class Principal {
 		
 		JLabel lblCompras = new JLabel("Compras");
 		lblCompras.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCompras.setForeground(Color.BLACK);
+		lblCompras.setForeground(Color.DARK_GRAY);
 		lblCompras.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblCompras.setBounds(470, 207, 120, 14);
 		frmPrincipal.getContentPane().add(lblCompras);
@@ -182,7 +203,7 @@ public class Principal {
 		
 		JLabel lblVendas = new JLabel("Vendas");
 		lblVendas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVendas.setForeground(Color.BLACK);
+		lblVendas.setForeground(Color.DARK_GRAY);
 		lblVendas.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblVendas.setBounds(700, 207, 120, 14);
 		frmPrincipal.getContentPane().add(lblVendas);
@@ -205,7 +226,7 @@ public class Principal {
 		
 		JLabel lblUsuario = new JLabel("Usuario");
 		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsuario.setForeground(Color.BLACK);
+		lblUsuario.setForeground(Color.DARK_GRAY);
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblUsuario.setBounds(920, 207, 120, 14);
 		frmPrincipal.getContentPane().add(lblUsuario);
@@ -225,7 +246,7 @@ public class Principal {
 		});
 		panelSite.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelSite.setOpaque(false);
-		panelSite.setBounds(10, 438, 186, 40);
+		panelSite.setBounds(10, 454, 186, 40);
 		frmPrincipal.getContentPane().add(panelSite);
 		panelSite.setLayout(new BorderLayout(0, 0));
 		
@@ -253,7 +274,7 @@ public class Principal {
 		});
 		panelPdf.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelPdf.setOpaque(false);
-		panelPdf.setBounds(10, 489, 186, 40);
+		panelPdf.setBounds(10, 506, 186, 40);
 		frmPrincipal.getContentPane().add(panelPdf);
 		panelPdf.setLayout(new BorderLayout(0, 0));
 		
@@ -272,26 +293,35 @@ public class Principal {
 		lblVersao.setBounds(984, 645, 80, 14);
 		frmPrincipal.getContentPane().add(lblVersao);
 		
+		JLabel lblNewLabel = new JLabel("Todos os direitos reservados \u00A92017-2018");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(10, 590, 1054, 29);
+		frmPrincipal.getContentPane().add(lblNewLabel);
+		
 		JLabel foto = new JLabel("");
 		foto.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		foto.setIcon(new ImageIcon(Principal.class.getResource("/img/gradiente_Branco.jpg")));
+		foto.setIcon(new ImageIcon("D:\\Icones_40x40\\Teste2.jpg"));
 		foto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		foto.setForeground(Color.WHITE);
 		foto.setBorder(null);
-		foto.setBounds(0, 0, 1074, 671);
+		foto.setBounds(0, 0, 1074, 634);
 		frmPrincipal.getContentPane().add(foto);
+		
 		
 		menu();
 	}
 	
 	public void menu() {	
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), new Color(128, 128, 128), new Color(128, 128, 128), new Color(105, 105, 105)));
+		menuBar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
 		menuBar.setForeground(Color.GREEN);
 		menuBar.setBackground(Color.DARK_GRAY);
 		frmPrincipal.setJMenuBar(menuBar);
 		
 		JMenu mnInicio = new JMenu("");
+		mnInicio.setBorder(new SoftBevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY));
 		mnInicio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnInicio.setOpaque(true);
 		mnInicio.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -312,17 +342,18 @@ public class Principal {
 		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/img/Icone_GEstao.png")));
 		mnNewMenu.setOpaque(true);
 		mnNewMenu.setFocusPainted(true);
-		mnNewMenu.setBorder(new CompoundBorder());
+		mnNewMenu.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(64, 64, 64), new Color(64, 64, 64), new Color(64, 64, 64), new Color(64, 64, 64)));
 		mnNewMenu.setBackground(Color.DARK_GRAY);
 		mnNewMenu.setForeground(Color.WHITE);
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
+		
 		mntmCadastrarAnimais.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		mntmCadastrarAnimais.setBorder(new LineBorder(new Color(34, 139, 34)));
+		mntmCadastrarAnimais.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
 		mntmCadastrarAnimais.setOpaque(true);
-		mntmCadastrarAnimais.setForeground(new Color(0, 0, 0));
-		mntmCadastrarAnimais.setBackground(SystemColor.menu);
+		mntmCadastrarAnimais.setForeground(Color.WHITE);
+		mntmCadastrarAnimais.setBackground(Color.DARK_GRAY);
 		mntmCadastrarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarAnimais.main(null);
@@ -332,6 +363,10 @@ public class Principal {
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
 		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Funcionarios");
+		mntmCadastrarFuncionarios.setOpaque(true);
+		mntmCadastrarFuncionarios.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmCadastrarFuncionarios.setBackground(Color.DARK_GRAY);
+		mntmCadastrarFuncionarios.setForeground(Color.WHITE);
 		mntmCadastrarFuncionarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnNewMenu.add(mntmCadastrarFuncionarios);
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
@@ -342,6 +377,8 @@ public class Principal {
 		});
 		
 		JMenu mnNewMenu_1 = new JMenu("");
+		mnNewMenu_1.setBorder(new SoftBevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY));
+		
 		mnNewMenu_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnNewMenu_1.setIcon(new ImageIcon(Principal.class.getResource("/img/Icone_Financeiro.png")));
 		mnNewMenu_1.setForeground(Color.WHITE);
@@ -350,6 +387,10 @@ public class Principal {
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmCompra = new JMenuItem("Compra");
+		mntmCompra.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmCompra.setForeground(Color.WHITE);
+		mntmCompra.setBackground(Color.DARK_GRAY);
+		mntmCompra.setOpaque(true);
 		mntmCompra.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmCompra.setEnabled(true);
 		mntmCompra.addActionListener(new ActionListener() {
@@ -361,10 +402,18 @@ public class Principal {
 		mnNewMenu_1.add(mntmCompra);
 		
 		JMenuItem mntmNovaVenda = new JMenuItem("Venda");
+		mntmNovaVenda.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmNovaVenda.setForeground(Color.WHITE);
+		mntmNovaVenda.setBackground(Color.DARK_GRAY);
+		mntmNovaVenda.setOpaque(true);
 		mntmNovaVenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnNewMenu_1.add(mntmNovaVenda);
 		
 		JMenuItem mntmTotal = new JMenuItem("Total");
+		mntmTotal.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmTotal.setForeground(Color.WHITE);
+		mntmTotal.setBackground(Color.DARK_GRAY);
+		mntmTotal.setOpaque(true);
 		mntmTotal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnNewMenu_1.add(mntmTotal);
 		mntmTotal.addActionListener(new ActionListener() {
@@ -381,6 +430,7 @@ public class Principal {
 		});
 		
 		JMenu mnOpes = new JMenu("");
+		mnOpes.setBorder(new SoftBevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY));
 		mnOpes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnOpes.setIcon(new ImageIcon(Principal.class.getResource("/img/Icone_OPCAO.png")));
 		mnOpes.setForeground(Color.WHITE);
@@ -389,6 +439,10 @@ public class Principal {
 		menuBar.add(mnOpes);
 		
 		JMenuItem mntmNovaFazenda = new JMenuItem("Fazenda");
+		mntmNovaFazenda.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmNovaFazenda.setBackground(Color.DARK_GRAY);
+		mntmNovaFazenda.setForeground(Color.WHITE);
+		mntmNovaFazenda.setOpaque(true);
 		mntmNovaFazenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmNovaFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -399,6 +453,10 @@ public class Principal {
 		mnOpes.add(mntmNovaFazenda);
 		
 		JMenuItem mntmSada = new JMenuItem("Sair");
+		mntmSada.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmSada.setBackground(Color.DARK_GRAY);
+		mntmSada.setForeground(Color.WHITE);
+		mntmSada.setOpaque(true);
 		mntmSada.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmSada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -407,6 +465,10 @@ public class Principal {
 		});
 		
 		JMenuItem mntmMudarFazenda = new JMenuItem("Mudar Fazenda");
+		mntmMudarFazenda.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmMudarFazenda.setBackground(Color.DARK_GRAY);
+		mntmMudarFazenda.setForeground(Color.WHITE);
+		mntmMudarFazenda.setOpaque(true);
 		mntmMudarFazenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmMudarFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -417,6 +479,10 @@ public class Principal {
 		mnOpes.add(mntmMudarFazenda);
 		
 		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
+		mntmDeslogar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmDeslogar.setBackground(Color.DARK_GRAY);
+		mntmDeslogar.setForeground(Color.WHITE);
+		mntmDeslogar.setOpaque(true);
 		mntmDeslogar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmDeslogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -427,6 +493,10 @@ public class Principal {
 		mnOpes.add(mntmDeslogar);
 		
 		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
+		mntmEnviar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmEnviar.setBackground(Color.DARK_GRAY);
+		mntmEnviar.setForeground(Color.WHITE);
+		mntmEnviar.setOpaque(true);
 		mntmEnviar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

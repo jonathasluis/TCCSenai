@@ -61,6 +61,7 @@ import outraJanelas.Principal;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Toolkit;
+import javax.swing.DebugGraphics;
 
 public class CadastrarFuncionarios {
 
@@ -742,6 +743,8 @@ public class CadastrarFuncionarios {
 	
 	public void menu() {	
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
+		menuBar.setOpaque(true);
 		menuBar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), new Color(128, 128, 128), new Color(128, 128, 128), new Color(105, 105, 105)));
 		menuBar.setForeground(Color.GREEN);
 		menuBar.setBackground(Color.DARK_GRAY);

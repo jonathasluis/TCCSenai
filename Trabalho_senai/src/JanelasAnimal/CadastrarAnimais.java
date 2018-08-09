@@ -579,8 +579,8 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(btnCadastrarNovaRaca);
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/gradiente_Branco.jpg")));
-		label_1.setBounds(0, 0, 1074, 670);
+		label_1.setIcon(new ImageIcon("D:\\Icones_40x40\\Teste13.jpg"));
+		label_1.setBounds(0, 0, 1074, 636);
 		frmCadastroDeAnimais.getContentPane().add(label_1);
 		
 		
