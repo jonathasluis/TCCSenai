@@ -73,9 +73,11 @@ public class Total {//
 	Date data = new Date();
 	
 	//tabela
-		static int teste = 1; 
+		static int teste = 0; 
 		static int x1=1;
 		private JScrollPane scrollPaneGasto;
+		private JTable table;
+		private JScrollPane scrollPane;
 		//tabela
 
 	/**
@@ -244,11 +246,13 @@ public class Total {//
 		calendar.setOpaque(false);
 		calendar.getDayChooser().getDayPanel().setOpaque(false);
 		calendar.getDayChooser().addPropertyChangeListener(new PropertyChangeListener() {
+			
 			public void propertyChange(PropertyChangeEvent evt) {//evento mudar dia
 				if(chckbxAnomesdia.isSelected()) {
 					colocaDadosNaTabelaGasto(new CrudCompras().procurarCompraDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
 							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+					
 					
 					colocaDadosNaTabelaReceita(new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
@@ -260,6 +264,8 @@ public class Total {//
 						new CrudVendas().procurarVendasDataAnoDia(String.valueOf(calendar.getYearChooser().getValue()),
 							String.valueOf(calendar.getMonthChooser().getMonth()+1), 
 							String.valueOf(calendar.getDayChooser().getDay()),  Principal.fazenda.getIdFazenda()));
+					
+					
 				}
 			}
 		});
@@ -351,6 +357,7 @@ public class Total {//
 		calendar.getMonthChooser().setVisible(false);
 		calendar.setBounds(147, 59, 217, 137);
 		frmRelattio.getContentPane().add(calendar);
+
 		
 		chckbxAno = new JCheckBox("Ano");
 		chckbxAno.setOpaque(false);
@@ -371,11 +378,15 @@ public class Total {//
 							.procurarCompraDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()),
 						new CrudVendas()
 							.procurarVendasDataAno(String.valueOf(calendar.getYearChooser().getValue()), Principal.fazenda.getIdFazenda()));
+					
+					
 				}
 			}
 		});
 		chckbxAno.setBounds(370, 59, 97, 23);
 		frmRelattio.getContentPane().add(chckbxAno);
+		
+		
 		
 		chckbxAnomes = new JCheckBox("Ano-Mes");
 		chckbxAnomes.setOpaque(false);
@@ -449,23 +460,47 @@ public class Total {//
 		btnNewButton.setBounds(590, 114, 89, 23);
 		frmRelattio.getContentPane().add(btnNewButton);
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 320, 537, 25);
+		frmRelattio.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Produto", "Pre\u00E7o", "Data"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		scrollPane.setViewportView(table);
+		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(Total.class.getResource("/img/gradiente_Branco.jpg")));
-		label_1.setBounds(0, 0, 1074, 670);
+		label_1.setIcon(new ImageIcon(Total.class.getResource("/img/Teste13.jpg")));
+		label_1.setBounds(0, -15, 1074, 670);
 		frmRelattio.getContentPane().add(label_1);
 		
 		compras.setIdFazenda(Principal.fazenda.getIdFazenda());
 		vendas.setIdFazenda(Principal.fazenda.getIdFazenda());
-		//tabela
-				x1=1;
-				//tabela
+		
+	
+		
+		
+		
+	
 		menu();
-		//tabela
-		//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
-		if (tabelaGasto.getRowCount()== 0) {
-			scrollPaneGasto.setVisible(false);
-		}
-		//tabela/
+		
+	
+		
 		
 		colocaDadosNaTabelaGasto(CrudCompras.selecionaCompras(compras));
 		colocaDadosNaTabelaReceita(CrudVendas.selecionaVendas(vendas));
@@ -473,23 +508,34 @@ public class Total {//
 	}
 	
 	void colocaDadosNaTabelaGasto(ResultSet rs) {
-		scrollPaneGasto.setVisible(true);
-		DefaultTableModel modelo = (DefaultTableModel) tabelaGasto.getModel();
+		
+		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		modelo.setNumRows(0);
 		
 		try {
 			while (rs.next()) {
 				modelo.addRow(new Object[] {rs.getString("produto"),rs.getString("preco"),rs.getString("data_compra")});
+				
 				//tabela
 				if (x1==1) {
-					if (tabelaGasto.getRowCount() >= teste & tabelaGasto.getRowCount() <=14) {
-						teste = tabelaGasto.getRowCount();
-						System.out.println(teste);
-						int x = (teste*17);
-						scrollPaneGasto.setBounds(10, 250, 519, x);
+				if (scrollPane.getHeight()<250) {
+					
+					int tabel = table.getRowCount();
+					int linha = tabel*16;
+					int valor = 22+linha;
+					scrollPane.setBounds(10, 320, 537, valor);
+					System.out.println(table.getRowCount());
+					int vazio = tabelaGasto.getRowCount();
+					if (vazio < 0.) {
+						scrollPane.setVisible(false);
+							
+						
 					}
 				}
 				//tabela
+			}
+			
+			
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -506,6 +552,23 @@ public class Total {//
 			while (rs.next()) {
 				modelo.addRow(new Object[] {rs.getString("produto"),rs.getString("preco"),rs.getString("datavenda")});	
 			}
+			
+			//tabela
+			if (x1==1) {
+			if (scrollPaneReceita.getHeight()<250) {
+				
+				int tabel = tabelaGasto.getRowCount();
+				int linha = tabel*16;
+				int valor = 22+linha;
+				scrollPaneReceita.setBounds(545, 250, 519, valor);
+				
+				//System.out.println(tabelaReceita.getRowCount());
+				
+				int vazio = tabelaReceita.getRowCount();
+				
+			}
+			//tabela
+		}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -556,12 +619,13 @@ public class Total {//
 	
 	public void menu() {	
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), new Color(128, 128, 128), new Color(128, 128, 128), new Color(105, 105, 105)));
+		menuBar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
 		menuBar.setForeground(Color.GREEN);
 		menuBar.setBackground(Color.DARK_GRAY);
 		frmRelattio.setJMenuBar(menuBar);
 		
 		JMenu mnInicio = new JMenu("");
+		mnInicio.setBorder(new SoftBevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY));
 		mnInicio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnInicio.setOpaque(true);
 		mnInicio.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -582,17 +646,18 @@ public class Total {//
 		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/img/Icone_GEstao.png")));
 		mnNewMenu.setOpaque(true);
 		mnNewMenu.setFocusPainted(true);
-		mnNewMenu.setBorder(new CompoundBorder());
+		mnNewMenu.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(64, 64, 64), new Color(64, 64, 64), new Color(64, 64, 64), new Color(64, 64, 64)));
 		mnNewMenu.setBackground(Color.DARK_GRAY);
 		mnNewMenu.setForeground(Color.WHITE);
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmCadastrarAnimais = new JMenuItem("Animais");
+		
 		mntmCadastrarAnimais.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		mntmCadastrarAnimais.setBorder(new LineBorder(new Color(34, 139, 34)));
+		mntmCadastrarAnimais.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
 		mntmCadastrarAnimais.setOpaque(true);
-		mntmCadastrarAnimais.setForeground(new Color(0, 0, 0));
-		mntmCadastrarAnimais.setBackground(SystemColor.menu);
+		mntmCadastrarAnimais.setForeground(Color.WHITE);
+		mntmCadastrarAnimais.setBackground(Color.DARK_GRAY);
 		mntmCadastrarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarAnimais.main(null);
@@ -602,6 +667,10 @@ public class Total {//
 		mnNewMenu.add(mntmCadastrarAnimais);
 		
 		JMenuItem mntmCadastrarFuncionarios = new JMenuItem("Funcionarios");
+		mntmCadastrarFuncionarios.setOpaque(true);
+		mntmCadastrarFuncionarios.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmCadastrarFuncionarios.setBackground(Color.DARK_GRAY);
+		mntmCadastrarFuncionarios.setForeground(Color.WHITE);
 		mntmCadastrarFuncionarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnNewMenu.add(mntmCadastrarFuncionarios);
 		mntmCadastrarFuncionarios.addActionListener(new ActionListener() {
@@ -612,6 +681,8 @@ public class Total {//
 		});
 		
 		JMenu mnNewMenu_1 = new JMenu("");
+		mnNewMenu_1.setBorder(new SoftBevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY));
+		
 		mnNewMenu_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnNewMenu_1.setIcon(new ImageIcon(Principal.class.getResource("/img/Icone_Financeiro.png")));
 		mnNewMenu_1.setForeground(Color.WHITE);
@@ -620,6 +691,10 @@ public class Total {//
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmCompra = new JMenuItem("Compra");
+		mntmCompra.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmCompra.setForeground(Color.WHITE);
+		mntmCompra.setBackground(Color.DARK_GRAY);
+		mntmCompra.setOpaque(true);
 		mntmCompra.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmCompra.setEnabled(true);
 		mntmCompra.addActionListener(new ActionListener() {
@@ -631,16 +706,24 @@ public class Total {//
 		mnNewMenu_1.add(mntmCompra);
 		
 		JMenuItem mntmNovaVenda = new JMenuItem("Venda");
+		mntmNovaVenda.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmNovaVenda.setForeground(Color.WHITE);
+		mntmNovaVenda.setBackground(Color.DARK_GRAY);
+		mntmNovaVenda.setOpaque(true);
 		mntmNovaVenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnNewMenu_1.add(mntmNovaVenda);
 		
 		JMenuItem mntmTotal = new JMenuItem("Total");
+		mntmTotal.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmTotal.setForeground(Color.WHITE);
+		mntmTotal.setBackground(Color.DARK_GRAY);
+		mntmTotal.setOpaque(true);
 		mntmTotal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnNewMenu_1.add(mntmTotal);
 		mntmTotal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Total.main(null);
-				frmRelattio.dispose();
+				//Total.main(null);
+				//frmRelattio.dispose();
 			}
 		});
 		mntmNovaVenda.addActionListener(new ActionListener() {
@@ -651,6 +734,7 @@ public class Total {//
 		});
 		
 		JMenu mnOpes = new JMenu("");
+		mnOpes.setBorder(new SoftBevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY, Color.DARK_GRAY));
 		mnOpes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mnOpes.setIcon(new ImageIcon(Principal.class.getResource("/img/Icone_OPCAO.png")));
 		mnOpes.setForeground(Color.WHITE);
@@ -659,6 +743,10 @@ public class Total {//
 		menuBar.add(mnOpes);
 		
 		JMenuItem mntmNovaFazenda = new JMenuItem("Fazenda");
+		mntmNovaFazenda.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmNovaFazenda.setBackground(Color.DARK_GRAY);
+		mntmNovaFazenda.setForeground(Color.WHITE);
+		mntmNovaFazenda.setOpaque(true);
 		mntmNovaFazenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmNovaFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -669,6 +757,10 @@ public class Total {//
 		mnOpes.add(mntmNovaFazenda);
 		
 		JMenuItem mntmSada = new JMenuItem("Sair");
+		mntmSada.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmSada.setBackground(Color.DARK_GRAY);
+		mntmSada.setForeground(Color.WHITE);
+		mntmSada.setOpaque(true);
 		mntmSada.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmSada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -677,6 +769,10 @@ public class Total {//
 		});
 		
 		JMenuItem mntmMudarFazenda = new JMenuItem("Mudar Fazenda");
+		mntmMudarFazenda.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmMudarFazenda.setBackground(Color.DARK_GRAY);
+		mntmMudarFazenda.setForeground(Color.WHITE);
+		mntmMudarFazenda.setOpaque(true);
 		mntmMudarFazenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmMudarFazenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -687,6 +783,10 @@ public class Total {//
 		mnOpes.add(mntmMudarFazenda);
 		
 		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
+		mntmDeslogar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmDeslogar.setBackground(Color.DARK_GRAY);
+		mntmDeslogar.setForeground(Color.WHITE);
+		mntmDeslogar.setOpaque(true);
 		mntmDeslogar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmDeslogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -697,6 +797,10 @@ public class Total {//
 		mnOpes.add(mntmDeslogar);
 		
 		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
+		mntmEnviar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
+		mntmEnviar.setBackground(Color.DARK_GRAY);
+		mntmEnviar.setForeground(Color.WHITE);
+		mntmEnviar.setOpaque(true);
 		mntmEnviar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

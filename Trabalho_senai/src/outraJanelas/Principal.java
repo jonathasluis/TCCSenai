@@ -302,7 +302,7 @@ public class Principal {
 		
 		JLabel foto = new JLabel("");
 		foto.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		foto.setIcon(new ImageIcon("D:\\Icones_40x40\\Teste2.jpg"));
+		foto.setIcon(new ImageIcon(Principal.class.getResource("/img/Teste2.jpg")));
 		foto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		foto.setForeground(Color.WHITE);
 		foto.setBorder(null);
