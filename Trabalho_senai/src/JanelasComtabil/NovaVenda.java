@@ -41,6 +41,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import DAO.Animal;
@@ -55,10 +58,6 @@ import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-import javax.swing.border.LineBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
 
 public class NovaVenda {
 
@@ -85,6 +84,7 @@ public class NovaVenda {
 	private JScrollPane scrollPane;
 	int quantidadeAntes=0;
 	private JTextField tfNota;
+	private JButton btnCancelar;
 	
 
 	/**
@@ -270,7 +270,7 @@ public class NovaVenda {
 				if (tfNota.getText().trim().equals("")) {
 					int x = JOptionPane.showConfirmDialog(null, "Você deseja deixar a nota como nulo?", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 					if (x==JOptionPane.YES_OPTION) {
-						tfNota.setText("00000000000000000");
+						tfNota.setText("00000");
 				
 					}else {
 						tfNota.requestFocus();
@@ -301,20 +301,41 @@ public class NovaVenda {
 				
 				//TESTE DE CADASTRO DE PREÇO
 				numero = tfPreco.getText().toString();
-				numero = numero.replace(".", ",");
+				if (numero.contains(",")) {
+					numero = numero.replace(".", ",");
+				}
+				
 				//FIM DO TESTE
 				
 				if (contadorEditar==0) {
 					pegaIdAnimal();
 					preencherDAOparaSalvarVenda();
-					alteraAnimal(false);
+					alteraAnimal(false,0);
 					if (rdbtnAnimal.isSelected() && quantidadeAntes < Integer.parseInt(spinner.getValue().toString())) {
 						JOptionPane.showMessageDialog(null, "Quandidade superior ao numero de animais!", "ALERTA", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					alteraAnimal(true);
+					alteraAnimal(true,Integer.parseInt(spinner.getValue().toString()));
 					new CrudVendas().addvendas(venda);
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
+				}
+				
+				if (contadorEditar==1) {
+					int resposta = JOptionPane.showConfirmDialog(null, "Você deseja alterar os dados já salvos?","ALERTA", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					if (resposta == JOptionPane.YES_NO_OPTION) {
+						pegaIdAnimal();
+						preencherDAOparaSalvarVenda();
+						alteraAnimal(false,0);
+						if (rdbtnAnimal.isSelected() && quantidadeAntes < Integer.parseInt(spinner.getValue().toString())) {
+							JOptionPane.showMessageDialog(null, "Quandidade superior ao numero de animais!", "ALERTA", JOptionPane.WARNING_MESSAGE);
+							return;
+						}
+						alteraAnimal(true,conta(table.getSelectedRow()));
+						new CrudVendas().updVendas(venda);
+						criaTabela(CrudVendas.selecionaVendas(venda));
+						btnCancelar.doClick();
+					
+					}
 				}
 			}
 		});
@@ -332,17 +353,26 @@ public class NovaVenda {
 				rdbtnSubproduto.setSelected(true);
 				spinner.setValue(0);
 				cbAnimal.setSelectedIndex(0);
+				tfNota.setText(null);
 			}
 		});
 		btnLimpar.setBounds(876, 596, 89, 23);
 		frmNovaVenda.getContentPane().add(btnLimpar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frmNovaVenda.dispose();
-				Principal.frmPrincipal.setVisible(true);
+				if (contadorEditar==0) {
+					frmNovaVenda.dispose();
+					Principal.frmPrincipal.setVisible(true);
+				}
+				if (contadorEditar==1) {
+					contadorEditar=0;
+					ftfData.setEditable(true);
+					btnLimpar.setEnabled(true);
+					btnLimpar.doClick();
+				}
 			}
 		});
 		btnCancelar.setBounds(777, 596, 89, 23);
@@ -366,6 +396,9 @@ public class NovaVenda {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				contadorEditar=1;
+				ftfData.setEditable(false);
+				btnLimpar.setEnabled(false);
+				pegaDadosDaTabela();
 			}
 		});
 		
@@ -384,6 +417,10 @@ public class NovaVenda {
 				"ID da venda", "Tipo do Produto", "Produto", "Animal", "Cliente", "Numero da Nota", "Quantidade ", "Pre\u00E7o", "Data da venda"
 			}
 		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false, false
 			};
@@ -449,7 +486,7 @@ public class NovaVenda {
 		venda.setCliente(tfCliente.getText());
 		venda.setDataVenda(ftfData.getText());
 		venda.setPreco(Double.parseDouble(numero));
-		venda.setQuantidade((int) spinner.getValue());
+		venda.setQuantidade((Integer.parseInt(spinner.getValue().toString())));
 		venda.setIdFazenda(Principal.fazenda.getIdFazenda());
 		venda.setNumeroDaNota(tfNota.getText());
 		
@@ -471,59 +508,59 @@ public class NovaVenda {
 	}
 	
 	//MÉTODO PARA COLOCAR OS DADOS NA TABELA a
-		public void criaTabela(ResultSet rs) {
-			
-			DefaultTableModel tabela = (DefaultTableModel) table.getModel();
-			tabela.setRowCount(0);
-			
-			String tipo=null;
-			String animal=null;
-			
-			try {
-				while(rs.next()) {
-					
-					if (rs.getInt("tipodoproduto")==1) {
-						tipo="Animal";
-					}
-					if (rs.getInt("tipodoproduto")==2) {
-						tipo="Subproduto";
-					}
-					if (rs.getInt("tipodoproduto")==3) {
-						tipo="Plantio";
-					}
-					
-					
-					ResultSet dados=null;//inicio do resultset para pegar o nome do animal
-					String sql = "SELECT idvendas, animais.nomelote FROM vendas "+
-							"INNER JOIN animais ON vendas.idanimal = animais.idanimal where idvendas=?";
-					try {
-						PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
-						stmt.setInt(1, rs.getInt("idvendas"));
-						dados = stmt.executeQuery();
-						stmt.execute();
-						stmt.close();	
-						
-						if (dados.next()) {
-							animal=dados.getString("nomeLote");
-						}
-						if (rs.getInt("idanimal")==1) {
-							animal=null;
-						}
-						
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						System.out.println("erro ao pegar nome animal");
-					}//fim do resultset para pegar o nome do animal
-					
-					tabela.addRow(new Object[] {rs.getInt("idvendas"),tipo,rs.getString("produto"),animal,rs.getString("cliente"),
-		 					rs.getString("numeronota"),rs.getInt("qtd"),rs.getDouble("preco"),rs.getString("datavenda")});
-					
+	public void criaTabela(ResultSet rs) {
+		
+		DefaultTableModel tabela = (DefaultTableModel) table.getModel();
+		tabela.setRowCount(0);
+		
+		String tipo=null;
+		String animal=null;
+		
+		try {
+			while(rs.next()) {
+				
+				if (rs.getInt("tipodoproduto")==1) {
+					tipo="Animal";
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+				if (rs.getInt("tipodoproduto")==2) {
+					tipo="Subproduto";
+				}
+				if (rs.getInt("tipodoproduto")==3) {
+					tipo="Plantio";
+				}
+				
+				
+				ResultSet dados=null;//inicio do resultset para pegar o nome do animal
+				String sql = "SELECT idvendas, animais.nomelote FROM vendas "+
+						"INNER JOIN animais ON vendas.idanimal = animais.idanimal where idvendas=?";
+				try {
+					PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+					stmt.setInt(1, rs.getInt("idvendas"));
+					dados = stmt.executeQuery();
+					stmt.execute();
+					stmt.close();	
+					
+					if (dados.next()) {
+						animal=dados.getString("nomeLote");
+					}
+					if (rs.getInt("idanimal")==1) {
+						animal=null;
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("erro ao pegar nome animal");
+				}//fim do resultset para pegar o nome do animal
+				
+				tabela.addRow(new Object[] {rs.getInt("idvendas"),tipo,rs.getString("produto"),animal,rs.getString("cliente"),
+	 					rs.getString("numeronota"),rs.getInt("qtd"),rs.getDouble("preco"),rs.getString("datavenda")});
+				
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+	}
 	
 	void comboBoxAnimal() {
 		ResultSet dados=null;
@@ -580,7 +617,7 @@ public class NovaVenda {
 		}
 	}
 	
-	void alteraAnimal(boolean resposta) {
+	void alteraAnimal(boolean resposta,int quantidadePraTirar) {
 			Animal animal = new Animal();
 			animal.setIdFazenda(Principal.fazenda.getIdFazenda());
 			ResultSet rs = CrudAnimal.selecionaAnimais(animal);
@@ -602,7 +639,7 @@ public class NovaVenda {
 				String sql = "UPDATE animais set quantidade=? where idanimal=?";
 				try {
 					PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
-						stmt.setInt(1, quantidadeAntes-Integer.parseInt(spinner.getValue().toString()));
+						stmt.setInt(1, quantidadeAntes-quantidadePraTirar);
 						stmt.setInt(2, id);
 						stmt.execute();
 						stmt.close();
@@ -616,7 +653,7 @@ public class NovaVenda {
 	void pegaDadosDaTabela() {
 		int linha = table.getSelectedRow();
 		
-		id= Integer.parseInt(table.getValueAt(linha, 0).toString());
+		venda.setId(Integer.parseInt(table.getValueAt(linha, 0).toString())) ;
 		
 		if (table.getValueAt(linha, 1).toString().equalsIgnoreCase("animal")) {
 			rdbtnAnimal.setSelected(true);
@@ -628,7 +665,12 @@ public class NovaVenda {
 			rdbtnPlantio.setSelected(true);
 		}
 		
-		tfProduto.setText(table.getValueAt(linha, 2).toString());
+		if (table.getValueAt(linha, 2) == null) {
+			tfProduto.setText(null);
+		}else {
+			tfProduto.setText(table.getValueAt(linha, 2).toString());
+		}
+		
 		tfCliente.setText(table.getValueAt(linha, 4).toString());
 		tfNota.setText(table.getValueAt(linha, 5).toString());
 		spinner.setValue(table.getValueAt(linha, 6));
@@ -638,9 +680,19 @@ public class NovaVenda {
 		if (!table.getValueAt(linha, 3).toString().equals("")) {
 			
 		}
+	}
+	
+	int conta(int linha) {
+		int quantidade=0;
 		
-		//"ID da venda", "Tipo do Produto", "Produto", "Animal", "Cliente", "Numero da Nota", "Quantidade ", "Pre\u00E7o", "Data da venda"
+		if (Integer.parseInt(spinner.getValue().toString()) == Integer.parseInt(table.getValueAt(linha, 6).toString())) {
+			quantidade = 0;
+		}
+		else {
+			quantidade = Integer.parseInt(spinner.getValue().toString()) - Integer.parseInt(table.getValueAt(linha, 6).toString());
+		}
 		
+		return quantidade;
 	}
 	
 	public void menu() {	

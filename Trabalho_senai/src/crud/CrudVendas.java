@@ -34,14 +34,19 @@ public class CrudVendas {
 	}
 	
 	public boolean updVendas(Vendas venda) {
-		String sql = "update  vendas set preco, cliente where idvendas=?";
+		String sql = "update  vendas set produto=?, idanimal=?, preco=?, cliente=?, qtd=?,tipodoproduto=?,numeronota=? where idvendas=?";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
-			 stmt.setDouble(1, venda.getPreco());
-			 stmt.setString(2, venda.getCliente());
-			 stmt.setInt(3, venda.getId());
-			 stmt.execute();
-			 stmt.close();
+			stmt.setString(1, venda.getProduto());
+			stmt.setInt(2, venda.getIdanimal());
+			stmt.setDouble(3, venda.getPreco());
+			stmt.setString(4, venda.getCliente());
+			stmt.setInt(5, venda.getQuantidade());
+			stmt.setInt(6, venda.getTipoDoProduto());
+			stmt.setString(7, venda.getNumeroDaNota());
+			stmt.setInt(8, venda.getId());
+			stmt.execute();
+			stmt.close();
 			 return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
