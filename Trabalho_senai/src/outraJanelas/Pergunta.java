@@ -26,6 +26,7 @@ import crud.CrudFazenda;
 public class Pergunta {
 
 	private JFrame frame;
+	public static JFrame outroFrame;
 	static JComboBox<String> comboBox;
 	static Usuario usuario = new Usuario();
 	private JButton btnOk;
@@ -71,8 +72,6 @@ public class Pergunta {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		
-		
-		
 		JLabel lblNewLabel = new JLabel("Selecione a Fazenda");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -96,12 +95,11 @@ public class Pergunta {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String resp = String.valueOf(comboBox.getSelectedItem());
-				if (contador==0) {
-					Principal.frmPrincipal.setVisible(true);
+				if (contador==1) {
+					outroFrame.dispose();
 				}
-				
+				Principal.frmPrincipal.setVisible(true);
 				passa(resp);
-				//Principal.pega();
 				frame.dispose();
 			}
 		});

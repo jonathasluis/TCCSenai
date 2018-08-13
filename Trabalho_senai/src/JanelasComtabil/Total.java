@@ -778,6 +778,7 @@ public class Total {//
 			public void actionPerformed(ActionEvent arg0) {
 				Pergunta.main(null);
 				Pergunta.contador = 1;
+				Pergunta.outroFrame=frmRelattio;
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);

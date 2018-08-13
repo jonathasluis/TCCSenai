@@ -35,7 +35,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
@@ -194,13 +193,7 @@ public class NovaFazenda {
 					JOptionPane.showMessageDialog(null, "Fazenda cadastrada com sucesso!");
 					btnLimpar.doClick();
 					colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
-
-				}
-				if (contadorEditar==1) {
-					//tabela
-					x1=0;
-					//tabela
-	
+					
 					int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar para essa Fazenda? ", "alerta",
 							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 					if(resposta==JOptionPane.YES_OPTION) {
@@ -210,11 +203,8 @@ public class NovaFazenda {
 					}else {
 						return;
 					}
+
 				}
-
-				
-
-				
 
 				if (contadorEditar==1) {
 					int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar essa Fazenda? ", "alerta",
@@ -294,6 +284,7 @@ public class NovaFazenda {
 					if(fazenda.getIdFazenda()==Principal.fazenda.getIdFazenda()) {//se a fazenda logada for excluida manda mudar
 						Pergunta.main(null);
 						Pergunta.contador = 1;
+						Pergunta.outroFrame=frmNovaFazenda;
 					}
 				}
 			}
@@ -778,6 +769,7 @@ public class NovaFazenda {
 			public void actionPerformed(ActionEvent arg0) {
 				Pergunta.main(null);
 				Pergunta.contador = 1;
+				Pergunta.outroFrame = frmNovaFazenda;
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);

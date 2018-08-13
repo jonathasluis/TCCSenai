@@ -474,11 +474,13 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(ftfNascimento);
 		
 		rdbtnMasculino = new JRadioButton("Masculino");
+		rdbtnMasculino.setOpaque(false);
 		rdbtnMasculino.setSelected(true);
 		rdbtnMasculino.setBounds(89, 184, 83, 23);
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnMasculino);
 		
 		rdbtnFeminino = new JRadioButton("Feminino");
+		rdbtnFeminino.setOpaque(false);
 		rdbtnFeminino.setBounds(174, 184, 109, 23);
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnFeminino);
 		
@@ -508,11 +510,13 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(lblDesligada);
 		
 		rdbtnAtivo = new JRadioButton("Ativo");
+		rdbtnAtivo.setOpaque(false);
 		rdbtnAtivo.setSelected(true);
 		rdbtnAtivo.setBounds(500, 184, 60, 23);
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnAtivo);
 		
 		rdbtnDesligado = new JRadioButton("Desligado");
+		rdbtnDesligado.setOpaque(false);
 		rdbtnDesligado.setBounds(556, 184, 83, 23);
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnDesligado);
 		
@@ -588,8 +592,8 @@ public class CadastrarFuncionarios {
 				x1=1;
 				//tabela
 		menu();
-		DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
-		colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
+		//DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
+		//colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
 		
 		//tabela
 				//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
@@ -902,6 +906,7 @@ public class CadastrarFuncionarios {
 			public void actionPerformed(ActionEvent arg0) {
 				Pergunta.main(null);
 				Pergunta.contador = 1;
+				Pergunta.outroFrame=frmCadastrarFuncionarios;
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);

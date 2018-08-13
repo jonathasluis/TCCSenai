@@ -856,6 +856,7 @@ public class NovaVenda {
 			public void actionPerformed(ActionEvent arg0) {
 				Pergunta.main(null);
 				Pergunta.contador = 1;
+				Pergunta.outroFrame=frmNovaVenda;
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);

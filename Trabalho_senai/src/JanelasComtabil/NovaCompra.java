@@ -817,6 +817,7 @@ public class NovaCompra {////
 			public void actionPerformed(ActionEvent arg0) {
 				Pergunta.main(null);
 				Pergunta.contador = 1;
+				Pergunta.outroFrame=frmCompraDeInsumos;
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);
