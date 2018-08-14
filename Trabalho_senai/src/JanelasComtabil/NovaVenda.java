@@ -318,6 +318,7 @@ public class NovaVenda {
 					alteraAnimal(true,Integer.parseInt(spinner.getValue().toString()));
 					new CrudVendas().addvendas(venda);
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
+					criaTabela(CrudVendas.selecionaVendas(venda));
 				}
 				
 				if (contadorEditar==1) {

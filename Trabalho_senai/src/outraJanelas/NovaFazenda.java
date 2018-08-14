@@ -199,6 +199,7 @@ public class NovaFazenda {
 					if(resposta==JOptionPane.YES_OPTION) {
 						Pergunta.main(null);
 						Pergunta.contador = 1;
+						Pergunta.outroFrame = frmNovaFazenda;
 						Pergunta.comboBox.setSelectedItem(fazenda.getNome());
 					}else {
 						return;

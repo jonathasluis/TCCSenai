@@ -46,7 +46,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
@@ -392,6 +391,12 @@ public class CadastrarAnimais {//teste3
 				preencherDAOAnimalParaSalvarNovo();
 				
 				if(contadorParaEditar==0) {
+					if (nomeAnimal()==false) {
+						JOptionPane.showMessageDialog(null, "Já existe um lote com este nome!", "ALERTA!", JOptionPane.WARNING_MESSAGE);
+						tfNomeLote.requestFocus();
+						return;
+					}
+					
 					crud.addAnimal(animal);
 					//tabela
 					x1=0;
@@ -525,8 +530,7 @@ public class CadastrarAnimais {//teste3
 				x1=0;
 				//tratamento para almentar a tabela
 				colocaDadosNaTabela(CrudAnimal.procuraAnimal(tfProcurar.getText(),animal ));	
-				int animal = new Animal().getIdAnimal();
-				
+				int animal = new Animal().getIdAnimal();				
 				int tabel = tabela.getRowCount();
 				int linha = tabel*16;
 				int valor = 23+linha;
@@ -598,10 +602,28 @@ public class CadastrarAnimais {//teste3
 			scrollPane.setVisible(false);
 		}
 		//tabela
-	
-				
-				
+		
 	}//fim do inicialize
+	boolean nomeAnimal() {//verifica se ja tem animal com esse nome
+		boolean resposta=true;
+		
+		ResultSet rs = CrudAnimal.selecionaAnimais(animal);
+		
+		try {
+			while (rs.next()) {
+				if (tfNomeLote.getText().equals(rs.getString("nomelote"))) {
+					resposta=false;
+					break;
+				}
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return resposta;
+	}
 	
 	void preencherDAOAnimalParaSalvarNovo() {
 		animal.setNomeLote(tfNomeLote.getText());
@@ -609,7 +631,6 @@ public class CadastrarAnimais {//teste3
 		animal.setDataCompra(ftfDataCompra.getText());
 		animal.setQuantidade((int) spinnerQuantidade.getValue());
 		animal.setRaca(ComboBox.pegaIdRaca(cbRaca.getSelectedItem().toString()));
-		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
 		animal.setDestino(tfDestino.getText());
 		animal.setImagem(mI.getImagem(img, panel));
 		if(rdbtnMacho.isSelected())
@@ -619,7 +640,6 @@ public class CadastrarAnimais {//teste3
 	}
 	
 	void colocaDadosNaTabela(ResultSet rs) {
-		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
 		String sexo;
 		//tabela
 		scrollPane.setVisible(true);
