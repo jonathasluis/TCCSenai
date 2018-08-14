@@ -60,7 +60,7 @@ import outraJanelas.Pergunta;
 import outraJanelas.Principal;
 
 public class NovaVenda {
-
+//
 	private JFrame frmNovaVenda;
 	private JTextField tfProduto;
 	private JRadioButton rdbtnPlantio;
