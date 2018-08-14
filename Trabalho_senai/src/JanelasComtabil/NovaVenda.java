@@ -423,12 +423,6 @@ public class NovaVenda {
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
-			Class[] columnTypes = new Class[] {
-				Object.class, Object.class, Object.class, String.class, Object.class, Object.class, Object.class, Object.class, Object.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false, false
 			};
@@ -488,6 +482,8 @@ public class NovaVenda {
 		comboBoxAnimal();
 		venda.setIdFazenda(Principal.fazenda.getIdFazenda());
 		criaTabela(CrudVendas.selecionaVendas(venda));
+		
+		
 	}
 	
 	void preencherDAOparaSalvarVenda() {
@@ -552,7 +548,7 @@ public class NovaVenda {
 						animal=dados.getString("nomeLote");
 					}
 					if (rs.getInt("idanimal")==1) {
-						animal=null;
+						animal="---";
 					}
 					
 				} catch (SQLException e) {
@@ -664,13 +660,13 @@ public class NovaVenda {
 		venda.setId(Integer.parseInt(table.getValueAt(linha, 0).toString())) ;
 		
 		if (table.getValueAt(linha, 1).toString().equalsIgnoreCase("animal")) {
-			rdbtnAnimal.setSelected(true);
+			rdbtnAnimal.doClick();
 		}
 		if (table.getValueAt(linha, 1).toString().equalsIgnoreCase("subproduto")) {
-			rdbtnSubproduto.setSelected(true);
+			rdbtnSubproduto.doClick();
 		}
 		if (table.getValueAt(linha, 1).toString().equalsIgnoreCase("plantio")) {
-			rdbtnPlantio.setSelected(true);
+			rdbtnPlantio.doClick();
 		}
 		
 		if (table.getValueAt(linha, 2) == null) {
@@ -685,7 +681,21 @@ public class NovaVenda {
 		tfPreco.setText(table.getValueAt(linha, 7).toString());
 		ftfData.setText(table.getValueAt(linha, 8).toString());
 		
-		
+		if (!rdbtnPlantio.isSelected()) {
+			String palavraCheia = null;
+			String[] palavraCortada = null;
+			
+			for(int x=0; x < cbAnimal.getItemCount();x++) {
+				cbAnimal.setSelectedIndex(x);
+				palavraCheia = cbAnimal.getSelectedItem().toString();
+				palavraCheia = cbAnimal.getSelectedItem().toString();
+				palavraCortada =  palavraCheia.split(" ");
+				
+				if (palavraCortada[0].equals(table.getValueAt(linha, 3).toString())) {
+					break;
+				}
+			}
+		}
 	}
 	
 	int conta(int linha) {
