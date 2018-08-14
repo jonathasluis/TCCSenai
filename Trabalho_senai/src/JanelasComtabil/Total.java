@@ -490,7 +490,7 @@ public class Total {//
 			while (rs.next()) {
 				modelo.addRow(new Object[] {rs.getString("produto"),rs.getString("preco"),rs.getString("data_compra")});
 				
-				//tabela
+			//z	//tabela
 				if (x1==1) {
 				if (scrollPaneGasto.getHeight()<250) {
 					
