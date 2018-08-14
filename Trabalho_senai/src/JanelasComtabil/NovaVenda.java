@@ -413,6 +413,7 @@ public class NovaVenda {
 		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
 				"ID da venda", "Tipo do Produto", "Produto", "Animal", "Cliente", "Numero da Nota", "Quantidade ", "Pre\u00E7o", "Data da venda"
@@ -422,6 +423,12 @@ public class NovaVenda {
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
+			Class[] columnTypes = new Class[] {
+				Object.class, Object.class, Object.class, String.class, Object.class, Object.class, Object.class, Object.class, Object.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false, false
 			};
@@ -678,9 +685,7 @@ public class NovaVenda {
 		tfPreco.setText(table.getValueAt(linha, 7).toString());
 		ftfData.setText(table.getValueAt(linha, 8).toString());
 		
-		if (!table.getValueAt(linha, 3).toString().equals("")) {
-			
-		}
+		
 	}
 	
 	int conta(int linha) {
