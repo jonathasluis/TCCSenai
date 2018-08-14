@@ -138,7 +138,7 @@ public class CadastrarAnimais {//teste3
 		}//fim formatação mascara
 		
 		frmCadastroDeAnimais = new JFrame();
-		frmCadastroDeAnimais.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarAnimais.class.getResource("/img/logo-pequena-sem-texto.png")));
+		frmCadastroDeAnimais.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarAnimais.class.getResource("/img/32x32.png")));
 		frmCadastroDeAnimais.setTitle("Cadastro de Animais");
 		frmCadastroDeAnimais.setBounds(100, 100, 1080, 720);
 		frmCadastroDeAnimais.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -256,7 +256,7 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(panel);
 		
 		lblImagem = new JLabel("");
-		lblImagem.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/logo-pequena-sem-texto.png")));
+		lblImagem.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/128x128.png")));
 		lblImagem.setToolTipText("Clique 2 vezes");
 		lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 		lblImagem.addMouseListener(new MouseAdapter() {

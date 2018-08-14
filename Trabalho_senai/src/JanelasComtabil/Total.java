@@ -76,8 +76,6 @@ public class Total {//
 		static int teste = 0; 
 		static int x1=1;
 		private JScrollPane scrollPaneGasto;
-		private JTable table;
-		private JScrollPane scrollPane;
 		//tabela
 
 	/**
@@ -110,7 +108,7 @@ public class Total {//
 		
 		frmRelattio = new JFrame();
 		frmRelattio.setTitle("Relat\u00F3tio");
-		frmRelattio.setIconImage(Toolkit.getDefaultToolkit().getImage(Total.class.getResource("/img/logo-pequena-sem-texto.png")));
+		frmRelattio.setIconImage(Toolkit.getDefaultToolkit().getImage(Total.class.getResource("/img/32x32.png")));
 		frmRelattio.setBounds(100, 100, 1080, 720);
 		frmRelattio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmRelattio.setResizable(false);
@@ -460,30 +458,6 @@ public class Total {//
 		btnNewButton.setBounds(590, 114, 89, 23);
 		frmRelattio.getContentPane().add(btnNewButton);
 		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 320, 537, 25);
-		frmRelattio.getContentPane().add(scrollPane);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Produto", "Pre\u00E7o", "Data"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(1).setResizable(false);
-		table.getColumnModel().getColumn(2).setResizable(false);
-		scrollPane.setViewportView(table);
-		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(Total.class.getResource("/img/Teste13.jpg")));
 		label_1.setBounds(0, -15, 1074, 670);
@@ -509,7 +483,7 @@ public class Total {//
 	
 	void colocaDadosNaTabelaGasto(ResultSet rs) {
 		
-		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+		DefaultTableModel modelo = (DefaultTableModel) tabelaGasto.getModel();
 		modelo.setNumRows(0);
 		
 		try {
@@ -518,19 +492,14 @@ public class Total {//
 				
 				//tabela
 				if (x1==1) {
-				if (scrollPane.getHeight()<250) {
+				if (scrollPaneGasto.getHeight()<250) {
 					
-					int tabel = table.getRowCount();
+					int tabel = tabelaGasto.getRowCount();
 					int linha = tabel*16;
 					int valor = 22+linha;
-					scrollPane.setBounds(10, 320, 537, valor);
-					System.out.println(table.getRowCount());
-					int vazio = tabelaGasto.getRowCount();
-					if (vazio < 0.) {
-						scrollPane.setVisible(false);
-							
-						
-					}
+					scrollPaneGasto.setBounds(10, 250, 519, valor);
+					System.out.println(tabelaGasto.getRowCount());
+					
 				}
 				//tabela
 			}
@@ -557,7 +526,7 @@ public class Total {//
 			if (x1==1) {
 			if (scrollPaneReceita.getHeight()<250) {
 				
-				int tabel = tabelaGasto.getRowCount();
+				int tabel = tabelaReceita.getRowCount();
 				int linha = tabel*16;
 				int valor = 22+linha;
 				scrollPaneReceita.setBounds(545, 250, 519, valor);

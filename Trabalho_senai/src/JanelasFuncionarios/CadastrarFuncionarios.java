@@ -137,7 +137,7 @@ public class CadastrarFuncionarios {
 		}//fim formatação mascara
 		
 		frmCadastrarFuncionarios = new JFrame();
-		frmCadastrarFuncionarios.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarFuncionarios.class.getResource("/img/Capturar1.png")));
+		frmCadastrarFuncionarios.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\SENAI\\Desktop\\FINAL\\32x32.png"));
 		frmCadastrarFuncionarios.setTitle("Cadastrar Funcionarios");
 		frmCadastrarFuncionarios.setBounds(100, 100, 1080, 720);
 		frmCadastrarFuncionarios.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

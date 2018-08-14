@@ -48,6 +48,10 @@ import javax.swing.border.SoftBevelBorder;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextField;
+import java.awt.Window.Type;
+import java.awt.Dialog.ModalExclusionType;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 //
 
 public class Principal {
@@ -55,6 +59,26 @@ public class Principal {
 	public static JFrame frmPrincipal;
 	static JButton button;
 	public static Fazenda fazenda = new Fazenda();
+	private JLabel lblNomeDoSistema;
+	private JButton btnAnimais;
+	private JLabel lblAnimais;
+	private JButton btnFuncionarios;
+	private JLabel lblFuncionarios;
+	private JButton btnCompras;
+	private JLabel lblCompras;
+	private JButton btnVendas;
+	private JLabel lblVendas;
+	private JButton btnUsuario;
+	private JLabel lblUsuario;
+	private JPanel panelSite;
+	private JLabel lblImgSite;
+	private JLabel lblSite;
+	private JPanel panelPdf;
+	private JLabel lblImgPdf;
+	private JLabel lblManual;
+	private JLabel lblVersao;
+	private JLabel lblNewLabel;
+	private JLabel foto;
 
 	/**
 	 * Launch the application.
@@ -95,7 +119,8 @@ public class Principal {
 		
 		
 		frmPrincipal = new JFrame();
-		frmPrincipal.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/logo-pequena-sem-texto.png")));
+		frmPrincipal.setType(Type.POPUP);
+		frmPrincipal.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/32x32.png")));
 		frmPrincipal.setTitle("Principal");
 		frmPrincipal.setBounds(100, 100, 1080, 720);
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,7 +131,7 @@ public class Principal {
 		Pergunta.main(null);
 		Pergunta.contador = 0;	
 		
-		JLabel lblNomeDoSistema = new JLabel("Nome do sistema");
+		lblNomeDoSistema = new JLabel("Nome do sistema");
 		lblNomeDoSistema.setBackground(Color.WHITE);
 		lblNomeDoSistema.setForeground(Color.DARK_GRAY);
 		lblNomeDoSistema.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -116,7 +141,7 @@ public class Principal {
 		
 		ImageIcon iconAnimal = new ImageIcon("src/img/vaca1.png");
 		iconAnimal.setImage(iconAnimal.getImage().getScaledInstance(135,101 ,100));
-		JButton btnAnimais = new JButton("");
+		btnAnimais = new JButton("");
 		btnAnimais.setBorderPainted(false);
 		btnAnimais.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAnimais.addActionListener(new ActionListener() {
@@ -131,7 +156,7 @@ public class Principal {
 		btnAnimais.setIcon(iconAnimal);
 		frmPrincipal.getContentPane().add(btnAnimais);
 		
-		JLabel lblAnimais = new JLabel("Animais");
+		lblAnimais = new JLabel("Animais");
 		lblAnimais.setForeground(Color.DARK_GRAY);
 		lblAnimais.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblAnimais.setHorizontalAlignment(SwingConstants.CENTER);
@@ -140,7 +165,7 @@ public class Principal {
 		
 		ImageIcon iconFuncionarios = new ImageIcon("src/img/t3.png");
 		iconFuncionarios.setImage(iconFuncionarios.getImage().getScaledInstance(135, 101 ,100));
-		JButton btnFuncionarios = new JButton("");
+		btnFuncionarios = new JButton("");
 		btnFuncionarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnFuncionarios.setBorderPainted(false);
 		btnFuncionarios.addActionListener(new ActionListener() {
@@ -155,7 +180,7 @@ public class Principal {
 		btnFuncionarios.setIcon(iconFuncionarios);
 		frmPrincipal.getContentPane().add(btnFuncionarios);
 		
-		JLabel lblFuncionarios = new JLabel("Funcionarios");
+		lblFuncionarios = new JLabel("Funcionarios");
 		lblFuncionarios.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFuncionarios.setForeground(Color.DARK_GRAY);
 		lblFuncionarios.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -164,7 +189,7 @@ public class Principal {
 		//aa
 		ImageIcon iconCompras = new ImageIcon("src/img/compra12.png");
 		iconCompras.setImage(iconCompras.getImage().getScaledInstance(135,101 ,100));
-		JButton btnCompras = new JButton("");
+		btnCompras = new JButton("");
 		btnCompras.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCompras.setBorderPainted(false);
 		btnCompras.addActionListener(new ActionListener() {
@@ -178,7 +203,7 @@ public class Principal {
 		btnCompras.setIcon(iconCompras);
 		frmPrincipal.getContentPane().add(btnCompras);
 		
-		JLabel lblCompras = new JLabel("Compras");
+		lblCompras = new JLabel("Compras");
 		lblCompras.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCompras.setForeground(Color.DARK_GRAY);
 		lblCompras.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -187,7 +212,7 @@ public class Principal {
 		
 		ImageIcon iconVendas = new ImageIcon("src/img/t1.png");
 		iconVendas.setImage(iconVendas.getImage().getScaledInstance(135,101 ,100));
-		JButton btnVendas = new JButton("");
+		btnVendas = new JButton("");
 		btnVendas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnVendas.setBorderPainted(false);
 		btnVendas.addActionListener(new ActionListener() {
@@ -201,7 +226,7 @@ public class Principal {
 		btnVendas.setIcon(iconVendas);
 		frmPrincipal.getContentPane().add(btnVendas);
 		
-		JLabel lblVendas = new JLabel("Vendas");
+		lblVendas = new JLabel("Vendas");
 		lblVendas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVendas.setForeground(Color.DARK_GRAY);
 		lblVendas.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -210,7 +235,7 @@ public class Principal {
 		
 		ImageIcon iconUsuario = new ImageIcon("src/img/usu1.png");
 		iconUsuario.setImage(iconUsuario.getImage().getScaledInstance(135,101 ,100));
-		JButton btnUsuario = new JButton("");
+		btnUsuario = new JButton("");
 		btnUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnUsuario.setBorderPainted(false);
 		btnUsuario.addActionListener(new ActionListener() {
@@ -224,14 +249,14 @@ public class Principal {
 		btnUsuario.setIcon(iconUsuario);
 		frmPrincipal.getContentPane().add(btnUsuario);
 		
-		JLabel lblUsuario = new JLabel("Usuario");
+		lblUsuario = new JLabel("Usuario");
 		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsuario.setForeground(Color.DARK_GRAY);
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblUsuario.setBounds(920, 207, 120, 14);
 		frmPrincipal.getContentPane().add(lblUsuario);
 		
-		JPanel panelSite = new JPanel();
+		panelSite = new JPanel();
 		panelSite.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -252,14 +277,14 @@ public class Principal {
 		
 		ImageIcon iconSite = new ImageIcon("src/img/WWW-Icon.png");
 		iconSite.setImage(iconSite.getImage().getScaledInstance(40, 40 ,100));
-		JLabel lblImgSite = new JLabel("");
+		lblImgSite = new JLabel("");
 		panelSite.add(lblImgSite, BorderLayout.WEST);
 		lblImgSite.setIcon(iconSite);
 		
-		JLabel lblSite = new JLabel("  www.fodase.com");
+		lblSite = new JLabel("  www.fodase.com");
 		panelSite.add(lblSite, BorderLayout.CENTER);
 		
-		JPanel panelPdf = new JPanel();
+		panelPdf = new JPanel();
 		panelPdf.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -280,27 +305,27 @@ public class Principal {
 		
 		ImageIcon iconPdf = new ImageIcon("src/img/pdf.png");
 		iconPdf.setImage(iconPdf.getImage().getScaledInstance(40, 40, 100));
-		JLabel lblImgPdf = new JLabel("");
+		lblImgPdf = new JLabel("");
 		panelPdf.add(lblImgPdf, BorderLayout.WEST);
 		lblImgPdf.setIcon(iconPdf);
 		
-		JLabel lblManual = new JLabel("  Manual");
+		lblManual = new JLabel("  Manual");
 		panelPdf.add(lblManual, BorderLayout.CENTER);
 		
-		JLabel lblVersao = new JLabel("Versao 2.0");
+		lblVersao = new JLabel("Versao 2.0");
 		lblVersao.setForeground(Color.BLACK);
 		lblVersao.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblVersao.setBounds(984, 645, 80, 14);
 		frmPrincipal.getContentPane().add(lblVersao);
 		
-		JLabel lblNewLabel = new JLabel("Todos os direitos reservados \u00A92017-2018");
+		lblNewLabel = new JLabel("Todos os direitos reservados \u00A92017-2018");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(10, 590, 1054, 29);
 		frmPrincipal.getContentPane().add(lblNewLabel);
 		
-		JLabel foto = new JLabel("");
+		foto = new JLabel("");
 		foto.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		foto.setIcon(new ImageIcon(Principal.class.getResource("/img/Teste2.jpg")));
 		foto.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -508,5 +533,6 @@ public class Principal {
 		
 		mnOpes.add(mntmSada);
 		frmPrincipal.getContentPane().setLayout(null);
+		frmPrincipal.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{frmPrincipal.getContentPane(), lblNomeDoSistema, btnAnimais, lblAnimais, btnFuncionarios, lblFuncionarios, btnCompras, lblCompras, btnVendas, lblVendas, btnUsuario, lblUsuario, panelSite, lblImgSite, lblSite, panelPdf, lblImgPdf, lblManual, lblVersao, lblNewLabel, foto, menuBar, mnInicio, mnNewMenu, mntmCadastrarAnimais, mntmCadastrarFuncionarios, mnNewMenu_1, mntmCompra, mntmNovaVenda, mntmTotal, mnOpes, mntmNovaFazenda, mntmMudarFazenda, mntmDeslogar, mntmEnviar, mntmSada}));
 	}
 }
