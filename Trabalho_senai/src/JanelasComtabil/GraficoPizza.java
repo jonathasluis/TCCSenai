@@ -11,8 +11,11 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class Grafico extends JFrame {
+public class GraficoPizza extends JFrame {
 
 	private JPanel contentPane;
 
@@ -23,7 +26,7 @@ public class Grafico extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Grafico frame = new Grafico();
+					GraficoPizza frame = new GraficoPizza();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,28 +38,42 @@ public class Grafico extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Grafico() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1065, 639);
+	public GraficoPizza() {
+		setUndecorated(true);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 915, 560);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
+		setResizable(false);
+		setLocationRelativeTo(null);
 		criarGrafico();
 	
 		
 		setContentPane(contentPane);
+		
+		JButton btnNewButton = new JButton("Sair");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				dispose();
+				
+			}
+		});
+		contentPane.add(btnNewButton, BorderLayout.SOUTH);
 		criarGrafico();
 	}
 	
 	public void criarGrafico() {
 	DefaultPieDataset pizza = new DefaultPieDataset();
+	
+		pizza.setValue("Gasto", Float.parseFloat(Total.valorGasto.getText()));
+		pizza.setValue("Receita", Float.parseFloat(Total.valorReceita.getText()));
 		
-		pizza.setValue("Produto", 5);
-		pizza.setValue("Compra",5);
 		
-		JFreeChart grafico = ChartFactory.createPieChart3D("as", pizza);
+		JFreeChart grafico = ChartFactory.createPieChart3D("Total", pizza, true, true, true);
 		ChartPanel painel = new ChartPanel(grafico);
-		add(painel);
+		getContentPane().add(painel);
 	}
 	
 	
