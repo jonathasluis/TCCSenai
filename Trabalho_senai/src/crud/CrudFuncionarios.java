@@ -13,7 +13,7 @@ public class CrudFuncionarios {
 	
 	public boolean addFun(Funcionario funcionario) {
 		String sql = "INSERT INTO funcionarios ( nome_fun, data_nasc, cpf_fun, rg_fun, fone_fun, email_fun,"
-				+ " cargo, salario, status, img, idfazenda, sexo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ " cargo, salario, status, img, idfazenda, sexo, dataAdimissao, dataDemissao, numeroCarteira, pis) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
@@ -29,6 +29,10 @@ public class CrudFuncionarios {
 			stmt.setBytes (10, funcionario.getImg());
 			stmt.setInt(11, funcionario.getIdFazenda());
 			stmt.setString(12, funcionario.getSexo());
+			stmt.setString(13, funcionario.getAdmissao());
+			stmt.setString(14, funcionario.getDemissao());
+			stmt.setString(15, funcionario.getCarteira());
+			stmt.setString(16, funcionario.getPis());
 			stmt.execute();
 			stmt.close();
 			return true;
@@ -42,7 +46,7 @@ public class CrudFuncionarios {
 		
 	public boolean updFun(Funcionario funcionario) {
 		String sql = "UPDATE funcionarios SET nome_fun=?, data_nasc=?, cpf_fun=?, rg_fun=?, "
-				+ "fone_fun=?, email_fun=?, cargo=?, salario=?, status=?, img=?, idfazenda=?, sexo=?"
+				+ "fone_fun=?, email_fun=?, cargo=?, salario=?, status=?, img=?, idfazenda=?, sexo=?, dataAdimissao=?, dataDemissao=?, numeroCarteira=?, pis=?"
 				+ " where idfuncionarios=?";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
@@ -58,7 +62,11 @@ public class CrudFuncionarios {
 			stmt.setBytes(10, funcionario.getImg());
 			stmt.setInt(11, funcionario.getIdFazenda());
 			stmt.setString(12, funcionario.getSexo());
-			stmt.setInt(13, funcionario.getIdFuncionario());
+			stmt.setString(13, funcionario.getAdmissao());
+			stmt.setString(14, funcionario.getDemissao());
+			stmt.setString(15, funcionario.getCarteira());
+			stmt.setString(16, funcionario.getPis());
+			stmt.setInt(17, funcionario.getIdFuncionario());
 			stmt.execute();
 			stmt.close();
 			return true;

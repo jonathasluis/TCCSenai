@@ -14,7 +14,35 @@ public class Funcionario {
 	private String sexo;
 	private byte[] img;
 	private int idFazenda;
+	private String admissao;
+	private String demissao;
+	private String carteira;
+	private String pis;
 	
+	public String getAdmissao() {
+		return admissao;
+	}
+	public void setAdmissao(String admissao) {
+		this.admissao = admissao;
+	}
+	public String getDemissao() {
+		return demissao;
+	}
+	public void setDemissao(String demissao) {
+		this.demissao = demissao;
+	}
+	public String getCarteira() {
+		return carteira;
+	}
+	public void setCarteira(String carteira) {
+		this.carteira = carteira;
+	}
+	public String getPis() {
+		return pis;
+	}
+	public void setPis(String pis) {
+		this.pis = pis;
+	}
 	public int getIdFuncionario() {
 		return idFuncionario;
 	}

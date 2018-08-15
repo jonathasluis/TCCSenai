@@ -6,8 +6,11 @@ import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -35,7 +38,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
@@ -49,7 +51,6 @@ import JanelasComtabil.NovaCompra;
 import JanelasComtabil.NovaVenda;
 import JanelasComtabil.Total;
 import banco.Conexao;
-import crud.CrudAnimal;
 import crud.CrudFazenda;
 import crud.CrudFuncionarios;
 import outraJanelas.EnviarEmail;
@@ -57,11 +58,6 @@ import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
-import javax.swing.DebugGraphics;
 
 public class CadastrarFuncionarios {
 
@@ -85,7 +81,7 @@ public class CadastrarFuncionarios {
 	private JButton btnCancelar;
 	private JFormattedTextField ftfCpf;
 	private MetodosImagem mI = new MetodosImagem();
-	private MaskFormatter maskaraData, maskaraTelefone,maskaraCpf;
+	private MaskFormatter maskaraData, maskaraTelefone,maskaraCpf,maskaraTrabalho,maskaraPis;
 	private JRadioButton rdbtnFeminino;
 	private JRadioButton rdbtnAtivo;
 	private JRadioButton rdbtnDesligado;
@@ -93,6 +89,10 @@ public class CadastrarFuncionarios {
 	private Funcionario DAOFuncionario = new Funcionario();
 	int contadorParaEditar = 0;
 	private JScrollPane scrollPane;
+	private JFormattedTextField ftfAdimissao;
+	private JFormattedTextField ftfDemissao;
+	private JFormattedTextField ftfCarteira;
+	private JFormattedTextField ftfPis;
 	
 	//tabela
 		static int teste = 1; 
@@ -131,6 +131,8 @@ public class CadastrarFuncionarios {
 			maskaraData = new MaskFormatter("####-##-##");
 			maskaraTelefone = new MaskFormatter("(##) ####-####");
 			maskaraCpf = new MaskFormatter("###.###.###-##");
+			maskaraTrabalho = new MaskFormatter("######");
+			maskaraPis = new MaskFormatter("###########");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -177,11 +179,11 @@ public class CadastrarFuncionarios {
 		panel.add(lblImagem, "name_12082521761208");
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 253, 1054, 23);
 		frmCadastrarFuncionarios.getContentPane().add(scrollPane);
 		
 		tabela = new JTable();
+		tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tabela.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {//evento de clique na tabela
@@ -194,13 +196,14 @@ public class CadastrarFuncionarios {
 		});
 		tabela.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"ID", "Nome", "Nascimento", "CPF", "RG", "Sexo", "Telefone", "Email", "Cargo", "Salario", "Fazenda", "Status"
+				"ID", "Nome", "Nascimento", "CPF", "RG", "Sexo", "Telefone", "Email", "Cargo", "Salario", "Fazenda", "Status", "Data Admiss\u00E3o", "Data Demiss\u00E3o", "N\u00B0 Carteira", "PIS"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false, false, false, false, false, false
+				false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -230,8 +233,11 @@ public class CadastrarFuncionarios {
 		tabela.getColumnModel().getColumn(10).setPreferredWidth(90);
 		tabela.getColumnModel().getColumn(11).setResizable(false);
 		tabela.getColumnModel().getColumn(11).setPreferredWidth(70);
+		tabela.getColumnModel().getColumn(12).setResizable(false);
+		tabela.getColumnModel().getColumn(13).setResizable(false);
+		tabela.getColumnModel().getColumn(14).setResizable(false);
+		tabela.getColumnModel().getColumn(15).setResizable(false);
 		tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tabela.getTableHeader().setReorderingAllowed(false);
 		scrollPane.setViewportView(tabela);
 		
@@ -267,7 +273,28 @@ public class CadastrarFuncionarios {
 					JOptionPane.showMessageDialog(null, "insira o salario", "ALERTA!",JOptionPane.WARNING_MESSAGE);
 					tfSalario.requestFocus();
 					return;
-				}//fim do tratamento de informação para salvar novo funcionario
+				}
+				if(ftfAdimissao.getText().contains(" ")){
+					JOptionPane.showMessageDialog(null, "insira uma Data de Admissão", "ALERTA!",JOptionPane.WARNING_MESSAGE);
+					ftfAdimissao.requestFocus();
+					return;
+				}
+				if(ftfCarteira.getText().contains(" ")){
+					JOptionPane.showMessageDialog(null, "insira o numero da carteira", "ALERTA!",JOptionPane.WARNING_MESSAGE);
+					ftfCarteira.requestFocus();
+					return;
+				}
+				if(ftfPis.getText().contains(" ")){
+					JOptionPane.showMessageDialog(null, "insira o numero do PIS", "ALERTA!",JOptionPane.WARNING_MESSAGE);
+					ftfPis.requestFocus();
+					return;
+				}
+				if (rdbtnDesligado.isSelected() && ftfDemissao.getText().contains(" ")) {
+					JOptionPane.showMessageDialog(null, "insira a data de Demissão", "ALERTA!",JOptionPane.WARNING_MESSAGE);
+					ftfDemissao.requestFocus();
+					return;
+				}
+				//fim do tratamento de informação para salvar novo funcionario
 				
 				preencherDAOFuncionarioParaSalvarNovo();
 				if(contadorParaEditar==0) {
@@ -321,6 +348,10 @@ public class CadastrarFuncionarios {
 				rdbtnAtivo.setSelected(true);
 				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
+				ftfAdimissao.setValue(null);
+				ftfDemissao.setValue(null);
+				ftfCarteira.setValue(null);
+				ftfPis.setValue(null);
 			}
 		});//fim evento botao limpar
 		btnLimpar.setBackground(SystemColor.controlHighlight);
@@ -444,7 +475,7 @@ public class CadastrarFuncionarios {
 			}
 		});
 		tfNome.setColumns(10);
-		tfNome.setBounds(89, 60, 174, 20);
+		tfNome.setBounds(89, 60, 150, 20);
 		frmCadastrarFuncionarios.getContentPane().add(tfNome);
 		
 		tfRg = new JTextField();
@@ -457,7 +488,7 @@ public class CadastrarFuncionarios {
 			}
 		});
 		tfRg.setColumns(10);
-		tfRg.setBounds(89, 153, 174, 20);
+		tfRg.setBounds(89, 153, 150, 20);
 		frmCadastrarFuncionarios.getContentPane().add(tfRg);
 		
 		ftfNascimento = new JFormattedTextField(maskaraData);
@@ -470,7 +501,7 @@ public class CadastrarFuncionarios {
 			}
 		});
 		ftfNascimento.setToolTipText("aaaa/mm/dd");
-		ftfNascimento.setBounds(89, 92, 174, 20);
+		ftfNascimento.setBounds(89, 91, 150, 20);
 		frmCadastrarFuncionarios.getContentPane().add(ftfNascimento);
 		
 		rdbtnMasculino = new JRadioButton("Masculino");
@@ -481,43 +512,43 @@ public class CadastrarFuncionarios {
 		
 		rdbtnFeminino = new JRadioButton("Feminino");
 		rdbtnFeminino.setOpaque(false);
-		rdbtnFeminino.setBounds(174, 184, 109, 23);
+		rdbtnFeminino.setBounds(174, 184, 98, 23);
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnFeminino);
 		
 		JLabel lblTelefone = new JLabel("Telefone:");
 		lblTelefone.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblTelefone.setBounds(420, 60, 70, 20);
+		lblTelefone.setBounds(260, 60, 70, 20);
 		frmCadastrarFuncionarios.getContentPane().add(lblTelefone);
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblEmail.setBounds(420, 91, 60, 20);
+		lblEmail.setBounds(260, 91, 60, 20);
 		frmCadastrarFuncionarios.getContentPane().add(lblEmail);
 		
 		JLabel lblCargo = new JLabel("Cargo:");
 		lblCargo.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblCargo.setBounds(420, 122, 60, 20);
+		lblCargo.setBounds(260, 122, 60, 20);
 		frmCadastrarFuncionarios.getContentPane().add(lblCargo);
 		
 		JLabel lblSalario = new JLabel("Salario:");
 		lblSalario.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblSalario.setBounds(420, 153, 60, 20);
+		lblSalario.setBounds(260, 153, 60, 20);
 		frmCadastrarFuncionarios.getContentPane().add(lblSalario);
 		
 		JLabel lblDesligada = new JLabel("Status:");
 		lblDesligada.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDesligada.setBounds(420, 184, 60, 20);
+		lblDesligada.setBounds(260, 184, 60, 20);
 		frmCadastrarFuncionarios.getContentPane().add(lblDesligada);
 		
 		rdbtnAtivo = new JRadioButton("Ativo");
 		rdbtnAtivo.setOpaque(false);
 		rdbtnAtivo.setSelected(true);
-		rdbtnAtivo.setBounds(500, 184, 60, 23);
+		rdbtnAtivo.setBounds(340, 184, 60, 23);
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnAtivo);
 		
 		rdbtnDesligado = new JRadioButton("Desligado");
 		rdbtnDesligado.setOpaque(false);
-		rdbtnDesligado.setBounds(556, 184, 83, 23);
+		rdbtnDesligado.setBounds(396, 184, 83, 23);
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnDesligado);
 		
 		ftfTelefone = new JFormattedTextField(maskaraTelefone);
@@ -529,7 +560,7 @@ public class CadastrarFuncionarios {
 				}
 			}
 		});
-		ftfTelefone.setBounds(500, 61, 174, 20);
+		ftfTelefone.setBounds(340, 60, 150, 20);
 		frmCadastrarFuncionarios.getContentPane().add(ftfTelefone);
 		
 		tfEmail = new JTextField();
@@ -542,7 +573,7 @@ public class CadastrarFuncionarios {
 			}
 		});
 		tfEmail.setColumns(10);
-		tfEmail.setBounds(500, 92, 174, 20);
+		tfEmail.setBounds(340, 91, 150, 20);
 		frmCadastrarFuncionarios.getContentPane().add(tfEmail);
 		
 		tfCargo = new JTextField();
@@ -555,12 +586,20 @@ public class CadastrarFuncionarios {
 			}
 		});
 		tfCargo.setColumns(10);
-		tfCargo.setBounds(500, 123, 174, 20);
+		tfCargo.setBounds(340, 122, 150, 20);
 		frmCadastrarFuncionarios.getContentPane().add(tfCargo);
 		
 		tfSalario = new JTextField();
+		tfSalario.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					ftfAdimissao.requestFocus();
+				}
+			}
+		});
 		tfSalario.setColumns(10);
-		tfSalario.setBounds(500, 154, 174, 20);
+		tfSalario.setBounds(340, 153, 150, 20);
 		frmCadastrarFuncionarios.getContentPane().add(tfSalario);
 		
 		ButtonGroup bgSexo = new ButtonGroup();
@@ -580,20 +619,80 @@ public class CadastrarFuncionarios {
 				}
 			}
 		});
-		ftfCpf.setBounds(89, 122, 174, 20);
+		ftfCpf.setBounds(89, 122, 150, 20);
 		frmCadastrarFuncionarios.getContentPane().add(ftfCpf);
 		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/Teste13.jpg")));
-		label.setBounds(0, -15, 1074, 670);
-		frmCadastrarFuncionarios.getContentPane().add(label);
+		JLabel lblAdmisso = new JLabel("Admiss\u00E3o");
+		lblAdmisso.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblAdmisso.setBounds(510, 60, 80, 20);
+		frmCadastrarFuncionarios.getContentPane().add(lblAdmisso);
+		
+		JLabel lblDemisso = new JLabel("Demiss\u00E3o");
+		lblDemisso.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblDemisso.setBounds(510, 91, 80, 20);
+		frmCadastrarFuncionarios.getContentPane().add(lblDemisso);
+		
+		JLabel lblNumeroDaCarteira = new JLabel("N\u00BA Carteira:");
+		lblNumeroDaCarteira.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNumeroDaCarteira.setBounds(510, 122, 80, 20);
+		frmCadastrarFuncionarios.getContentPane().add(lblNumeroDaCarteira);
+		
+		JLabel lblPis = new JLabel("PIS:");
+		lblPis.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblPis.setBounds(510, 153, 80, 20);
+		frmCadastrarFuncionarios.getContentPane().add(lblPis);
+		
+		ftfAdimissao = new JFormattedTextField(maskaraData);
+		ftfAdimissao.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					ftfDemissao.requestFocus();
+				}
+			}
+		});
+		ftfAdimissao.setBounds(600, 61, 150, 20);
+		frmCadastrarFuncionarios.getContentPane().add(ftfAdimissao);
+		
+		ftfDemissao = new JFormattedTextField(maskaraData);
+		ftfDemissao.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					ftfCarteira.requestFocus();
+				}
+			}
+		});
+		ftfDemissao.setBounds(600, 92, 150, 20);
+		frmCadastrarFuncionarios.getContentPane().add(ftfDemissao);
+		
+		ftfCarteira = new JFormattedTextField(maskaraTrabalho);
+		ftfCarteira.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					ftfPis.requestFocus();
+				}
+			}
+		});
+		ftfCarteira.setBounds(600, 123, 150, 20);
+		frmCadastrarFuncionarios.getContentPane().add(ftfCarteira);
+		
+		ftfPis = new JFormattedTextField(maskaraPis);
+		ftfPis.setBounds(600, 154, 150, 20);
+		frmCadastrarFuncionarios.getContentPane().add(ftfPis);
+		
+		JLabel lblFundo = new JLabel("PIS:");
+		lblFundo.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/Teste13.jpg")));
+		lblFundo.setBounds(0, -15, 1074, 670);
+		frmCadastrarFuncionarios.getContentPane().add(lblFundo);
 		
 		//tabela
 				x1=1;
 				//tabela
 		menu();
-		//DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
-		//colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
+		DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
+		colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
 		
 		//tabela
 				//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
@@ -615,6 +714,16 @@ public class CadastrarFuncionarios {
 		DAOFuncionario.setSalario(Float.parseFloat(tfSalario.getText()));
 		DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
 		DAOFuncionario.setImg(mI.getImagem(img, panel));
+		DAOFuncionario.setAdmissao(ftfAdimissao.getText());
+		DAOFuncionario.setPis(ftfPis.getText());
+		DAOFuncionario.setCarteira(ftfCarteira.getText());
+		
+		if (rdbtnDesligado.isSelected()) {
+			DAOFuncionario.setDemissao(ftfDemissao.getText());
+		}
+		else {
+			DAOFuncionario.setDemissao(null);
+		}
 		
 		if(rdbtnMasculino.isSelected()) {
 			DAOFuncionario.setSexo("M");
@@ -642,6 +751,7 @@ public class CadastrarFuncionarios {
 				ResultSet rs2 = new CrudFazenda().selecionaFazendaEspecifica(rs.getInt("idfazenda"));
 				String fazenda=null;
 				String status=null;
+				String demissao=null;
 				
 				if(rs2.next())
 					fazenda = rs2.getString("nome");
@@ -656,16 +766,22 @@ public class CadastrarFuncionarios {
 				}else {
 					status="desligado";
 				}
-					
+				
+				if (rs.getString("datademissao") == null) {
+					demissao=null;
+				}else {
+					demissao=rs.getString("datademissao");
+				}
+				
 				modelo.addRow(new Object[] {rs.getInt("idfuncionarios"),rs.getString("nome_fun"),rs.getString("data_nasc"),
 						rs.getString("cpf_fun"),rs.getString("rg_fun"),sexo,rs.getString("fone_fun"),rs.getString("email_fun"),
-						rs.getString("cargo"),rs.getString("salario"),fazenda,status});
+						rs.getString("cargo"),rs.getString("salario"),fazenda,status,rs.getString("dataAdimissao"),demissao,rs.getString("numeroCarteira"),rs.getString("pis")});
 				//tabela
 				if (x1==1) {
 					if (tabela.getRowCount() >= teste & scrollPane.getHeight()<=339) {
 						teste=1;
 						teste=+1;
-						int x = (teste*16)+scrollPane.getHeight();
+						int x = (teste*17)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 				}
