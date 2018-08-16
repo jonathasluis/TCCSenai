@@ -517,22 +517,10 @@ public class Principal {
 		});
 		mnOpes.add(mntmDeslogar);
 		
-		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
-		mntmEnviar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
-		mntmEnviar.setBackground(Color.DARK_GRAY);
-		mntmEnviar.setForeground(Color.WHITE);
-		mntmEnviar.setOpaque(true);
-		mntmEnviar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		mntmEnviar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//frmPrincipal.dispose();
-				EnviarEmail.main(null);
-			}
-		});
-		mnOpes.add(mntmEnviar);
+		
 		
 		mnOpes.add(mntmSada);
 		frmPrincipal.getContentPane().setLayout(null);
-		frmPrincipal.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{frmPrincipal.getContentPane(), lblNomeDoSistema, btnAnimais, lblAnimais, btnFuncionarios, lblFuncionarios, btnCompras, lblCompras, btnVendas, lblVendas, btnUsuario, lblUsuario, panelSite, lblImgSite, lblSite, panelPdf, lblImgPdf, lblManual, lblVersao, lblNewLabel, foto, menuBar, mnInicio, mnNewMenu, mntmCadastrarAnimais, mntmCadastrarFuncionarios, mnNewMenu_1, mntmCompra, mntmNovaVenda, mntmTotal, mnOpes, mntmNovaFazenda, mntmMudarFazenda, mntmDeslogar, mntmEnviar, mntmSada}));
+		frmPrincipal.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{frmPrincipal.getContentPane(), lblNomeDoSistema, btnAnimais, lblAnimais, btnFuncionarios, lblFuncionarios, btnCompras, lblCompras, btnVendas, lblVendas, btnUsuario, lblUsuario, panelSite, lblImgSite, lblSite, panelPdf, lblImgPdf, lblManual, lblVersao, lblNewLabel, foto, menuBar, mnInicio, mnNewMenu, mntmCadastrarAnimais, mntmCadastrarFuncionarios, mnNewMenu_1, mntmCompra, mntmNovaVenda, mntmTotal, mnOpes, mntmNovaFazenda, mntmMudarFazenda, mntmDeslogar, mntmSada}));
 	}
 }

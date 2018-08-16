@@ -53,7 +53,7 @@ import JanelasFuncionarios.CadastrarFuncionarios;
 import banco.Conexao;
 import crud.CrudAnimal;
 import crud.CrudVendas;
-import outraJanelas.EnviarEmail;
+
 import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
@@ -891,19 +891,7 @@ public class NovaVenda {
 		});
 		mnOpes.add(mntmDeslogar);
 		
-		JMenuItem mntmEnviar = new JMenuItem("Enviar feedback");
-		mntmEnviar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105), new Color(105, 105, 105)));
-		mntmEnviar.setBackground(Color.DARK_GRAY);
-		mntmEnviar.setForeground(Color.WHITE);
-		mntmEnviar.setOpaque(true);
-		mntmEnviar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		mntmEnviar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//frmPrincipal.dispose();
-				EnviarEmail.main(null);
-			}
-		});
-		mnOpes.add(mntmEnviar);
+	
 		
 		mnOpes.add(mntmSada);
 		frmNovaVenda.getContentPane().setLayout(null);
