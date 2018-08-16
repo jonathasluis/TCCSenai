@@ -128,14 +128,14 @@ public class NovaCompra {////
 		frmCompraDeInsumos.getContentPane().add(lblCompraDeInsumos);
 		
 		JLabel lblProduto = new JLabel("Produto:");
-		lblProduto.setForeground(Color.BLACK);
-		lblProduto.setFont(new Font("Arial", Font.BOLD, 14));
-		lblProduto.setBounds(10, 80, 78, 20);
+		lblProduto.setForeground(new Color(0, 0, 0));
+		lblProduto.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblProduto.setBounds(10, 61, 78, 20);
 		frmCompraDeInsumos.getContentPane().add(lblProduto);
 		
 		tfProduto = new JTextField();
 		tfProduto.setForeground(SystemColor.controlText);
-		tfProduto.setFont(new Font("Arial", Font.PLAIN, 13));
+		tfProduto.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfProduto.addKeyListener(new KeyAdapter() {
 			//EVENTO PARA QUANDO APERTAR "ENTER" DAR FOCO EM OUTRA CAIXA DE TEXTO
 			@Override
@@ -145,26 +145,26 @@ public class NovaCompra {////
 				}
 			});
 		tfProduto.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		tfProduto.setBounds(108, 82, 200, 20);
+		tfProduto.setBounds(108, 61, 200, 20);
 		frmCompraDeInsumos.getContentPane().add(tfProduto);
 		tfProduto.setColumns(10);
 		
 		JLabel lblDataDaCompra = new JLabel("Data da Compra:");
-		lblDataDaCompra.setForeground(Color.BLACK);
-		lblDataDaCompra.setFont(new Font("Arial", Font.BOLD, 14));
+		lblDataDaCompra.setForeground(new Color(0, 0, 0));
+		lblDataDaCompra.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblDataDaCompra.setBounds(405, 80, 125, 20);
 		frmCompraDeInsumos.getContentPane().add(lblDataDaCompra);
 	
 		
 		JLabel lblNumeroDaNota = new JLabel("Numero da Nota:");
-		lblNumeroDaNota.setForeground(Color.BLACK);
-		lblNumeroDaNota.setFont(new Font("Arial", Font.BOLD, 14));
+		lblNumeroDaNota.setForeground(new Color(0, 0, 0));
+		lblNumeroDaNota.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNumeroDaNota.setBounds(405, 111, 131, 20);
 		frmCompraDeInsumos.getContentPane().add(lblNumeroDaNota);
 		
 		tfNota = new JTextField();
 		tfNota.setForeground(SystemColor.controlText);
-		tfNota.setFont(new Font("Arial", Font.PLAIN, 13));
+		tfNota.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfNota.addKeyListener(new KeyAdapter() {
 			//EVENTO PARA QUANDO APERTAR "ENTER" DAR FOCO EM OUTRA CAIXA DE TEXTO
 			@Override
@@ -180,8 +180,8 @@ public class NovaCompra {////
 		frmCompraDeInsumos.getContentPane().add(tfNota);
 		
 		JLabel lblPreo = new JLabel("Pre\u00E7o:");
-		lblPreo.setForeground(Color.BLACK);
-		lblPreo.setFont(new Font("Arial", Font.BOLD, 14));
+		lblPreo.setForeground(new Color(0, 0, 0));
+		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblPreo.setBounds(787, 80, 57, 20);
 		frmCompraDeInsumos.getContentPane().add(lblPreo);
 		
@@ -201,7 +201,7 @@ public class NovaCompra {////
 			}
 		});
 		tfPreco.setForeground(SystemColor.controlText);
-		tfPreco.setFont(new Font("Arial", Font.PLAIN, 13));
+		tfPreco.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfPreco.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -222,14 +222,14 @@ public class NovaCompra {////
 		
 		JLabel lblFornecedor = new JLabel("Fornecedor:");
 		lblFornecedor.setBackground(Color.GRAY);
-		lblFornecedor.setForeground(Color.BLACK);
-		lblFornecedor.setFont(new Font("Arial", Font.BOLD, 14));
+		lblFornecedor.setForeground(new Color(0, 0, 0));
+		lblFornecedor.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblFornecedor.setBounds(10, 111, 100, 20);
 		frmCompraDeInsumos.getContentPane().add(lblFornecedor);
 		
 		txtFornecedor = new JTextField();
 		txtFornecedor.setForeground(SystemColor.controlText);
-		txtFornecedor.setFont(new Font("Arial", Font.PLAIN, 13));
+		txtFornecedor.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtFornecedor.addKeyListener(new KeyAdapter() {
 			//EVENTO PARA QUANDO APERTAR "ENTER" DAR FOCO EM OUTRA CAIXA DE TEXTO
 			@Override
@@ -245,8 +245,8 @@ public class NovaCompra {////
 		txtFornecedor.setColumns(10);
 	
 		JLabel lblCnpj = new JLabel("CNPJ:");
-		lblCnpj.setForeground(Color.BLACK);
-		lblCnpj.setFont(new Font("Arial", Font.BOLD, 14));
+		lblCnpj.setForeground(new Color(0, 0, 0));
+		lblCnpj.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblCnpj.setBounds(10, 142, 66, 20);
 		frmCompraDeInsumos.getContentPane().add(lblCnpj);
 		
@@ -365,7 +365,8 @@ public class NovaCompra {////
 		
 		//CANCELAR A OPERAÇÃO E VOLTAR PARA A TELA PRINCIPAL
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBackground(SystemColor.controlHighlight);
+		btnCancelar.setForeground(Color.WHITE);
+		btnCancelar.setBackground(Color.DARK_GRAY);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(editar==1) {
@@ -384,14 +385,14 @@ public class NovaCompra {////
 		
 		JLabel lblQuantidade = new JLabel("Quantidade:");
 		lblQuantidade.setForeground(Color.BLACK);
-		lblQuantidade.setFont(new Font("Arial", Font.BOLD, 14));
+		lblQuantidade.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblQuantidade.setBounds(787, 111, 89, 20);
 		frmCompraDeInsumos.getContentPane().add(lblQuantidade);
 		
 		
 		spinner = new JSpinner();
 		spinner.setForeground(SystemColor.controlText);
-		spinner.setFont(new Font("Arial", Font.PLAIN, 13));
+		spinner.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spinner.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		spinner.setBounds(886, 112, 164, 20);
@@ -442,14 +443,14 @@ public class NovaCompra {////
 		button.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		button.setForeground(Color.WHITE);
 		button.setBackground(Color.DARK_GRAY);
-		button.setFont(new Font("Arial", Font.BOLD, 12));
+		button.setFont(new Font("Tahoma", Font.BOLD, 12));
 		button.setBounds(351, 222, 89, 20);
 		frmCompraDeInsumos.getContentPane().add(button);
 		
 		try {
 			tfCNPJ = new JFormattedTextField(new MaskFormatter("###.###.###/####-##"));
 			tfCNPJ.setForeground(SystemColor.controlText);
-			tfCNPJ.setFont(new Font("Arial", Font.PLAIN, 13));
+			tfCNPJ.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			tfCNPJ.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 			tfCNPJ.addKeyListener(new KeyAdapter() {
 				@Override
@@ -532,10 +533,10 @@ public class NovaCompra {////
 		scrollPane.setViewportView(table);
 		
 		//IMAGEICON PARA COLOCAR IMAGEM NA TELA E REDIMENSIONAR 
-		ImageIcon icon = new ImageIcon("src/img/compra1.png");
-		icon.setImage(icon.getImage().getScaledInstance(57, 55, 100));
+		ImageIcon icon = new ImageIcon("src/img/compra12.png");
+		icon.setImage(icon.getImage().getScaledInstance(46, 48, 100));
 		JLabel llll = new JLabel("");
-		llll.setBounds(941, 11, 57, 55);
+		llll.setBounds(1004, 6, 46, 48);
 		llll.setIcon(icon);
 		
 		
@@ -550,6 +551,7 @@ public class NovaCompra {////
 		
 		try {
 			tfData = new JFormattedTextField(new MaskFormatter("####-##-##"));
+			tfData.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 			tfData.setBounds(546, 81, 186, 20);
 			frmCompraDeInsumos.getContentPane().add(tfData);
 			tfData.setText(formatada);

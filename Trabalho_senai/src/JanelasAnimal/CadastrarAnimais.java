@@ -252,7 +252,7 @@ public class CadastrarAnimais {//teste3
 		panel.setOpaque(false);
 		panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(774, 25, 290, 217);
+		panel.setBounds(775, 65, 289, 177);
 		frmCadastroDeAnimais.getContentPane().add(panel);
 		
 		lblImagem = new JLabel("");
@@ -457,9 +457,23 @@ public class CadastrarAnimais {//teste3
 				cbEspecie.setSelectedIndex(0);
 				tfDestino.setText(null);
 				rdbtnMacho.setSelected(true);
-				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
-				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);	
-				ftfDataCompra.setValue(null);
+				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/128x128.png")));
+				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
+				
+				ftfDataCompra = new JFormattedTextField(mask);//define a mascara
+				ftfDataCompra.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyPressed(KeyEvent e) {//evento de apertar ENTER e mudar de componente
+						if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+							spinnerQuantidade.requestFocus();
+						}
+					}
+				});
+				ftfDataCompra.setText(formatada);
+				ftfDataCompra.setToolTipText("aaaa-mm-dd");
+				ftfDataCompra.setBounds(140, 135, 164, 20);
+				frmCadastroDeAnimais.getContentPane().add(ftfDataCompra);
+
 				ftfDataNascimento.setValue(null);
 			}
 		});//fim ação do botão limpar
@@ -581,6 +595,13 @@ public class CadastrarAnimais {//teste3
 		btnCadastrarNovaRaca.setBackground(SystemColor.controlHighlight);
 		btnCadastrarNovaRaca.setBounds(675, 135, 20, 20);
 		frmCadastroDeAnimais.getContentPane().add(btnCadastrarNovaRaca);
+		
+		ImageIcon icon = new ImageIcon("src/img/vaca1.png");
+		icon.setImage(icon.getImage().getScaledInstance( 53, 48, 100));
+		JLabel lblIcon = new JLabel("");
+		lblIcon.setBounds(997, 6, 53, 48);
+		lblIcon.setIcon(icon);
+		frmCadastroDeAnimais.getContentPane().add(lblIcon);
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/Teste13.jpg")));

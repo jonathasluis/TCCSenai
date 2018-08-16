@@ -122,10 +122,10 @@ public class Total {//
 		
 		frmRelattio.getContentPane().setLayout(null);
 		
-		ImageIcon icon = new ImageIcon("src/img/relatorio.png");
-		icon.setImage(icon.getImage().getScaledInstance(60, 58, 100));
+		ImageIcon icon = new ImageIcon("src/img/relatio.png");
+		icon.setImage(icon.getImage().getScaledInstance(44, 40, 100));
 		JLabel lblIcone = new JLabel("");
-		lblIcone.setBounds(941, 11, 57, 55);
+		lblIcone.setBounds(1006, 6, 44, 40);
 		lblIcone.setIcon(icon);
 		frmRelattio.getContentPane().add(lblIcone);
 		
@@ -214,7 +214,7 @@ public class Total {//
 		
 		JLabel lblFiltrarData = new JLabel("Filtrar Data:");
 		lblFiltrarData.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblFiltrarData.setBounds(10, 90, 84, 14);
+		lblFiltrarData.setBounds(10, 59, 84, 14);
 		frmRelattio.getContentPane().add(lblFiltrarData);
 		
 		calendar = new JCalendar();

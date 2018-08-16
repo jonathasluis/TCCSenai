@@ -194,16 +194,7 @@ public class NovaFazenda {
 					btnLimpar.doClick();
 					colocaDadosNaTabela(CrudFazenda.selecionaFazenda(Pergunta.usuario));
 					
-					int resposta = JOptionPane.showConfirmDialog(null, "voce deseja alterar para essa Fazenda? ", "alerta",
-							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-					if(resposta==JOptionPane.YES_OPTION) {
-						Pergunta.main(null);
-						Pergunta.contador = 1;
-						Pergunta.outroFrame = frmNovaFazenda;
-						Pergunta.comboBox.setSelectedItem(fazenda.getNome());
-					}else {
-						return;
-					}
+					
 
 				}
 
@@ -443,9 +434,9 @@ public class NovaFazenda {
 		tfQtdAnimais = new JTextField();
 		tfQtdAnimais.setText("0");
 		tfQtdAnimais.setEditable(false);
-		tfQtdAnimais.setBorder(null);
+		tfQtdAnimais.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tfQtdAnimais.setOpaque(false);
-		tfQtdAnimais.setBounds(197, 179, 76, 20);
+		tfQtdAnimais.setBounds(200, 178, 76, 20);
 		frmNovaFazenda.getContentPane().add(tfQtdAnimais);
 		tfQtdAnimais.setColumns(10);
 		
@@ -454,8 +445,8 @@ public class NovaFazenda {
 		tfQtdFuncionarios.setOpaque(false);
 		tfQtdFuncionarios.setEditable(false);
 		tfQtdFuncionarios.setColumns(10);
-		tfQtdFuncionarios.setBorder(null);
-		tfQtdFuncionarios.setBounds(197, 210, 76, 20);
+		tfQtdFuncionarios.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tfQtdFuncionarios.setBounds(200, 210, 76, 20);
 		frmNovaFazenda.getContentPane().add(tfQtdFuncionarios);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -466,6 +457,16 @@ public class NovaFazenda {
 		taDescricao.setLineWrap(true);
 		taDescricao.setWrapStyleWord(true);
 		scrollPane_1.setViewportView(taDescricao);
+		
+		JLabel lblFUN = new JLabel("");
+		lblFUN.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/32x32Fun.png")));
+		lblFUN.setBounds(286, 209, 32, 37);
+		frmNovaFazenda.getContentPane().add(lblFUN);
+		
+		JLabel lblVACA = new JLabel("");
+		lblVACA.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/32x32Vaca.png")));
+		lblVACA.setBounds(286, 167, 32, 43);
+		frmNovaFazenda.getContentPane().add(lblVACA);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/Teste13.jpg")));

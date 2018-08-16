@@ -139,7 +139,7 @@ public class CadastrarFuncionarios {
 		}//fim formatação mascara
 		
 		frmCadastrarFuncionarios = new JFrame();
-		frmCadastrarFuncionarios.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\SENAI\\Desktop\\FINAL\\32x32.png"));
+		frmCadastrarFuncionarios.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarFuncionarios.class.getResource("/img/32x32.png")));
 		frmCadastrarFuncionarios.setTitle("Cadastrar Funcionarios");
 		frmCadastrarFuncionarios.setBounds(100, 100, 1080, 720);
 		frmCadastrarFuncionarios.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -156,12 +156,12 @@ public class CadastrarFuncionarios {
 		panel = new JPanel();
 		panel.setOpaque(false);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(774, 25, 290, 217);
+		panel.setBounds(774, 60, 290, 182);
 		frmCadastrarFuncionarios.getContentPane().add(panel);
 		panel.setLayout(new CardLayout(0, 0));
 		
 		lblImagem = new JLabel("");
-		lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
+		lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/128x128.png")));
 		lblImagem.setToolTipText("Clique 2 vezes");
 		lblImagem.addMouseListener(new MouseAdapter() {//inicio evento para escolher e abrir imagem
 			@Override
@@ -346,7 +346,7 @@ public class CadastrarFuncionarios {
 				tfSalario.setText(null);
 				tfEmail.setText(null);
 				rdbtnAtivo.setSelected(true);
-				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
+				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/128x128.png")));
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
 				ftfAdimissao.setValue(null);
 				ftfDemissao.setValue(null);
@@ -426,7 +426,9 @@ public class CadastrarFuncionarios {
 				
 				int tabel = tabela.getRowCount();
 				int linha = tabel*16;
-				int valor = 23+linha;
+				int valor = 39
+						
+						+linha;
 				scrollPane.setBounds(10, 253, 1054, valor);
 				if (!(tfProcurar.getText()).trim().equals("")) {
 					if (tabela.getRowCount()==0) {
@@ -682,6 +684,13 @@ public class CadastrarFuncionarios {
 		ftfPis.setBounds(600, 154, 150, 20);
 		frmCadastrarFuncionarios.getContentPane().add(ftfPis);
 		
+		ImageIcon icon = new ImageIcon("src/img/t3.png");
+		icon.setImage(icon.getImage().getScaledInstance( 53, 48, 100));
+		JLabel lblIcon = new JLabel("");
+		lblIcon.setBounds(997, 6, 53, 48);
+		lblIcon.setIcon(icon);
+		frmCadastrarFuncionarios.getContentPane().add(lblIcon);
+		
 		JLabel lblFundo = new JLabel("PIS:");
 		lblFundo.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/Teste13.jpg")));
 		lblFundo.setBounds(0, -15, 1074, 670);
@@ -781,7 +790,7 @@ public class CadastrarFuncionarios {
 					if (tabela.getRowCount() >= teste & scrollPane.getHeight()<=339) {
 						teste=1;
 						teste=+1;
-						int x = (teste*17)+scrollPane.getHeight();
+						int x = (teste*24)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 				}

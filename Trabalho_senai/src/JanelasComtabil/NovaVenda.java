@@ -131,10 +131,10 @@ public class NovaVenda {
 		frmNovaVenda.setResizable(false);
 		frmNovaVenda.getContentPane().setLayout(null);
 		
-		ImageIcon icon = new ImageIcon("src/img/compra1.png");
-		icon.setImage(icon.getImage().getScaledInstance(57, 55, 100));
+		ImageIcon icon = new ImageIcon("src/img/t1.png");
+		icon.setImage(icon.getImage().getScaledInstance(46, 48, 100));
 		JLabel label = new JLabel("");
-		label.setBounds(941, 11, 57, 55);
+		label.setBounds(1004, 6, 46, 48);
 		label.setIcon(icon);
 		frmNovaVenda.getContentPane().add(label);
 		
