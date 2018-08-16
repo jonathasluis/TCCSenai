@@ -26,11 +26,9 @@ import javax.swing.SwingConstants;
 import DAO.Usuario;
 import banco.Conexao;
 import crud.crudUsuarios;
+import javax.swing.ImageIcon;
 
 public class Login {//
-	Conexao c = new Conexao();
-	
-	
 	String acesso="nao";
 	private JFrame frmLogin;
 	private JTextField tfUsuario;
@@ -72,9 +70,9 @@ public class Login {//
 	 */
 	private void initialize() {
 		frmLogin = new JFrame();
-		frmLogin.setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/img/logo-pequena-sem-texto.png")));
+		frmLogin.setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/img/32x32.png")));
 		frmLogin.setTitle("Login");
-		frmLogin.setBounds(100, 100, 309, 243);
+		frmLogin.setBounds(100, 100, 400, 400);
 		frmLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmLogin.getContentPane().setLayout(null);
 		frmLogin.setResizable(false);
@@ -83,18 +81,18 @@ public class Login {//
 		
 		JLabel lblNewLabel = new JLabel("Login");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(10, 11, 273, 34);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblNewLabel.setBounds(10, 0, 374, 34);
 		frmLogin.getContentPane().add(lblNewLabel);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblUsuario.setBounds(10, 56, 54, 20);
+		lblUsuario.setBounds(10, 202, 54, 20);
 		frmLogin.getContentPane().add(lblUsuario);
 		
 		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblSenha.setBounds(10, 87, 54, 20);
+		lblSenha.setBounds(10, 233, 54, 20);
 		frmLogin.getContentPane().add(lblSenha);
 		
 		tfUsuario = new JTextField();
@@ -106,7 +104,7 @@ public class Login {//
 				}
 			}
 		});
-		tfUsuario.setBounds(65, 57, 183, 20);
+		tfUsuario.setBounds(100, 203, 220, 20);
 		frmLogin.getContentPane().add(tfUsuario);
 		tfUsuario.setColumns(10);
 		
@@ -119,11 +117,11 @@ public class Login {//
 				}
 			}
 		});
-		pfSenha.setBounds(65, 87, 183, 20);
+		pfSenha.setBounds(100, 234, 220, 20);
 		frmLogin.getContentPane().add(pfSenha);
 		
 		btnEntrar = new JButton("Entrar");
-		btnEntrar.setBounds(178, 180, 105, 23);
+		btnEntrar.setBounds(279, 338, 105, 23);
 		frmLogin.getContentPane().add(btnEntrar);
 		
 		JLabel lblEsqueceuSuaSenha = new JLabel("Esqueceu sua Senha?");
@@ -176,12 +174,25 @@ public class Login {//
 			}//fim evento de clique no label
 		});
 		lblEsqueceuSuaSenha.setFont(new Font("Tahoma", Font.BOLD, 10));
-		lblEsqueceuSuaSenha.setBounds(178, 118, 105, 14);
+		lblEsqueceuSuaSenha.setBounds(243, 265, 105, 14);
 		frmLogin.getContentPane().add(lblEsqueceuSuaSenha);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(63, 180, 105, 23);
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				NovoUsuario.main(null);
+				frmLogin.dispose();
+			}
+		});
+		btnCadastrar.setBounds(164, 338, 105, 23);
 		frmLogin.getContentPane().add(btnCadastrar);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Login.class.getResource("/img/128x128.png")));
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label.setBounds(10, 45, 374, 128);
+		frmLogin.getContentPane().add(label);
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logar();

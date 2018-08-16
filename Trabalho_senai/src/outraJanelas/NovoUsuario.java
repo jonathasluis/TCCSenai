@@ -7,10 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,7 +19,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import banco.Conexao;
+import DAO.Usuario;
+import crud.crudUsuarios;
 
 public class NovoUsuario {///
 	
@@ -28,7 +29,8 @@ public class NovoUsuario {///
 	private JTextField tfUsuario;
 	private JPasswordField pfSenha;
 	private JPasswordField pfConfirma;
-
+	private JTextField tfEmail;
+	Usuario usuario = new Usuario();
 	/**
 	 * Launch the application.
 	 */
@@ -57,22 +59,23 @@ public class NovoUsuario {///
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(NovoUsuario.class.getResource("/img/logo-pequena-sem-texto.png")));
-		frame.setBounds(100, 100, 447, 300);
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(NovoUsuario.class.getResource("/img/32x32.png")));
+		frame.setBounds(100, 100, 400, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Cadastrar Novo Usuario");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(68, 11, 335, 14);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(NovoUsuario.class.getResource("/img/128x128.png")));
+		lblLogo.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogo.setBounds(10, 45, 374, 128);
+		frame.getContentPane().add(lblLogo);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblUsuario.setBounds(10, 77, 78, 14);
+		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblUsuario.setBounds(10, 188, 78, 20);
 		frame.getContentPane().add(lblUsuario);
 		
 		tfUsuario = new JTextField();
@@ -80,74 +83,70 @@ public class NovoUsuario {///
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				if(arg0.getKeyCode() == KeyEvent.VK_ENTER) {
-					pfSenha.requestFocus();
+					tfEmail.requestFocus();
 					
 				}
 			}
 		});
-		tfUsuario.setBounds(140, 76, 227, 20);
+		tfUsuario.setBounds(100, 188, 220, 20);
 		frame.getContentPane().add(tfUsuario);
 		tfUsuario.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblSenha.setBounds(10, 114, 50, 14);
+		lblSenha.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblSenha.setBounds(10, 248, 50, 23);
 		frame.getContentPane().add(lblSenha);
 		
 		JLabel lblConfirmarSenha = new JLabel("Confirmar Senha");
-		lblConfirmarSenha.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblConfirmarSenha.setBounds(10, 139, 126, 14);
+		lblConfirmarSenha.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblConfirmarSenha.setBounds(10, 278, 113, 23);
 		frame.getContentPane().add(lblConfirmarSenha);
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String usu = tfUsuario.getText().toString();
-				String senh = String.copyValueOf(pfSenha.getPassword());
-				String senhCon= String.copyValueOf(pfConfirma.getPassword());
+				String nomeUsuario = tfUsuario.getText().toString();
+				String senha = String.valueOf(pfSenha.getPassword());
+				String senhConfirm= String.valueOf(pfConfirma.getPassword());
 				
 				
-				if (usu.trim().equals("")) {
-					JOptionPane.showMessageDialog(null, "Informe um usuario v√°lido");
+				if (nomeUsuario.trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "Informe um usuario v·lida","ALERTA!",JOptionPane.WARNING_MESSAGE);
 					tfUsuario.requestFocus();
 					return;
 				}
-				
-				if (senh.equals(senhCon)) {
-					//crudUsuarios crud = new crudUsuarios();
-					//crud.addusu(usu, senh);
-					JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso!");
-					
-					
-				}if(!(senh.equals(senhCon))) {
-					JOptionPane.showMessageDialog(null, "As senhas n√£o est√£o se relacioando"
-							+ "");
+				if (tfEmail.getText().trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "Informe um e-mail v·lida","ALERTA!",JOptionPane.WARNING_MESSAGE);
+					tfUsuario.requestFocus();
+					return;
+				}
+				if (senha.trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "Informe uma senha v·lida","ALERTA!",JOptionPane.WARNING_MESSAGE);
+					pfSenha.requestFocus();
+					return;
+				}
+				if (senhConfirm.trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "confirme sua senha","ALERTA!",JOptionPane.WARNING_MESSAGE);
+					pfSenha.requestFocus();
+					return;
+				}
+				if(!(senha.equals(senhConfirm))) {
+					JOptionPane.showMessageDialog(null, "As senhas n„o s„o iguais","ALERTA!",JOptionPane.WARNING_MESSAGE);
+					pfConfirma.requestFocus();
+					return;
 				}
 				
-				ResultSet tabela = null;
-				  
-				String sql = "select*from usuario where usuario=? and senha=?";
-				try {
-					PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
-					stmt.setString(1, tfUsuario.getText().toString());
-					stmt.setString(2, String.valueOf(pfSenha.getPassword()));
-					tabela = stmt.executeQuery();
-					if(tabela.next()) {
-						frame.dispose();
-						Principal.main(null);
-					}else {
-
-						JOptionPane.showMessageDialog(null, "Usuario e/ou Senha inv√°lido(s)!");						
-					}
-
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				DAOUsuario();
+				if (verificaSeTemUsuario()) {
+					new crudUsuarios().addUsuario(usuario);
+					Pergunta.usuario = usuario;
+					JOptionPane.showMessageDialog(null, "Bem-Vindo "+usuario.getUsuario());
+					frame.dispose();
+					Principal.main(null);
 				}
-			
 			}
 		});
-		btnSalvar.setBounds(48, 206, 146, 35);
+		btnSalvar.setBounds(279, 338, 105, 23);
 		frame.getContentPane().add(btnSalvar);
 		
 		pfSenha = new JPasswordField();
@@ -159,7 +158,7 @@ public class NovoUsuario {///
 				}
 			}
 		});
-		pfSenha.setBounds(140, 107, 227, 20);
+		pfSenha.setBounds(100, 248, 220, 20);
 		frame.getContentPane().add(pfSenha);
 		
 		pfConfirma = new JPasswordField();
@@ -172,7 +171,7 @@ public class NovoUsuario {///
 				}
 			}
 		});
-		pfConfirma.setBounds(140, 138, 227, 20);
+		pfConfirma.setBounds(120, 280, 200, 20);
 		frame.getContentPane().add(pfConfirma);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -182,7 +181,57 @@ public class NovoUsuario {///
 				Login.main(null);
 			}
 		});
-		btnCancelar.setBounds(244, 206, 146, 35);
+		btnCancelar.setBounds(164, 338, 105, 23);
 		frame.getContentPane().add(btnCancelar);
+		
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblEmail.setBounds(10, 218, 78, 20);
+		frame.getContentPane().add(lblEmail);
+		
+		tfEmail = new JTextField();
+		tfEmail.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					pfSenha.requestFocus();
+				}
+			}
+		});
+		tfEmail.setToolTipText("Insira um e-mail v\u00E1lido caso haja necessidade de recuperar sua senha!");
+		tfEmail.setColumns(10);
+		tfEmail.setBounds(100, 219, 220, 20);
+		frame.getContentPane().add(tfEmail);
+		
+		JLabel lblNovoUsuario = new JLabel("Novo Usuario");
+		lblNovoUsuario.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblNovoUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNovoUsuario.setBounds(10, 0, 374, 38);
+		frame.getContentPane().add(lblNovoUsuario);
+	}
+	
+	void DAOUsuario() {
+		usuario.setUsuario(tfUsuario.getText().toLowerCase());
+		usuario.setEmail(tfEmail.getText().toLowerCase());
+		usuario.setSenha(String.copyValueOf(pfSenha.getPassword()));
+	}
+	
+	boolean verificaSeTemUsuario() {
+		boolean resposta=true;
+		ResultSet rs = new crudUsuarios().selectUsuarioPeloNome(usuario.getUsuario());
+		
+		try {
+			if (rs.next()) {
+				if (tfUsuario.getText().equalsIgnoreCase(rs.getString("usuario"))) {
+					resposta=false;
+				}
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return resposta;
 	}
 }

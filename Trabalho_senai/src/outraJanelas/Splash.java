@@ -1,21 +1,20 @@
 package outraJanelas;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 
 import banco.Conexao;
-
-import java.awt.Cursor;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.Font;
 
 public class Splash {
 
@@ -49,6 +48,7 @@ public class Splash {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Splash.class.getResource("/img/32x32.png")));
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 420, 250);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -82,7 +82,7 @@ public class Splash {
 		progressBar = new JProgressBar();
 		progressBar.setOpaque(true);
 		progressBar.setBounds(0, 238, 420, 12);
-		progressBar.setForeground(UIManager.getColor("ProgressBar.foreground"));
+		progressBar.setForeground(new Color(102, 204, 51));
 		progressBar.setStringPainted(true);
 		progressBar.setMaximum(70);
 		frame.getContentPane().add(progressBar);
@@ -90,7 +90,7 @@ public class Splash {
 		ImageIcon iconAnimal = new ImageIcon("/img/gradiente_Branco.jpg");
 		iconAnimal.setImage(iconAnimal.getImage().getScaledInstance(420, 250 ,100));
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(Splash.class.getResource("/img/logo-pequena-sem-texto.png")));
+		label.setIcon(new ImageIcon(Splash.class.getResource("/img/128x128.png")));
 		label.setBounds(0, 0, 420, 250);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(label);

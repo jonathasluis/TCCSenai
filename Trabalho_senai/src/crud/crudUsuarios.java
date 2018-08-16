@@ -15,7 +15,7 @@ public class crudUsuarios {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1,usuario.getUsuario());
 			stmt.setString(2,usuario.getSenha());
-			stmt.setString(2,usuario.getEmail());
+			stmt.setString(3,usuario.getEmail());
 			stmt.execute();
 			stmt.close();
 			return true;
