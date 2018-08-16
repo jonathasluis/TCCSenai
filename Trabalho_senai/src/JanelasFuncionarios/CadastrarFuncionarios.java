@@ -807,6 +807,16 @@ public class CadastrarFuncionarios {
 		DAOFuncionario.setCargo(tabela.getValueAt(linha, 8).toString());
 		DAOFuncionario.setSalario(Float.parseFloat(tabela.getValueAt(linha, 9).toString()));
 		DAOFuncionario.setStatus(tabela.getValueAt(linha, 11).toString());
+		DAOFuncionario.setAdmissao(tabela.getValueAt(linha, 12).toString());
+	
+		if (tabela.getValueAt(linha, 13) == null) {
+			DAOFuncionario.setDemissao(null);
+		}else {
+			DAOFuncionario.setDemissao(tabela.getValueAt(linha, 13).toString());
+		}
+		
+		DAOFuncionario.setCarteira(tabela.getValueAt(linha, 14).toString());
+		DAOFuncionario.setPis(tabela.getValueAt(linha, 15).toString());
 		
 		ResultSet dados1 = null;
 		String sql = "SELECT (img) FROM funcionarios WHERE idfuncionarios=?";
@@ -835,6 +845,10 @@ public class CadastrarFuncionarios {
 		tfEmail.setText(DAOFuncionario.getEmail());
 		tfCargo.setText(DAOFuncionario.getCargo());
 		tfSalario.setText(String.valueOf(DAOFuncionario.getSalario()));
+		ftfAdimissao.setText(DAOFuncionario.getAdmissao());
+		ftfDemissao.setText(DAOFuncionario.getDemissao());
+		ftfCarteira.setText(DAOFuncionario.getCarteira());
+		ftfPis.setText(DAOFuncionario.getPis());
 		
 		if(DAOFuncionario.getSexo().equalsIgnoreCase("masculino")) {
 			rdbtnMasculino.setSelected(true);
