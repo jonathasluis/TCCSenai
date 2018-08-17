@@ -14,6 +14,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Window.Type;
 
 public class GraficoPizza extends JFrame {
 
@@ -39,6 +40,7 @@ public class GraficoPizza extends JFrame {
 	 * Create the frame.
 	 */
 	public GraficoPizza() {
+		setType(Type.UTILITY);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 915, 560);

@@ -122,7 +122,7 @@ public class NovaVenda {
 		}//fim formatação mascara
 		
 		frmNovaVenda = new JFrame();
-		frmNovaVenda.setIconImage(Toolkit.getDefaultToolkit().getImage(NovaVenda.class.getResource("/img/logo-pequena-sem-texto.png")));
+		frmNovaVenda.setIconImage(Toolkit.getDefaultToolkit().getImage(NovaVenda.class.getResource("/img/32x32.png")));
 		frmNovaVenda.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
 		frmNovaVenda.setTitle("Nova Venda");
 		frmNovaVenda.setBounds(100, 100, 1080, 720);

@@ -17,6 +17,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Window.Type;
 
 public class GraficoBarra extends JFrame {
 
@@ -42,6 +43,7 @@ public class GraficoBarra extends JFrame {
 	 * Create the frame.
 	 */
 	public GraficoBarra() {
+		setType(Type.UTILITY);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 915, 560);

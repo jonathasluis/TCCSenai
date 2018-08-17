@@ -22,6 +22,7 @@ import DAO.Fazenda;
 import DAO.Usuario;
 import banco.Conexao;
 import crud.CrudFazenda;
+import javax.swing.ImageIcon;
 
 public class Pergunta {
 
@@ -60,9 +61,9 @@ public class Pergunta {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Pergunta.class.getResource("/img/logo-pequena-sem-texto.png")));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Pergunta.class.getResource("/img/32x32.png")));
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 350, 250);
+		frame.setBounds(100, 100, 400, 400);
 		if(contador==0) {
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			Principal.frmPrincipal.setVisible(false);
@@ -73,9 +74,9 @@ public class Pergunta {
 		frame.setLocationRelativeTo(null);
 		
 		JLabel lblNewLabel = new JLabel("Selecione a Fazenda");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 19));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 11, 324, 28);
+		lblNewLabel.setBounds(10, 0, 374, 28);
 		frame.getContentPane().add(lblNewLabel);
 		
 		comboBox = new JComboBox<String>();
@@ -87,7 +88,7 @@ public class Pergunta {
 				}
 			}
 		});
-		comboBox.setBounds(83, 80, 180, 20);
+		comboBox.setBounds(100, 217, 200, 20);
 		frame.getContentPane().add(comboBox);
 		
 		btnOk = new JButton("OK");
@@ -103,17 +104,26 @@ public class Pergunta {
 				frame.dispose();
 			}
 		});
-		btnOk.setBounds(269, 187, 65, 23);
+		btnOk.setBounds(319, 337, 65, 23);
 		frame.getContentPane().add(btnOk);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Login.main(null);
+				frame.dispose();
 			}
 		});
-		btnCancelar.setBounds(170, 187, 89, 23);
+		btnCancelar.setBounds(220, 337, 89, 23);
 		frame.getContentPane().add(btnCancelar);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Pergunta.class.getResource("/img/128x128.png")));
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label.setBounds(10, 45, 374, 128);
+		frame.getContentPane().add(label);
 		
 		comboBoxFazenda();
 	}

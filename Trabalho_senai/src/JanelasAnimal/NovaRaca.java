@@ -72,6 +72,7 @@ public class NovaRaca {
 		frmNovaRaca.setResizable(false);
 		frmNovaRaca.setBounds(100, 100, 300, 200);
 		frmNovaRaca.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmNovaRaca.setLocationRelativeTo(null);
 		frmNovaRaca.getContentPane().setLayout(null);
 		
 		JLabel lblDespcie = new JLabel("Esp\u00E9cie:");

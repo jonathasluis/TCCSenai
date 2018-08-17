@@ -108,7 +108,7 @@ public class NovaFazenda {
 	 */
 	private void initialize() {
 		frmNovaFazenda = new JFrame();
-		frmNovaFazenda.setIconImage(Toolkit.getDefaultToolkit().getImage(NovaFazenda.class.getResource("/img/logo-pequena-sem-texto.png")));
+		frmNovaFazenda.setIconImage(Toolkit.getDefaultToolkit().getImage(NovaFazenda.class.getResource("/img/32x32.png")));
 		frmNovaFazenda.setTitle("Nova Fazenda");
 		frmNovaFazenda.setBounds(100, 100, 1080,720);
 		frmNovaFazenda.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -139,7 +139,7 @@ public class NovaFazenda {
 			}
 		});
 		lblImg.setHorizontalAlignment(SwingConstants.CENTER);
-		lblImg.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/logo-pequena-sem-texto.png")));
+		lblImg.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/128x128.png")));
 		panel.add(lblImg, "name_20449716211995");
 		
 		JButton btnSalvar = new JButton("Salvar");
@@ -226,7 +226,7 @@ public class NovaFazenda {
 				tfProprietario.setText(null);
 				taDescricao.setText(null);
 				lblImg.setHorizontalAlignment(SwingConstants.CENTER);
-				lblImg.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/logo-pequena-sem-texto.png")));
+				lblImg.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/128x128.png")));
 				tfQtdAnimais.setText("0");
 				tfQtdFuncionarios.setText("0");
 			}

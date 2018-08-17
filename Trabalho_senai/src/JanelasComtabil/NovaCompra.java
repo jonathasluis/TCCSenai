@@ -112,7 +112,7 @@ public class NovaCompra {////
 		
 		
 		frmCompraDeInsumos = new JFrame();
-		frmCompraDeInsumos.setIconImage(Toolkit.getDefaultToolkit().getImage(NovaCompra.class.getResource("/img/logo-pequena-sem-texto.png")));
+		frmCompraDeInsumos.setIconImage(Toolkit.getDefaultToolkit().getImage(NovaCompra.class.getResource("/img/32x32.png")));
 		frmCompraDeInsumos.setTitle("Compra de Insumos");
 		frmCompraDeInsumos.setBounds(100, 100, 1080, 720);
 		frmCompraDeInsumos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
