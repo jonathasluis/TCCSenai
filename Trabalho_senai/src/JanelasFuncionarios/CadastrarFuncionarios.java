@@ -35,7 +35,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
@@ -53,7 +52,6 @@ import JanelasComtabil.Total;
 import banco.Conexao;
 import crud.CrudFazenda;
 import crud.CrudFuncionarios;
-
 import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
@@ -202,6 +200,10 @@ public class CadastrarFuncionarios {
 				"ID", "Nome", "Nascimento", "CPF", "RG", "Sexo", "Telefone", "Email", "Cargo", "Salario", "Fazenda", "Status", "Data Admiss\u00E3o", "Data Demiss\u00E3o", "N\u00B0 Carteira", "PIS"
 			}
 		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
 			};
@@ -875,7 +877,7 @@ public class CadastrarFuncionarios {
 			mI.abrirImagem(DAOFuncionario.getImg(), null, panel, lblImagem, DAOFuncionario.getImg());
 		}else {
 			lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
-			lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
+			lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/128x128.png")));
 		}
 		
 			

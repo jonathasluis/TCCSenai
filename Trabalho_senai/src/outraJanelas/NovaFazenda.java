@@ -76,7 +76,7 @@ public class NovaFazenda {
 	private JScrollPane scrollPane;
 	//tabela
 
-	private JTable table;
+	//private JTable table;
 	JButton btnCancelar;
 
 
@@ -398,6 +398,10 @@ public class NovaFazenda {
 				"ID ", "Nome da Fazenda", "Tamanho da Fazenda", "Escritura da Fazenda", "Descri\u00E7\u00E3o da Fazenda", "Proprietario"
 			}
 		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false
 			};
@@ -564,7 +568,7 @@ public class NovaFazenda {
 				mI.abrirImagem(fazenda.getImg(), null, panel, lblImg, fazenda.getImg());
 			}else {
 				lblImg.setHorizontalAlignment(SwingConstants.CENTER);
-				lblImg.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
+				lblImg.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/128x128.png")));
 			}
 			
 		} catch (SQLException e) {

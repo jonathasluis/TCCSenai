@@ -84,14 +84,14 @@ public class CadastrarEspecie{
 				}
 			}
 		});
-		textField.setBounds(10, 36, 274, 20);
+		textField.setBounds(10, 48, 274, 20);
 		frmNovaEspecie.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Nome da Esp\u00E9cie:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel.setBounds(10, 11, 274, 14);
+		lblNewLabel.setBounds(10, 11, 274, 20);
 		frmNovaEspecie.getContentPane().add(lblNewLabel);
 		
 		btnSalvar = new JButton("Salvar");
@@ -108,7 +108,7 @@ public class CadastrarEspecie{
 				//contador=1;	
 			}
 		});
-		btnSalvar.setBounds(199, 92, 85, 23);
+		btnSalvar.setBounds(199, 95, 85, 23);
 		frmNovaEspecie.getContentPane().add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -119,14 +119,14 @@ public class CadastrarEspecie{
 				frmNovaEspecie.dispose();
 			}
 		});
-		btnCancelar.setBounds(104, 92, 85, 23);
+		btnCancelar.setBounds(104, 95, 85, 23);
 		frmNovaEspecie.getContentPane().add(btnCancelar);
 		
 		ImageIcon icon = new ImageIcon("/img/gradiente_Branco.jpg");
 		icon.setImage(icon.getImage().getScaledInstance(294, 121 ,100));
 		JLabel label = new JLabel("");
-		label.setBounds(0, 0, 294, 121);
-		label.setIcon(icon);
+		label.setBounds(0, 0, 294, 171);
+		label.setIcon(new ImageIcon(CadastrarEspecie.class.getResource("/img/fundoPequeno.jpg")));
 		frmNovaEspecie.getContentPane().add(label);
 		frmNovaEspecie.setLocationRelativeTo(null);
 		

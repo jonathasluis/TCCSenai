@@ -34,11 +34,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
+import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -46,13 +43,10 @@ import DAO.Compras;
 import JanelasAnimal.CadastrarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import crud.CrudCompras;
-
 import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-import javax.swing.border.LineBorder;
-import javax.swing.border.SoftBevelBorder;
 
 public class NovaCompra {////
 	

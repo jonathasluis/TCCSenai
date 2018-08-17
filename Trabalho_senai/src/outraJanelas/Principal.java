@@ -2,18 +2,19 @@ package outraJanelas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+//
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URI;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,13 +24,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.LookAndFeel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import DAO.Fazenda;
 import JanelasAnimal.CadastrarAnimais;
@@ -37,22 +36,6 @@ import JanelasComtabil.NovaCompra;
 import JanelasComtabil.NovaVenda;
 import JanelasComtabil.Total;
 import JanelasFuncionarios.CadastrarFuncionarios;
-
-
-import java.awt.SystemColor;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.SoftBevelBorder;
-
-
-
-import javax.swing.border.BevelBorder;
-import javax.swing.JTextField;
-import java.awt.Window.Type;
-import java.awt.Dialog.ModalExclusionType;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
-//
 
 public class Principal {
 
@@ -134,7 +117,7 @@ public class Principal {
 		lblNomeDoSistema = new JLabel("Nome do sistema");
 		lblNomeDoSistema.setBackground(Color.WHITE);
 		lblNomeDoSistema.setForeground(Color.DARK_GRAY);
-		lblNomeDoSistema.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNomeDoSistema.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNomeDoSistema.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNomeDoSistema.setBounds(10, 11, 1054, 43);
 		frmPrincipal.getContentPane().add(lblNomeDoSistema);

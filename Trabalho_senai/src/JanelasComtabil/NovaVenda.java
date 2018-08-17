@@ -141,7 +141,7 @@ public class NovaVenda {
 		
 		JLabel lblNovaVenda = new JLabel("Nova Venda");
 		lblNovaVenda.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNovaVenda.setFont(new Font("Arial", Font.BOLD, 25));
+		lblNovaVenda.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNovaVenda.setBounds(0, 11, 1074, 39);
 		frmNovaVenda.getContentPane().add(lblNovaVenda);
 		

@@ -81,7 +81,7 @@ public class Login {//
 		
 		JLabel lblNewLabel = new JLabel("Login");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNewLabel.setBounds(10, 0, 374, 34);
 		frmLogin.getContentPane().add(lblNewLabel);
 		
@@ -125,6 +125,7 @@ public class Login {//
 		frmLogin.getContentPane().add(btnEntrar);
 		
 		JLabel lblEsqueceuSuaSenha = new JLabel("Esqueceu sua Senha?");
+		lblEsqueceuSuaSenha.setForeground(Color.BLACK);
 		lblEsqueceuSuaSenha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {//evento de mudar a cor do label
@@ -193,6 +194,11 @@ public class Login {//
 		label.setFont(new Font("Tahoma", Font.BOLD, 16));
 		label.setBounds(10, 45, 374, 128);
 		frmLogin.getContentPane().add(label);
+		
+		JLabel lblFundo = new JLabel("");
+		lblFundo.setIcon(new ImageIcon(Login.class.getResource("/img/fundo400.jpg")));
+		lblFundo.setBounds(0, 0, 394, 371);
+		frmLogin.getContentPane().add(lblFundo);
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logar();

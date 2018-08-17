@@ -757,7 +757,7 @@ public class CadastrarAnimais {//teste3
 				mI.abrirImagem(animal.getImagem(), null, panel, lblImagem,animal.getImagem());
 			}else {
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
-				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/logo-pequena-sem-texto.png")));
+				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/128x128.png")));
 			}
 	}
 

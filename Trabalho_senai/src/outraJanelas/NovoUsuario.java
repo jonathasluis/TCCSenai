@@ -209,10 +209,15 @@ public class NovoUsuario {///
 		frame.getContentPane().add(tfEmail);
 		
 		JLabel lblNovoUsuario = new JLabel("Novo Usuario");
-		lblNovoUsuario.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblNovoUsuario.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNovoUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNovoUsuario.setBounds(10, 0, 374, 38);
 		frame.getContentPane().add(lblNovoUsuario);
+		
+		JLabel lblFundo = new JLabel("");
+		lblFundo.setIcon(new ImageIcon(NovoUsuario.class.getResource("/img/fundo400.jpg")));
+		lblFundo.setBounds(0, 0, 394, 371);
+		frame.getContentPane().add(lblFundo);
 	}
 	
 	void DAOUsuario() {

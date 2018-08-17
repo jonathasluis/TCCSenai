@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,6 +17,7 @@ import java.util.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,12 +28,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.StandardTickUnitSource;
 import org.jfree.data.general.DefaultPieDataset;
 
 import com.toedter.calendar.JCalendar;
@@ -43,18 +45,10 @@ import JanelasAnimal.CadastrarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import crud.CrudCompras;
 import crud.CrudVendas;
-
 import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
-import java.awt.Toolkit;
-
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.JButton;
 
 public class Total {//
 
@@ -151,7 +145,7 @@ public class Total {//
 		valorGasto.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		valorGasto.setForeground(Color.BLACK);
 		valorGasto.setFont(new Font("Tahoma", Font.BOLD, 20));
-		valorGasto.setHorizontalAlignment(SwingConstants.TRAILING);
+		valorGasto.setHorizontalAlignment(SwingConstants.CENTER);
 		valorGasto.setBounds(387, 518, 126, 25);
 		frmRelattio.getContentPane().add(valorGasto);
 		
@@ -159,7 +153,7 @@ public class Total {//
 		valorReceita.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		valorReceita.setFont(new Font("Tahoma", Font.BOLD, 20));
 		valorReceita.setForeground(Color.BLACK);
-		valorReceita.setHorizontalAlignment(SwingConstants.TRAILING);
+		valorReceita.setHorizontalAlignment(SwingConstants.CENTER);
 		valorReceita.setBounds(646, 518, 126, 25);
 		frmRelattio.getContentPane().add(valorReceita);
 		
@@ -457,6 +451,10 @@ public class Total {//
 				"Produto", "Pre\u00E7o", "Data"
 			}
 		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false
 			};

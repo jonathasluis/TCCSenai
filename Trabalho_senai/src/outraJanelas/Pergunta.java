@@ -32,6 +32,7 @@ public class Pergunta {
 	static Usuario usuario = new Usuario();
 	private JButton btnOk;
 	public static int contador=0;
+	private JLabel lblFundo;
 
 	/**
 	 * Launch the application.
@@ -74,9 +75,9 @@ public class Pergunta {
 		frame.setLocationRelativeTo(null);
 		
 		JLabel lblNewLabel = new JLabel("Selecione a Fazenda");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 0, 374, 28);
+		lblNewLabel.setBounds(10, 0, 374, 34);
 		frame.getContentPane().add(lblNewLabel);
 		
 		comboBox = new JComboBox<String>();
@@ -124,6 +125,11 @@ public class Pergunta {
 		label.setFont(new Font("Tahoma", Font.BOLD, 16));
 		label.setBounds(10, 45, 374, 128);
 		frame.getContentPane().add(label);
+		
+		lblFundo = new JLabel("");
+		lblFundo.setIcon(new ImageIcon(Pergunta.class.getResource("/img/fundo400.jpg")));
+		lblFundo.setBounds(0, 0, 394, 371);
+		frame.getContentPane().add(lblFundo);
 		
 		comboBoxFazenda();
 	}

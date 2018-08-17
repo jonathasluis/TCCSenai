@@ -136,7 +136,7 @@ public class NovaRaca {
 		JLabel label = new JLabel("");
 		label.setBounds(0, 0, 294, 171);
 		frmNovaRaca.getContentPane().add(label);
-		label.setIcon(icon);
+		label.setIcon(new ImageIcon(NovaRaca.class.getResource("/img/fundoPequeno.jpg")));
 		
 		
 		comboBoxEspecie();
