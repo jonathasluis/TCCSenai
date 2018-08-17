@@ -81,6 +81,7 @@ public class NovaCompra {////
 	int mouseClick = 0;
 	static String numero=null;
 	private JFormattedTextField tfData;
+	private JButton button;
 	/**
 	 * Launch the application.
 	 */
@@ -120,17 +121,10 @@ public class NovaCompra {////
 		
 		 compra.setIdFazenda(Principal.fazenda.getIdFazenda());
 		
-		JLabel lblCompraDeInsumos = new JLabel("Compra de Insumos");
-		lblCompraDeInsumos.setForeground(Color.BLACK);
-		lblCompraDeInsumos.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCompraDeInsumos.setFont(new Font("Arial", Font.BOLD, 25));
-		lblCompraDeInsumos.setBounds(0, 11, 1074, 39);
-		frmCompraDeInsumos.getContentPane().add(lblCompraDeInsumos);
-		
 		JLabel lblProduto = new JLabel("Produto:");
 		lblProduto.setForeground(new Color(0, 0, 0));
 		lblProduto.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblProduto.setBounds(10, 61, 78, 20);
+		lblProduto.setBounds(10, 64, 78, 20);
 		frmCompraDeInsumos.getContentPane().add(lblProduto);
 		
 		tfProduto = new JTextField();
@@ -144,22 +138,22 @@ public class NovaCompra {////
 					txtFornecedor.requestFocus();
 				}
 			});
-		tfProduto.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		tfProduto.setBounds(108, 61, 200, 20);
+		tfProduto.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), Color.GRAY, new Color(128, 128, 128), new Color(64, 64, 64)));
+		tfProduto.setBounds(108, 65, 200, 20);
 		frmCompraDeInsumos.getContentPane().add(tfProduto);
 		tfProduto.setColumns(10);
 		
 		JLabel lblDataDaCompra = new JLabel("Data da Compra:");
 		lblDataDaCompra.setForeground(new Color(0, 0, 0));
 		lblDataDaCompra.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDataDaCompra.setBounds(405, 80, 125, 20);
+		lblDataDaCompra.setBounds(405, 65, 125, 20);
 		frmCompraDeInsumos.getContentPane().add(lblDataDaCompra);
 	
 		
 		JLabel lblNumeroDaNota = new JLabel("Numero da Nota:");
 		lblNumeroDaNota.setForeground(new Color(0, 0, 0));
 		lblNumeroDaNota.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNumeroDaNota.setBounds(405, 111, 131, 20);
+		lblNumeroDaNota.setBounds(405, 100, 131, 20);
 		frmCompraDeInsumos.getContentPane().add(lblNumeroDaNota);
 		
 		tfNota = new JTextField();
@@ -174,32 +168,22 @@ public class NovaCompra {////
 				}
 			}
 		});
-		tfNota.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tfNota.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfNota.setColumns(10);
-		tfNota.setBounds(546, 111, 188, 20);
+		tfNota.setBounds(535, 100, 188, 20);
 		frmCompraDeInsumos.getContentPane().add(tfNota);
 		
 		JLabel lblPreo = new JLabel("Pre\u00E7o:");
 		lblPreo.setForeground(new Color(0, 0, 0));
 		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPreo.setBounds(787, 80, 57, 20);
+		lblPreo.setBounds(787, 65, 57, 20);
 		frmCompraDeInsumos.getContentPane().add(lblPreo);
 		
 
 		
 		
 		tfPreco = new JTextField();
-		tfPreco.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				String numero = tfPreco.getText().toString();
-				System.out.println(numero);
-				numero = numero.replace(".", ",");
-				System.out.println(numero);
-
-				
-			}
-		});
+	
 		tfPreco.setForeground(SystemColor.controlText);
 		tfPreco.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfPreco.addKeyListener(new KeyAdapter() {
@@ -214,9 +198,15 @@ public class NovaCompra {////
 			         e.consume();
 			    }
 			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					spinner.requestFocus();
+				}
+			}
 		});
-		tfPreco.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		tfPreco.setBounds(886, 81, 164, 20);
+		tfPreco.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
+		tfPreco.setBounds(886, 65, 164, 20);
 		frmCompraDeInsumos.getContentPane().add(tfPreco);
 		tfPreco.setColumns(10);
 		
@@ -224,10 +214,11 @@ public class NovaCompra {////
 		lblFornecedor.setBackground(Color.GRAY);
 		lblFornecedor.setForeground(new Color(0, 0, 0));
 		lblFornecedor.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblFornecedor.setBounds(10, 111, 100, 20);
+		lblFornecedor.setBounds(10, 100, 100, 20);
 		frmCompraDeInsumos.getContentPane().add(lblFornecedor);
 		
 		txtFornecedor = new JTextField();
+		txtFornecedor.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		txtFornecedor.setForeground(SystemColor.controlText);
 		txtFornecedor.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtFornecedor.addKeyListener(new KeyAdapter() {
@@ -239,22 +230,23 @@ public class NovaCompra {////
 				}
 			}
 		});
-		txtFornecedor.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		txtFornecedor.setBounds(108, 112, 200, 20);
+		txtFornecedor.setBounds(108, 100, 200, 20);
 		frmCompraDeInsumos.getContentPane().add(txtFornecedor);
 		txtFornecedor.setColumns(10);
 	
 		JLabel lblCnpj = new JLabel("CNPJ:");
 		lblCnpj.setForeground(new Color(0, 0, 0));
 		lblCnpj.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblCnpj.setBounds(10, 142, 66, 20);
+		lblCnpj.setBounds(10, 135, 66, 20);
 		frmCompraDeInsumos.getContentPane().add(lblCnpj);
 		
 		
 		
 		//BOTÃO SALVAR E ADD OS DADOS NA TABELA DO BD
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBackground(SystemColor.controlHighlight);
+		btnSalvar.setForeground(Color.DARK_GRAY);
+		btnSalvar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnSalvar.setBackground(new Color(245, 245, 245));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -314,7 +306,7 @@ public class NovaCompra {////
 						//ADD LINHA NA TABELA DEPOIS DE SALVAR OS DADOS
 						JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!","SUCESSO!",JOptionPane.INFORMATION_MESSAGE);
 						if (scrollPane.getHeight()<=339) {
-							int x = (teste*16)+scrollPane.getHeight();
+							int x = (teste*17)+scrollPane.getHeight();
 							scrollPane.setBounds(10, 253, 1054, x);
 						}
 						new CrudCompras();
@@ -343,7 +335,9 @@ public class NovaCompra {////
 		
 		//LIMPAR TODOS OS DADOS 
 		btnLimpar = new JButton("Limpar");
-		btnLimpar.setBackground(SystemColor.controlHighlight);
+		btnLimpar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnLimpar.setForeground(Color.DARK_GRAY);
+		btnLimpar.setBackground(new Color(245, 245, 245));
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -365,8 +359,9 @@ public class NovaCompra {////
 		
 		//CANCELAR A OPERAÇÃO E VOLTAR PARA A TELA PRINCIPAL
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setForeground(Color.WHITE);
-		btnCancelar.setBackground(Color.DARK_GRAY);
+		btnCancelar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnCancelar.setForeground(Color.DARK_GRAY);
+		btnCancelar.setBackground(new Color(245, 245, 245));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(editar==1) {
@@ -386,7 +381,7 @@ public class NovaCompra {////
 		JLabel lblQuantidade = new JLabel("Quantidade:");
 		lblQuantidade.setForeground(Color.BLACK);
 		lblQuantidade.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblQuantidade.setBounds(787, 111, 89, 20);
+		lblQuantidade.setBounds(787, 100, 89, 20);
 		frmCompraDeInsumos.getContentPane().add(lblQuantidade);
 		
 		
@@ -394,12 +389,21 @@ public class NovaCompra {////
 		spinner.setForeground(SystemColor.controlText);
 		spinner.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-		spinner.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		spinner.setBounds(886, 112, 164, 20);
+		spinner.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
+		spinner.setBounds(886, 100, 164, 20);
 		frmCompraDeInsumos.getContentPane().add(spinner);
 		
 		
 		txtProucurarProdutos = new JTextField();
+		txtProucurarProdutos.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					button.doClick();
+				}
+			}
+		});
+		txtProucurarProdutos.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, new Color(128, 128, 128), new Color(128, 128, 128), Color.DARK_GRAY));
 		txtProucurarProdutos.setToolTipText("");
 		txtProucurarProdutos.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtProucurarProdutos.setForeground(Color.BLACK);
@@ -411,7 +415,8 @@ public class NovaCompra {////
 		
 		
 		
-		JButton button = new JButton("Proucurar");
+		button = new JButton("Proucurar");
+		
 		button.addActionListener(new ActionListener() {
 			
 			//BOTÃO PROUCURAR
@@ -422,7 +427,7 @@ public class NovaCompra {////
 				criaTabela(new CrudCompras().procurarCompra(txtProucurarProdutos.getText().toString(),idfazenda));
 				//TRATAMENTO PARA AUMENTAR E DIMINUIR TABELA
 				int tabel = table.getRowCount();
-				int linha = tabel*16;
+				int linha = tabel*17;
 				int valor = 23+linha;
 				scrollPane.setBounds(10, 253, 1054, valor);
 				if (!(txtProucurarProdutos.getText()).trim().equals("")) {
@@ -440,27 +445,27 @@ public class NovaCompra {////
 				
 			}
 		});
-		button.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		button.setForeground(Color.WHITE);
-		button.setBackground(Color.DARK_GRAY);
-		button.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button.setBounds(351, 222, 89, 20);
+		button.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(255, 255, 255), null, null, null));
+		button.setForeground(Color.DARK_GRAY);
+		button.setBackground(new Color(245, 245, 245));
+		button.setFont(new Font("Tahoma", button.getFont().getStyle(), button.getFont().getSize()));
+		button.setBounds(349, 222, 89, 23);
 		frmCompraDeInsumos.getContentPane().add(button);
 		
 		try {
 			tfCNPJ = new JFormattedTextField(new MaskFormatter("###.###.###/####-##"));
 			tfCNPJ.setForeground(SystemColor.controlText);
 			tfCNPJ.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			tfCNPJ.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			tfCNPJ.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 			tfCNPJ.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent arg0) {
 					if (arg0.getKeyCode()==KeyEvent.VK_ENTER) {
-						tfNota.requestFocus();
+						tfData.requestFocus();
 					}
 				}
 			});
-			tfCNPJ.setBounds(108, 142, 200, 20);
+			tfCNPJ.setBounds(108, 135, 200, 20);
 			frmCompraDeInsumos.getContentPane().add(tfCNPJ);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
@@ -470,35 +475,32 @@ public class NovaCompra {////
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBackground(new Color(169, 169, 169));
-		scrollPane.setFont(new Font("Arial", Font.BOLD, 13));
-		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		scrollPane.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		scrollPane.setBounds(10, 253, 1054, 23);
 		
 		frmCompraDeInsumos.getContentPane().add(scrollPane);
 		
 		table = new JTable();
-		table.setSelectionBackground(new Color(51, 153, 255));
+		table.setGridColor(SystemColor.activeCaption);
+		table.setSelectionBackground(new Color(135, 206, 250));
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				mouseClick++;
-				//new Thread(thread).start();	
+				
+					
 				btnLimpar.setEnabled(false);
 				editar();
-				/*if(mouseClick%2==0) {
 				
-				mouseClick=0;
-				}*/
-			}
+				}
 		});
 		
-		table.setToolTipText("Clique para editar os dados\r\n");
+		table.setToolTipText("");
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table.setIgnoreRepaint(true);
-		table.setFont(new Font("Arial", Font.PLAIN, 13));
-		table.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		table.setForeground(SystemColor.controlText);
-		table.setBackground(new Color(169, 169, 169));
+		table.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		table.setForeground(new Color(0, 0, 0));
+		table.setBackground(new Color(245, 245, 245));
 		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -551,8 +553,16 @@ public class NovaCompra {////
 		
 		try {
 			tfData = new JFormattedTextField(new MaskFormatter("####-##-##"));
-			tfData.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-			tfData.setBounds(546, 81, 186, 20);
+			tfData.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent arg0) {
+					if (arg0.getKeyCode()==KeyEvent.VK_ENTER) {
+						tfNota.requestFocus();
+					}
+				}
+			});
+			tfData.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
+			tfData.setBounds(535, 65, 186, 20);
 			frmCompraDeInsumos.getContentPane().add(tfData);
 			tfData.setText(formatada);
 			tfData.setToolTipText("aaaa-mm-dd");
@@ -561,9 +571,15 @@ public class NovaCompra {////
 			e1.printStackTrace();
 		}
 		
+		JLabel lblComprasDeInsumos = new JLabel("Compras de insumos");
+		lblComprasDeInsumos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblComprasDeInsumos.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblComprasDeInsumos.setBounds(10, 11, 1054, 25);
+		frmCompraDeInsumos.getContentPane().add(lblComprasDeInsumos);
+		
 		JLabel label = new JLabel("");
-		label.setBackground(Color.WHITE);
-		label.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/Teste13.jpg")));
+		label.setBackground(new Color(245, 245, 245));
+		label.setIcon(new ImageIcon(NovaCompra.class.getResource("/img/teste13.jpg")));
 		//label.setIcon(img);
 		label.setBounds(0, -17, 1074, 671);
 		frmCompraDeInsumos.getContentPane().add(label);
@@ -601,7 +617,7 @@ public class NovaCompra {////
 					if (tabela.getRowCount() >= teste & scrollPane.getHeight()<=339) {
 						teste=1;
 						teste=+1;
-						int x = (teste*16)+scrollPane.getHeight();
+						int x = (teste*17)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 				}
@@ -636,8 +652,8 @@ public class NovaCompra {////
 		numero=table.getValueAt(linha, 6).toString();
 		spinner.setValue(Integer.parseInt(table.getValueAt(linha, 5).toString()));
 		tfData.setText(table.getValueAt(linha, 7).toString());
-		tfData.setEnabled(false);
-		tfData.setToolTipText("Não é possível alterar a data!");
+		
+
 		addCompras.setId(Integer.parseInt(table.getValueAt(linha, 0).toString()));
 
 		tfPreco.setText(numero);
