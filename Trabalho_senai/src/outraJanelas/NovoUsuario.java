@@ -143,7 +143,12 @@ public class NovoUsuario {///
 					JOptionPane.showMessageDialog(null, "Bem-Vindo "+usuario.getUsuario());
 					frame.dispose();
 					Principal.main(null);
+				}else {
+					JOptionPane.showMessageDialog(null, "esse usuario ja existe", "ALERTA!", JOptionPane.WARNING_MESSAGE);
+					tfUsuario.requestFocus();
+					return;
 				}
+				
 			}
 		});
 		btnSalvar.setBounds(279, 338, 105, 23);
