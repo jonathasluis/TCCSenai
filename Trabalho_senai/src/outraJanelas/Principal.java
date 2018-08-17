@@ -499,6 +499,7 @@ public class Principal {
 			public void actionPerformed(ActionEvent arg0) {
 				Pergunta.main(null);
 				Pergunta.contador = 1;
+				Pergunta.outroFrame = frmPrincipal;
 			}
 		});
 		mnOpes.add(mntmMudarFazenda);
