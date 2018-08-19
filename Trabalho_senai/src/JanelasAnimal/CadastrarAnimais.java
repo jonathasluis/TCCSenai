@@ -152,6 +152,7 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(lblDataDeNascimento);
 		
 		ftfDataNascimento = new JFormattedTextField(mask);
+		ftfDataNascimento.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		ftfDataNascimento.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {//evento de apertar ENTER e mudar de componente
@@ -180,6 +181,7 @@ public class CadastrarAnimais {//teste3
 		String formatada = formato.format(data);
 		
 		ftfDataCompra = new JFormattedTextField(mask);//define a mascara
+		ftfDataCompra.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		ftfDataCompra.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {//evento de apertar ENTER e mudar de componente
@@ -199,6 +201,7 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(lblQuantidade);
 		
 		spinnerQuantidade = new JSpinner();
+		spinnerQuantidade.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		spinnerQuantidade.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {//evento de apertar ENTER e mudar de componente
@@ -226,7 +229,7 @@ public class CadastrarAnimais {//teste3
 				}
 			}
 		});//fim evento mudar item comboBox especie
-		cbEspecie.setBackground(SystemColor.controlHighlight);
+		cbEspecie.setBackground(new Color(245, 245, 245));
 		cbEspecie.setBounds(506, 100, 164, 20);
 		frmCadastroDeAnimais.getContentPane().add(cbEspecie);
 		
@@ -236,6 +239,7 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(lblNomeDoLote);
 		
 		tfNomeLote = new JTextField();
+		tfNomeLote.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfNomeLote.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {//evento de apertar ENTER e mudar de componente
@@ -256,6 +260,7 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(panel);
 		
 		lblImagem = new JLabel("");
+		lblImagem.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		lblImagem.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/128x128.png")));
 		lblImagem.setToolTipText("Clique 2 vezes");
 		lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
@@ -281,12 +286,14 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(lblSexo);
 		
 		rdbtnMacho = new JRadioButton("Macho");
+		rdbtnMacho.setBackground(new Color(245, 245, 245));
 		rdbtnMacho.setOpaque(false);
 		rdbtnMacho.setSelected(true);
 		rdbtnMacho.setBounds(62, 170, 68, 23);
 		frmCadastroDeAnimais.getContentPane().add(rdbtnMacho);
 		
 		rdbtnFemea = new JRadioButton("Femea");
+		rdbtnFemea.setBackground(new Color(245, 245, 245));
 		rdbtnFemea.setOpaque(false);
 		rdbtnFemea.setBounds(140, 170, 80, 23);
 		frmCadastroDeAnimais.getContentPane().add(rdbtnFemea);
@@ -297,17 +304,21 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(lblRaa);
 		
 		cbRaca = new JComboBox<String>();
-		cbRaca.setBackground(SystemColor.controlHighlight);
+		cbRaca.setBackground(new Color(245, 245, 245));
 		cbRaca.setBounds(506, 135, 164, 20);
 		frmCadastroDeAnimais.getContentPane().add(cbRaca);
 		
 		scrollPane =  new JScrollPane();
-		scrollPane.setOpaque(false);
+		scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		scrollPane.setBackground(new Color(245, 245, 245));
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 253, 1054, 23);
 		frmCadastroDeAnimais.getContentPane().add(scrollPane);
 		
 		tabela = new JTable();
+		tabela.setSelectionBackground(SystemColor.activeCaption);
+		tabela.setGridColor(SystemColor.activeCaptionBorder);
+		tabela.setBackground(new Color(245, 245, 245));
 		tabela.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {//evento de clique na tabela
@@ -363,6 +374,7 @@ public class CadastrarAnimais {//teste3
 		scrollPane.setViewportView(tabela);
 		
 		btnSalvar = new JButton("Salvar");
+		btnSalvar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(tfNomeLote.getText().trim().equals("")) {//inicio do tratamento de informação para salvar novo animal
@@ -401,7 +413,7 @@ public class CadastrarAnimais {//teste3
 					//tabela
 					x1=0;
 					if (scrollPane.getHeight()<=339) {
-						int x = (teste*16)+scrollPane.getHeight();
+						int x = (teste*17)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 					//tabela
@@ -427,11 +439,12 @@ public class CadastrarAnimais {//teste3
 				
 			}
 		});
-		btnSalvar.setBackground(SystemColor.controlHighlight);
+		btnSalvar.setBackground(new Color(245, 245, 245));
 		btnSalvar.setBounds(972, 602, 89, 23);
 		frmCadastroDeAnimais.getContentPane().add(btnSalvar);
 		
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {//inicio ação do botão cancelar
 				if(contadorParaEditar==0) {
@@ -445,11 +458,12 @@ public class CadastrarAnimais {//teste3
 				}
 			}
 		});//fim ação do botão cancelar
-		btnCancelar.setBackground(SystemColor.controlHighlight);
+		btnCancelar.setBackground(new Color(245, 245, 245));
 		btnCancelar.setBounds(774, 602, 89, 23);
 		frmCadastroDeAnimais.getContentPane().add(btnCancelar);
 		
 		btnLimpar = new JButton("Limpar");
+		btnLimpar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {//inicio da ação do botão limpar
 				tfNomeLote.setText(null);
@@ -477,11 +491,12 @@ public class CadastrarAnimais {//teste3
 				ftfDataNascimento.setValue(null);
 			}
 		});//fim ação do botão limpar
-		btnLimpar.setBackground(SystemColor.controlHighlight);
+		btnLimpar.setBackground(new Color(245, 245, 245));
 		btnLimpar.setBounds(675, 602, 89, 23);
 		frmCadastroDeAnimais.getContentPane().add(btnLimpar);
 		
 		btnDeletar = new JButton("Deletar");
+		btnDeletar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnDeletar.addActionListener(new ActionListener() {//inicio evento botao deletar
 			public void actionPerformed(ActionEvent arg0) {
 				int resposta = JOptionPane.showConfirmDialog(null, "Deseja deletar esse dado?", "ALERTA!",
@@ -504,7 +519,7 @@ public class CadastrarAnimais {//teste3
 			}
 		});//fim evento botao deletar
 		btnDeletar.setEnabled(false);
-		btnDeletar.setBackground(SystemColor.controlHighlight);
+		btnDeletar.setBackground(new Color(245, 245, 245));
 		btnDeletar.setBounds(873, 602, 89, 23);
 		frmCadastroDeAnimais.getContentPane().add(btnDeletar);
 		
@@ -520,11 +535,13 @@ public class CadastrarAnimais {//teste3
 		
 		
 		tfDestino = new JTextField();
+		tfDestino.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfDestino.setBounds(506, 170, 164, 20);
 		frmCadastroDeAnimais.getContentPane().add(tfDestino);
 		tfDestino.setColumns(10);
 		
 		tfProcurar = new JTextField();
+		tfProcurar.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfProcurar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {//evento de apertar ENTER e mudar de componente
@@ -538,6 +555,7 @@ public class CadastrarAnimais {//teste3
 		tfProcurar.setColumns(10);
 		
 		btnProcurar = new JButton("Procurar");
+		btnProcurar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, null, null, null));
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {//inicio da açao do botao procurar
 				//variavel para delimitar o tamanho da tabela
@@ -546,7 +564,7 @@ public class CadastrarAnimais {//teste3
 				colocaDadosNaTabela(CrudAnimal.procuraAnimal(tfProcurar.getText(),animal ));	
 				int animal = new Animal().getIdAnimal();				
 				int tabel = tabela.getRowCount();
-				int linha = tabel*16;
+				int linha = tabel*17;
 				int valor = 23+linha;
 				scrollPane.setBounds(10, 253, 1054, valor);
 				if (!(tfProcurar.getText()).trim().equals("")) {
@@ -558,11 +576,12 @@ public class CadastrarAnimais {//teste3
 				
 			}
 		});//fim da açao do botao procurar
-		btnProcurar.setBackground(SystemColor.controlHighlight);
+		btnProcurar.setBackground(new Color(245, 245, 245));
 		btnProcurar.setBounds(351, 222, 89, 20);
 		frmCadastroDeAnimais.getContentPane().add(btnProcurar);
 		
 		JButton btnCadastrarNovaEspecie = new JButton("...");
+		btnCadastrarNovaEspecie.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnCadastrarNovaEspecie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {//açao do botao cadastrar especie
 				if(CadastrarEspecie.limit == 0) {
@@ -573,12 +592,13 @@ public class CadastrarAnimais {//teste3
 				}
 			}
 		});
-		btnCadastrarNovaEspecie.setBackground(SystemColor.controlHighlight);
+		btnCadastrarNovaEspecie.setBackground(new Color(245, 245, 245));
 		btnCadastrarNovaEspecie.setToolTipText("Cadastrar nova Especie");
 		btnCadastrarNovaEspecie.setBounds(675, 100, 20, 20);
 		frmCadastroDeAnimais.getContentPane().add(btnCadastrarNovaEspecie);
 		
 		JButton btnCadastrarNovaRaca = new JButton("...");
+		btnCadastrarNovaRaca.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnCadastrarNovaRaca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				indexCbEspecie = cbEspecie.getSelectedIndex();
@@ -592,7 +612,7 @@ public class CadastrarAnimais {//teste3
 			}
 		});
 		btnCadastrarNovaRaca.setToolTipText("Cadastrar nova Ra\u00E7a");
-		btnCadastrarNovaRaca.setBackground(SystemColor.controlHighlight);
+		btnCadastrarNovaRaca.setBackground(new Color(245, 245, 245));
 		btnCadastrarNovaRaca.setBounds(675, 135, 20, 20);
 		frmCadastroDeAnimais.getContentPane().add(btnCadastrarNovaRaca);
 		
@@ -689,7 +709,7 @@ public class CadastrarAnimais {//teste3
 					if (tabela.getRowCount() >= teste & scrollPane.getHeight()<=339) {
 						teste=1;
 						teste=+1;
-						int x = (teste*16)+scrollPane.getHeight();
+						int x = (teste*17)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 				}

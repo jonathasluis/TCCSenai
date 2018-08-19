@@ -468,9 +468,9 @@ public class NovaCompra {////
 	
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBackground(new Color(169, 169, 169));
+		scrollPane.setBackground(new Color(245, 245, 245));
 		scrollPane.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane.setBounds(10, 253, 1054, 23);
 		
 		frmCompraDeInsumos.getContentPane().add(scrollPane);

@@ -159,6 +159,7 @@ public class CadastrarFuncionarios {
 		panel.setLayout(new CardLayout(0, 0));
 		
 		lblImagem = new JLabel("");
+		lblImagem.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/128x128.png")));
 		lblImagem.setToolTipText("Clique 2 vezes");
 		lblImagem.addMouseListener(new MouseAdapter() {//inicio evento para escolher e abrir imagem
@@ -177,10 +178,14 @@ public class CadastrarFuncionarios {
 		panel.add(lblImagem, "name_12082521761208");
 		
 		scrollPane = new JScrollPane();
+		scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane.setBounds(10, 253, 1054, 23);
 		frmCadastrarFuncionarios.getContentPane().add(scrollPane);
 		
 		tabela = new JTable();
+		tabela.setSelectionBackground(SystemColor.activeCaption);
+		tabela.setGridColor(SystemColor.activeCaptionBorder);
+		tabela.setBackground(new Color(245, 245, 245));
 		tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tabela.addMouseListener(new MouseAdapter() {
 			@Override
@@ -244,6 +249,7 @@ public class CadastrarFuncionarios {
 		scrollPane.setViewportView(tabela);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(tfNome.getText().trim().equals("")) { //inicio do tratamento de informação para salvar novo funcionario
@@ -331,11 +337,12 @@ public class CadastrarFuncionarios {
 				colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
 			}
 		});
-		btnSalvar.setBackground(SystemColor.controlHighlight);
+		btnSalvar.setBackground(new Color(245, 245, 245));
 		btnSalvar.setBounds(975, 602, 89, 23);
 		frmCadastrarFuncionarios.getContentPane().add(btnSalvar);
 		
 		btnLimpar = new JButton("Limpar");
+		btnLimpar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {//evento do botao limpar
 				tfNome.setText(null);
@@ -356,11 +363,12 @@ public class CadastrarFuncionarios {
 				ftfPis.setValue(null);
 			}
 		});//fim evento botao limpar
-		btnLimpar.setBackground(SystemColor.controlHighlight);
+		btnLimpar.setBackground(new Color(245, 245, 245));
 		btnLimpar.setBounds(680, 602, 89, 23);
 		frmCadastrarFuncionarios.getContentPane().add(btnLimpar);
 		
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnCancelar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {//inicio do evento do botao cancelar
@@ -376,11 +384,12 @@ public class CadastrarFuncionarios {
 				}
 			}
 		});//fim do evento do botao cancelar
-		btnCancelar.setBackground(SystemColor.controlHighlight);
+		btnCancelar.setBackground(new Color(245, 245, 245));
 		btnCancelar.setBounds(776, 602, 89, 23);
 		frmCadastrarFuncionarios.getContentPane().add(btnCancelar);
 		
 		btnDeletar = new JButton("Deletar");//inicio do evento do botao deletar
+		btnDeletar.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int resposta = JOptionPane.showConfirmDialog(null, "Deseja deletar esse dado?", "ALERTA!",
@@ -399,11 +408,12 @@ public class CadastrarFuncionarios {
 			}
 		});//fim do evento do botao deletar
 		btnDeletar.setEnabled(false);
-		btnDeletar.setBackground(SystemColor.controlHighlight);
+		btnDeletar.setBackground(new Color(245, 245, 245));
 		btnDeletar.setBounds(876, 602, 89, 23);
 		frmCadastrarFuncionarios.getContentPane().add(btnDeletar);
 		
 		tfProcurar = new JTextField();
+		tfProcurar.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfProcurar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -417,6 +427,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(tfProcurar);
 		
 		btnProcurar = new JButton("Procurar");
+		btnProcurar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, null, null, null));
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
@@ -440,8 +451,8 @@ public class CadastrarFuncionarios {
 				}
 			}
 		});
-		btnProcurar.setBackground(SystemColor.controlHighlight);
-		btnProcurar.setBounds(351, 222, 89, 20);
+		btnProcurar.setBackground(new Color(245, 245, 245));
+		btnProcurar.setBounds(351, 222, 89, 23);
 		frmCadastrarFuncionarios.getContentPane().add(btnProcurar);
 		
 		JLabel lblNome = new JLabel("Nome:");
@@ -470,6 +481,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(lblSexo);
 		
 		tfNome = new JTextField();
+		tfNome.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfNome.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -483,6 +495,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(tfNome);
 		
 		tfRg = new JTextField();
+		tfRg.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfRg.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -496,6 +509,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(tfRg);
 		
 		ftfNascimento = new JFormattedTextField(maskaraData);
+		ftfNascimento.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		ftfNascimento.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -509,12 +523,14 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(ftfNascimento);
 		
 		rdbtnMasculino = new JRadioButton("Masculino");
+		rdbtnMasculino.setBackground(new Color(245, 245, 245));
 		rdbtnMasculino.setOpaque(false);
 		rdbtnMasculino.setSelected(true);
 		rdbtnMasculino.setBounds(89, 184, 83, 23);
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnMasculino);
 		
 		rdbtnFeminino = new JRadioButton("Feminino");
+		rdbtnFeminino.setBackground(new Color(245, 245, 245));
 		rdbtnFeminino.setOpaque(false);
 		rdbtnFeminino.setBounds(174, 184, 98, 23);
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnFeminino);
@@ -545,17 +561,20 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(lblDesligada);
 		
 		rdbtnAtivo = new JRadioButton("Ativo");
+		rdbtnAtivo.setBackground(new Color(245, 245, 245));
 		rdbtnAtivo.setOpaque(false);
 		rdbtnAtivo.setSelected(true);
 		rdbtnAtivo.setBounds(340, 184, 60, 23);
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnAtivo);
 		
 		rdbtnDesligado = new JRadioButton("Desligado");
+		rdbtnDesligado.setBackground(new Color(245, 245, 245));
 		rdbtnDesligado.setOpaque(false);
 		rdbtnDesligado.setBounds(396, 184, 83, 23);
 		frmCadastrarFuncionarios.getContentPane().add(rdbtnDesligado);
 		
 		ftfTelefone = new JFormattedTextField(maskaraTelefone);
+		ftfTelefone.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		ftfTelefone.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -568,6 +587,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(ftfTelefone);
 		
 		tfEmail = new JTextField();
+		tfEmail.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfEmail.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -581,6 +601,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(tfEmail);
 		
 		tfCargo = new JTextField();
+		tfCargo.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfCargo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -594,6 +615,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(tfCargo);
 		
 		tfSalario = new JTextField();
+		tfSalario.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.BLACK));
 		tfSalario.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -615,6 +637,7 @@ public class CadastrarFuncionarios {
 		bgStatus.add(rdbtnDesligado);
 		
 		ftfCpf = new JFormattedTextField(maskaraCpf);
+		ftfCpf.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		ftfCpf.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -647,6 +670,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(lblPis);
 		
 		ftfAdimissao = new JFormattedTextField(maskaraData);
+		ftfAdimissao.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		ftfAdimissao.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -659,6 +683,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(ftfAdimissao);
 		
 		ftfDemissao = new JFormattedTextField(maskaraData);
+		ftfDemissao.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		ftfDemissao.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -671,6 +696,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(ftfDemissao);
 		
 		ftfCarteira = new JFormattedTextField(maskaraTrabalho);
+		ftfCarteira.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		ftfCarteira.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -683,6 +709,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(ftfCarteira);
 		
 		ftfPis = new JFormattedTextField(maskaraPis);
+		ftfPis.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		ftfPis.setBounds(600, 154, 150, 20);
 		frmCadastrarFuncionarios.getContentPane().add(ftfPis);
 		

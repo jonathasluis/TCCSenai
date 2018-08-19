@@ -86,6 +86,11 @@ public class NovaVenda {
 	private JTextField tfNota;
 	private JButton btnCancelar;
 	
+	
+	
+	static int teste = 1; 
+	static int x1=1;
+	private JButton btnProcurar;
 
 	/**
 	 * Launch the application.
@@ -151,6 +156,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblTipoDoProduto);
 		
 		rdbtnAnimal = new JRadioButton("Animal");
+		rdbtnAnimal.setBackground(new Color(245, 245, 245));
 		rdbtnAnimal.setOpaque(false);
 		rdbtnAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -162,6 +168,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(rdbtnAnimal);
 		
 		rdbtnSubproduto = new JRadioButton("Subproduto");
+		rdbtnSubproduto.setBackground(new Color(245, 245, 245));
 		rdbtnSubproduto.setOpaque(false);
 		rdbtnSubproduto.setSelected(true);
 		rdbtnSubproduto.addActionListener(new ActionListener() {
@@ -174,6 +181,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(rdbtnSubproduto);
 		
 		rdbtnPlantio = new JRadioButton("Plantio");
+		rdbtnPlantio.setBackground(new Color(245, 245, 245));
 		rdbtnPlantio.setOpaque(false);
 		rdbtnPlantio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -195,6 +203,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblProduto);
 		
 		tfProduto = new JTextField();
+		tfProduto.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfProduto.setBounds(108, 111, 200, 20);
 		frmNovaVenda.getContentPane().add(tfProduto);
 		tfProduto.setColumns(10);
@@ -205,7 +214,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblAnimal);
 		
 		cbAnimal = new JComboBox<String>();
-		cbAnimal.setBackground(SystemColor.controlHighlight);
+		cbAnimal.setBackground(new Color(245, 245, 245));
 		cbAnimal.setBounds(120, 142, 188, 20);
 		frmNovaVenda.getContentPane().add(cbAnimal);
 		
@@ -215,6 +224,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblQuantidade);
 		
 		spinner = new JSpinner();
+		spinner.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spinner.setBounds(546, 142, 200, 20);
 		frmNovaVenda.getContentPane().add(spinner);
@@ -225,8 +235,9 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblPreco);
 		
 		tfPreco = new JTextField();
+		tfPreco.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfPreco.setColumns(10);
-		tfPreco.setBounds(886, 81, 178, 20);
+		tfPreco.setBounds(910, 81, 154, 20);
 		tfPreco.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -248,6 +259,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblCliente);
 		
 		tfCliente = new JTextField();
+		tfCliente.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfCliente.setColumns(10);
 		tfCliente.setBounds(546, 80, 200, 20);
 		frmNovaVenda.getContentPane().add(tfCliente);
@@ -258,7 +270,8 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblDataDaVenda);
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBackground(SystemColor.controlHighlight);
+		btnSalvar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, null, null, null));
+		btnSalvar.setBackground(new Color(245, 245, 245));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -315,6 +328,11 @@ public class NovaVenda {
 						JOptionPane.showMessageDialog(null, "Quandidade superior ao numero de animais!", "ALERTA", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
+					x1=0;
+					if (scrollPane.getHeight()<=339) {
+						int x = (teste*17)+scrollPane.getHeight();
+						scrollPane.setBounds(10, 253, 1054, x);
+					}
 					alteraAnimal(true,Integer.parseInt(spinner.getValue().toString()));
 					new CrudVendas().addvendas(venda);
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
@@ -344,7 +362,8 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(btnSalvar);
 		
 		btnLimpar = new JButton("Limpar");
-		btnLimpar.setBackground(SystemColor.controlHighlight);
+		btnLimpar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, null, null, null));
+		btnLimpar.setBackground(new Color(245, 245, 245));
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tfCliente.setText(null);
@@ -361,7 +380,8 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(btnLimpar);
 		
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBackground(SystemColor.controlHighlight);
+		btnCancelar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, null, null, null));
+		btnCancelar.setBackground(new Color(245, 245, 245));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (contadorEditar==0) {
@@ -384,15 +404,16 @@ public class NovaVenda {
 		String formatada = formato.format(data);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBackground(new Color(169, 169, 169));
+		scrollPane.setBackground(new Color(245, 245, 245));
 		scrollPane.setFont(new Font("Arial", Font.BOLD, 13));
-		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		scrollPane.setBounds(10, 253, 1054, 136);
+		scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		scrollPane.setBounds(10, 253, 1054, 23);
 		
 		frmNovaVenda.getContentPane().add(scrollPane);
 		
 		table = new JTable();
-		table.setSelectionBackground(new Color(51, 153, 255));
+		table.setGridColor(SystemColor.activeCaptionBorder);
+		table.setSelectionBackground(SystemColor.activeCaption);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -407,9 +428,8 @@ public class NovaVenda {
 		table.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		table.setIgnoreRepaint(true);
 		table.setFont(new Font("Arial", Font.PLAIN, 13));
-		table.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		table.setForeground(SystemColor.controlText);
-		table.setBackground(new Color(169, 169, 169));
+		table.setBackground(new Color(245, 245, 245));
 		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -443,24 +463,52 @@ public class NovaVenda {
 		scrollPane.setViewportView(table);
 		
 		ftfData = new JFormattedTextField(mask);
+		ftfData.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		ftfData.setText(formatada);
 		ftfData.setBounds(910, 111, 154, 20);
 		frmNovaVenda.getContentPane().add(ftfData);
 		
 		tfProcurar = new JTextField();
+		tfProcurar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode()==KeyEvent.VK_ENTER) {
+					btnProcurar.doClick();
+				}
+			}
+		});
+		tfProcurar.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfProcurar.setToolTipText("");
 		tfProcurar.setForeground(Color.BLACK);
 		tfProcurar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		tfProcurar.setColumns(10);
 		tfProcurar.setBounds(10, 222, 331, 20);
 		frmNovaVenda.getContentPane().add(tfProcurar);
+	
 		
-		JButton btnProcurar = new JButton("Proucurar");
-		btnProcurar.setForeground(Color.WHITE);
-		btnProcurar.setFont(new Font("Arial", Font.BOLD, 12));
-		btnProcurar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		btnProcurar.setBackground(Color.DARK_GRAY);
-		btnProcurar.setBounds(351, 222, 89, 20);
+		
+		btnProcurar = new JButton("Proucurar");
+		btnProcurar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//TRATAMENTO PARA AUMENTAR E DIMINUIR TABELA
+				criaTabela(new CrudVendas().procuraVendas(tfProcurar.getText().toString(), venda));
+				int tabel = table.getRowCount();
+				int linha = tabel*17;
+				int valor = 23+linha;
+				scrollPane.setBounds(10, 253, 1054, valor);
+				if (!(tfProcurar.getText()).trim().equals("")) {
+					if (table.getRowCount()==0) {
+						int x2 = 23;
+						scrollPane.setBounds(10, 253, 1054, x2);
+					}
+				}
+			}
+		});
+		btnProcurar.setForeground(new Color(0, 0, 0));
+		btnProcurar.setFont(new Font("Tahoma", btnProcurar.getFont().getStyle(), btnProcurar.getFont().getSize()));
+		btnProcurar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, null, null, null));
+		btnProcurar.setBackground(new Color(245, 245, 245));
+		btnProcurar.setBounds(351, 222, 89, 23);
 		frmNovaVenda.getContentPane().add(btnProcurar);
 		
 		JLabel lblNumeroDaNota = new JLabel("Numero da Nota:");
@@ -469,6 +517,7 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblNumeroDaNota);
 		
 		tfNota = new JTextField();
+		tfNota.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfNota.setColumns(10);
 		tfNota.setBounds(546, 111, 200, 20);
 		frmNovaVenda.getContentPane().add(tfNota);
@@ -559,7 +608,19 @@ public class NovaVenda {
 				
 				tabela.addRow(new Object[] {rs.getInt("idvendas"),tipo,rs.getString("produto"),animal,rs.getString("cliente"),
 	 					rs.getString("numeronota"),rs.getInt("qtd"),rs.getDouble("preco"),rs.getString("datavenda")});
+				  
+
+				//IF PARA FAZER A TABELA AUMENTAR 
 				
+				if (x1==1) {
+					if (tabela.getRowCount() >= teste & scrollPane.getHeight()<=339) {
+						teste=1;
+						teste=+1;
+						int x = (teste*17)+scrollPane.getHeight();
+						scrollPane.setBounds(10, 253, 1054, x);
+					}
+				}
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

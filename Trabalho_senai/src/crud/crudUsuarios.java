@@ -59,7 +59,7 @@ public class crudUsuarios {
 		}
 	}
 	
-	ResultSet visualizarUsuario(Usuario usuario) {
+	public ResultSet visualizarUsuario(Usuario usuario) {
 		ResultSet tabela = null;
 		String sql = "SELECT*FROM usuario where idusuario=?";
 		try {

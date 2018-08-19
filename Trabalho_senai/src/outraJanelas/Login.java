@@ -41,7 +41,8 @@ public class Login {//
 	String titulo = "Nova senha";
 	String novaSenha;
 	String msg;
-
+	Usuario usuario = new Usuario();
+	static int idUsu;
 	/**
 	 * Launch the application.
 	 */
@@ -202,6 +203,7 @@ public class Login {//
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				logar();
+			
 			}			
 		});
 		
@@ -234,6 +236,7 @@ public class Login {//
 							Usuario usuario = new Usuario();
 							usuario.setEmail(rs.getString("email"));
 							usuario.setIdUsuario(rs.getInt("idusuario"));
+							 idUsu = usuario.getIdUsuario();
 							usuario.setSenha(rs.getString("senha"));
 							usuario.setUsuario(rs.getString("usuario"));
 							Pergunta.usuario = usuario;

@@ -99,8 +99,7 @@ public class Principal {
 	 */
 	private void initialize() {
 		
-		
-		
+	
 		frmPrincipal = new JFrame();
 		frmPrincipal.setType(Type.POPUP);
 		frmPrincipal.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/32x32.png")));
@@ -223,8 +222,8 @@ public class Principal {
 		btnUsuario.setBorderPainted(false);
 		btnUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Usuario.main(null);
-				//frmPrincipal.setVisible(false);
+				Usuario.main(null);
+				frmPrincipal.setVisible(false);
 			}
 		});
 		btnUsuario.setContentAreaFilled(false);
