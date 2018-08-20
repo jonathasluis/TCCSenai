@@ -229,6 +229,7 @@ public class NovaFazenda {
 				lblImg.setIcon(new ImageIcon(NovaFazenda.class.getResource("/img/128x128.png")));
 				tfQtdAnimais.setText("0");
 				tfQtdFuncionarios.setText("0");
+				img=null;
 			}
 		});
 		btnLimpar.setBounds(676, 602, 89, 23);

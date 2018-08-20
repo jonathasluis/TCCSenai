@@ -38,11 +38,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -53,7 +50,6 @@ import JanelasFuncionarios.CadastrarFuncionarios;
 import banco.Conexao;
 import crud.CrudAnimal;
 import crud.CrudVendas;
-
 import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
@@ -203,6 +199,16 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblProduto);
 		
 		tfProduto = new JTextField();
+		tfProduto.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode()==KeyEvent.VK_ENTER) {
+					tfCliente.requestFocus();
+				}
+					
+				
+			}
+		});
 		tfProduto.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfProduto.setBounds(108, 111, 200, 20);
 		frmNovaVenda.getContentPane().add(tfProduto);
@@ -224,6 +230,14 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblQuantidade);
 		
 		spinner = new JSpinner();
+		spinner.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					tfPreco.requestFocus();
+				}
+			}
+		});
 		spinner.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spinner.setBounds(546, 142, 200, 20);
@@ -250,6 +264,12 @@ public class NovaVenda {
 			         e.consume();
 			    }
 			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					ftfData.requestFocus();
+				}
+			}
 		});
 		frmNovaVenda.getContentPane().add(tfPreco);
 		
@@ -259,6 +279,14 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblCliente);
 		
 		tfCliente = new JTextField();
+		tfCliente.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					tfNota.requestFocus();
+				}
+			}
+		});
 		tfCliente.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfCliente.setColumns(10);
 		tfCliente.setBounds(546, 80, 200, 20);
@@ -491,7 +519,7 @@ public class NovaVenda {
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//TRATAMENTO PARA AUMENTAR E DIMINUIR TABELA
-				criaTabela(new CrudVendas().procuraVendas(tfProcurar.getText().toString(), venda));
+				criaTabela(CrudVendas.procuraVendas(tfProcurar.getText().toString(), venda));
 				int tabel = table.getRowCount();
 				int linha = tabel*17;
 				int valor = 23+linha;
@@ -517,6 +545,14 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(lblNumeroDaNota);
 		
 		tfNota = new JTextField();
+		tfNota.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					spinner.requestFocus();
+				}
+			}
+		});
 		tfNota.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfNota.setColumns(10);
 		tfNota.setBounds(546, 111, 200, 20);

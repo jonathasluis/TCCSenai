@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -43,6 +44,7 @@ import DAO.Compras;
 import DAO.Vendas;
 import JanelasAnimal.CadastrarAnimais;
 import JanelasFuncionarios.CadastrarFuncionarios;
+import banco.Conexao;
 import crud.CrudCompras;
 import crud.CrudVendas;
 import outraJanelas.Login;
@@ -505,17 +507,8 @@ public class Total {//
 		compras.setIdFazenda(Principal.fazenda.getIdFazenda());
 		vendas.setIdFazenda(Principal.fazenda.getIdFazenda());
 		
-	
-		
-		
-		
-	
 		menu();
 		
-	
-		
-		
-	
 		colocaDadosNaTabelaReceita(CrudVendas.selecionaVendas(vendas));
 		colocaDadosNaTabelaGasto(CrudCompras.selecionaCompras(compras));
 	}
@@ -562,6 +555,8 @@ public class Total {//
 	}
 	
 	void colocaDadosNaTabelaReceita(ResultSet rs) {
+		ResultSet dadosAnimal=null;
+		String produto=null;
 		
 		DefaultTableModel modelo = (DefaultTableModel) tabelaReceita.getModel();
 		modelo.setNumRows(0);
@@ -571,7 +566,23 @@ public class Total {//
 		btnGrficoBarra.setEnabled(true);
 		try {
 			while (rs.next()) {
-				modelo.addRow(new Object[] {rs.getString("produto"),rs.getString("preco"),rs.getString("datavenda")});	
+				
+				if (rs.getString("produto")==(null)) {
+					String sql = "select * from animais where idanimal=?";
+					PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+					stmt.setInt(1, rs.getInt("idanimal"));
+					dadosAnimal = stmt.executeQuery();
+					stmt.execute();
+					stmt.close();
+					
+					if (dadosAnimal.next()) {
+						produto=dadosAnimal.getString("nomelote")+" (lote de animais)";
+					}
+				}else {
+					produto=rs.getString("produto");
+				}
+				
+				modelo.addRow(new Object[] {produto,rs.getString("preco"),rs.getString("datavenda")});	
 			}
 			
 			//tabela

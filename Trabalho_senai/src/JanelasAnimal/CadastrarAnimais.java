@@ -473,22 +473,8 @@ public class CadastrarAnimais {//teste3
 				rdbtnMacho.setSelected(true);
 				lblImagem.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/128x128.png")));
 				lblImagem.setHorizontalAlignment(SwingConstants.CENTER);
-				
-				ftfDataCompra = new JFormattedTextField(mask);//define a mascara
-				ftfDataCompra.addKeyListener(new KeyAdapter() {
-					@Override
-					public void keyPressed(KeyEvent e) {//evento de apertar ENTER e mudar de componente
-						if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-							spinnerQuantidade.requestFocus();
-						}
-					}
-				});
-				ftfDataCompra.setText(formatada);
-				ftfDataCompra.setToolTipText("aaaa-mm-dd");
-				ftfDataCompra.setBounds(140, 135, 164, 20);
-				frmCadastroDeAnimais.getContentPane().add(ftfDataCompra);
-
 				ftfDataNascimento.setValue(null);
+				img=null;
 			}
 		});//fim ação do botão limpar
 		btnLimpar.setBackground(new Color(245, 245, 245));

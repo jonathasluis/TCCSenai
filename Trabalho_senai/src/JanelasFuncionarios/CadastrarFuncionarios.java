@@ -316,8 +316,6 @@ public class CadastrarFuncionarios {
 					funcionario.addFun(DAOFuncionario);
 					btnLimpar.doClick();
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
-					
-					
 				}
 				if(contadorParaEditar==1) {
 					//tabela
@@ -361,6 +359,7 @@ public class CadastrarFuncionarios {
 				ftfDemissao.setValue(null);
 				ftfCarteira.setValue(null);
 				ftfPis.setValue(null);
+				img=null;
 			}
 		});//fim evento botao limpar
 		btnLimpar.setBackground(new Color(245, 245, 245));
@@ -396,6 +395,7 @@ public class CadastrarFuncionarios {
 						JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 				if(resposta==JOptionPane.YES_OPTION) {
 					funcionario.removeFun(DAOFuncionario);
+					btnCancelar.doClick();
 					colocaDadosNaTabela(CrudFuncionarios.selecionaFuncionario(DAOFuncionario));
 					//tabela
 					x1=0;
@@ -742,6 +742,8 @@ public class CadastrarFuncionarios {
 	
 	
 	void preencherDAOFuncionarioParaSalvarNovo() {
+		
+		
 		DAOFuncionario.setNome(tfNome.getText());
 		DAOFuncionario.setDataDeNascimento(ftfNascimento.getText());
 		DAOFuncionario.setCpf(ftfCpf.getText());
