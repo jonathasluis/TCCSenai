@@ -35,10 +35,10 @@ public class Login {//
 	private JPasswordField pfSenha;
 	String armazenar ;
 	private JButton btnEntrar;
-	String emailSistema = "projetojavasenai@gmail.com";//o do teo
-	String senha = "senai123";
+	String emailSistema = "gan.gerenciamentodeagronegocio@gmail.com";//o novo
+	String senha = "gansenha@123";
 	String destino;
-	String titulo = "Nova senha";
+	String titulo = "Nova senha GAN(Gereciamento de Agronegócio)";
 	String novaSenha;
 	String msg;
 	Usuario usuario = new Usuario();
@@ -149,7 +149,7 @@ public class Login {//
 					if(rs.next()) { // verificaçao se tem usurio
 						destino = rs.getString("email");
 						novaSenha = gerarSenhaAleatoria();
-						msg = "sua nova senha é "+novaSenha;
+						msg = "Sua nova senha "+tfUsuario.getText()+" é: "+novaSenha;
 						
 					}else {
 						JOptionPane.showMessageDialog(null, "<html><body><p width='150px' align='center'>O usuario inserido não "+ "\n<html><body><p width='150px'"

@@ -440,8 +440,8 @@ public class NovaVenda {
 		frmNovaVenda.getContentPane().add(scrollPane);
 		
 		table = new JTable();
-		table.setGridColor(SystemColor.activeCaptionBorder);
-		table.setSelectionBackground(SystemColor.activeCaption);
+		table.setGridColor(SystemColor.activeCaption);
+		table.setSelectionBackground(new Color(135, 206, 250));
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {

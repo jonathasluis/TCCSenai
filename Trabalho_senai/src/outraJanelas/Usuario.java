@@ -36,6 +36,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Usuario {
 
@@ -53,6 +55,12 @@ public class Usuario {
 	int teste = 0;
 	private JPasswordField pfSenhaNova2;
 	private JTextArea textArea;
+	String emailEnviar = "ganenviar@gmail.com";
+	String senha = "ganenviar@123";
+	String destino;
+	String msg;
+	String titulo;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -109,6 +117,14 @@ public class Usuario {
 		frmUsuario.getContentPane().add(label);
 		
 		tfNome = new JTextField();
+		tfNome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode()==KeyEvent.VK_ENTER) {
+					tfEmail.requestFocus();
+				}
+			}
+		});
 		tfNome.setEnabled(false);
 		tfNome.setColumns(10);
 		tfNome.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
@@ -121,6 +137,14 @@ public class Usuario {
 		frmUsuario.getContentPane().add(lblEmail);
 		
 		tfEmail = new JTextField();
+		tfEmail.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					pfSenha.requestFocus();
+				}
+			}
+		});
 		tfEmail.setEnabled(false);
 		tfEmail.setColumns(10);
 		tfEmail.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
@@ -133,6 +157,14 @@ public class Usuario {
 		frmUsuario.getContentPane().add(lblSenha);
 		
 		pfSenha = new JPasswordField();
+		pfSenha.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					pfSenhaNova.requestFocus();
+				}
+			}
+		});
 		pfSenha.setEnabled(false);
 		pfSenha.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		pfSenha.setBounds(732, 66, 295, 20);
@@ -144,6 +176,14 @@ public class Usuario {
 		frmUsuario.getContentPane().add(lblNovaSenha);
 		
 		pfSenhaNova = new JPasswordField();
+		pfSenhaNova.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					pfSenhaNova2.requestFocus();
+				}
+			}
+		});
 		pfSenhaNova.setEditable(false);
 		pfSenhaNova.setEnabled(false);
 		pfSenhaNova.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
@@ -211,6 +251,13 @@ public class Usuario {
 		btnEnviar = new JButton("Enviar");
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				msg=textArea.getText()+"  /Entrar em contato com "+tfEmail.getText();
+				titulo="GAN feedback de "+tfNome.getText();
+				destino="gan.gerenciamentodeagronegocio@gmail.com";
+				new EnviarEmail().enviarEmail(emailEnviar, senha, destino, titulo, msg);
+				JOptionPane.showMessageDialog(null, "Seu relatório foi enviado com sucesso!"+
+				" Entraremos em contato o mais breve possível, obrigado pela compreensão!");
+				btnLimpar.doClick();
 			}
 		});
 		btnEnviar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -267,6 +314,7 @@ public class Usuario {
 		frmUsuario.getContentPane().add(btnCancelar);
 		
 		chckbxAlterarDados = new JCheckBox("Alterar dados");
+		chckbxAlterarDados.setOpaque(false);
 		chckbxAlterarDados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 					if (chckbxAlterarDados.isSelected()) {
@@ -319,15 +367,21 @@ public class Usuario {
 		
 		JLabel lblRelatarErros = new JLabel("Relatar erros");
 		lblRelatarErros.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRelatarErros.setFont(new Font("Tahoma", Font.BOLD, 22));
+		lblRelatarErros.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblRelatarErros.setBounds(10, 207, 1054, 25);
 		frmUsuario.getContentPane().add(lblRelatarErros);
 		
 		textArea = new JTextArea();
+		textArea.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		textArea.setWrapStyleWord(true);
 		textArea.setLineWrap(true);
 		textArea.setBounds(47, 257, 980, 277);
 		frmUsuario.getContentPane().add(textArea);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(Usuario.class.getResource("/img/teste13.jpg")));
+		label_1.setBounds(0, -24, 1074, 670);
+		frmUsuario.getContentPane().add(label_1);
 		
 		
 		

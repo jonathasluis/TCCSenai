@@ -51,6 +51,7 @@ import outraJanelas.Login;
 import outraJanelas.NovaFazenda;
 import outraJanelas.Pergunta;
 import outraJanelas.Principal;
+import java.awt.SystemColor;
 
 public class Total {//
 
@@ -175,11 +176,15 @@ public class Total {//
 		frmRelattio.getContentPane().add(label);
 		
 		scrollPaneReceita = new JScrollPane();
+		scrollPaneReceita.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPaneReceita.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPaneReceita.setBounds(545, 250, 519, 23);
 		frmRelattio.getContentPane().add(scrollPaneReceita);
 		
 		tabelaReceita = new JTable();
+		tabelaReceita.setSelectionBackground(new Color(135, 206, 250));
+		tabelaReceita.setGridColor(SystemColor.activeCaption);
+		tabelaReceita.setBackground(new Color(245, 245, 245));
 		tabelaReceita.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -424,6 +429,7 @@ public class Total {//
 		frmRelattio.getContentPane().add(painel);
 		
 		btnGraficoSetor = new JButton("Gr\u00E1fico de setor");
+		btnGraficoSetor.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnGraficoSetor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				GraficoPizza.main(null);
@@ -433,6 +439,8 @@ public class Total {//
 		frmRelattio.getContentPane().add(btnGraficoSetor);
 		
 		btnGrficoBarra = new JButton("Gr\u00E1fico de barra");
+		btnGrficoBarra.setBackground(new Color(245, 245, 245));
+		btnGrficoBarra.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnGrficoBarra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				GraficoBarra.main(null);
@@ -442,10 +450,15 @@ public class Total {//
 		frmRelattio.getContentPane().add(btnGrficoBarra);
 		
 		scrollPaneGasto = new JScrollPane();
+		scrollPaneGasto.setBackground(new Color(245, 245, 245));
+		scrollPaneGasto.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPaneGasto.setBounds(10, 250, 519, 23);
 		frmRelattio.getContentPane().add(scrollPaneGasto);
 		
 		tabelaGasto = new JTable();
+		tabelaGasto.setGridColor(SystemColor.activeCaption);
+		tabelaGasto.setSelectionBackground(new Color(135, 206, 250));
+		tabelaGasto.setBackground(new Color(245, 245, 245));
 		tabelaGasto.setModel(new DefaultTableModel(
 			new Object[][] {
 			},

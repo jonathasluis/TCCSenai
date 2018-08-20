@@ -95,6 +95,7 @@ public class CadastrarFuncionarios {
 	//tabela
 		static int teste = 1; 
 		static int x1=1;
+		private JLabel lblSemdados;
 		//tabela
 	
 	/**
@@ -183,8 +184,8 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(scrollPane);
 		
 		tabela = new JTable();
-		tabela.setSelectionBackground(SystemColor.activeCaption);
-		tabela.setGridColor(SystemColor.activeCaptionBorder);
+		tabela.setSelectionBackground(new Color(135, 206, 250));
+		tabela.setGridColor(SystemColor.activeCaption);
 		tabela.setBackground(new Color(245, 245, 245));
 		tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tabela.addMouseListener(new MouseAdapter() {
@@ -309,6 +310,7 @@ public class CadastrarFuncionarios {
 					//tabela
 					x1=0;
 					if (scrollPane.getHeight()<=339) {
+						lblSemdados.setVisible(false);
 						int x = (teste*16)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
@@ -400,10 +402,14 @@ public class CadastrarFuncionarios {
 					//tabela
 					x1=0;
 					if (tabela.getRowCount()<=19) {
-						int x = scrollPane.getHeight()-16;
+						int x = scrollPane.getHeight()-36;
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 					//tabela
+					if (tabela.getRowCount()== 0) {
+						scrollPane.setVisible(false);
+						lblSemdados.setVisible(true);
+					}
 				}
 			}
 		});//fim do evento do botao deletar
@@ -433,21 +439,22 @@ public class CadastrarFuncionarios {
 				DAOFuncionario.setIdFazenda(Principal.fazenda.getIdFazenda());
 				//variavel para delimitar o tamanho da tabela
 				x1=0;
+				if (!(tabela.getRowCount()==0)) {
 				//tratamento para almentar a tabela
 				colocaDadosNaTabela(CrudFuncionarios.procurafuncionario(tfProcurar.getText(),DAOFuncionario ));	
 				int animal = new Animal().getIdAnimal();
 				
 				int tabel = tabela.getRowCount();
-				int linha = tabel*16;
-				int valor = 39
-						
-						+linha;
+				int linha = tabel*17;
+				int valor = 40+linha;
 				scrollPane.setBounds(10, 253, 1054, valor);
 				if (!(tfProcurar.getText()).trim().equals("")) {
 					if (tabela.getRowCount()==0) {
 						int x2 = 23;
 						scrollPane.setBounds(10, 253, 1054, x2);
 					}
+					
+				}
 				}
 			}
 		});
@@ -720,6 +727,12 @@ public class CadastrarFuncionarios {
 		lblIcon.setIcon(icon);
 		frmCadastrarFuncionarios.getContentPane().add(lblIcon);
 		
+		lblSemdados = new JLabel("Sem dados salvos!");
+		lblSemdados.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSemdados.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblSemdados.setBounds(10, 281, 1054, 25);
+		frmCadastrarFuncionarios.getContentPane().add(lblSemdados);
+		
 		JLabel lblFundo = new JLabel("PIS:");
 		lblFundo.setIcon(new ImageIcon(CadastrarFuncionarios.class.getResource("/img/Teste13.jpg")));
 		lblFundo.setBounds(0, -15, 1074, 670);
@@ -736,6 +749,7 @@ public class CadastrarFuncionarios {
 				//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
 				if (tabela.getRowCount()== 0) {
 					scrollPane.setVisible(false);
+					lblSemdados.setVisible(true);
 				}
 				//tabela
 	}
@@ -821,7 +835,8 @@ public class CadastrarFuncionarios {
 					if (tabela.getRowCount() >= teste & scrollPane.getHeight()<=339) {
 						teste=1;
 						teste=+1;
-						int x = (teste*24)+scrollPane.getHeight();
+						lblSemdados.setVisible(false);
+						int x = (teste*35)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 				}

@@ -126,6 +126,7 @@ public class NovaFazenda {
 		panel.setLayout(new CardLayout(0, 0));
 		
 		lblImg = new JLabel("");
+		lblImg.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		lblImg.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -143,7 +144,8 @@ public class NovaFazenda {
 		panel.add(lblImg, "name_20449716211995");
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBackground(SystemColor.controlHighlight);
+		btnSalvar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnSalvar.setBackground(new Color(245, 245, 245));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(tfNome.getText().trim().equals("")) {
@@ -218,6 +220,7 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(btnSalvar);
 		
 		btnLimpar = new JButton("Limpar");
+		btnLimpar.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(245, 245, 245), null, null, null));
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tfEscritura.setText(null);
@@ -233,10 +236,11 @@ public class NovaFazenda {
 			}
 		});
 		btnLimpar.setBounds(676, 602, 89, 23);
-		btnLimpar.setBackground(SystemColor.controlHighlight);
+		btnLimpar.setBackground(new Color(245, 245, 245));
 		frmNovaFazenda.getContentPane().add(btnLimpar);
 		
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (contadorEditar==0) {
@@ -252,10 +256,11 @@ public class NovaFazenda {
 			}
 		});
 		btnCancelar.setBounds(778, 602, 89, 23);
-		btnCancelar.setBackground(SystemColor.controlHighlight);
+		btnCancelar.setBackground(new Color(245, 245, 245));
 		frmNovaFazenda.getContentPane().add(btnCancelar);
 		
 		btnDeletar = new JButton("Deletar");
+		btnDeletar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int resposta = JOptionPane.showConfirmDialog(null, "Todos os dados dessa Fazenda serão excluidos,deseja continuar", "ALERTA!",
@@ -284,7 +289,7 @@ public class NovaFazenda {
 		});
 		btnDeletar.setEnabled(false);
 		btnDeletar.setBounds(876, 602, 89, 23);
-		btnDeletar.setBackground(SystemColor.controlHighlight);
+		btnDeletar.setBackground(new Color(245, 245, 245));
 		frmNovaFazenda.getContentPane().add(btnDeletar);
 		
 		JLabel lblNonaFazenda = new JLabel("Fazendas");
@@ -294,7 +299,7 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(lblNonaFazenda);
 		
 		tfNome = new JTextField();
-		tfNome.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
+		tfNome.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfNome.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
@@ -313,7 +318,7 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(lblNome);
 		
 		tfTamanho = new JTextField();
-		tfTamanho.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
+		tfTamanho.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfTamanho.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
@@ -332,7 +337,7 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(lblTamanho);
 		
 		tfEscritura = new JTextField();
-		tfEscritura.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
+		tfEscritura.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfEscritura.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -351,7 +356,7 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(lblEscritura);
 		
 		tfProprietario = new JTextField();
-		tfProprietario.setBorder(new LineBorder(SystemColor.activeCaptionBorder));
+		tfProprietario.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfProprietario.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -376,6 +381,8 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(lblDescrio_1);
 		
 		scrollPane = new JScrollPane();
+		scrollPane.setBackground(new Color(245, 245, 245));
+		scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setOpaque(false);
 		scrollPane.setInheritsPopupMenu(true);
@@ -383,6 +390,9 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(scrollPane);
 		
 		tabela = new JTable();
+		tabela.setSelectionBackground(new Color(135, 206, 250));
+		tabela.setGridColor(SystemColor.activeCaption);
+		tabela.setBackground(new Color(245, 245, 245));
 		tabela.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -459,6 +469,7 @@ public class NovaFazenda {
 		frmNovaFazenda.getContentPane().add(scrollPane_1);
 		
 		taDescricao = new JTextArea();
+		taDescricao.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		taDescricao.setLineWrap(true);
 		taDescricao.setWrapStyleWord(true);
 		scrollPane_1.setViewportView(taDescricao);

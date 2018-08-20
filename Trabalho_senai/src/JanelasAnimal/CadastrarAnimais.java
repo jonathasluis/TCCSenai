@@ -102,6 +102,7 @@ public class CadastrarAnimais {//teste3
 	//tabela
 	
 	static int indexCbEspecie;
+	private JLabel lblSemdados;
 	/**
 	 *
 	 * Launch the application.
@@ -316,8 +317,8 @@ public class CadastrarAnimais {//teste3
 		frmCadastroDeAnimais.getContentPane().add(scrollPane);
 		
 		tabela = new JTable();
-		tabela.setSelectionBackground(SystemColor.activeCaption);
-		tabela.setGridColor(SystemColor.activeCaptionBorder);
+		tabela.setSelectionBackground(new Color(135, 206, 250));
+		tabela.setGridColor(SystemColor.activeCaption);
 		tabela.setBackground(new Color(245, 245, 245));
 		tabela.addMouseListener(new MouseAdapter() {
 			@Override
@@ -414,6 +415,7 @@ public class CadastrarAnimais {//teste3
 					x1=0;
 					if (scrollPane.getHeight()<=339) {
 						int x = (teste*17)+scrollPane.getHeight();
+						lblSemdados.setVisible(false);
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 					//tabela
@@ -499,7 +501,11 @@ public class CadastrarAnimais {//teste3
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 					//tabela
-					
+					if (tabela.getRowCount()== 0) {
+						lblSemdados.setVisible(true);
+						scrollPane.setVisible(false);
+					}
+
 					
 				}
 			}
@@ -547,6 +553,7 @@ public class CadastrarAnimais {//teste3
 				//variavel para delimitar o tamanho da tabela
 				x1=0;
 				//tratamento para almentar a tabela
+				if (!(tabela.getRowCount()==0)) {
 				colocaDadosNaTabela(CrudAnimal.procuraAnimal(tfProcurar.getText(),animal ));	
 				int animal = new Animal().getIdAnimal();				
 				int tabel = tabela.getRowCount();
@@ -559,7 +566,7 @@ public class CadastrarAnimais {//teste3
 						scrollPane.setBounds(10, 253, 1054, x2);
 					}
 				}
-				
+				}
 			}
 		});//fim da açao do botao procurar
 		btnProcurar.setBackground(new Color(245, 245, 245));
@@ -609,6 +616,12 @@ public class CadastrarAnimais {//teste3
 		lblIcon.setIcon(icon);
 		frmCadastroDeAnimais.getContentPane().add(lblIcon);
 		
+		lblSemdados = new JLabel("Sem dados salvos!");
+		lblSemdados.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSemdados.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblSemdados.setBounds(10, 294, 1054, 25);
+		frmCadastroDeAnimais.getContentPane().add(lblSemdados);
+		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/Teste13.jpg")));
 		label_1.setBounds(0, 0, 1074, 636);
@@ -626,6 +639,7 @@ public class CadastrarAnimais {//teste3
 		//tabela
 		//IF PARA VERIFICAR SE A TABLE ESTIVER VAZIA E DEIXAR VISIBLE.(FALSE)
 		if (tabela.getRowCount()== 0) {
+			lblSemdados.setVisible(true);
 			scrollPane.setVisible(false);
 		}
 		//tabela
@@ -695,6 +709,7 @@ public class CadastrarAnimais {//teste3
 					if (tabela.getRowCount() >= teste & scrollPane.getHeight()<=339) {
 						teste=1;
 						teste=+1;
+						lblSemdados.setVisible(false);
 						int x = (teste*17)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
 					}

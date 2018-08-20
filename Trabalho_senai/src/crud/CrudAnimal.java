@@ -76,7 +76,7 @@ public class CrudAnimal {
 	
 	public static ResultSet selecionaAnimais(Animal animal) {
 		ResultSet tabela = null;
-		String sql = "SELECT * FROM animais where idfazenda = ? order by nomeLote";
+		String sql = "SELECT * FROM animais where idfazenda = ? and idanimal>2 order by nomeLote";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setInt(1, animal.getIdFazenda());
@@ -93,7 +93,7 @@ public class CrudAnimal {
 	
 	public static ResultSet procuraAnimal(String letra,Animal animal) {
 		ResultSet tabela = null;
-		String sql = "SELECT * FROM animais WHERE nomelote LIKE ? and idfazenda = ? order by nomeLote";
+		String sql = "SELECT * FROM animais WHERE nomelote LIKE ? and idfazenda = ? and idanimal>2  order by nomeLote";
 		try {
 			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
 			stmt.setString(1, "%"+letra+"%");
