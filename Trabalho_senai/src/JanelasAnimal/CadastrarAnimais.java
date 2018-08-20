@@ -59,6 +59,7 @@ import JanelasComtabil.Total;
 import JanelasFuncionarios.CadastrarFuncionarios;
 import banco.Conexao;
 import crud.CrudAnimal;
+import crud.CrudCompras;
 import crud.CrudFazenda;
 
 import outraJanelas.Login;
@@ -137,7 +138,7 @@ public class CadastrarAnimais {//teste3
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}//fim formatação mascara
-		
+		animal.setIdFazenda(Principal.fazenda.getIdFazenda());
 		frmCadastroDeAnimais = new JFrame();
 		frmCadastroDeAnimais.setIconImage(Toolkit.getDefaultToolkit().getImage(CadastrarAnimais.class.getResource("/img/32x32.png")));
 		frmCadastroDeAnimais.setTitle("Cadastro de Animais");
@@ -567,6 +568,10 @@ public class CadastrarAnimais {//teste3
 					}
 				}
 				}
+					new CrudAnimal();
+					colocaDadosNaTabela(CrudAnimal.selecionaAnimais(CadastrarAnimais.this.animal));	
+				
+				
 			}
 		});//fim da açao do botao procurar
 		btnProcurar.setBackground(new Color(245, 245, 245));

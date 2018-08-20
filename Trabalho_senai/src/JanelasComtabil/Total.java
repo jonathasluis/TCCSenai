@@ -429,6 +429,7 @@ public class Total {//
 		frmRelattio.getContentPane().add(painel);
 		
 		btnGraficoSetor = new JButton("Gr\u00E1fico de setor");
+		btnGraficoSetor.setBackground(new Color(245, 245, 245));
 		btnGraficoSetor.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnGraficoSetor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -499,7 +500,7 @@ public class Total {//
 		lblSemDados1 = new JLabel("Sem dados salvos!");
 		lblSemDados1.setVisible(false);
 		lblSemDados1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSemDados1.setForeground(Color.BLACK);
+		lblSemDados1.setForeground(new Color(0, 0, 0));
 		lblSemDados1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblSemDados1.setBounds(147, 264, 217, 40);
 		frmRelattio.getContentPane().add(lblSemDados1);
@@ -507,7 +508,7 @@ public class Total {//
 		lblSemdados2 = new JLabel("Sem dados salvos!");
 		lblSemdados2.setVisible(false);
 		lblSemdados2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSemdados2.setForeground(Color.BLACK);
+		lblSemdados2.setForeground(new Color(0, 0, 0));
 		lblSemdados2.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblSemdados2.setBounds(711, 264, 206, 40);
 		frmRelattio.getContentPane().add(lblSemdados2);

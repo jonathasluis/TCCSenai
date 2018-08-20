@@ -180,7 +180,7 @@ public class CadastrarFuncionarios {
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		scrollPane.setBounds(10, 253, 1054, 23);
+		scrollPane.setBounds(10, 253, 1054, 42);
 		frmCadastrarFuncionarios.getContentPane().add(scrollPane);
 		
 		tabela = new JTable();
@@ -311,7 +311,7 @@ public class CadastrarFuncionarios {
 					x1=0;
 					if (scrollPane.getHeight()<=339) {
 						lblSemdados.setVisible(false);
-						int x = (teste*16)+scrollPane.getHeight();
+						int x = (teste*18)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 					//tabela
@@ -390,7 +390,7 @@ public class CadastrarFuncionarios {
 		frmCadastrarFuncionarios.getContentPane().add(btnCancelar);
 		
 		btnDeletar = new JButton("Deletar");//inicio do evento do botao deletar
-		btnDeletar.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		btnDeletar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int resposta = JOptionPane.showConfirmDialog(null, "Deseja deletar esse dado?", "ALERTA!",
@@ -402,7 +402,7 @@ public class CadastrarFuncionarios {
 					//tabela
 					x1=0;
 					if (tabela.getRowCount()<=19) {
-						int x = scrollPane.getHeight()-36;
+						int x = (scrollPane.getHeight()-16);
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 					//tabela
@@ -443,18 +443,22 @@ public class CadastrarFuncionarios {
 				//tratamento para almentar a tabela
 				colocaDadosNaTabela(CrudFuncionarios.procurafuncionario(tfProcurar.getText(),DAOFuncionario ));	
 				int animal = new Animal().getIdAnimal();
-				
 				int tabel = tabela.getRowCount();
-				int linha = tabel*17;
-				int valor = 40+linha;
+				int linha = tabel*15;
+				int valor = 46+linha;
 				scrollPane.setBounds(10, 253, 1054, valor);
 				if (!(tfProcurar.getText()).trim().equals("")) {
 					if (tabela.getRowCount()==0) {
+						lblSemdados.setVisible(true);
 						int x2 = 23;
 						scrollPane.setBounds(10, 253, 1054, x2);
-					}
+							new CrudFuncionarios();
+							colocaDadosNaTabela(new CrudFuncionarios().selecionaFuncionario(DAOFuncionario));
 					
+						
+					}
 				}
+					
 				}
 			}
 		});
@@ -836,7 +840,7 @@ public class CadastrarFuncionarios {
 						teste=1;
 						teste=+1;
 						lblSemdados.setVisible(false);
-						int x = (teste*35)+scrollPane.getHeight();
+						int x = (teste*17)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 				}
