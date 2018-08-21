@@ -265,7 +265,7 @@ public class NovaCompra {////
 							tfCNPJ.requestFocus();
 							return;
 						}
-					}	
+					}	//as
 					if(tfNota.getText().trim().equals("")) {
 						int x = JOptionPane.showConfirmDialog(null, "Você deseja deixar a nota como nulo?", "ALERTA!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 						if (x==JOptionPane.YES_OPTION) {
