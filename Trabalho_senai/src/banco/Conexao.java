@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import outraJanelas.Splash;
+
 public class Conexao {//a
 
 	public static Connection conexao = null;
@@ -29,6 +31,6 @@ public class Conexao {//a
 
 	/*public static void main(String[] args) {
 		Conexao c = new  Conexao();
-		System.out.println(c.getConexao());
+		Splash.main(null);
 	}*/
 }

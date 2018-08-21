@@ -146,7 +146,7 @@ public class Total {//
 		
 		valorGasto = new JLabel("");
 		valorGasto.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		valorGasto.setForeground(Color.BLACK);
+		valorGasto.setForeground(new Color(0, 0, 0));
 		valorGasto.setFont(new Font("Tahoma", Font.BOLD, 20));
 		valorGasto.setHorizontalAlignment(SwingConstants.CENTER);
 		valorGasto.setBounds(387, 518, 126, 25);
@@ -155,7 +155,7 @@ public class Total {//
 		valorReceita = new JLabel("");
 		valorReceita.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		valorReceita.setFont(new Font("Tahoma", Font.BOLD, 20));
-		valorReceita.setForeground(Color.BLACK);
+		valorReceita.setForeground(new Color(0, 0, 0));
 		valorReceita.setHorizontalAlignment(SwingConstants.CENTER);
 		valorReceita.setBounds(646, 518, 126, 25);
 		frmRelattio.getContentPane().add(valorReceita);
@@ -170,7 +170,7 @@ public class Total {//
 		label = new JLabel("0.0");
 		label.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setForeground(Color.BLACK);
+		label.setForeground(new Color(0, 0, 0));
 		label.setFont(new Font("Tahoma", Font.BOLD, 20));
 		label.setBounds(442, 571, 225, 51);
 		frmRelattio.getContentPane().add(label);

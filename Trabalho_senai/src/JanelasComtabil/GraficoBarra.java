@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
 
 public class GraficoBarra extends JFrame {
 
@@ -69,6 +71,8 @@ public class GraficoBarra extends JFrame {
 			getContentPane().add(painel);
 			
 			JButton btnSair = new JButton("Sair");
+			btnSair.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+			btnSair.setBackground(new Color(245, 245, 245));
 			btnSair.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					dispose();

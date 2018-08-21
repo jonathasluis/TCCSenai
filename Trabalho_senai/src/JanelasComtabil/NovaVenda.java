@@ -87,6 +87,7 @@ public class NovaVenda {
 	static int teste = 1; 
 	static int x1=1;
 	private JButton btnProcurar;
+	private JLabel lblSemdados;
 
 	/**
 	 * Launch the application.
@@ -301,6 +302,7 @@ public class NovaVenda {
 		btnSalvar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, null, null, null));
 		btnSalvar.setBackground(new Color(245, 245, 245));
 		btnSalvar.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				
 				if(tfCliente.getText().trim().equals("")) {//inicio do tratamento de informaçao 
@@ -360,14 +362,17 @@ public class NovaVenda {
 					if (scrollPane.getHeight()<=339) {
 						int x = (teste*17)+scrollPane.getHeight();
 						scrollPane.setBounds(10, 253, 1054, x);
+						lblSemdados.setVisible(false);
 					}
 					alteraAnimal(true,Integer.parseInt(spinner.getValue().toString()));
 					new CrudVendas().addvendas(venda);
-					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
+					JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+					btnLimpar.doClick();
 					criaTabela(CrudVendas.selecionaVendas(venda));
 				}
 				
 				if (contadorEditar==1) {
+					x1=0;
 					int resposta = JOptionPane.showConfirmDialog(null, "Você deseja alterar os dados já salvos?","ALERTA", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 					if (resposta == JOptionPane.YES_NO_OPTION) {
 						pegaIdAnimal();
@@ -518,6 +523,7 @@ public class NovaVenda {
 		btnProcurar = new JButton("Proucurar");
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				x1=0;
 				//TRATAMENTO PARA AUMENTAR E DIMINUIR TABELA
 				criaTabela(CrudVendas.procuraVendas(tfProcurar.getText().toString(), venda));
 				int tabel = table.getRowCount();
@@ -528,11 +534,15 @@ public class NovaVenda {
 					if (table.getRowCount()==0) {
 						int x2 = 23;
 						scrollPane.setBounds(10, 253, 1054, x2);
+						new CrudVendas();
+						criaTabela(CrudVendas.selecionaVendas(venda));
+						lblSemdados.setVisible(true);
 					}
 				}
+				
 			}
 		});
-		btnProcurar.setForeground(new Color(0, 0, 0));
+		btnProcurar.setForeground(Color.DARK_GRAY);
 		btnProcurar.setFont(new Font("Tahoma", btnProcurar.getFont().getStyle(), btnProcurar.getFont().getSize()));
 		btnProcurar.setBorder(new BevelBorder(BevelBorder.RAISED, Color.WHITE, null, null, null));
 		btnProcurar.setBackground(new Color(245, 245, 245));
@@ -558,6 +568,12 @@ public class NovaVenda {
 		tfNota.setBounds(546, 111, 200, 20);
 		frmNovaVenda.getContentPane().add(tfNota);
 		
+		lblSemdados = new JLabel("Sem dados salvos!");
+		lblSemdados.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSemdados.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblSemdados.setBounds(10, 287, 1054, 32);
+		frmNovaVenda.getContentPane().add(lblSemdados);
+		
 		JLabel lblFundo = new JLabel("");
 		lblFundo.setIcon(new ImageIcon(NovaVenda.class.getResource("/img/Teste13.jpg")));
 		lblFundo.setBounds(0, -22, 1074, 670);
@@ -567,7 +583,10 @@ public class NovaVenda {
 		comboBoxAnimal();
 		venda.setIdFazenda(Principal.fazenda.getIdFazenda());
 		criaTabela(CrudVendas.selecionaVendas(venda));
-		
+		if (table.getRowCount()== 0) {
+			scrollPane.setVisible(false);
+			lblSemdados.setVisible(true);
+		}
 		
 	}
 	
@@ -604,6 +623,8 @@ public class NovaVenda {
 		
 		String tipo=null;
 		String animal=null;
+		lblSemdados.setVisible(false);
+		scrollPane.setVisible(true);
 		
 		try {
 			while(rs.next()) {

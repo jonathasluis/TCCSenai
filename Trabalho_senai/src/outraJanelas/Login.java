@@ -27,6 +27,7 @@ import DAO.Usuario;
 import banco.Conexao;
 import crud.crudUsuarios;
 import javax.swing.ImageIcon;
+import javax.swing.border.BevelBorder;
 
 public class Login {//
 	String acesso="nao";
@@ -97,6 +98,7 @@ public class Login {//
 		frmLogin.getContentPane().add(lblSenha);
 		
 		tfUsuario = new JTextField();
+		tfUsuario.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfUsuario.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {//evento de apertar ENTER
@@ -110,6 +112,7 @@ public class Login {//
 		tfUsuario.setColumns(10);
 		
 		pfSenha = new JPasswordField();
+		pfSenha.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		pfSenha.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {//evento de apertar ENTER
@@ -122,6 +125,8 @@ public class Login {//
 		frmLogin.getContentPane().add(pfSenha);
 		
 		btnEntrar = new JButton("Entrar");
+		btnEntrar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnEntrar.setBackground(new Color(245, 245, 245));
 		btnEntrar.setBounds(279, 338, 105, 23);
 		frmLogin.getContentPane().add(btnEntrar);
 		
@@ -180,6 +185,8 @@ public class Login {//
 		frmLogin.getContentPane().add(lblEsqueceuSuaSenha);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnCadastrar.setBackground(new Color(245, 245, 245));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				NovoUsuario.main(null);
@@ -202,8 +209,7 @@ public class Login {//
 		frmLogin.getContentPane().add(lblFundo);
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				logar();
-			
+				logar();	
 			}			
 		});
 		
@@ -211,6 +217,7 @@ public class Login {//
 	}	
 	
 	public void logar() {
+
 		ResultSet rs = null;
 		String campoUsuario = tfUsuario.getText();
 		String senha = String.valueOf(pfSenha.getPassword());
@@ -220,14 +227,16 @@ public class Login {//
 			JOptionPane.showMessageDialog(null, "Insira um usuario");
 			return;
 		}
-		
+		JOptionPane.showMessageDialog(null, "logandooo");
+
 		try {
-			PreparedStatement stmt = Conexao.conexao.prepareStatement(sql);
+			PreparedStatement stmt = new Conexao().getConexao().prepareStatement(sql);
 			stmt.setString(1, campoUsuario);
 			rs = stmt.executeQuery();
 			stmt.execute();
 			stmt.close();
-			
+			JOptionPane.showMessageDialog(null, "logandooo");
+
 			if(rs.next()) {
 				String teste = rs.getString("usuario");
 				
@@ -255,6 +264,7 @@ public class Login {//
 			}
 
 		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, e1.toString());
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}

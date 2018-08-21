@@ -23,6 +23,8 @@ import DAO.Usuario;
 import banco.Conexao;
 import crud.CrudFazenda;
 import javax.swing.ImageIcon;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
 
 public class Pergunta {
 
@@ -93,7 +95,8 @@ public class Pergunta {
 		frame.getContentPane().add(comboBox);
 		
 		btnOk = new JButton("OK");
-		btnOk.setBackground(SystemColor.controlHighlight);
+		btnOk.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnOk.setBackground(new Color(245, 245, 245));
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String resp = String.valueOf(comboBox.getSelectedItem());
@@ -109,7 +112,8 @@ public class Pergunta {
 		frame.getContentPane().add(btnOk);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBackground(SystemColor.controlHighlight);
+		btnCancelar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnCancelar.setBackground(new Color(245, 245, 245));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Login.main(null);

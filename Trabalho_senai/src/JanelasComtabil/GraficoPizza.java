@@ -14,6 +14,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
 
 public class GraficoPizza extends JFrame {
 
@@ -54,6 +56,8 @@ public class GraficoPizza extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton btnNewButton = new JButton("Sair");
+		btnNewButton.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnNewButton.setBackground(new Color(245, 245, 245));
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {

@@ -420,7 +420,7 @@ public class CadastrarAnimais {//teste3
 						scrollPane.setBounds(10, 253, 1054, x);
 					}
 					//tabela
-					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
+					JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 					btnLimpar.doClick();
 				}
 				else if(contadorParaEditar==1) {
@@ -565,17 +565,20 @@ public class CadastrarAnimais {//teste3
 					if (tabela.getRowCount()==0) {
 						int x2 = 23;
 						scrollPane.setBounds(10, 253, 1054, x2);
+						new CrudAnimal();
+						colocaDadosNaTabela(CrudAnimal.selecionaAnimais(CadastrarAnimais.this.animal));	
+						lblSemdados.setVisible(true);
 					}
 				}
 				}
-					new CrudAnimal();
-					colocaDadosNaTabela(CrudAnimal.selecionaAnimais(CadastrarAnimais.this.animal));	
+				
+				
 				
 				
 			}
 		});//fim da açao do botao procurar
 		btnProcurar.setBackground(new Color(245, 245, 245));
-		btnProcurar.setBounds(351, 222, 89, 20);
+		btnProcurar.setBounds(351, 222, 89, 23);
 		frmCadastroDeAnimais.getContentPane().add(btnProcurar);
 		
 		JButton btnCadastrarNovaEspecie = new JButton("...");
@@ -624,12 +627,12 @@ public class CadastrarAnimais {//teste3
 		lblSemdados = new JLabel("Sem dados salvos!");
 		lblSemdados.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSemdados.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblSemdados.setBounds(10, 294, 1054, 25);
+		lblSemdados.setBounds(10, 298, 1054, 25);
 		frmCadastroDeAnimais.getContentPane().add(lblSemdados);
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(CadastrarAnimais.class.getResource("/img/Teste13.jpg")));
-		label_1.setBounds(0, 0, 1074, 636);
+		label_1.setBounds(0, 11, 1074, 636);
 		frmCadastroDeAnimais.getContentPane().add(label_1);
 		
 		
@@ -692,6 +695,8 @@ public class CadastrarAnimais {//teste3
 		//tabela
 		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
 		modelo.setNumRows(0);
+		lblSemdados.setVisible(false);
+		
 		
 		try {
 			while (rs.next()) {

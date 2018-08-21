@@ -317,7 +317,7 @@ public class CadastrarFuncionarios {
 					//tabela
 					funcionario.addFun(DAOFuncionario);
 					btnLimpar.doClick();
-					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
+					JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 				}
 				if(contadorParaEditar==1) {
 					//tabela

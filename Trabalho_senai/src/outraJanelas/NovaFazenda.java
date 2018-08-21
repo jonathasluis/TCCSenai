@@ -384,7 +384,6 @@ public class NovaFazenda {
 		scrollPane.setBackground(new Color(245, 245, 245));
 		scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setOpaque(false);
 		scrollPane.setInheritsPopupMenu(true);
 		scrollPane.setBounds(10, 253, 1054, 23);
 		frmNovaFazenda.getContentPane().add(scrollPane);

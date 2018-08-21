@@ -21,6 +21,8 @@ import javax.swing.SwingConstants;
 
 import DAO.Usuario;
 import crud.crudUsuarios;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
 
 public class NovoUsuario {///
 	
@@ -79,6 +81,7 @@ public class NovoUsuario {///
 		frame.getContentPane().add(lblUsuario);
 		
 		tfUsuario = new JTextField();
+		tfUsuario.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfUsuario.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
@@ -103,6 +106,8 @@ public class NovoUsuario {///
 		frame.getContentPane().add(lblConfirmarSenha);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnSalvar.setBackground(new Color(245, 245, 245));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String nomeUsuario = tfUsuario.getText().toString();
@@ -155,6 +160,7 @@ public class NovoUsuario {///
 		frame.getContentPane().add(btnSalvar);
 		
 		pfSenha = new JPasswordField();
+		pfSenha.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		pfSenha.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -167,6 +173,7 @@ public class NovoUsuario {///
 		frame.getContentPane().add(pfSenha);
 		
 		pfConfirma = new JPasswordField();
+		pfConfirma.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(245, 245, 245), Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		pfConfirma.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -180,6 +187,8 @@ public class NovoUsuario {///
 		frame.getContentPane().add(pfConfirma);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		btnCancelar.setBackground(new Color(245, 245, 245));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
@@ -195,6 +204,7 @@ public class NovoUsuario {///
 		frame.getContentPane().add(lblEmail);
 		
 		tfEmail = new JTextField();
+		tfEmail.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.WHITE, Color.GRAY, Color.GRAY, Color.DARK_GRAY));
 		tfEmail.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
